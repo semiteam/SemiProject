@@ -70,33 +70,26 @@
 
 					<div class="user-info-pw">
 						<div id="pwd_text">* 비밀번호</div>
-
-						<input type="password" placeholder="영어,숫자,특수문자 조합 8~16자리"
-							id="input_pwd" />
-
-
+						<input type="password" placeholder="영어,숫자,특수문자 조합 8~16자리" id="input_pwd" />
 					</div>
 					<div class="user-info-pw-check">
 						<div id="pwd_text2">* 비밀번호 확인</div>
-
-						<input type="password" placeholder="영어,숫자,특수문자 조합 8~16자리"
-							id="input_pwd2" />
-
+						<input type="password" placeholder="영어,숫자,특수문자 조합 8~16자리" id="input_pwd2" />
 					</div>
 
 					<form action="" name="form1">
 						<div class="user-info-address">
 							<div id="address_title">우편번호</div>
 							<div id="address_div">
-								<input type="text" style="width: 100px;" name="zipcode"
-									class="zip_code_text"> <input type="button"
-									value="우편번호 검색" id="zip_code">
+								<input type="text" style="width: 100px;" name="zipcode" class="zip_code_text">
+                                <input type="button" value="우편번호 검색" id="zip_code">
 							</div>
 							<input type="text" name="addr1" readonly id="add">
 							<div id="address_text">상세주소</div>
 							<input type="text" id="address_text2">
 						</div>
 					</form>
+                </div>
 			</form>
 		</div>
 		<button type="submit" class="min_user_join" id="min_sign" onclick="Validation()">가입하기</button>
