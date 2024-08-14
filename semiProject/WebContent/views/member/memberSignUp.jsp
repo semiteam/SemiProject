@@ -17,7 +17,7 @@
 	<div class="container">
 		<div class="member-container">
 			<div class="header">
-				<img src="resouces/imgs/KakaoTalk_20240709_164155122.png" alt="">
+				<img style="width: 280px; height: 250px;" src="resouces/imgs/KakaoTalk_20240709_164155122.png" alt="">
 			</div>
 
 			<form action="" id="">
@@ -33,7 +33,7 @@
 							<input type="text" placeholder="생년월일 6자리" id="birthday" maxlength="6">
                             <div> _ </div>
                             <input type="text" id="gender_firstnumber" style="width: 30px;" maxlength="1">
-							<input type="password" id="gender_number" placeholder="******" readonly>
+							<input type="password" placeholder="* * * * * *" readonly>
 						</div>
 					</div>
 
@@ -43,19 +43,20 @@
 							<select style="width: 100px;">
 								<option value="">SKT</option>
 								<option value="">KT</option>
-								<option value="">LG</option>
+								<option value="">U+</option>
+								<option value="">알뜰폰</option>
 							</select>
+                            <input type="text" placeholder="-제외 숫자만 입력" id="min_phone">
+						    <button id="phone_in">인증확인</button>
 						</div>
-
-                        <input type="text" style="width: 200px;" placeholder="-제외 숫자만 입력" id="min_phone">
-						<button id="phone_in">인증확인</button>
 					</div>
 
 					<div class="user-info-email">
 						<div id="email_text">* 이메일</div>
-						<input type="text" style="width: 200px;" id="input_email" /> @ <select>
-							<option value="">naver.com</option>
+						<input type="text" style="width: 225px;" id="input_email" /> @ <select>
 							<option value="">gmail.com</option>
+							<option value="">naver.com</option>
+							<option value="">daum.net</option>
 						</select>
 					</div>
 
@@ -78,20 +79,20 @@
 						<div class="user-info-address">
 							<div id="address_title">우편번호</div>
 							<div id="address_div">
-								<input type="text" style="width: 100px;" name="zipcode" class="zip_code_text">
-                                <input type="button" value="우편번호 검색" id="zip_code" class="big">
+								<input type="text" style="width: 300px;" name="zipcode" class="zip_code_text">
+                                <input type="button" style="width: 145px; margin: 0 0 5px 5px;" value="우편번호 검색" id="zip_code" class="big">
+                                <input type="text" name="addr1" readonly id="add" class="big">
+                                <div id="address_text" style="margin: 5px 0;">상세주소</div>
+                                <input type="text" id="address_text2" class="big">
 							</div>
-							<input type="text" name="addr1" readonly id="add">
-							<div id="address_text">상세주소</div>
-							<input type="text" id="address_text2" class="big">
 						</div>
 					</form>
                 </div>
 
-                <button type="submit" class="min_user_join" id="min_sign" onclick="Validation()">가입하기</button>
+                <button type="submit" class="min_user_join" id="min_sign">가입하기</button>
 			</form>
 
-            <br><br>
+            <br><br><br>
 		</div>
 	</div>
 	<!-- 우편번호 api -->
@@ -117,112 +118,87 @@
       
 	</script> -->
 
-
-	</div>
-	</form>
-
 	<script>
+        const regPhone = /^010([0-9]{3,4})([0-9]{4})$/;
+        const regIdPw = /^[a-zA-Z0-9]{4,12}$/;
+        const regName = /^[가-힣a-zA-Z]{2,15}$/;
+        const regBirth = /^([0-9]{2}(0[1-9]|1[0-2])(0[1-9]|[1,2][0-9]|3[0,1]))$/;
 
-        function Validation() {
-            //변수에 저장
-            var uid = document.getElementById("input_id")
-            var pw = document.getElementById("input_pwd")
-            var cpw = document.getElementById("input_pwd2")
-            var name = document.getElementById("name_input")
-
-            const phone = document.getElementById('min_phone')
-            const regPhone = /^01([0|1|6|7|8|9])([0-9]{3,4})([0-9]{4})$/;
-
-            // 정규식
-            // id, pw
-            var regIdPw = /^[a-zA-Z0-9]{4,12}$/;
-            // 이름
-            var regName = /^[가-힣a-zA-Z]{2,15}$/;
-
-
-            const birth = document.getElementById('birthday')
-            const regBirth = /^([0-9]{2}(0[1-9]|1[0-2])(0[1-9]|[1,2][0-9]|3[0,1]))$/;
-
-            if(!regBirth.test(birth)) {
-                alert('정확한 생년월일 6자리를 입력해주세요');
-                return;
-            }
-
-
-            if(!regPhone.test(phone)) {
-                alert('정확한 핸드폰번호를 입력해주세요: - 제외');
-                return;
-            }
-
-
-            //아이디 확인
-            if(uid.value == ""){
-                alert("아이디를 입력하세요.")
+        $('#input_id').on('keyup', function() {
+            if (uid.value === "") {
+                alert("아이디를 입력하세요.");
+                uid.focus();
+                return false;
+            } else if (!regIdPw.test(uid.value)) {
+                alert("4~12자 영문 대소문자, 숫자만 입력하세요.");
                 uid.focus();
                 return false;
             }
-            
-            //아이디 영어 대소문자 확인
-            else if(!regIdPw.test(uid.value)){
-                alert("4~12자 영문 대소문자, 숫자만 입력하세요.")
-                uid.focus();
-                return false;
-            }
+        });
 
-            //비밀번호 확인
-            if(pw.value == ""){
-                alert("비밀번호를 입력하세요.")
+        $('#input_pwd').on('keyup', function() {
+            if (pw.value === "") {
+                alert("비밀번호를 입력하세요.");
+                pw.focus();
+                return false;
+            } else if (!regIdPw.test(pw.value)) {
+                alert("4~12자 영문 대소문자, 숫자만 입력하세요.");
+                pw.focus();
+                return false;
+            } else if (pw.value === uid.value) {
+                alert("아이디와 동일한 비밀번호를 사용할 수 없습니다.");
                 pw.focus();
                 return false;
             }
+        });
 
-            //비밀번호 영어 대소문자 확인
-            else if(!regIdPw.test(pw.value)){
-                alert("4~12자 영문 대소문자, 숫자만 입력하세요.")
-                pw.focus();
-                return false;
-            }
-
-            //비밀번호와 아이디 비교
-            else if(pw.value == uid.value){
-                alert("아이디와 동일한 비밀번호를 사용할 수 없습니다.")
-                pw.focus();
-                return false;
-            }
-
-
-            //비밀번호 확인
-            if(cpw.value !== pw.value){
-                alert("비밀번호와 동일하지 않습니다.")
+        $('#input_pwd2').on('keyup', function() {
+            if (cpw.value !== pw.value) {
+                alert("비밀번호가 일치하지 않습니다.");
                 cpw.focus();
                 return false;
             }
+        });
 
-
-            //이름 확인 = 한글과 영어만 가능하도록
-            if(uname.value == ""){
-                alert("이름을 입력하세요.")
-                uname.focus();
+        $('#name_input').on('keyup', function() {
+            if (name.value === "") {
+                alert("이름을 입력하세요.");
+                name.focus();
+                return false;
+            } else if (!regName.test(name.value)) {
+                alert("최소 2글자 이상, 한글과 영어만 입력하세요.");
+                name.focus();
                 return false;
             }
+        });
 
-            else if(!regName.test(uname.value)){
-                alert("최소 2글자 이상, 한글과 영어만 입력하세요.")
-                uname.focus();
+        $('#min_phone').on('keyup', function() {
+            if (!regPhone.test(phone.value)) {
+                alert('정확한 핸드폰번호를 입력해주세요: - 제외');
+                phone.focus();
                 return false;
             }
+        });
 
-            // 유효성 문제 없을 시 폼에 submit
-            document.joinForm.submit();
-        }
+        
+        $('#birthday').on('keyup', function() {
+            if (!regBirth.test($(this).value)) {
+                birth.focus();
+                return false;
+            }
+        });
+
+        $('#gender_firstnumber').on('keyup', function() {
+
+        });
 
         function selectAll(selectAll)  {
-        const checkboxes 
-            = document.querySelectorAll('input[type="checkbox"]');
-        
-        checkboxes.forEach((checkbox) => {
-            checkbox.checked = selectAll.checked
-        })
+            const checkboxes 
+                = document.querySelectorAll('input[type="checkbox"]');
+            
+            checkboxes.forEach((checkbox) => {
+                checkbox.checked = selectAll.checked
+            })
         }
     
     </script>
