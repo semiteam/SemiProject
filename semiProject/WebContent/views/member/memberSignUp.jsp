@@ -17,25 +17,26 @@
 	<div class="container">
 		<div class="member-container">
 			<div class="header">
-				<img src="resouces/imgs/KakaoTalk_20240709_164155122.png"
-					alt="">
+				<img src="resouces/imgs/KakaoTalk_20240709_164155122.png" alt="">
 			</div>
+
 			<form action="" id="">
 				<div class="user-info">
 					<div class="user-info-name">
 						<div class="name_text">* 이름</div>
-						<input type="text" id="name_input" />
+						<input type="text" id="name_input" class="big" />
 					</div>
 
 					<div class="user-info-day">
 						<div id="birthday_text">*생년월일/성별</div>
 						<div id="birthdayGender">
-							<input type="text" placeholder="생년월일 6자리" id="birthday"
-								maxlength="6"> - <input type="text"
-								id="gender_firstnumber" style="width: 30px;" maxlength="1">
+							<input type="text" placeholder="생년월일 6자리" id="birthday" maxlength="6">
+                            <div> _ </div>
+                            <input type="text" id="gender_firstnumber" style="width: 30px;" maxlength="1">
 							<input type="password" id="gender_number" placeholder="******" readonly>
 						</div>
 					</div>
+
 					<div class="user-info-phone">
 						<div>*휴대폰 인증</div>
 						<div id="phone">
@@ -45,36 +46,32 @@
 								<option value="">LG</option>
 							</select>
 						</div>
-					</div>
 
-					<div class="user-info-phone_1">
-						<input type="text" style="width: 200px;" placeholder="-제외 숫자만 입력"
-							id="min_phone">
+                        <input type="text" style="width: 200px;" placeholder="-제외 숫자만 입력" id="min_phone">
 						<button id="phone_in">인증확인</button>
 					</div>
+
 					<div class="user-info-email">
 						<div id="email_text">* 이메일</div>
-
 						<input type="text" style="width: 200px;" id="input_email" /> @ <select>
 							<option value="">naver.com</option>
 							<option value="">gmail.com</option>
 						</select>
 					</div>
+
 					<div class="user-info-id">
 						<div id="id_text">* 아이디</div>
-
-						<input type="text" placeholder="영어 소문자 및 숫자로만 4~16" id="input_id">
-
-
+						<input type="text" placeholder="영어 소문자 및 숫자로만 4~16" id="input_id" class="big">
 					</div>
 
 					<div class="user-info-pw">
 						<div id="pwd_text">* 비밀번호</div>
-						<input type="password" placeholder="영어,숫자,특수문자 조합 8~16자리" id="input_pwd" />
+						<input type="password" placeholder="영어,숫자,특수문자 조합 8~16자리" id="input_pwd" class="big" />
 					</div>
+
 					<div class="user-info-pw-check">
 						<div id="pwd_text2">* 비밀번호 확인</div>
-						<input type="password" placeholder="영어,숫자,특수문자 조합 8~16자리" id="input_pwd2" />
+						<input type="password" placeholder="영어,숫자,특수문자 조합 8~16자리" id="input_pwd2" class="big" />
 					</div>
 
 					<form action="" name="form1">
@@ -82,17 +79,20 @@
 							<div id="address_title">우편번호</div>
 							<div id="address_div">
 								<input type="text" style="width: 100px;" name="zipcode" class="zip_code_text">
-                                <input type="button" value="우편번호 검색" id="zip_code">
+                                <input type="button" value="우편번호 검색" id="zip_code" class="big">
 							</div>
 							<input type="text" name="addr1" readonly id="add">
 							<div id="address_text">상세주소</div>
-							<input type="text" id="address_text2">
+							<input type="text" id="address_text2" class="big">
 						</div>
 					</form>
                 </div>
+
+                <button type="submit" class="min_user_join" id="min_sign" onclick="Validation()">가입하기</button>
 			</form>
+
+            <br><br>
 		</div>
-		<button type="submit" class="min_user_join" id="min_sign" onclick="Validation()">가입하기</button>
 	</div>
 	<!-- 우편번호 api -->
 	<!--
