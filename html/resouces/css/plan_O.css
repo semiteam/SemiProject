@@ -1,0 +1,55 @@
+.under > .side_menu > #side_menu_open_2 {font-weight: 600;}
+
+.under .content .plan {
+    position: absolute;
+    width: 50%;
+    height: 25%;
+    border-bottom: 1px solid white;
+    margin: 3%;
+}
+
+.under .content .cover {
+    width: 100%;
+    height: 90%;
+    background-image: url('../img/japan.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 0;
+    border-radius: 20px;
+    overflow: hidden;
+    padding: 10px;
+}
+
+.under .content .plan_title,
+.under .content .date,
+.under .content .mini_bar {
+    color: white;
+    position: absolute;
+    font-size: 24px;
+    -webkit-text-stroke: .2px rgb(0, 0, 0);
+}
+
+.under .content .date {
+    bottom: 25px;
+    right: 108px;
+}
+
+.under .content .mini_bar {
+    bottom: 27px;
+    right: 18px;
+}
+
+.under .content .mini_bar div {
+    margin: -7px;
+    font-size: 21px;
+    cursor: pointer;
+}
+
+.under .content .add_plan {
+    color: white;
+    font-size: 26px;
+    position: absolute;
+    left: 27%;
+    top: 32%;
+    cursor: pointer;
+}

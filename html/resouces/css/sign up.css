@@ -1,0 +1,168 @@
+@font-face {
+  font-family: 'DungGeunMo';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body *{
+  font-family: 'DungGeunMo';
+  box-sizing: border-box;
+}
+
+body input:not(#gender_number):not(#zip_code) {padding-left: 15px;}
+
+body {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 670px;
+  height: auto;
+  background: #ffffff;
+  border: 1px solid #aacdff;
+  box-shadow: 7px 7px 39px rgba(0, 104, 255, 0.25);
+  border-radius: 20px;
+  margin: 30px 0;
+}
+
+.member-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 470px;
+}
+
+select{
+  width: 200px;
+  padding: 5px;
+}
+
+.big {width: 100%;}
+
+.zip_code_text{
+  color: black;
+}
+
+.user-info {width: 450px;}
+
+.user-info input:not(#gender_firstnumber):not(#gender_number) {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  border-radius: 5px;
+  height: 35px;
+  border: 1px solid #000;
+}
+
+#gender_firstnumber, #gender_number {
+  border-color: #000;
+  border-style: solid;
+}
+
+#gender_firstnumber {
+  border-width: 1px 0 1px 1px;
+  border-radius: 5px 0 0 5px;
+}
+
+#gender_number {
+  border-width: 1px 1px 1px 0;
+  border-radius: 0 5px 5px 0;
+}
+
+input:focus {outline: none;}
+
+.gender {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 140px;
+  height: 23.94px;
+}
+
+.gender input {
+  width: 20px;
+  height: 19.95px;
+  background: #ebebeb;
+  border: 1px solid #d2d2d2;
+}
+
+.gender label {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.agree-check {
+  width: 454px;
+  height: 21.06px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  color: #000000;
+}
+
+  
+.min_user_join{
+  background-color: #aacdff;
+  width: 450px;
+  font-size: 16px;
+  border-radius: 5px;
+  background-color: #aacdff;
+  padding: 10px ;
+}
+
+.agree_check_text{
+ position: absolute;
+}
+
+#min_sign:hover{
+  cursor: pointer;
+  background: linear-gradient(124.47deg, 
+  rgba(61, 151, 215, 0.8), 
+  rgba(61, 151, 215, 0.6), 
+  rgba(61, 151, 215, 0.8));
+}
+
+#zip_code:hover{
+  cursor: pointer;
+  background: linear-gradient(124.47deg, 
+  rgba(61, 151, 215, 0.8), 
+  rgba(61, 151, 215, 0.6), 
+  rgba(61, 151, 215, 0.8));
+
+}
+
+#phone_in:hover{
+  cursor: pointer;
+  background: linear-gradient(124.47deg, 
+  rgba(61, 151, 215, 0.8), 
+  rgba(61, 151, 215, 0.6), 
+  rgba(61, 151, 215, 0.8));
+}
+
+.hide{display: none;}
+
+.user-info > div {margin-bottom: 20px;}
+
+.user-info > div > div:first-child {margin-bottom: 10px;}
+
+#birthdayGender {
+  display: flex;
+  flex-direction: row;
+}
+
+#birthdayGender input:not(:nth-child(2)) {width: 205px;}
+
+#min_phone {width: 260px;}
+
+#address_div {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
