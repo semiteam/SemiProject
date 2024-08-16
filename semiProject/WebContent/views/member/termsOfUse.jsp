@@ -5,7 +5,7 @@
   <head>
     <title>이용약관</title>
     <meta charset="UTF-8" />
-    <script defer src="./resouces/js/이용약관.js"></script>
+    <script defer src="resouces/js/이용약관.js"></script>
     <link rel="stylesheet" href="https://cQdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css">
 
     <link rel="stylesheet" href="resouces/css/이용약관.css">

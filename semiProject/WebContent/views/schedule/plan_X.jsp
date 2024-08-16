@@ -193,35 +193,35 @@
 
                     <div id="img">
                         <div id="korea">
-                            <img src="./resouces/img/korea.jpg" alt="">
+                            <img src="resouces/img/korea.jpg" alt="">
                             <div class="cover" id="cover_1">
                                 <div class="text">KOREA</div>
                             </div>
                         </div>
                         
                         <div id="japan">
-                            <img src="./resouces/img/japan.png" alt="">
+                            <img src="resouces/img/japan.png" alt="">
                             <div class="cover" id="cover_2">
                                 <div class="text">JAPAN</div>
                             </div>
                         </div>
 
                         <div id="paris">
-                            <img src="./resouces/img/paris.jpg" alt="">
+                            <img src="resouces/img/paris.jpg" alt="">
                             <div class="cover" id="cover_3">
                                 <div class="text">PARIS</div>
                             </div>
                         </div>
 
                         <div id="austraila">
-                            <img src="./resouces/img/austraila.jpg" alt="">
+                            <img src="resouces/img/austraila.jpg" alt="">
                             <div class="cover" id="cover_4">
                                 <div class="text">AUSTRAILA</div>
                             </div>
                         </div>
  
                         <div id="usa">
-                            <img src="./resouces/img/usa.jpg" alt="">
+                            <img src="resouces/img/usa.jpg" alt="">
                             <div class="cover" id="cover_5">
                                 <div class="text">USA</div>
                             </div>
