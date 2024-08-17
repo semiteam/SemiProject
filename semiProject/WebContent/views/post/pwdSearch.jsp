@@ -9,6 +9,7 @@
     <title>Document</title>
 </head>
 <body>
+    <%@ include file="../common/basic.jsp" %>
     <div class="container">
         <form accept="" method="" class="member-container">
             <div class="header">

@@ -22,19 +22,20 @@ public class MemberDao {
 		try {
 			prop.loadFromXML(new FileInputStream(filePath));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
 	public Member loginMember(Connection conn, String mId, String mPwd) {
-		PreparedStatement pstmt = null;
 		Member m = null;
+		
+		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
 		String sql = prop.getProperty("loginMember");
 		try {
 			pstmt = conn.prepareStatement(sql);
+			
 			pstmt.setString(1, mId);
 			pstmt.setString(2, mPwd);
 			
@@ -58,7 +59,6 @@ public class MemberDao {
 							   rset.getString("M_PROFILE"));
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
 			close(rset);

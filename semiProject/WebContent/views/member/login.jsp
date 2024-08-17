@@ -1,5 +1,9 @@
+<%@page import="semi.member.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	Member loginUser = (Member)request.getAttribute("loginUser");
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,10 +11,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="resouces/css/login.css">
-    
 </head>
 <body>
-    <form action="" method="" class="container">
+	<%@ include file="../common/basic.jsp" %>
+    <form action="<%=contextPath %>/login.me" class="container" method="post">
         <div class="member-container">
             <div class="header">
                 <img src="resouces/img/로고.png" alt="">
@@ -20,12 +24,12 @@
 
         <div class="user-input-id">
             <div  class="text_id" style="font-size: 20px;">ID</div>
-            <input type="text" style="height: 25px; border-radius: 5px;">
+            <input type="text" style="height: 25px; border-radius: 5px;" name="mId">
         </div>
 
         <div class="user-input-pwd">
             <div class="text_pwd" style="font-size: 20px;">PWD</div>
-            <input type="password" style="height: 25px; border-radius: 5px;">
+            <input type="password" style="height: 25px; border-radius: 5px;" name="mPwd">
         </div>
 
         <div class="abcd">
@@ -33,7 +37,7 @@
             <a href="views/member/idSearch.jsp" id="IdPwdSearch">아이디/비밀번호 찾기</a>
         </div>
 
-        <button id="login-btn" type="button">로그인</button>
+        <button id="login-btn" type="submit">로그인</button>
 
         <div class="line">
             <div class="line_1">
@@ -51,6 +55,5 @@
             <img src="resouces/img/kakao_login_medium_wide.png" alt="">
         </div>
     </form>
-    
 </body>
 </html>

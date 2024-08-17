@@ -44,6 +44,7 @@
         <link rel="stylesheet" href="resouces/css/plan_X.css">
     </head>
     <body>       
+        <%@ include file="../common/basic.jsp" %>
         <div class="wrap">
             <div class="top">
                 <video id="main_video" src="resouces/img/산타_댄스.mp4" muted autoplay loop preload="auto"></video>
