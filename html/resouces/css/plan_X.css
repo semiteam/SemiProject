@@ -1,0 +1,157 @@
+.under > .side_menu > #side_menu_open_1 {font-weight: 600;}
+
+@font-face {
+    font-family: 'DungGeunMo';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {background-color: black;}
+
+body * {
+    white-space: nowrap;
+    font-family: 'DungGeunMo';
+}
+
+.wrap * {box-sizing: border-box;}
+
+.wrap .top {
+    position: relative;
+    width: 100%;
+    height: 55.7vw;
+    background-color: white;
+    z-index: 9;
+}
+
+.wrap .top #main_video {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+}
+
+.wrap .top #top_menu {
+    position: fixed;
+    width: 100%;
+    height: 5vh;
+    transition: background-color .5s;
+}
+
+.wrap .top #logo {
+    position: fixed;
+    font-size: 135%;
+    letter-spacing: 5px;
+    top: 1.6vh;
+    left: 3vw;
+    color: #fff;
+}
+
+.wrap .top #top_menu #small_menu {
+    position: fixed;
+    top: 1.75vh;
+    left: 89.68vw;
+    font-size: 80%;
+    width: 13vw;
+    height: 2vh;
+    color: #fff;
+}
+
+.wrap .top * {cursor: pointer;}
+
+.wrap .top #small_menu > ul > * {
+    float: left;
+    margin: 0 0 0 1.2vw;
+    height: 2vh;
+}
+
+.wrap .top #small_menu ul li:hover {font-weight: 600;}
+
+.wrap .under #title {
+    font-size: 400%;
+    margin: 2vw 2.5vw;
+    color: white;
+}
+
+.wrap .under #content {
+    position: relative;
+    height: 56vw;
+}
+
+.wrap .under #img {
+    position: absolute;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    height: 55vw;
+    top: 0;
+    z-index: 3;
+}
+
+.wrap .under #img * {
+    width: 30vw;
+    height: 20vw;
+    color: white;
+}
+
+.wrap .under #img > div {
+    margin: 1vw;
+    position: relative;
+    font-size: 300%;
+    text-align: center;
+    cursor: pointer;
+}
+
+.wrap .under #img > div:nth-child(3n+2) {margin-top: 3vw;}
+
+.wrap .under #img > div:nth-child(3n) {margin-top: 6vw;}
+
+.wrap .under #img .text {padding: 27% 0;}
+
+.wrap .under #img > div:hover > .cover {display: block;}
+
+.wrap .under #img .cover {
+    background-color: #00000050;
+    position: absolute;
+    top: 0;
+    display: none;
+}
+
+.wrap .under #img #add_plan {background-color: #7c7c7c50;}
+
+.wrap .under #description {
+    position: relative;
+    width: 100%;
+    height: 55vw;
+}
+
+.wrap .under #full_cover {
+    position: relative;
+    top: -55vw;
+    width: 100%;
+    height: 55vw;
+    background-color: black;
+    z-index: 2;
+}
+
+.wrap .under #description > div {
+    width: 60vw;
+    height: 30vw;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    background-color: #fff;
+    border-radius: 20px;
+    z-index: 1;
+}
+
+.wrap .under #description * {color: #000;}
+
+.wrap .under #description .swiper-slide {
+    padding: 5vw;
+    height: 30vw;
+}

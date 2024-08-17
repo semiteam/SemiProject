@@ -1,0 +1,123 @@
+.under > .side_menu > #side_menu_open_1 {font-weight: 600;}
+
+.content {
+    padding: 15px;
+    color: white;
+}
+
+.content_1 {
+    width: 100%;
+    height: 40px;
+    padding: 10px 30px;
+}
+
+.content_2 {
+    width: 100%;
+    height: 30px;
+    text-align: center;
+    padding: 5px;
+}
+
+.content_3 {
+    width: 100%;
+    height: 30px;
+    padding: 5px 30px;
+    margin-top: 25px;
+}
+
+.content_4 {
+    width: 100%;
+    height: 400px;
+}
+
+.content_5 {
+    width: 100%;
+    height: 30px;
+    padding: 5px 30px;
+    margin-top: 50px;
+}
+
+.content_6 {
+    width: 100%;
+    height: 400px;
+    display: flex;
+}
+
+.content_7 {
+    width: 100%;
+    height: 30px;
+    padding: 5px 30px;
+    margin-top: 50px;
+}
+
+.content_8 {
+    width: 100%;
+    height: 400px;
+    margin-bottom: 50px;
+}
+
+h3 {
+    margin-top: 2%;
+    margin-left: 5%;
+}
+
+.swiper {
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.swiper-slide img,
+.swiper-slide .cover {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+    position: absolute;
+}
+
+.swiper-slide .cover {
+    display: none;
+    padding: 50% 0;
+}
+
+.swiper-slide img:hover+.cover,
+.swiper-slide .cover:hover {
+    display: block;
+    background-color: #000000cc;
+    transition: .7s;
+}
+
+.content_4 .swiper-slide:hover img {
+    width: 600px;
+    height: 450px;
+    overflow: hidden;
+    transition-duration: .7s;
+}
+
+.content_6 .swiper-slide img:hover {
+    width: 110%;
+    height: 110%;
+    overflow: hidden;
+    transition-duration: .7s;
+}
+
+.content_8 .swiper-slide img:hover {
+    width: 110%;
+    height: 110%;
+    overflow: hidden;
+    transition-duration: .7s;
+}

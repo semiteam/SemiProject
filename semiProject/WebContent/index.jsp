@@ -8,5 +8,6 @@
 </head>
 <body>
 	<%@ include file="views/member/memberLogin.jsp" %>
+	<%@ include file="views/goTrip/goTripLogin_O.jsp" %>
 </body>
 </html>
