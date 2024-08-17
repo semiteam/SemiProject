@@ -1,0 +1,124 @@
+.under > .side_menu > #side_menu_open_3 {font-weight: 600;}
+
+.headLine {
+    width: 890px;
+    height: 250px;
+    margin: auto;
+    position: relative;
+    display: flex;
+}
+
+.headLine .textLine {
+    color: white;
+    font-size: 40px;
+    font-weight: 700;
+    position: absolute;
+    top: 190px;
+    left: 30px;
+}
+
+.headLine .whiteBox {
+    width: 10px;
+    height: 40px;
+    background-color: rgb(97, 255, 124);
+    position: absolute;
+    top: 190px;
+    left: 10px;
+}
+
+.post {
+    width: 830px;
+    min-height: 700px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    position: relative;
+}
+
+.post-title {
+    width: 750px;
+    height: 30px;
+    margin: 0 auto;
+    padding: 40px;
+    font-size: 35px;
+    font-size: 700;
+    border: 0;
+    outline: none;
+}
+
+.post-content {
+    width: 750px;
+    min-height: 500px;
+    margin: 0 40px;
+    font-size: 16px;
+    border: 0;
+    outline: none;
+}
+
+.post-content input {
+    vertical-align: top;
+}
+
+.thumbnail {
+    margin-top: 20px;
+    width: 150px;
+    height: 160px;
+}
+
+.thumbnail button {
+    width: 150px;
+    height: 150px;
+    background-color: #e0e0e0;
+    border: 0;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 100px;
+}
+
+.thumbnail p {
+    font-size: 12px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.role {
+    position: absolute;
+    bottom: 120px;;
+    left: 190px;
+    font-size: 10px;
+}
+
+.role ol {
+    margin: 5px;
+}
+
+.post .button-box button {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    width: 100px;
+    height: 50px;
+    border: 0;
+    font-size: 20px;
+    border-radius: 10px;
+    background-color: #d9d7ff;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+#cancel-btn {
+    background-color: #ffc0c0;
+    right: 250px;
+}
+
+#view-btn {
+    background-color: #e0ffe0;
+    right: 135px;
+}
+
+.footer {
+    height: 200px;
+    background-color: black;
+}

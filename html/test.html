@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Swiper demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+  <!-- Link Swiper's CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+  <style>
+    input {
+      text-align: center;
+      border: none;
+      font-size: 30px;
+    }
+
+    input:focus {outline: none;}
+
+    html, body {
+      position: relative;
+      height: 100%;
+    }
+
+    body {
+      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      color: #000;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .swiper-wrapper * {
+      width: 100px;
+      height: 100px;
+    }
+
+    .swiper {
+      width: 100px;
+      height: 300px;
+    }
+
+    .swiper-slide {
+      text-align: center;
+      font-size: 18px;
+      background: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .swiper-slide img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    body {display: flex;}
+    
+    .swiper-slide-prev,
+    .swiper-slide-next{
+      color: gray;
+      font-size: 20px;
+    }
+    .swiper-slide-active {
+      color: #000;
+      font-size: 30px;
+    }
+  </style>
+</head>
+<body>
+    <!-- Swiper -->
+    <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+            <div id="hour00" class="swiper-slide swiper-hour">00</div>
+            <div id="hour01" class="swiper-slide swiper-hour">01</div>
+            <div id="hour02" class="swiper-slide swiper-hour">02</div>
+            <div id="hour03" class="swiper-slide swiper-hour">03</div>
+            <div id="hour04" class="swiper-slide swiper-hour">04</div>
+            <div id="hour05" class="swiper-slide swiper-hour">05</div>
+            <div id="hour06" class="swiper-slide swiper-hour">06</div>
+            <div id="hour07" class="swiper-slide swiper-hour">07</div>
+            <div id="hour08" class="swiper-slide swiper-hour">08</div>
+            <div id="hour09" class="swiper-slide swiper-hour">09</div>
+            <div id="hour10" class="swiper-slide swiper-hour">10</div>
+            <div id="hour11" class="swiper-slide swiper-hour">11</div>
+            <div id="hour12" class="swiper-slide swiper-hour">12</div>
+            <div id="hour13" class="swiper-slide swiper-hour">13</div>
+            <div id="hour14" class="swiper-slide swiper-hour">14</div>
+            <div id="hour15" class="swiper-slide swiper-hour">15</div>
+            <div id="hour16" class="swiper-slide swiper-hour">16</div>
+            <div id="hour17" class="swiper-slide swiper-hour">17</div>
+            <div id="hour18" class="swiper-slide swiper-hour">18</div>
+            <div id="hour19" class="swiper-slide swiper-hour">19</div>
+            <div id="hour20" class="swiper-slide swiper-hour">20</div>
+            <div id="hour21" class="swiper-slide swiper-hour">21</div>
+            <div id="hour22" class="swiper-slide swiper-hour">22</div>
+            <div id="hour23" class="swiper-slide swiper-hour">23</div>
+        </div>
+    </div>
+
+    <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+            <div id="minute00" class="swiper-slide swiper-minute">00</div>
+            <div id="minute01" class="swiper-slide swiper-minute">01</div>
+            <div id="minute02" class="swiper-slide swiper-minute">02</div>
+            <div id="minute03" class="swiper-slide swiper-minute">03</div>
+            <div id="minute04" class="swiper-slide swiper-minute">04</div>
+            <div id="minute05" class="swiper-slide swiper-minute">05</div>
+            <div id="minute06" class="swiper-slide swiper-minute">06</div>
+            <div id="minute07" class="swiper-slide swiper-minute">07</div>
+            <div id="minute08" class="swiper-slide swiper-minute">08</div>
+            <div id="minute09" class="swiper-slide swiper-minute">09</div>
+            <div id="minute10" class="swiper-slide swiper-minute">10</div>
+            <div id="minute11" class="swiper-slide swiper-minute">11</div>
+            <div id="minute12" class="swiper-slide swiper-minute">12</div>
+            <div id="minute13" class="swiper-slide swiper-minute">13</div>
+            <div id="minute14" class="swiper-slide swiper-minute">14</div>
+            <div id="minute15" class="swiper-slide swiper-minute">15</div>
+            <div id="minute16" class="swiper-slide swiper-minute">16</div>
+            <div id="minute17" class="swiper-slide swiper-minute">17</div>
+            <div id="minute18" class="swiper-slide swiper-minute">18</div>
+            <div id="minute19" class="swiper-slide swiper-minute">19</div>
+            <div id="minute20" class="swiper-slide swiper-minute">20</div>
+            <div id="minute21" class="swiper-slide swiper-minute">21</div>
+            <div id="minute22" class="swiper-slide swiper-minute">22</div>
+            <div id="minute23" class="swiper-slide swiper-minute">23</div>
+            <div id="minute24" class="swiper-slide swiper-minute">24</div>
+            <div id="minute25" class="swiper-slide swiper-minute">25</div>
+            <div id="minute26" class="swiper-slide swiper-minute">26</div>
+            <div id="minute27" class="swiper-slide swiper-minute">27</div>
+            <div id="minute28" class="swiper-slide swiper-minute">28</div>
+            <div id="minute29" class="swiper-slide swiper-minute">29</div>
+            <div id="minute30" class="swiper-slide swiper-minute">30</div>
+            <div id="minute31" class="swiper-slide swiper-minute">31</div>
+            <div id="minute32" class="swiper-slide swiper-minute">32</div>
+            <div id="minute33" class="swiper-slide swiper-minute">33</div>
+            <div id="minute34" class="swiper-slide swiper-minute">34</div>
+            <div id="minute35" class="swiper-slide swiper-minute">35</div>
+            <div id="minute36" class="swiper-slide swiper-minute">36</div>
+            <div id="minute37" class="swiper-slide swiper-minute">37</div>
+            <div id="minute38" class="swiper-slide swiper-minute">38</div>
+            <div id="minute39" class="swiper-slide swiper-minute">39</div>
+            <div id="minute40" class="swiper-slide swiper-minute">40</div>
+            <div id="minute41" class="swiper-slide swiper-minute">41</div>
+            <div id="minute42" class="swiper-slide swiper-minute">42</div>
+            <div id="minute43" class="swiper-slide swiper-minute">43</div>
+            <div id="minute44" class="swiper-slide swiper-minute">44</div>
+            <div id="minute45" class="swiper-slide swiper-minute">45</div>
+            <div id="minute46" class="swiper-slide swiper-minute">46</div>
+            <div id="minute47" class="swiper-slide swiper-minute">47</div>
+            <div id="minute48" class="swiper-slide swiper-minute">48</div>
+            <div id="minute49" class="swiper-slide swiper-minute">49</div>
+            <div id="minute50" class="swiper-slide swiper-minute">50</div>
+            <div id="minute51" class="swiper-slide swiper-minute">51</div>
+            <div id="minute52" class="swiper-slide swiper-minute">52</div>
+            <div id="minute53" class="swiper-slide swiper-minute">53</div>
+            <div id="minute54" class="swiper-slide swiper-minute">54</div>
+            <div id="minute55" class="swiper-slide swiper-minute">55</div>
+            <div id="minute56" class="swiper-slide swiper-minute">56</div>
+            <div id="minute57" class="swiper-slide swiper-minute">57</div>
+            <div id="minute58" class="swiper-slide swiper-minute">58</div>
+            <div id="minute59" class="swiper-slide swiper-minute">59</div>
+        </div>
+    </div>
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+      var swiper = new Swiper(".mySwiper", {
+        direction: "vertical",
+        slidesPerView: 'auto',
+        centeredSlides: true,
+        mousewheel: true,
+        on: {
+          slideChangeTransitionEnd: function () {
+            // 시간
+            $('.swiper-hour').each(function() {
+              let hour = $(this);
+              let originalHour = hour.data('original-hour'); // undefined -> false로 간주
+              
+              if (hour.closest('.swiper-slide').hasClass('swiper-slide-active')) {
+                if (!originalHour) {
+                  originalHour = hour.text();
+                  hour.data('original-hour', originalHour);
+                }
+                hour.html('<input type="text" name="hour" id="hour" value="' + originalHour + '">');
+              } else {
+                if (originalHour) {
+                  hour.html(originalHour);
+                }
+              }
+            });
+    
+            // 분
+            $('.swiper-minute').each(function() {
+              let minute = $(this);
+              let originalMinute = minute.data('original-minute');
+    
+              if (minute.closest('.swiper-slide').hasClass('swiper-slide-active')) {
+                if (!originalMinute) {
+                  originalMinute = minute.text();
+                  minute.data('original-minute', originalMinute);
+                }
+                minute.html('<input type="text" name="minute" id="minute" value="' + originalMinute + '">');
+              } else {
+                if (originalMinute) {
+                  minute.html(originalMinute);
+                }
+              }
+            });
+
+            $('.swiper-hour').on('keyup', function() {
+              let findHour = $(this).find('input').val();
+              console.log(findHour)
+              swiper.slideTo(findHour)
+            })
+          }
+        }
+      });
+
+      $(function() {
+        // $('.swiper-hour').on('keyup', function() {
+        //   let findHour = $(this).find('input').val();
+        //   // let id = $('#hour' + findHour);
+        //   // $('.swiper-hour').removeClass('swiper-slide-prev swiper-slide-active swiper-slide-next');
+        //   // id.prev().addClass('swiper-slide-prev');
+        //   // id.addClass('swiper-slide-active');
+        //   // id.next().addClass('swiper-slide-next');
+
+        //   slideTo(findHour + 1)
+        // })
+
+        $('.swiper-minute').on('keyup', function() {
+
+        })
+      })
+    </script>
+    
+</body>
+</html>

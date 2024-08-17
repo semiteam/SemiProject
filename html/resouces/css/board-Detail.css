@@ -1,0 +1,82 @@
+.under > .side_menu > #side_menu_open_3 {font-weight: 600;}
+
+hr {
+    width: 670px;
+    margin: 10px;
+}
+.board-area {
+    width: 830px;
+    min-height: 1100px;
+    margin: 0 auto;
+    padding: 20px;
+    background-image: url("https://i.pinimg.com/originals/a0/da/17/a0da17efe16d2c58f06496cd9dbe8435.jpg");
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    position: relative;
+}
+
+.post {
+    width: 700px;
+    position: absolute;
+    right: -14px;
+    top: 27px;
+}
+
+.post-title {
+    width: 700px;
+    height: 30px;
+    margin: 0 auto;
+    padding: 30px 20px;
+    font-size: 35px;
+    font-size: 700;
+    border: 0;
+    outline: none;
+}
+
+.info {
+    width: 95%;
+    height: 12px;
+    text-align: right;
+    
+    font-size: 12px;
+}
+
+.post-content {
+    width: 700px;
+    min-height: 750px;
+    margin: 20px 20px;
+    font-size: 16px;
+    border: 0;
+    outline: none;
+}
+
+.recommend {
+    width: 100%;
+    height: 30px;
+    text-align: center;
+    margin-top: 40px;
+
+}
+.post .button-box button {
+    width: 100px;
+    height: 50px;
+    border: 0;
+    font-size: 20px;
+    border-radius: 10px;
+    background-color: #d9d7ff;
+    cursor: pointer;
+    font-size: 14px;
+    margin: 5px;
+}
+
+#cancel-btn {
+    background-color: #ffc0c0;
+}
+
+#view-btn {
+    background-color: #e0ffe0;
+}
+
+.footer {
+    background-color: black;
+}
