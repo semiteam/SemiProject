@@ -1,5 +1,7 @@
 package semi.member.model.service;
 import java.sql.Connection;
+import java.util.ArrayList;
+
 import static semi.common.JDBCTemplate.*;
 
 import semi.member.model.dao.MemberDao;
@@ -17,6 +19,15 @@ public class MemberService {
 		
 		
 		return m;
+	}
+
+	public ArrayList<Member> selectMemberList() {
+		Connection conn = getConnection();
+		ArrayList<Member> list = new MemberDao().selectMemberList(conn);
+		
+		close(conn);
+		
+		return list;
 	}
 
 }

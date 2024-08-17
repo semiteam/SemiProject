@@ -23,4 +23,7 @@
 	   AND M_PWD = ?
 	   AND M_STATUS = 'U'
 	</entry>
+<entry key="selectMemberList">
+      SELECT * FROM MEMBER
+    </entry>
 </properties>

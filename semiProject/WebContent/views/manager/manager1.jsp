@@ -37,6 +37,7 @@
         <link rel="stylesheet" href="resouces/css/common.css">
     </head>
     <body>
+        <%@ include file="../common/basic.jsp" %>
         <div class="wrap">
             <div class="top">
                 <div class="logo" onclick="location.href='views/goTrip/goTripLogin_O.jsp'">우리 여행가조</div>
@@ -87,13 +88,24 @@
                                 <input type="text" placeholder="회원정보를 입력하세요." class="search-txt">
                                 <button class="btn search-btn" type="submit">검색</button>
                             </form>
+                        
 
+                          <% if(list.isEmpty()) { %>
+                            <div class="user-info" id="info1">
+                                    <p>조회된 게시글이 없습니다.</p>
+                                </div>
+                          
+                          <% } else { %>
+                          		<% for(Member m : list) { %>
                          <div class="left-inner">
                              <div class="left-inner-left">
-                                <div class="user-info" id="info1">
-                                    <p>회원번호(pk)/회원정보 등등 .../ 클릭시 회원상세정보창</p>
+                                <div class="user-info"> -->
+                                    <p><%=m.getmNo() %></p>
                                 </div>
-
+                            </div>
+                            <% } %>
+                           <% } %>
+                                <!--
                                 <div class="user-info" id="info2">
                                     <p>회원번호(pk)/회원정보 등등 ...</p>
                                 </div>
@@ -113,7 +125,7 @@
                                 <div class="user-info" id="info6">
                                     <p>회원번호(pk)/회원정보 등등 ...</p>
                                 </div>
-                             </div>
+                            -->
                              
                              <div class="left-inner-right">
                                  <div class="report">
