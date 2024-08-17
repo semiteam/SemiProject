@@ -2,8 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-    String contextPath = request.getContextPath();
-    Member loginUser = (Member)request.getAttribute("loginUser");
+	Member loginUser = (Member)request.getAttribute("loginUser");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,6 +13,7 @@
     <link rel="stylesheet" href="resouces/css/login.css">
 </head>
 <body>
+	<%@ include file="../common/basic.jsp" %>
     <form action="<%=contextPath %>/login.me" class="container" method="post">
         <div class="member-container">
             <div class="header">
@@ -24,12 +24,12 @@
 
         <div class="user-input-id">
             <div  class="text_id" style="font-size: 20px;">ID</div>
-            <input type="text" style="height: 25px; border-radius: 5px;">
+            <input type="text" style="height: 25px; border-radius: 5px;" name="mId">
         </div>
 
         <div class="user-input-pwd">
             <div class="text_pwd" style="font-size: 20px;">PWD</div>
-            <input type="password" style="height: 25px; border-radius: 5px;">
+            <input type="password" style="height: 25px; border-radius: 5px;" name="mPwd">
         </div>
 
         <div class="abcd">

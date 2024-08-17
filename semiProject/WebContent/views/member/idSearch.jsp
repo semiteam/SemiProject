@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="resouces/css/idSearch.css">
 </head>
 <body>
+    <%@ include file="../common/basic.jsp" %>
     <div class="container">
         <div class="member-container">
             <div class="header">

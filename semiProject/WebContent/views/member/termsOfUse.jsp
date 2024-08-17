@@ -13,6 +13,7 @@
   </head>
 
   <body>
+    <%@ include file="../common/basic.jsp" %>
     <div class="wrap">
       <div class="logo"><img src="resouces/img/로고.png" alt="" style="width: 350px; "></div>
       <div class="contents">

@@ -32,13 +32,13 @@ public class LoginController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		String mId = request.getParameter("mId");
 		String mPwd = request.getParameter("mPwd");
 		
 		Member loginUser = new MemberService().loginMember(mId, mPwd);
+		
 		if(loginUser == null) {
-			System.out.println("로그인실패");
+			
 		}else {
 			
 			HttpSession session = request.getSession();
@@ -47,7 +47,6 @@ public class LoginController extends HttpServlet {
 			
 			response.sendRedirect(request.getContextPath());
 			System.out.println("로그인성공");
-			
 		}
 		
 		

@@ -40,6 +40,7 @@
 </head>
 
 <body>
+    <%@ include file="../common/basic.jsp" %>
     <div class="wrap">
         <div class="top">
             <div class="logo" onclick="location.href='views/goTrip/goTripLogin_O'">우리 여행가조</div>
