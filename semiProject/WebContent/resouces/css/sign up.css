@@ -85,6 +85,8 @@ input:focus {outline: none;}
   height: 23.94px;
 }
 
+.bold {font-weight: bold !important;}
+
 .gender input {
   width: 20px;
   height: 19.95px;

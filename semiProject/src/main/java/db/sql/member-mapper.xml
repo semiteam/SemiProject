@@ -1,26 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
-<entry key ="loginMember">
-	SELECT 
-	         M_NO
-	        ,M_NAME
-	        ,M_ID
-	        ,M_NICKNAME
-	        ,M_PWD
-	        ,M_RRN
-	        ,M_PHONE
-	        ,M_EMAIL
-	        ,M_ADDRESS
-	        ,M_DATE
-	        ,M_MODIFY
-	        ,M_STATUS
-	        ,M_REPORT
-	        ,M_GRADE
-	        ,M_PROFILE  
+	<entry key ="loginMember">
+	SELECT M_NO
+	     , M_NAME
+	     , M_ID
+	     , M_NICKNAME
+	     , M_PWD
+	     , M_RRN
+	     , M_PHONE
+	     , M_EMAIL
+	     , M_ADDRESS
+	     , M_DATE
+	     , M_MODIFY
+	     , M_STATUS
+	     , M_REPORT
+	     , M_GRADE
+	     , M_PROFILE  
 	  FROM MEMBER
 	 WHERE M_ID = ?
 	   AND M_PWD = ?
 	   AND M_STATUS = 'U'
+	</entry>
+	
+	<entry key ="insertMember">
+		INSERT
+		  INTO MEMBER
+		  (
+		    M_NO
+		  , M_NAME
+		  , M_ID
+		  , M_NICKNAME
+		  , M_PWD
+		  , M_RRN
+		  , M_PHONE
+		  , M_EMAIL
+		  , M_ADDRESS
+		  , M_PROFILE
+		  )
+		  VALUES
+		  (
+		    SEQ_MEM.NEXTVAL
+		  , ?
+		  , ?
+		  , ?
+		  , ?
+		  , ?
+		  , ?
+		  , ?
+		  , ?
+		  , ?
+		  )
 	</entry>
 </properties>

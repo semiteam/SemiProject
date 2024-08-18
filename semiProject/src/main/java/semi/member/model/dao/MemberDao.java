@@ -47,12 +47,12 @@ public class MemberDao {
 							   rset.getString("M_ID"),
 							   rset.getString("M_NICKNAME"),
 							   rset.getString("M_PWD"),
-							   rset.getInt("M_RRN"),
-							   rset.getInt("M_PHONE"),
+							   rset.getString("M_RRN"),
+							   rset.getString("M_PHONE"),
 							   rset.getString("M_EMAIL"),
 							   rset.getString("M_ADDRESS"),
 							   rset.getDate("M_DATE"),
-							   rset.getString("M_MODIFY"),
+							   rset.getDate("M_MODIFY"),
 							   rset.getString("M_STATUS"),
 							   rset.getInt("M_REPORT"),
 							   rset.getString("M_GRADE"),
@@ -66,6 +66,36 @@ public class MemberDao {
 		}
 		
 		return m;
+	}
+
+	public int insertMember(Connection conn, Member m) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, m.getmName());
+			pstmt.setString(2, m.getmId());
+			pstmt.setString(3, m.getmNickname());
+			pstmt.setString(4, m.getmPwd());
+			pstmt.setString(5, m.getmRrn());
+			pstmt.setString(6, m.getmPhone());
+			pstmt.setString(7, m.getmEmail());
+			pstmt.setString(8, m.getmAddress());
+			pstmt.setString(9, m.getmProfile());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 
 }

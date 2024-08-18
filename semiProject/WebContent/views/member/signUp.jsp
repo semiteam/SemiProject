@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@4.0.1/reset.min.css" />
 	<link rel="stylesheet" href="resouces/css/sign up.css" />
 	<!-- <script src="sign.js"></script> -->
-	<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css"> -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css">
 	
 	<!-- 우편번호 Script-->
 	<!-- <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> -->
@@ -20,70 +20,75 @@
 					<img style="width: 280px; height: 250px;" src="resouces/img/로고.png" alt="">
 				</div>
 	
-				<form action="<contextPath>/signUp.m" id="">
+				<form action="<%= contextPath %>/signUp.me" method="post">
 					<div class="user-info">
 						<div class="user-info-name">
-						  <div class="name_text">* 이름</div>
-						  <input type="text" id="name_input" class="big" />
+						  <div class="name_text bold">* 이름</div>
+						  <input type="text" id="name_input" class="big" name="mName"/>
 						</div>
 						
 						<div class="user-info-day">
-							<div id="birthday_text">* 생년월일/성별</div>
+							<div id="birthday_text" class="bold">* 생년월일/성별</div>
 							<div id="birthdayGender">
-								<input type="text" placeholder="생년월일 6자리" id="birthday" maxlength="6">
-						                       <div> _ </div>
-						                       <input type="text" id="gender_firstnumber" style="width: 30px;" maxlength="1">
+								<input type="text" placeholder="생년월일 6자리" id="birthday" maxlength="6" name="mBirthday1">
+		                        <div> _ </div>
+		                        <input type="text" id="gender_firstnumber" style="width: 30px;" maxlength="1" name="mBirthday2">
 								<input type="password" placeholder="* * * * * *" readonly id="gender_number">
 							</div>
 						</div>
 						
 						<div class="user-info-phone">
-							<div>* 휴대폰 인증</div>
+							<div class="bold">* 휴대폰 인증</div>
 							<div id="phone">
 								<select style="width: 100px;">
-									<option value="">SKT</option>
-									<option value="">KT</option>
-									<option value="">U+</option>
-									<option value="">알뜰폰</option>
+									<option>SKT</option>
+									<option>KT</option>
+									<option>U+</option>
+									<option>알뜰폰</option>
 								</select>
-						                       <input type="text" placeholder="-제외 숫자만 입력" id="min_phone">
+		                       	<input type="text" placeholder="-제외 숫자만 입력" id="min_phone" name="mPhone">
 							    <button id="phone_in">인증확인</button>
 							</div>
 						</div>
 	
 						<div class="user-info-email">
-							<div id="email_text">* 이메일</div>
-							<input type="text" style="width: 225px;" id="input_email" /> @ <select>
-								<option value="">gmail.com</option>
-								<option value="">naver.com</option>
-								<option value="">daum.net</option>
+							<div id="email_text" class="bold">* 이메일</div>
+							<input type="text" style="width: 225px;" id="input_email" name="mMail1"/> @ <select>
+								<option name="mMail2" value="gmail.com">gmail.com</option>
+								<option name="mMail2" value="naver.com">naver.com</option>
+								<option name="mMail2" value="daum.net">daum.net</option>
 							</select>
 						</div>
 	
 						<div class="user-info-id">
-							<div id="id_text">* 아이디</div>
-							<input type="text" placeholder="영어 소문자 및 숫자로만 4~16" id="input_id" class="big">
+							<div id="id_text" class="bold">* 아이디</div>
+							<input type="text" placeholder="영어 소문자 및 숫자로만 4~16" id="input_id" class="big" name="mId">
+						</div>
+
+						<div class="user-info-nn">
+							<div id="id_text">닉네임</div>
+							<input type="text" placeholder="미입력 시 아이디와 동일하게 설정, 최대 10자" id="input_nn" class="big" name="mNn">
 						</div>
 	
 						<div class="user-info-pw">
-							<div id="pwd_text">* 비밀번호</div>
-							<input type="password" placeholder="영어,숫자,특수문자 조합 8~16자리" id="input_pwd" class="big" />
+							<div id="pwd_text" class="bold">* 비밀번호</div>
+							<input type="password" placeholder="영어,숫자,특수문자 조합 8~16자리" id="input_pwd" class="big" name="mPwd" />
 						</div>
 	
 						<div class="user-info-pw-check">
-							<div id="pwd_text2">* 비밀번호 확인</div>
+							<div id="pwd_text2" class="bold">* 비밀번호 확인</div>
 							<input type="password" placeholder="영어,숫자,특수문자 조합 8~16자리" id="input_pwd2" class="big" />
 						</div>
 	
 						<form action="" name="form1">
 							<div class="user-info-address">
-								<div id="address_title">우편번호</div>
+								<div id="address_title" class="bold">* 우편번호</div>
 								<div id="address_div">
-									<input type="text" style="width: 300px;" name="zipcode" class="zip_code_text">
+									<input type="text" style="width: 300px;" name="zipcode" class="zip_code_text" name="mAddress1">
 					                <input type="button" style="width: 145px; margin: 0 0 5px 5px;" value="우편번호 검색" id="zip_code" class="big">
-					                <input type="text" name="addr1" readonly id="add" class="big">
+					                <input type="text" name="addr1" readonly id="add" class="big" name="mAddress2">
 					                <div id="address_text" style="margin: 5px 0;">상세주소</div>
-					                <input type="text" id="address_text2" class="big">
+					                <input type="text" id="address_text2" class="big" name="mAddress3">
 								</div>
 							</div>
 						</form>
@@ -95,7 +100,7 @@
 			</div>
 		</div>
 		<!-- 우편번호 api -->
-		<!--
+		
 		<script>
 	      const btn = document.querySelector("#zip_code");
 	      btn.addEventListener("click",() => {
@@ -115,7 +120,7 @@
 	          }).open();
 	      })
 	      
-		</script> -->
+		</script>
 	
 		<!--
 		<script>
