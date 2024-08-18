@@ -21,9 +21,39 @@
 	  FROM MEMBER
 	 WHERE M_ID = ?
 	   AND M_PWD = ?
-	   AND M_STATUS = 'U'
+	   AND M_STATUS IN ('A','U')
+	   
 	</entry>
 <entry key="selectMemberList">
       SELECT * FROM MEMBER
     </entry>
+
+<entry key = "selectMemberCount">
+SELECT
+        COUNT(*) COUNT
+  FROM MEMBER
+ WHERE M_STATUS = 'U'
+</entry>
+
+<entry key = "selectList">
+SELECT *
+FROM (
+SELECT ROWNUM RNUM, A.* 
+  FROM      (
+SELECT 
+                    M_NO
+                  , M_NAME
+                  , M_ID
+                  , M_STATUS
+                  , M_REPORT
+                  , M_GRADE
+              FROM  MEMBER
+             WHERE M_STATUS = 'U'
+               
+             ORDER
+                BY M_REPORT DESC
+            ) A
+    )
+    WHERE RNUM BETWEEN ? AND ?
+</entry>
 </properties>

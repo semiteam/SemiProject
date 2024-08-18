@@ -8,6 +8,6 @@
 </head>
 <body>
 	
-	<%@ include file = "views/manager/manager1.jsp" %>
+	<%@ include file = "views/member/login.jsp" %>
 </body>
 </html>

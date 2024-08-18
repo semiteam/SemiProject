@@ -1,10 +1,18 @@
+<%@page import="semi.common.model.vo.PageInfo"%>
 <%@page import="semi.member.model.vo.Member"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	
 <%
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+
 	ArrayList<Member> list = (ArrayList<Member>)request.getAttribute("list");
+
+	int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -83,101 +91,66 @@
                     
                     <div class="main left-main">
                         <div class="inner">
-                            <p>회원정보 관리</p>
+                         <form action="<%=contextPath %>/selectMember.ma" method="get">
+                            <p>회원정보 관리  <button class = "btn" type="submit">새로고침</button> </p>
+                              </form>
                             <form action="" class="search-box" method="get">
                                 <input type="text" placeholder="회원정보를 입력하세요." class="search-txt">
                                 <button class="btn search-btn" type="submit">검색</button>
                             </form>
-                        
-                        <form action="<%=contextPath %>/selectMember.ma" method="post">
-                          <% if(list.isEmpty()) { %>
-                            <div class="user-info" id="info1">
-                                    <p>조회된 게시글이 없습니다.</p>
-                                </div>
-                          
-                          <% } else { %>
-                          		<% for(Member m : list) { %>
-                         <div class="left-inner">
+                         
+                            
+                        <div class="left-inner">
                              <div class="left-inner-left">
-                                <div class="user-info"> -->
-                                    <p><%=m.getmNo() %></p>
+                         <% if(list == null || list.isEmpty()) {  %>
+                                <div class="user-info">
+                           			<p>조회된 회원정보가 없습니다</p>
                                 </div>
-                            </div>
-                            <% } %>
-                           <% } %>
-
-                        </form>
-                                <!--
-                                <div class="user-info" id="info2">
-                                    <p>회원번호(pk)/회원정보 등등 ...</p>
+                                 </div>
+                                 
+                           <% } else { %>
+                           <% for(Member m : list) { %>
+                            
+                                <div class="user-info">
+                                    <tr>
+                                        <td>PK: <%=m.getmNo()%></td>
+                                       <td><%=m.getmId()%></td>
+                                        <td><%=m.getmName() %></td>
+                                        <td>누적신고횟수 : <%=m.getmReport() %></td>
+                                        <td>회원상태 : <%=m.getmStatus() %></td>
+                                    </tr>
                                 </div>
-
-                                <div class="user-info" id="info3">
-                                    <p>회원번호(pk)/회원정보 등등 ...</p>
-                                </div>
-
-                                <div class="user-info" id="info4">
-                                    <p>회원번호(pk)/회원정보 등등 ...</p>
-                                </div>
-
-                                <div class="user-info" id="info5">
-                                    <p>회원번호(pk)/회원정보 등등 ...</p>
-                                </div>
-
-                                <div class="user-info" id="info6">
-                                    <p>회원번호(pk)/회원정보 등등 ...</p>
-                                </div>
-                            -->
-                             
-                             <div class="left-inner-right">
-                                 <div class="report">
-                                    <button class="btn btn-danger" id="block1">차단</button>
-                                    <button class="btn btn-danger" id="clear-block1">차단해제</button>
-                                </div>
-
-                                <div class="report">
-                                    <button class="btn btn-danger" id="block2">차단</button>
-                                    <button class="btn btn-danger" id="clear-block2">차단해제</button>
-                                </div>
-
-                                <div class="report">
-                                    <button class="btn btn-danger" id="block3">차단</button>
-                                    <button class="btn btn-danger" id="clear-block3">차단해제</button>
-                                </div>
-
-                                <div class="report">
-                                    <button class="btn btn-danger" id="block4">차단</button>
-                                    <button class="btn btn-danger" id="clear-block4">차단해제</button>
-                                </div>
-
-                                <div class="report">
-                                    <button class="btn btn-danger" id="block5">차단</button>
-                                    <button class="btn btn-danger" id="clear-block5">차단해제</button>
-                                </div>
-
-                                <div class="report">
-                                    <button class="btn btn-danger" id="block6">차단</button>
-                                    <button class="btn btn-danger" id="clear-block6">차단해제</button>
-                                </div>
+                             <% } %>
                              </div>
+                          <% } %>
+                            
                          </div>    
                         </div>
+				 <script>
+				 $(function() {
+			            $(".user-info>tbody>tr").click(function() { // 수정할것
+			                location.href = '<%= contextPath %>/detail.bo?bno=' + $(this).children().eq(0).text();
+			            });
+			        });
+	             </script>
+						
 
-                        <ul class="pagination justify-content-center">
-                            <li class="page-item disabled">
-                                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">이전</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#">4</a></li>
-                            <li class="page-item"><a class="page-link" href="#">5</a></li>
-
-
-                            <li class="page-item">
-                                <a class="page-link" href="#">다음</a>
-                            </li>
-                        </ul>
+           <div class="paging-area" align="center">
+            <% if (currentPage != 1) { %>    
+            <button onclick="location.href='<%= contextPath %>/list.ma?cpage=<%= currentPage - 1 %>'">&lt;</button>
+            <% } %>
+            <% for (int p = startPage; p <= endPage; p++) { %>
+                <% if (p == currentPage) { %>
+                    <button disabled><%= p %></button>
+                <% } else { %>
+                    <button onclick="location.href='<%= contextPath %>/list.ma?cpage=<%= p %>'"><%= p %></button>
+                <% } %>
+            <% } %>
+            
+            <% if (currentPage != maxPage) { %>
+            <button onclick="location.href='<%= contextPath %>/list.ma?cpage=<%= currentPage + 1 %>'">&gt;</button>
+            <% } %>
+       	 </div>
                     </div>
     
                     <div class="main right-main">
@@ -242,7 +215,7 @@
                             </div>
                         </div>
 
-                        <ul class="pagination justify-content-center">
+                 <ul class="pagination justify-content-center">
                             <li class="page-item disabled">
                                 <a class="page-link" href="#" tabindex="-1" aria-disabled="true">이전</a>
                             </li>
@@ -252,6 +225,7 @@
                             <li class="page-item"><a class="page-link" href="#">4</a></li>
                             <li class="page-item"><a class="page-link" href="#">5</a></li>
 
+
                             <li class="page-item">
                                 <a class="page-link" href="#">다음</a>
                             </li>
@@ -260,27 +234,33 @@
                 </div>
             </div>     
         </div>
+        <% if(list == null || list.isEmpty()) { %>
+        	<% }else { %>
         <div id="myModal" class="modal">
             <div class="modal-content">
                 <span class="close">&times;</span>
                 <div class="modal-info">
+              
                     <div class="modal-profile">
                         <div class="profile-photo" id="user-profile-photo">프로필사진</div>
                     </div>
                     <div class="modal-text" align="left" >
-                        <div class="modal-text-contetn" id="user_no">회원번호</div>
-                        <div class="modal-text-contetn" id="user_name">이름</div>
-                        <div class="modal-text-contetn" id="user_id">아이디</div>
-                        <div class="modal-text-contetn" id="user_phone">전화번호</div>
-                        <div class="modal-text-contetn" id="user_email">이메일</div>
-                        <div class="modal-text-contetn" id="user_address">주소</div>
-                        <div class="modal-text-contetn" id="user_grade">회원등급</div>
-                        <div class="modal-text-contetn" id="user_report">신고당한회수</div>
-                        <div class="modal-text-contetn" id="user_status">회원상태</div>
+                        <div class="modal-text-contetn" id="user_no">회원번호 : <%=list.get(0).getmNo()%></div>
+                        <div class="modal-text-contetn" id="user_name">아이디 : <%=list.get(0).getmName()%></div>
+                        <div class="modal-text-contetn" id="user_id">이름 : <%=list.get(0).getmId()%></div>
+                        <div class="modal-text-contetn" id="user_phone">전화번호 : <%=list.get(0).getmPhone()%></div>
+                        <div class="modal-text-contetn" id="user_email">이메일 : <%=list.get(0).getmEmail()%></div>
+                        <div class="modal-text-contetn" id="user_address">주소 : <%=list.get(0).getmAddress()%></div>
+                        <div class="modal-text-contetn" id="user_grade">등급 : <%=list.get(0).getmGrade()%></div>
+                        <div class="modal-text-contetn" id="user_report">신고횟수 : <%=list.get(0).getmReport()%></div>
+                        <div class="modal-text-contetn" id="user_status">상태 : <%=list.get(0).getmStatus()%></div>
                     </div>
                 </div>
-                <div class="modal-bottom"><button id="edit-btn" class="btn btn-wide btn-danger">차단</button><button id="cancel-btn" class="btn btn-wide">나가기</button></div>
-                
+ 
+     <% } %>
+                <div class="modal-bottom">
+                <button id="edit-btn" class="btn btn-wide btn-danger">차단</button>
+                <button id="cancel-btn" class="btn btn-wide">차단해제</button></div>
 
             </div>
         </div>
@@ -289,6 +269,8 @@
         
         
         <script>
+        
+        
             document.addEventListener('DOMContentLoaded', function () {
                 const modal = document.getElementById("myModal");
                 const span = document.getElementsByClassName("close")[0];

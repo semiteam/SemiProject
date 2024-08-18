@@ -19,6 +19,16 @@ public class Member {
 	private String mGrade;
 	private String mProfile;
 
+	public Member(int mNo, String mName, String mId, String mStatus, int mReport, String mGrade) {
+		super();
+		this.mNo = mNo;
+		this.mName = mName;
+		this.mId = mId;
+		this.mStatus = mStatus;
+		this.mReport = mReport;
+		this.mGrade = mGrade;
+	}
+
 	public Member() {
 	}
 
