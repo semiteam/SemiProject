@@ -92,7 +92,7 @@
                 </div>
     
                 <div class="content">
-                    <form action="" method="post" class="inner">
+                    <form action="<%= contextPath %>/addPlan.sd" method="post" class="inner">
                         <table>
                             <tr>
                                 <td id="plan_name_t" class="white big"><div>여행명</div></td>
@@ -106,10 +106,8 @@
                                         <input type="text" name="place_name" id="place_name">
                                         <button type="submit" class="material-symbols-outlined" id="search_btn">search</button>
                                     </div>
-                                    <div id="search_result">
-                                        <div id="search_place_result">
-                                            결과들 유동적으로 추가할 예정
-                                        </div>
+                                    <div class="search_result">
+                                        결과들 유동적으로 추가할 예정
                                     </div>
                                     <div id="search_place_add" class="white">장소 추가하기</div>
                                 </td>
@@ -131,6 +129,9 @@
                                                 <button id="next" aria-label="Next month" type="button" class="material-symbols-outlined">arrow_forward_ios</button>
                                             </div>
                                         </div>
+
+                                        <input type="hidden" id="sDate" name="sDate">
+                                        <input type="hidden" id="eDate" name="eDate">
                                     </div>
                                 </td>
                             </tr>
@@ -159,10 +160,10 @@
                             <tr class="white">
                                 <td class="big" colspan="2">배경 이미지</td>
                                 <td>
-                                    <input type="radio" name="img" id="random" value="" checked>
+                                    <input type="radio" name="img" id="random" checked>
                                     <label for="random">랜덤</label>
 
-                                    <input type="radio" name="img" id="choice" value="">
+                                    <input type="radio" name="img" id="choice">
                                     <label for="choice">선택</label>
                                 </td>
                             </tr>

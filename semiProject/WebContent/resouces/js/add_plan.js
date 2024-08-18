@@ -67,3 +67,8 @@ $('#choice').on('click', function() {
         $('#img_choice_tr').css('display', 'contents')
     }
 })
+
+$('.search_result').on('click', function() {
+    $('#place_name').val($(this).text().trim());
+    $('#place_name').attr('name', 'choice');
+});

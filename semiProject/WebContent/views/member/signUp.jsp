@@ -67,7 +67,7 @@
 
 						<div class="user-info-nn">
 							<div id="id_text">닉네임</div>
-							<input type="text" placeholder="미입력 시 아이디와 동일하게 설정, 최대 10자" id="input_nn" class="big" name="mNn">
+							<input type="text" placeholder="미입력 시 아이디와 동일하게 설정, 한글 최대 10자" id="input_nn" class="big" name="mNn">
 						</div>
 	
 						<div class="user-info-pw">

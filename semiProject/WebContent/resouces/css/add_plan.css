@@ -61,7 +61,7 @@ label {margin-right: 30px;}
 
 .content .inner #place_name {
     width: 91.2%;
-    font-size: 18px;
+    font-size: 16px;
     left: 1vw;
 }
 
@@ -70,13 +70,14 @@ label {margin-right: 30px;}
     border: none;
 }
 
-.content .inner #search_result {
+.content .inner .search_result {
     border-radius: 15px;
     background-color: #fff;
     overflow: hidden;
     width: 98.5%;
     height: 100px;
     padding: 10px;
+    cursor: pointer;
 }
 
 .content .inner #search_place_add {

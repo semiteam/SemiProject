@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key ="insertSchedule">
+		INSERT
+		  INTO SCHEDULE
+		     (
+		       SD_NO
+		     , SD_TITLE
+		     , SD_PLACE
+		     , SD_SDATE
+		     , SD_EDATE
+		     , SD_DESCRIPTION
+		     , RANGE_NO
+		     , BGI_NO
+		     , SD_CDATE
+		     , SD_STATUS
+		     )
+		VALUES
+		     (
+		       SEQ_SD.NEXTVAL
+		     , ?
+		     , ?
+		     , ?
+		     , ?
+		     , ?
+		     , ?
+		     , ?
+		     , SYSDATE
+		     , 'N'
+		     )
+	</entry>
+	
+	<entry key ="">
+		
+	</entry>
+</properties>
