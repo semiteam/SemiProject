@@ -24,7 +24,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 
         <!-- jQuery library -->
-       <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
 
         <!-- Popper JS -->
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
@@ -45,7 +45,7 @@
         <link rel="stylesheet" href="resouces/css/common.css">
     </head>
     <body>
-        <%@ include file="../common/basic.jsp" %>
+    <%@ include file="../common/basic.jsp" %>
         <div class="wrap">
             <div class="top">
                 <div class="logo" onclick="location.href='views/goTrip/goTripLogin_O.jsp'">우리 여행가조</div>
@@ -86,14 +86,12 @@
                         <img src="resouces/img/chevron_right_24dp_5F6368.png" alt="">
                     </div>
                 </div>
-           
+    
                 <div class="content">
                     
                     <div class="main left-main">
                         <div class="inner">
-                         <form action="<%=contextPath %>/selectMember.ma" method="get">
-                            <p>회원정보 관리  <button class = "btn" type="submit">새로고침</button> </p>
-                              </form>
+                            <p>회원정보 관리</p>
                             <form action="" class="search-box" method="get">
                                 <input type="text" placeholder="회원정보를 입력하세요." class="search-txt">
                                 <button class="btn search-btn" type="submit">검색</button>
