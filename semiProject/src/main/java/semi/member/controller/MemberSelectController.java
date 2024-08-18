@@ -16,7 +16,7 @@ import semi.member.model.vo.Member;
 /**
  * Servlet implementation class MemberSelectController
  */
-@WebServlet("/manager1")
+@WebServlet("/selectMember.ma")
 public class MemberSelectController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

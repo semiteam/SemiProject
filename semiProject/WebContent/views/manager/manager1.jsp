@@ -16,7 +16,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 
         <!-- jQuery library -->
-        <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+       <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
 
         <!-- Popper JS -->
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
@@ -78,7 +78,7 @@
                         <img src="resouces/img/chevron_right_24dp_5F6368.png" alt="">
                     </div>
                 </div>
-    
+           
                 <div class="content">
                     
                     <div class="main left-main">
@@ -89,7 +89,7 @@
                                 <button class="btn search-btn" type="submit">검색</button>
                             </form>
                         
-
+                        <form action="<%=contextPath %>/selectMember.ma" method="post">
                           <% if(list.isEmpty()) { %>
                             <div class="user-info" id="info1">
                                     <p>조회된 게시글이 없습니다.</p>
@@ -105,6 +105,8 @@
                             </div>
                             <% } %>
                            <% } %>
+
+                        </form>
                                 <!--
                                 <div class="user-info" id="info2">
                                     <p>회원번호(pk)/회원정보 등등 ...</p>
@@ -150,7 +152,7 @@
 
                                 <div class="report">
                                     <button class="btn btn-danger" id="block5">차단</button>
-                                    <button class="btn btn-danger" id="clear-block"5>차단해제</button>
+                                    <button class="btn btn-danger" id="clear-block5">차단해제</button>
                                 </div>
 
                                 <div class="report">
