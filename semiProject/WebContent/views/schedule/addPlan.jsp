@@ -104,7 +104,7 @@
                                     <div id="search_place_t" class="white big">장소 검색</div>
                                     <div id="search_place_b">
                                         <input type="text" name="place_name" id="place_name">
-                                        <button type="submit" class="material-symbols-outlined" id="search_btn">search</button>
+                                        <button type="button" class="material-symbols-outlined" id="search_btn">search</button>
                                     </div>
                                     <div class="search_result">
                                         결과들 유동적으로 추가할 예정
@@ -160,10 +160,10 @@
                             <tr class="white">
                                 <td class="big" colspan="2">배경 이미지</td>
                                 <td>
-                                    <input type="radio" name="img" id="random" checked>
+                                    <input type="radio" name="img" id="random" value="1"checked>
                                     <label for="random">랜덤</label>
 
-                                    <input type="radio" name="img" id="choice">
+                                    <input type="radio" name="img" id="choice" value="2">
                                     <label for="choice">선택</label>
                                 </td>
                             </tr>
@@ -239,7 +239,7 @@
 
                         <br><br>
 
-                        <input type="submit" value="일정 추가 완료하기" formaction="" id="add_done_plan" class="white">
+                        <input type="submit" value="일정 추가 완료하기" id="add_done_plan" class="white">
                     </form>
 
                     <br><br>

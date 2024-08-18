@@ -31,46 +31,48 @@ public class addPlanController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		
 		String sTitle = request.getParameter("plan_title");
 		String sPlace = request.getParameter("choice");
 		
 		String sYear = request.getParameter("sDate").substring(11, 15);
 		String sMonth = "";
 		switch(request.getParameter("sDate").substring(4, 7)) {
-			case "jan":
+			case "Jan":
 				sMonth = "01";
 				break;
-			case "feb":
+			case "Feb":
 				sMonth = "02";
 				break;
-			case "mar":
+			case "Mar":
 				sMonth = "03";
 				break;
-			case "apr":
+			case "Apr":
 				sMonth = "04";
 				break;
-			case "may":
+			case "May":
 				sMonth = "05";
 				break;
-			case "jun":
+			case "Jun":
 				sMonth = "06";
 				break;
-			case "jul":
+			case "Jul":
 				sMonth = "07";
 				break;
-			case "aug":
+			case "Aug":
 				sMonth = "08";
 				break;
-			case "sep":
+			case "Sep":
 				sMonth = "09";
 				break;
-			case "oct":
+			case "Oct":
 				sMonth = "10";
 				break;
-			case "nov":
+			case "Nov":
 				sMonth = "11";
 				break;
-			case "dec":
+			case "Dec":
 				sMonth = "12";
 				break;
 		}
@@ -80,43 +82,43 @@ public class addPlanController extends HttpServlet {
 		String eYear = request.getParameter("eDate").substring(11, 15);
 		String eMonth = "";
 		switch(request.getParameter("eDate").substring(4, 7)) {
-			case "jan":
+			case "Jan":
 				eMonth = "01";
 				break;
-			case "feb":
+			case "Feb":
 				eMonth = "02";
 				break;
-			case "mar":
+			case "Mar":
 				eMonth = "03";
 				break;
-			case "apr":
+			case "Apr":
 				eMonth = "04";
 				break;
-			case "may":
+			case "May":
 				eMonth = "05";
 				break;
-			case "jun":
+			case "Jun":
 				eMonth = "06";
 				break;
-			case "jul":
+			case "Jul":
 				eMonth = "07";
 				break;
-			case "aug":
+			case "Aug":
 				eMonth = "08";
 				break;
-			case "sep":
+			case "Sep":
 				eMonth = "09";
 				break;
-			case "oct":
+			case "Oct":
 				eMonth = "10";
 				break;
-			case "nov":
+			case "Nov":
 				eMonth = "11";
 				break;
-			case "dec":
+			case "Dec":
 				eMonth = "12";
 				break;
-	}
+		}
 		String eDay = request.getParameter("eDate").substring(8, 10);
 		String sEdate = "TO_DATE('"+ eYear + "-" + eMonth + "-" + eDay +"', 'YYYY-MM-DD')";
 		
@@ -128,7 +130,15 @@ public class addPlanController extends HttpServlet {
 		
 		int result = new ScheduleService().insertSchedule(sd);
 		
-		if (result )
+		String alertMsg;
+		if (result > 0) {
+			alertMsg = "성공적으로 일정을 등록하였습니다.";
+		} else {
+			alertMsg = "일정 등록에 실패하였습니다.";
+		}
+		
+		request.setAttribute("alertMsg", alertMsg);
+		response.sendRedirect(request.getContextPath());
 	}
 
 	/**
