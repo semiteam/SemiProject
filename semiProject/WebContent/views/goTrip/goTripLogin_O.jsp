@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+<% String contextPath = request.getContextPath(); %>	
 <!DOCTYPE html>
 <html lang="en">
 
@@ -185,7 +187,7 @@
                 </div>
                 <div id="side_menu_close_3" onclick="location.href='views/post/postMain.jsp'">
                     <img src="resouces/img/dynamic_feed_24dp_5F6368.png" alt="">
-                    <div class="explanation">리뷰 볼래?</div>
+                    <div class="explanation"><button onclick="location.href='views/post/postMain.jsp'">리뷰 볼래?</button></div>
                 </div>
                 <div id="side_menu_close_4" onclick="location.href='views/manager/manager1.jsp'">
                     <img src="resouces/img/manage_accounts_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png" alt="">

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<entry key="selectListCount">
+ SELECT 
+        COUNT(*) AS COUNT
+   FROM POST
+  WHERE POST_STATUS = 'Y'
+
+
+</entry>
+
+<entry key="selectList">
+	SELECT * 
+  	  FROM (
+            SELECT ROWNUM AS RNUM,A.*
+                FROM (
+                  SELECT
+                        POST_NO
+                      , M_ID
+                      , POST_TITLE
+                      , POST_CONTENT
+                      , POST_COUNT
+                      , POST_RECOMMEND
+                      , TO_CHAR(POST_DATE,'YYYY/MM/DD') AS "POST_DATE"
+                  FROM POST P
+                  JOIN MEMBER USING(M_NO)
+                  WHERE POST_STATUS = 'Y'
+                  ORDER
+                     BY POST_NO DESC
+             ) A
+
+        )
+        WHERE RNUM BETWEEN ? AND ?
+</entry>
+
+<entry key="updateMember">
+UPDATE MEMBER
+   SET  M_NICKNAME = ?
+      , M_PHONE = ?
+      , M_EMAIL = ?
+      , M_MODIFY = SYSDATE
+  WHERE M_ID = ?    
+</entry>
+
+<entry key="selectMember">
+	SELECT 
+        M_NO
+      , M_NAME
+      , M_ID
+      , M_NICKNAME
+      , M_PWD
+      , M_RRNM_ID
+      , M_PHONE
+      , M_EMAIL
+      , M_ADDRESS
+      , M_DATE
+      , M_MODIFY
+      , M_STATUS
+      , M_REPORT
+      , M_GRADE
+      , M_PROFILE
+ FROM  MEMBER
+ WHERE M_ID = ?
+   AND M_STATUS = 'U' 
+</entry>
+
+</properties>
