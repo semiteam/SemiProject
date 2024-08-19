@@ -98,7 +98,11 @@ public class MemberDao {
 		} finally {
 			close(pstmt);
 		}
-		System.out.println(result + "dao!@!@!@");
+		System.out.println(m.getmNickname());
+		System.out.println(m.getmPwd());
+		System.out.println(m.getmPhone());
+		System.out.println(m.getmEmail());
+		System.out.println(m.getmId());
 		return result;
 	}
 	

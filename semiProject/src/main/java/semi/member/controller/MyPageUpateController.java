@@ -46,7 +46,7 @@ public class MyPageUpateController extends HttpServlet {
 			System.out.println(updateMem);
 		if(updateMem == null) {
 			
-		}else {
+		} else {
 			HttpSession session = request.getSession();
 			session.setAttribute("loginUser", updateMem);
 			
