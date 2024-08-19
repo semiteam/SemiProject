@@ -2,6 +2,8 @@ package semi.schedule.controller;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -77,7 +79,6 @@ public class addPlanController extends HttpServlet {
 				break;
 		}
 		String sDay = request.getParameter("sDate").substring(8, 10);
-		String sSdate = "TO_DATE('"+ sYear + "-" + sMonth + "-" + sDay +"', 'YYYY-MM-DD')";
 		
 		String eYear = request.getParameter("eDate").substring(11, 15);
 		String eMonth = "";
@@ -120,7 +121,17 @@ public class addPlanController extends HttpServlet {
 				break;
 		}
 		String eDay = request.getParameter("eDate").substring(8, 10);
-		String sEdate = "TO_DATE('"+ eYear + "-" + eMonth + "-" + eDay +"', 'YYYY-MM-DD')";
+		
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Date sSdate = null;
+		Date sEdate = null;
+
+		try {
+		    sSdate = new Date(dateFormat.parse(sYear.trim() + "-" + sMonth.trim() + "-" + sDay.trim()).getTime());
+		    sEdate = new Date(dateFormat.parse(eYear.trim() + "-" + eMonth.trim() + "-" + eDay.trim()).getTime());
+		} catch (ParseException e) {
+		    e.printStackTrace();
+		}
 		
 		String sDescription = request.getParameter("explanation_e");
 		int rangeNo = Integer.parseInt(request.getParameter("range")); // 공개 범위
@@ -137,8 +148,8 @@ public class addPlanController extends HttpServlet {
 			alertMsg = "일정 등록에 실패하였습니다.";
 		}
 		
-		request.setAttribute("alertMsg", alertMsg);
-		response.sendRedirect(request.getContextPath());
+		request.getSession().setAttribute("alertMsg", alertMsg);
+		response.sendRedirect(request.getContextPath() + "/planExist.sd");
 	}
 
 	/**

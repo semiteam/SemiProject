@@ -36,8 +36,8 @@ public class ScheduleDao {
 			
 			pstmt.setString(1, sd.getsTitle());
 			pstmt.setString(2, sd.getsPlace());
-			pstmt.setString(3, sd.getsSdate());
-			pstmt.setString(4, sd.getsEdate());
+			pstmt.setDate(3, sd.getsSdate());
+			pstmt.setDate(4, sd.getsEdate());
 			pstmt.setString(5, sd.getsDescription());
 			pstmt.setInt(6, sd.getRangeNo());
 			pstmt.setInt(7, sd.getBgiNo());

@@ -6,8 +6,8 @@ public class Schedule {
 	private int sNo;
 	private String sTitle;
 	private String sPlace;
-	private String sSdate;
-	private String sEdate;
+	private Date sSdate;
+	private Date sEdate;
 	private String sDescription;
 	private int rangeNo;
 	private int bgiNo;
@@ -16,8 +16,8 @@ public class Schedule {
 	
 	public Schedule() {}
 
-	public Schedule(int sNo, String sTitle, String sPlace, String sSdate, String sEdate, String sDescription,
-			int rangeNo, int bgiNo, Date sCdate, String sStatus) {
+	public Schedule(int sNo, String sTitle, String sPlace, Date sSdate, Date sEdate, String sDescription, int rangeNo,
+			int bgiNo, Date sCdate, String sStatus) {
 		super();
 		this.sNo = sNo;
 		this.sTitle = sTitle;
@@ -30,8 +30,8 @@ public class Schedule {
 		this.sCdate = sCdate;
 		this.sStatus = sStatus;
 	}
-	
-	public Schedule(String sTitle, String sPlace, String sSdate, String sEdate, String sDescription, int rangeNo,
+
+	public Schedule(String sTitle, String sPlace, Date sSdate, Date sEdate, String sDescription, int rangeNo,
 			int bgiNo) {
 		super();
 		this.sTitle = sTitle;
@@ -46,7 +46,7 @@ public class Schedule {
 	public int getsNo() {
 		return sNo;
 	}
-	
+
 	public void setsNo(int sNo) {
 		this.sNo = sNo;
 	}
@@ -67,19 +67,19 @@ public class Schedule {
 		this.sPlace = sPlace;
 	}
 
-	public String getsSdate() {
+	public Date getsSdate() {
 		return sSdate;
 	}
 
-	public void setsSdate(String sSdate) {
+	public void setsSdate(Date sSdate) {
 		this.sSdate = sSdate;
 	}
 
-	public String getsEdate() {
+	public Date getsEdate() {
 		return sEdate;
 	}
 
-	public void setsEdate(String sEdate) {
+	public void setsEdate(Date sEdate) {
 		this.sEdate = sEdate;
 	}
 
