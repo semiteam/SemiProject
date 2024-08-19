@@ -109,7 +109,16 @@
                            <% } else { %>
                            <% for(Member m : list) { %>
                             
-                                <div class="user-info">
+                                <div class="user-info" 
+                                			 data-mno="<%=m.getmNo()%>"
+										     data-mid="<%=m.getmId()%>"
+										     data-mname="<%=m.getmName()%>"
+										     data-mphone="<%=m.getmPhone()%>"
+										     data-memail="<%=m.getmEmail()%>"
+										     data-maddress="<%=m.getmAddress()%>"
+										     data-mgrade="<%=m.getmGrade()%>"
+										     data-mreport="<%=m.getmReport()%>"
+										     data-mstatus="<%=m.getmStatus()%>">
                                     <tr>
                                         <td>PK: <%=m.getmNo()%></td>
                                        <td><%=m.getmId()%></td>
@@ -124,29 +133,23 @@
                             
                          </div>    
                         </div>
-				 <script>
-				 $(function() {
-			            $(".user-info>tbody>tr").click(function() { // 수정할것
-			                location.href = '<%= contextPath %>/detail.bo?bno=' + $(this).children().eq(0).text();
-			            });
-			        });
-	             </script>
+				
 						
 
            <div class="paging-area" align="center">
             <% if (currentPage != 1) { %>    
-            <button onclick="location.href='<%= contextPath %>/list.ma?cpage=<%= currentPage - 1 %>'">&lt;</button>
+            <button onclick="location.href='<%= contextPath %>/list.ad?cpage=<%= currentPage - 1 %>'">&lt;</button>
             <% } %>
             <% for (int p = startPage; p <= endPage; p++) { %>
                 <% if (p == currentPage) { %>
                     <button disabled><%= p %></button>
                 <% } else { %>
-                    <button onclick="location.href='<%= contextPath %>/list.ma?cpage=<%= p %>'"><%= p %></button>
+                    <button onclick="location.href='<%= contextPath %>/list.ad?cpage=<%= p %>'"><%= p %></button>
                 <% } %>
             <% } %>
             
             <% if (currentPage != maxPage) { %>
-            <button onclick="location.href='<%= contextPath %>/list.ma?cpage=<%= currentPage + 1 %>'">&gt;</button>
+            <button onclick="location.href='<%= contextPath %>/list.ad?cpage=<%= currentPage + 1 %>'">&gt;</button>
             <% } %>
        	 </div>
                     </div>
@@ -243,24 +246,23 @@
                         <div class="profile-photo" id="user-profile-photo">프로필사진</div>
                     </div>
                     <div class="modal-text" align="left" >
-                        <div class="modal-text-contetn" id="user_no">회원번호 : <%=list.get(0).getmNo()%></div>
-                        <div class="modal-text-contetn" id="user_name">아이디 : <%=list.get(0).getmName()%></div>
-                        <div class="modal-text-contetn" id="user_id">이름 : <%=list.get(0).getmId()%></div>
-                        <div class="modal-text-contetn" id="user_phone">전화번호 : <%=list.get(0).getmPhone()%></div>
-                        <div class="modal-text-contetn" id="user_email">이메일 : <%=list.get(0).getmEmail()%></div>
-                        <div class="modal-text-contetn" id="user_address">주소 : <%=list.get(0).getmAddress()%></div>
-                        <div class="modal-text-contetn" id="user_grade">등급 : <%=list.get(0).getmGrade()%></div>
-                        <div class="modal-text-contetn" id="user_report">신고횟수 : <%=list.get(0).getmReport()%></div>
-                        <div class="modal-text-contetn" id="user_status">상태 : <%=list.get(0).getmStatus()%></div>
+                        <div class="modal-text-contetn" id="user_no"></div>
+                        <div class="modal-text-contetn" id="user_name"></div>
+                        <div class="modal-text-contetn" id="user_id"></div>
+                        <div class="modal-text-contetn" id="user_phone"></div>
+                        <div class="modal-text-contetn" id="user_email"></div>
+                        <div class="modal-text-contetn" id="user_address"></div>
+                        <div class="modal-text-contetn" id="user_grade"></div>
+                        <div class="modal-text-contetn" id="user_report"></div>
+                        <div class="modal-text-contetn" id="user_status"></div>
                     </div>
                 </div>
  
      <% } %>
                 <div class="modal-bottom">
-                <button id="edit-btn" class="btn btn-wide btn-danger">차단</button>
+                <button id="edit-btn" class="btn btn-wide btn-danger" onclick="location.href='<%= contextPath %>/block.ad'">차단</button>
                 <button id="cancel-btn" class="btn btn-wide">차단해제</button></div>
-
-            </div>
+                </div>
         </div>
         
 
@@ -276,7 +278,29 @@
 
                 document.querySelectorAll('.user-info').forEach(function(item){
                     item.addEventListener('click', function () {
-                        modal.style.display = "block";
+
+                    	 const mNo = this.dataset.mno;
+                         const mId = this.dataset.mid;
+                         const mName = this.dataset.mname;
+                         const mPhone = this.dataset.mphone;
+                         const mEmail = this.dataset.memail;
+                         const mAddress = this.dataset.maddress;
+                         const mGrade = this.dataset.mgrade;
+                         const mReport = this.dataset.mreport;
+                         const mStatus = this.dataset.mstatus;
+
+                         
+                         document.getElementById('user_no').textContent = `회원 : ` + mNo;
+                         document.getElementById('user_name').textContent = `아이디 : ` + mId;
+                         document.getElementById('user_id').textContent = `이름 :` + mName;
+                         document.getElementById('user_phone').textContent = `전화번호 : ` + mPhone;
+                         document.getElementById('user_email').textContent = `이메일 : ` + mEmail;
+                         document.getElementById('user_address').textContent = `주소 : ` + mAddress;
+                         document.getElementById('user_grade').textContent = `등급 : ` + mGrade;
+                         document.getElementById('user_report').textContent = `신고횟수 : ` + mReport;
+                         document.getElementById('user_status').textContent = `상태 :` + mStatus;
+                    	
+                    	modal.style.display = "block";
                     });
                 });
 

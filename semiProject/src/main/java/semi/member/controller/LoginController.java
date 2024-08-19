@@ -16,7 +16,7 @@ import semi.member.model.vo.Member;
 /**
  * Servlet implementation class LoginController
  */
-@WebServlet("/login.me")
+@WebServlet("/login.ad")
 public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -47,7 +47,7 @@ public class LoginController extends HttpServlet {
 			
 			session.setAttribute("loginUser", loginUser);
             session.setAttribute("alertMsg", loginUser.getmName() + "님의 방문을 환영합니다");
-            response.sendRedirect(request.getContextPath() + "/list.ma?cpage=1");
+            response.sendRedirect(request.getContextPath() + "/list.ad?cpage=1");
 			
 		}
 		

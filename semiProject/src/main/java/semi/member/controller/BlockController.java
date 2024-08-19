@@ -1,29 +1,23 @@
 package semi.member.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import semi.member.model.service.MemberService;
-import semi.member.model.vo.Member;
-
-
 /**
- * Servlet implementation class MemberSelectController
+ * Servlet implementation class BlockController
  */
-@WebServlet("/selectMember.ad")
-public class MemberSelectController extends HttpServlet {
+@WebServlet("/block.ad")
+public class BlockController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberSelectController() {
+    public BlockController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,12 +26,7 @@ public class MemberSelectController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		ArrayList<Member> list = new MemberService().selectMemberList();
-		request.setAttribute("list",list);
-		
-		
-		request.getRequestDispatcher("/views/manager/manager1.jsp").forward(request, response);
+			
 	}
 
 	/**

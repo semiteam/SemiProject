@@ -29,6 +29,10 @@ public class MemberService {
 		
 		close(conn);
 		
+		for (Member member : list) {
+	        System.out.println(member.toString());
+	    }
+		
 		return list;
 	}
 

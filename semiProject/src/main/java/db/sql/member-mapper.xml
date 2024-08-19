@@ -32,7 +32,7 @@
 SELECT
         COUNT(*) COUNT
   FROM MEMBER
- WHERE M_STATUS = 'U'
+ WHERE M_STATUS != 'A'
 </entry>
 
 <entry key = "selectList">
@@ -41,14 +41,23 @@ FROM (
 SELECT ROWNUM RNUM, A.* 
   FROM      (
 SELECT 
-                    M_NO
-                  , M_NAME
-                  , M_ID
-                  , M_STATUS
-                  , M_REPORT
-                  , M_GRADE
+                     M_NO
+			        ,M_NAME
+			        ,M_ID
+			        ,M_NICKNAME
+			        ,M_PWD
+			        ,M_RRN
+			        ,M_PHONE
+			        ,M_EMAIL
+			        ,M_ADDRESS
+			        ,M_DATE
+			        ,M_MODIFY
+			        ,M_STATUS
+			        ,M_REPORT
+			        ,M_GRADE
+			        ,M_PROFILE
               FROM  MEMBER
-             WHERE M_STATUS = 'U'
+             WHERE M_STATUS != 'A'
                
              ORDER
                 BY M_REPORT DESC
