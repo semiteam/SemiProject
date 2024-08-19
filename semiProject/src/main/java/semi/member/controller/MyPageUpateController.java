@@ -43,14 +43,14 @@ public class MyPageUpateController extends HttpServlet {
 		
 		Member updateMem = new MemberService().updateMember(m);
 		
-			System.out.println(updateMem);
+			System.out.println(updateMem + "ㄴ마은마은마ㅣ의ㅏㄴㅁ아ㅣ늠아ㅣㅡㄴ마이ㅣㅏㅁ능ㄴㅁㅇ");
 		if(updateMem == null) {
 			
 		} else {
 			HttpSession session = request.getSession();
 			session.setAttribute("loginUser", updateMem);
 			
-			response.sendRedirect(request.getContextPath() + "/myPage.me");
+			request.getRequestDispatcher("views/goTrip/goTripLogin_O.jsp").forward(request, response);
 		}
 		
 		

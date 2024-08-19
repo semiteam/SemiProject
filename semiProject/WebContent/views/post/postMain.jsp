@@ -3,16 +3,24 @@
 <%@page import="semi.common.model.vo.PageInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%
+
 	
+<%
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	
 	ArrayList<Post> list = (ArrayList<Post>)request.getAttribute("list");
 	
 	int currentPage = pi.getCurrentPage();
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();
 	int maxPage = pi.getMaxPage();
-%>	
+
+
+ %>	
+	
+	
+	
+
 	
 <!DOCTYPE html>
 <html lang="en">
@@ -73,7 +81,7 @@
         <link rel="stylesheet" href="resouces/css/common.css">
     </head>
     <body>
-<<<<<<< HEAD
+
     
     	
 
@@ -164,15 +172,15 @@
                                 <button onclick="location.href='views/post/postWrite.jsp'"><div class="material-icons edit">edit</div></button>
                               </div>
                               <div class="container" id="post-container">
-                              <% for(Post p : list) { %>
+                             	<% for(Post p : list){ %>
                                 <div class="board-list">
                                   <div class="board">
                                     <div class="thumbnail"><img src="resouces/img/2.jpg" alt=""></div>
-                                    <div class="title"><%= p.getPostTitle() %></div>
-                                    <div class="info">작성자 : <%= p.getmNO() %> | 조회수 : <%= p.getPostCount() %> | 추천수 : <%= p.getPostRecommend() %> | 작성일 :<%= p.getPostDate() %></div>
+                                    <div class="title"></div>
+                                    <div class="info">작성자 : | 조회수 : <%= p.getPostCount() %>| 추천수 : <%= p.getPostRecommend() %>| 작성일 : <%= p.getPostDate() %></div>
                                     <div class="cover">
                                       <div class="material-icons arrow">arrow_forward</div>
-                                      <div class="preview" onclick="location.href='views/post/postDetail.jsp'"><%= p.getPostContent() %>
+                                      <div class="preview" onclick="location.href='views/post/postDetail.jsp'">
                                         
                                       </div>
                                     </div>

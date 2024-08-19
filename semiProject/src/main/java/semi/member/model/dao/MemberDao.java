@@ -98,11 +98,7 @@ public class MemberDao {
 		} finally {
 			close(pstmt);
 		}
-		System.out.println(m.getmNickname());
-		System.out.println(m.getmPwd());
-		System.out.println(m.getmPhone());
-		System.out.println(m.getmEmail());
-		System.out.println(m.getmId());
+	
 		return result;
 	}
 	
@@ -173,8 +169,8 @@ public class MemberDao {
 	
 	}
 
-	/*
-	public Member selectMember(Connection conn, String getmId) {
+	
+	public Member selectMember(Connection conn, String mId) {
 		
 		Member m = null;
 		PreparedStatement pstmt = null;
@@ -183,9 +179,9 @@ public class MemberDao {
 		String sql = prop.getProperty("selectMember");
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, getmId);
+			pstmt.setString(1, mId);
 			
-			
+			rset = pstmt.executeQuery();
 			if(rset.next()) {
 				m = new Member(rset.getInt("M_NO"),
 						   rset.getString("M_NAME"),
@@ -212,5 +208,5 @@ public class MemberDao {
 		}
 		return m;
 	}
-	*/
+	
 }

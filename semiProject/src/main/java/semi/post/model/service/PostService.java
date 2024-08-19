@@ -13,11 +13,11 @@ import semi.post.model.vo.Post;
 
 public class PostService {
 	
-	public ArrayList<Post> selectList(PageInfo pi) {
+	public ArrayList<Post> PostList(PageInfo pi) {
 		
 		Connection conn = getConnection();
 		
-		ArrayList<Post> list = new PostDao().selectList(conn,pi);
+		ArrayList<Post> list = new PostDao().PostList(conn,pi);
 		
 		System.out.println(pi);
 		System.out.println(list);
@@ -37,4 +37,6 @@ public class PostService {
 		return listCount;
 		
 	}
+
+	
 }

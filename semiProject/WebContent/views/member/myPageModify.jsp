@@ -118,7 +118,7 @@
                                 </tr>
 
                                 <tr>
-                                    <td class="text height" width="500">새 비밀번호 확인</td>
+                                    <td class="text height" width="500" name="newPwd2">새 비밀번호 확인</td>
                                 </tr>
 
                                 <tr>
@@ -189,9 +189,21 @@
                             
                             <br><br><br>
 
-                            <button type="submit">변경하기</button>
+                            <button type="submit" onclick="return pwd();">변경하기</button>
+                            <button type="submit" data-toggle="modal" data-target="#deleteModal">탈퇴하기</button> 
                             <button type="reset">취소</button>
                         </form>
+                        
+                        <script>
+                        function pwd(){
+                        	if($("input[name=newPwd]").val() != $("input[name=newPwd2]").val()){
+                        		alert("비밀번호 틀렸음 다시 바꾸셈");
+                        		return false;
+                        	}
+                        }
+                        
+                        
+                        </script>
                     </div>
                 </div>
             </div>

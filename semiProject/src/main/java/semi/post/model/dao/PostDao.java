@@ -27,7 +27,7 @@ public class PostDao {
 		}
 	}
 	
-	public ArrayList<Post> selectList(Connection conn , PageInfo pi){
+	public ArrayList<Post> PostList(Connection conn , PageInfo pi){
 		
 		ArrayList<Post> list = new ArrayList<Post>();
 		PreparedStatement pstmt = null;
