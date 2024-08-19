@@ -6,9 +6,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import static semi.common.JDBCTemplate.*;
+
+import semi.common.model.vo.PageInfo;
 import semi.member.model.vo.Member;
 
 
@@ -68,6 +71,7 @@ public class MemberDao {
 		return m;
 	}
 
+<<<<<<< HEAD
 	public int insertMember(Connection conn, Member m) {
 		int result = 0;
 		
@@ -96,6 +100,108 @@ public class MemberDao {
 		}
 		
 		return result;
+=======
+	public ArrayList<Member> selectMemberList(Connection conn) {
+		ArrayList<Member> list = new ArrayList<>();
+	    PreparedStatement pstmt = null;
+	    ResultSet rset = null;
+	    
+	    String sql = prop.getProperty("selectMemberList");
+	    
+	    try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			
+			
+			while(rset.next()) {
+				 Member m = new Member(rset.getInt("M_NO"),
+                         rset.getString("M_NAME"),
+                         rset.getString("M_ID"),
+                         rset.getString("M_NICKNAME"),
+                         rset.getString("M_PWD"),
+                         rset.getInt("M_RRN"),
+                         rset.getInt("M_PHONE"),
+                         rset.getString("M_EMAIL"),
+                         rset.getString("M_ADDRESS"),
+                         rset.getDate("M_DATE"),
+                         rset.getString("M_MODIFY"),
+                         rset.getString("M_STATUS"),
+                         rset.getInt("M_REPORT"),
+                         rset.getString("M_GRADE"),
+                         rset.getString("M_PROFILE"));
+				 list.add(m);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return list;
+	}
+
+	public int selectMemberCount(Connection conn) {
+		int listCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectMemberCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				listCount = rset.getInt("count");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return listCount;
+	}
+
+	public ArrayList<Member> selectList(Connection conn, PageInfo pi) {
+		ArrayList<Member> list = new ArrayList<Member>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			int startRow = (pi.getCurrentPage()-1) * pi.getBoardLimit() +1;
+			int endRow = startRow + pi.getBoardLimit() -1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Member(rset.getInt("M_NO"),
+									rset.getString("M_NAME"),
+									rset.getString("M_ID"),
+									rset.getString("M_STATUS"),
+									rset.getInt("M_REPORT"),
+									rset.getString("M_GRADE")));
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+>>>>>>> 0525e6519daca48f5525b81e1b1ebfbd34c9bfdf
 	}
 
 }
