@@ -31,7 +31,7 @@ public class MemberService {
 		
 		if(result > 0) {
 			commit(conn);
-			updateMem = new MemberDao().selectMember(conn,m.getmId());
+			//updateMem = new MemberDao().selectMember(conn,m.getmId());
 		}else {
 			rollback(conn);
 		}
@@ -41,15 +41,8 @@ public class MemberService {
 	
 	}
 
-	public ArrayList<Member> selectMemberList() {
-		Connection conn = getConnection();
-		
-		ArrayList<Member> list = new MemberDao().selectMemberList(conn);
-		
-		close(conn);
-		
-		return list;
-	}
+	
+	
 
 	public int selectMemberCount() {
 		

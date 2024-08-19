@@ -78,17 +78,19 @@ public class MemberDao {
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("updateMember");
 		
+		System.out.println(sql);
+		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			
+		
 			pstmt.setString(1, m.getmNickname());
 			pstmt.setString(2, m.getmPwd());
 			pstmt.setString(3, m.getmPhone());
 			pstmt.setString(4, m.getmEmail());
-			pstmt.setString(5, m.getmId());
+			pstmt.setString(5, m.getmId()); 
 			
+			System.out.println(m + "dao!@!@!@!@!@!@!");
 			result = pstmt.executeUpdate();
-			
 			
 		} catch (SQLException e) {
 			
@@ -103,46 +105,6 @@ public class MemberDao {
 	
 		
 		
-	public ArrayList<Member> selectMemberList(Connection conn) {
-		ArrayList<Member> list = new ArrayList<>();
-	    PreparedStatement pstmt = null;
-	    ResultSet rset = null;
-	    
-	    String sql = prop.getProperty("selectMemberList");
-	    
-	    try {
-			pstmt = conn.prepareStatement(sql);
-			rset = pstmt.executeQuery();
-			
-			
-			while(rset.next()) {
-				 Member m = new Member(rset.getInt("M_NO"),
-                         rset.getString("M_NAME"),
-                         rset.getString("M_ID"),
-                         rset.getString("M_NICKNAME"),
-                         rset.getString("M_PWD"),
-                         rset.getInt("M_RRN"),
-                         rset.getString("M_PHONE"),
-                         rset.getString("M_EMAIL"),
-                         rset.getString("M_ADDRESS"),
-                         rset.getDate("M_DATE"),
-                         rset.getString("M_MODIFY"),
-                         rset.getString("M_STATUS"),
-                         rset.getInt("M_REPORT"),
-                         rset.getString("M_GRADE"),
-                         rset.getString("M_PROFILE"));
-				 list.add(m);
-			}
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-		}finally {
-			close(rset);
-			close(pstmt);
-		}
-
-		return list;
-	}
 
 	public int selectMemberCount(Connection conn) {
 		int listCount = 0;
@@ -207,6 +169,7 @@ public class MemberDao {
 	
 	}
 
+	/*
 	public Member selectMember(Connection conn, String getmId) {
 		
 		Member m = null;
@@ -216,6 +179,8 @@ public class MemberDao {
 		String sql = prop.getProperty("selectMember");
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, getmId);
+			
 			
 			if(rset.next()) {
 				m = new Member(rset.getInt("M_NO"),
@@ -243,4 +208,5 @@ public class MemberDao {
 		}
 		return m;
 	}
+	*/
 }

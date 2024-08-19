@@ -49,10 +49,10 @@
 	
 	
 	<%
-		String userNickname = loginUser1.getmNickname();
-		String phone = loginUser1.getmPhone();
-		String email = loginUser1.getmEmail();
-		String address = loginUser1.getmAddress();
+		String userNickname = loginUser.getmNickname();
+		String phone = loginUser.getmPhone();
+		String email = loginUser.getmEmail();
+		String address = loginUser.getmAddress();
 		
 	%>
 		
@@ -95,7 +95,7 @@
                 <div class="content">
                     <div class="min_content" align="center">
                          <form id="myPage-form" action="<%= contextPath %>/update.me" method="post"> 
-                            <input type="hidden" name="userId">
+                            <input type="hidden" name="userId" value="<%= loginUser.getmId() %>">
                             <table>
                                 <tr>
                                     <!-- <th colspan="2" class="text">내 정보 수정</th> -->
