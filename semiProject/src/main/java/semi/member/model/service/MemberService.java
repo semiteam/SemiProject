@@ -37,16 +37,6 @@ public class MemberService {
 		
 		return result;
 	}
-	
-	public ArrayList<Member> selectMemberList() {
-		Connection conn = getConnection();
-		
-		ArrayList<Member> list = new MemberDao().selectMemberList(conn);
-		
-		close(conn);
-		
-		return list;
-	}
 
 	public int selectMemberCount() {
 		

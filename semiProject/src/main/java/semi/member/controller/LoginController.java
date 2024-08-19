@@ -47,7 +47,7 @@ public class LoginController extends HttpServlet {
 			if (loginAdmin == null) {
 				session.setAttribute("alertMsg", "로그인에 실패하였습니다.");
 				
-				response.sendRedirect(request.getContextPath() + "/login.me");
+				response.sendRedirect(request.getContextPath() + "/goLogin.me");
 			} else {
 				session.setAttribute("loginAdmin", loginAdmin);
 	            session.setAttribute("alertMsg", loginAdmin.getaNickname() + "님의 방문을 환영합니다");
