@@ -155,6 +155,7 @@
 </head>
 
 <body>
+    <%@ include file="../common/basic.jsp" %>
     <div class="wrap">
         <div class="top">
             <div class="logo" onclick="location.href='views/goTrip/goTripLogin_O.jsp'">우리 여행가조</div>
@@ -162,7 +163,7 @@
                 <ul>
                     <li id="top_menu_1" onclick="location.href=''">My page</li>
                     <li id="top_menu_2" onclick="location.href=''">고객센터</li>
-                    <li id="top_menu_3" onclick="location.href='views/goTrip/goTripLogin_X.jsp'">로그아웃</li>
+                    <li id="top_menu_3" onclick="location.href='views/member/login.jsp'">로그인</li>
                 </ul>
             </div>
         </div>

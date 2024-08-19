@@ -43,11 +43,12 @@ public class MyPageUpateController extends HttpServlet {
 		
 		Member updateMem = new MemberService().updateMember(m);
 		
+			System.out.println(updateMem);
 		if(updateMem == null) {
 			
 		}else {
 			HttpSession session = request.getSession();
-			session.setAttribute("updateMem", updateMem);
+			session.setAttribute("loginUser", updateMem);
 			
 			response.sendRedirect(request.getContextPath() + "/myPage.me");
 		}

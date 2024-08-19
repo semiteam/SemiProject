@@ -2,7 +2,7 @@ package semi.member.controller;
 
 import java.io.IOException;
 
-
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,21 +32,22 @@ public class LoginController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		String mId = request.getParameter("mId");
 		String mPwd = request.getParameter("mPwd");
 		
 		Member loginUser = new MemberService().loginMember(mId, mPwd);
+		
 		if(loginUser == null) {
-			System.out.println("로그인실패");
+			request.getSession().setAttribute("alertMsg", "로그인 실패!");
+            response.sendRedirect(request.getContextPath());
+			
 		}else {
 			
 			HttpSession session = request.getSession();
 			
 			session.setAttribute("loginUser", loginUser);
-			
-			response.sendRedirect(request.getContextPath());
-			System.out.println("로그인성공");
+            session.setAttribute("alertMsg", loginUser.getmName() + "님의 방문을 환영합니다");
+            response.sendRedirect(request.getContextPath() + "/login_O.tp");
 			
 		}
 		

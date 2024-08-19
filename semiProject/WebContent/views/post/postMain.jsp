@@ -73,8 +73,12 @@
         <link rel="stylesheet" href="resouces/css/common.css">
     </head>
     <body>
+<<<<<<< HEAD
     
-    	<%@ include file="../goTrip/goTripLogin_O.jsp" %>
+    	
+
+      <%@ include file="../common/basic.jsp" %>
+
         <div class="wrap">
           <div class="top">
             <div class="logo" onclick="location.href='views/goTrip/goTripLogin_O.jsp'">우리 여행가조</div>

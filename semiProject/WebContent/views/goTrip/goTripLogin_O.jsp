@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-	
-<% String contextPath = request.getContextPath(); %>	
+	pageEncoding="UTF-8"%>	
 <!DOCTYPE html>
 <html lang="en">
 
@@ -157,12 +155,13 @@
 </head>
 
 <body>
+    <%@ include file="../common/basic.jsp" %>
     <div class="wrap">
         <div class="top">
             <div class="logo" onclick="location.href='views/goTrip/goTripLogin_O.jsp'">우리 여행가조</div>
             <div class="top_menu">
                 <ul>
-                    <li id="top_menu_1" onclick="location.href='<%= contextPath %>/update.me'">My page</li>
+                    <li id="top_menu_1" onclick="location.href='<%= contextPath %>/myPage.me'">My page</li>
                     <li id="top_menu_2" onclick="location.href=''">고객센터</li>
                     <li id="top_menu_3" onclick="location.href='views/goTrip/goTripLogin_X.jsp'">로그아웃</li>
                 </ul>

@@ -10,6 +10,7 @@
     
 </head>
 <body>
+    <%@ include file="../common/basic.jsp" %>
     <div class="container">
         <form action="" method="" class="member-container">
             <div class="header">

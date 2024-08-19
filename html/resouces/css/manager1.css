@@ -32,27 +32,19 @@
 
 .left-inner-left{
     background-color: white;
-    width: 75%;
+    width: 70%;
 }
 
 .user-info{
     padding: 30px;
     cursor: pointer;
-    
 }
 
 .user-info:not(:last-child){
     border-bottom: 1px solid black;
-
 }
 
-.report{
-    padding: 30px;
-}
 
-.left-inner-right{
-    width: 20%;
-}
 
 
 /*오른쪽 부분*/

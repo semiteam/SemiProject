@@ -3,6 +3,7 @@ package semi.member.model.vo;
 import java.sql.Date;
 
 public class Member {
+
 	
 		private int mNo;
 		private String mName; 
@@ -43,6 +44,18 @@ public Member(int mNo, String mName, String mId, String mNickname, String mPwd, 
 }
 
 
+
+
+
+public Member(int mNo, String mName, String mId, String mStatus, int mReport, String mGrade) {
+	super();
+	this.mNo = mNo;
+	this.mName = mName;
+	this.mId = mId;
+	this.mStatus = mStatus;
+	this.mReport = mReport;
+	this.mGrade = mGrade;
+}
 
 public Member(String mId, String mNickname, String mPwd, String mPhone, String mEmail) {
 	super();
@@ -181,6 +194,6 @@ public String toString() {
 			+ ", mProfile=" + mProfile + "]";
 }
 
-
-
 }
+
+

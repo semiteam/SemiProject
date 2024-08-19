@@ -1,11 +1,9 @@
 <%@page import="semi.member.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-<!-- <%
 
-	Member m = (Member)request.getAttribute("updateMem");
-%>     -->
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,7 +45,16 @@
 </head>
 <body>
 
-	<!-- <%@ include file="../goTrip/goTripLogin_O.jsp" %> -->
+	<%@ include file="../common/basic.jsp" %>
+	<%
+		String userNickname = loginUser.getmNickname();
+		String phone = loginUser.getmPhone();
+		String email = loginUser.getmEmail();
+		String address = loginUser.getmAddress();
+		
+	%>
+		
+	
 	 <div class="wrap">
             <div class="top">
                 <div class="logo" onclick="location.href='../main/main_로그인_O.html'">우리 여행가조</div>
@@ -85,8 +92,8 @@
     
                 <div class="content">
                     <div class="min_content" align="center">
-                        <!-- <form id="myPage-form" action="<%= contextPath %>/update.me" method="post"> -->
-                            <!-- <input type="hidden" name="userId" value="<%= m.getmId() %>"> -->
+                         <form id="myPage-form" action="<%= contextPath %>/update.me" method="post"> 
+                            
                             <table>
                                 <tr>
                                     <!-- <th colspan="2" class="text">내 정보 수정</th> -->
@@ -105,7 +112,7 @@
                                 </tr>
 
                                 <tr>
-                                    <!-- <td><input type="password" id="newPassword" class="height" name="newPwd" value="<%= m.getmPwd()%>"></td> -->
+                                   <td><input type="password" id="newPassword" class="height" name="newPwd" > </td>
                                 </tr>
 
                                 <tr>
@@ -142,10 +149,10 @@
 
                                 <tr>
                                     <td class="height">
-                                        <input type="text" id="min_username" value="user01" name="newNickName">
+                                        <input type="text" id="min_username" value="<%= userNickname %>" name="newNickName">
                                         <button type="button" class="min_check-btn">중복확인</button>
                                     </td>
-                                    <td><input type="text" id="address"></td>
+                                    <td><input type="text" id="address" value="<%= address %>"></td>
                                 </tr>
 
                                 <tr>
@@ -156,7 +163,7 @@
                                 <tr>
                                     <td class="height"></td>
                                     <td>
-                                       <input type="text" class="phone" name="newPhone" style="width: 300px;">
+                                       <input type="text" class="phone" name="newPhone" style="width: 300px;" value="<%= phone %>">
                                     </td>
                                 </tr>
 
@@ -168,7 +175,7 @@
                                 <tr>
                                     <td class="height"></td>
                                     <td id="email">
-                                        <!-- <input type="text" class="email" name="newEamil" value="<%= m.getmEmail() %>"><div class="text" id="email_t">@</div> -->
+                                       <input type="text" class="email" name="newEamil" value="<%= email %>" ><div class="text" id="email_t">@</div>
                                         <select>
                                             <option value="">직접입력</option>
                                             <option value="">naver.com</option>
