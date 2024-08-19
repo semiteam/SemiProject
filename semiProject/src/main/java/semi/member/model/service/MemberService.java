@@ -35,7 +35,7 @@ public class MemberService {
 		}else {
 			rollback(conn);
 		}
-		
+		System.out.println(updateMem + "서비스");
 		close(conn);
 		return updateMem;
 	

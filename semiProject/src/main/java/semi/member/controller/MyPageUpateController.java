@@ -33,22 +33,24 @@ public class MyPageUpateController extends HttpServlet {
 	      	
 		request.setCharacterEncoding("utf-8");
 		
-		String userId = request.getParameter("userId");
-		String newNickName = request.getParameter("newNickName");
-		String newPwd = request.getParameter("newPwd");
-		String newPhone = request.getParameter("newPhone");
-		String newEmail = request.getParameter("newEmail");
+		String mId = request.getParameter("userId");
+		String mNickname = request.getParameter("newNickName");
+		String mPwd = request.getParameter("newPwd");
+		String mPhone = request.getParameter("newPhone");
+		String mEmail = request.getParameter("newEmail");
 		
-		Member m = new Member(userId,newNickName,newPwd,newPhone,newEmail);  
 		
-		Member updateMem = new MemberService().updateMember(m);
+		Member m = new Member(mId,mNickname,mPwd,mPhone,mEmail);  
 		
-			System.out.println(updateMem);
-		if(updateMem == null) {
+		System.out.println(m + "~~~~~~~~~~~~~~~~");
+		int result = new MemberService().updateMember(m);
+		
+		//	System.out.println(updateMem);
+		if(result > 0) {
 			
 		}else {
 			HttpSession session = request.getSession();
-			session.setAttribute("loginUser", updateMem);
+			session.setAttribute("loginUser", result);
 			
 			response.sendRedirect(request.getContextPath() + "/myPage.me");
 		}

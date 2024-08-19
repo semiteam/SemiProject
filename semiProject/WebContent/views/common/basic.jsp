@@ -6,7 +6,7 @@
 	String contextPath = request.getContextPath();
 	String alertMsg = (String)session.getAttribute("alertMsg");
 	
-	Member loginUser = (Member)session.getAttribute("loginUser");
+	Member loginUser1 = (Member)session.getAttribute("loginUser");
 %>
 <!DOCTYPE html>
 <html>

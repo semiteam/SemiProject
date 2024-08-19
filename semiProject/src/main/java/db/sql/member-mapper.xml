@@ -60,6 +60,7 @@ SELECT
 <entry key="updateMember">
 UPDATE MEMBER
    SET  M_NICKNAME = ?
+      , M_PWD = ?
       , M_PHONE = ?
       , M_EMAIL = ?
       , M_MODIFY = SYSDATE
@@ -73,7 +74,7 @@ UPDATE MEMBER
       , M_ID
       , M_NICKNAME
       , M_PWD
-      , M_RRNM_ID
+      , M_RRN
       , M_PHONE
       , M_EMAIL
       , M_ADDRESS
