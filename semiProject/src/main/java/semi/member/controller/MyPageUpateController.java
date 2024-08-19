@@ -39,16 +39,12 @@ public class MyPageUpateController extends HttpServlet {
 		String mPhone = request.getParameter("newPhone");
 		String mEmail = request.getParameter("newEmail");
 		
-		
 		Member m = new Member(mId,mNickname,mPwd,mPhone,mEmail);  
 		
-		System.out.println(m + "~~~~~~~~~~~~~~~~");
-		int result = new MemberService().updateMember(m);
-		
-		//	System.out.println(updateMem);
-		if(result > 0) {
+		Member result = new MemberService().updateMember(m);
+		if(result == null) {
 			
-		}else {
+		} else {
 			HttpSession session = request.getSession();
 			session.setAttribute("loginUser", result);
 			

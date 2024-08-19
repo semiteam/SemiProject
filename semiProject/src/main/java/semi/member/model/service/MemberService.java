@@ -31,14 +31,13 @@ public class MemberService {
 		
 		if(result > 0) {
 			commit(conn);
-			updateMem = new MemberDao().selectMember(conn,m.getmId());
+			// updateMem = new MemberDao().selectMember(conn,m.getmId());
 		}else {
 			rollback(conn);
 		}
-		System.out.println(updateMem + "서비스");
 		close(conn);
-		return updateMem;
 	
+		return updateMem;
 	}
 
 	public ArrayList<Member> selectMemberList() {
