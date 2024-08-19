@@ -121,10 +121,12 @@
 										     data-mstatus="<%=m.getmStatus()%>">
                                     <tr>
                                         <td>PK: <%=m.getmNo()%></td>
-                                       <td><%=m.getmId()%></td>
+                                        <td><%=m.getmId()%></td>
                                         <td><%=m.getmName() %></td>
                                         <td>누적신고횟수 : <%=m.getmReport() %></td>
                                         <td>회원상태 : <%=m.getmStatus() %></td>
+                                        <td><button class="btn btn-danger">차단</button></td>
+                                        <td><button class="btn">차단해제</button></td>
                                     </tr>
                                 </div>
                              <% } %>
@@ -138,18 +140,18 @@
 
            <div class="paging-area" align="center">
             <% if (currentPage != 1) { %>    
-            <button onclick="location.href='<%= contextPath %>/list.ad?cpage=<%= currentPage - 1 %>'">&lt;</button>
+            <button onclick="location.href='<%= contextPath %>/adminList.ad?cpage=<%= currentPage - 1 %>'">&lt;</button>
             <% } %>
             <% for (int p = startPage; p <= endPage; p++) { %>
                 <% if (p == currentPage) { %>
                     <button disabled><%= p %></button>
                 <% } else { %>
-                    <button onclick="location.href='<%= contextPath %>/list.ad?cpage=<%= p %>'"><%= p %></button>
+                    <button onclick="location.href='<%= contextPath %>/adminList.ad?cpage=<%= p %>'"><%= p %></button>
                 <% } %>
             <% } %>
             
             <% if (currentPage != maxPage) { %>
-            <button onclick="location.href='<%= contextPath %>/list.ad?cpage=<%= currentPage + 1 %>'">&gt;</button>
+            <button onclick="location.href='<%= contextPath %>/adminList.ad?cpage=<%= currentPage + 1 %>'">&gt;</button>
             <% } %>
        	 </div>
                     </div>
@@ -257,20 +259,13 @@
                         <div class="modal-text-contetn" id="user_status"></div>
                     </div>
                 </div>
- 
-     <% } %>
-                <div class="modal-bottom">
-                <button id="edit-btn" class="btn btn-wide btn-danger" onclick="location.href='<%= contextPath %>/block.ad'">차단</button>
-                <button id="cancel-btn" class="btn btn-wide">차단해제</button></div>
-                </div>
         </div>
+     <% } %>
         
 
         
         
         <script>
-        
-        
             document.addEventListener('DOMContentLoaded', function () {
                 const modal = document.getElementById("myModal");
                 const span = document.getElementsByClassName("close")[0];
@@ -292,7 +287,7 @@
                          
                          document.getElementById('user_no').textContent = `회원 : ` + mNo;
                          document.getElementById('user_name').textContent = `아이디 : ` + mId;
-                         document.getElementById('user_id').textContent = `이름 :` + mName;
+                         document.getElementById('user_id').textContent = `이름 : ` + mName;
                          document.getElementById('user_phone').textContent = `전화번호 : ` + mPhone;
                          document.getElementById('user_email').textContent = `이메일 : ` + mEmail;
                          document.getElementById('user_address').textContent = `주소 : ` + mAddress;

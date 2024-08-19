@@ -8,12 +8,12 @@ public class Member {
 	private String mId;
 	private String mNickname;
 	private String mPwd;
-	private int mRrn;
-	private int mPhone;
+	private String mRrn;
+	private String mPhone;
 	private String mEmail;
 	private String mAddress;
 	private Date mDate;
-	private String mModify;
+	private Date mModify;
 	private String mStatus;
 	private int mReport;
 	private String mGrade;
@@ -32,8 +32,9 @@ public class Member {
 	public Member() {
 	}
 
-	public Member(int mNo, String mName, String mId, String mNickname, String mPwd, int mRrn, int mPhone, String mEmail,
-			String mAddress, Date mDate, String mModify, String mStatus, int mReport, String mGrade, String mProfile) {
+	public Member(int mNo, String mName, String mId, String mNickname, String mPwd, String mRrn, String mPhone,
+			String mEmail, String mAddress, Date mDate, Date mModify, String mStatus, int mReport, String mGrade,
+			String mProfile) {
 		super();
 		this.mNo = mNo;
 		this.mName = mName;
@@ -49,6 +50,20 @@ public class Member {
 		this.mStatus = mStatus;
 		this.mReport = mReport;
 		this.mGrade = mGrade;
+		this.mProfile = mProfile;
+	}
+
+	public Member(String mName, String mId, String mNickname, String mPwd, String mRrn, String mPhone, String mEmail,
+			String mAddress, String mProfile) {
+		super();
+		this.mName = mName;
+		this.mId = mId;
+		this.mNickname = mNickname;
+		this.mPwd = mPwd;
+		this.mRrn = mRrn;
+		this.mPhone = mPhone;
+		this.mEmail = mEmail;
+		this.mAddress = mAddress;
 		this.mProfile = mProfile;
 	}
 
@@ -92,19 +107,19 @@ public class Member {
 		this.mPwd = mPwd;
 	}
 
-	public int getmRrn() {
+	public String getmRrn() {
 		return mRrn;
 	}
 
-	public void setmRrn(int mRrn) {
+	public void setmRrn(String mRrn) {
 		this.mRrn = mRrn;
 	}
 
-	public int getmPhone() {
+	public String getmPhone() {
 		return mPhone;
 	}
 
-	public void setmPhone(int mPhone) {
+	public void setmPhone(String mPhone) {
 		this.mPhone = mPhone;
 	}
 
@@ -132,11 +147,11 @@ public class Member {
 		this.mDate = mDate;
 	}
 
-	public String getmModify() {
+	public Date getmModify() {
 		return mModify;
 	}
 
-	public void setmModify(String mModify) {
+	public void setmModify(Date mModify) {
 		this.mModify = mModify;
 	}
 
@@ -171,7 +186,7 @@ public class Member {
 	public void setmProfile(String mProfile) {
 		this.mProfile = mProfile;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "Member [mNo=" + mNo + ", mName=" + mName + ", mId=" + mId + ", mNickname=" + mNickname + ", mPwd="

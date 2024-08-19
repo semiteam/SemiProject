@@ -9,21 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import semi.common.model.vo.PageInfo;
 import semi.member.model.service.MemberService;
 import semi.member.model.vo.Member;
 
+
 /**
- * Servlet implementation class ManagerListController
+ * Servlet implementation class MemberSelectController
  */
-@WebServlet("/adminList.ad")
-public class ManagerListController extends HttpServlet {
+@WebServlet("/selectMember.ma")
+public class afterLoginMemberController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ManagerListController() {
+    public afterLoginMemberController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,40 +32,12 @@ public class ManagerListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int listCount;
-		int currentPage;
-		int pageLimit;
-		int boardLimit;
-		int maxPage;
-		int startPage;
-		int endPage;
 		
-		listCount = new MemberService().selectMemberCount();
+		//ArrayList<Member> list = new MemberService().
+		//request.setAttribute("list",list);
 		
-		currentPage = Integer.parseInt(request.getParameter("cpage"));
 		
-		pageLimit = 10;
-		
-		boardLimit = 6;
-		
-		maxPage = (int)Math.ceil((double)listCount/boardLimit);
-		
-		startPage = (currentPage -1 )/pageLimit * pageLimit+1 ;
-		
-		endPage = startPage + pageLimit  - 1;
-		
-		if(endPage>maxPage) {
-			endPage = maxPage;
-		}
-		
-		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
-		
-		ArrayList<Member> list = new MemberService().selectList(pi);
-		
-		request.setAttribute("pi", pi);
-		request.setAttribute("list", list);
-		
-		request.getRequestDispatcher("views/manager/manager1.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/manager/manager1.jsp").forward(request, response);
 	}
 
 	/**

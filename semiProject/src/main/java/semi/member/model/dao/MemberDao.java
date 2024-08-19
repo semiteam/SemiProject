@@ -50,12 +50,12 @@ public class MemberDao {
 							   rset.getString("M_ID"),
 							   rset.getString("M_NICKNAME"),
 							   rset.getString("M_PWD"),
-							   rset.getInt("M_RRN"),
-							   rset.getInt("M_PHONE"),
+							   rset.getString("M_RRN"),
+							   rset.getString("M_PHONE"),
 							   rset.getString("M_EMAIL"),
 							   rset.getString("M_ADDRESS"),
 							   rset.getDate("M_DATE"),
-							   rset.getString("M_MODIFY"),
+							   rset.getDate("M_MODIFY"),
 							   rset.getString("M_STATUS"),
 							   rset.getInt("M_REPORT"),
 							   rset.getString("M_GRADE"),
@@ -71,45 +71,34 @@ public class MemberDao {
 		return m;
 	}
 
-	public ArrayList<Member> selectMemberList(Connection conn) {
-		ArrayList<Member> list = new ArrayList<>();
-	    PreparedStatement pstmt = null;
-	    ResultSet rset = null;
-	    
-	    String sql = prop.getProperty("selectMemberList");
-	    
-	    try {
+	public int insertMember(Connection conn, Member m) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertMember");
+		
+		try {
 			pstmt = conn.prepareStatement(sql);
-			rset = pstmt.executeQuery();
 			
+			pstmt.setString(1, m.getmName());
+			pstmt.setString(2, m.getmId());
+			pstmt.setString(3, m.getmNickname());
+			pstmt.setString(4, m.getmPwd());
+			pstmt.setString(5, m.getmRrn());
+			pstmt.setString(6, m.getmPhone());
+			pstmt.setString(7, m.getmEmail());
+			pstmt.setString(8, m.getmAddress());
+			pstmt.setString(9, m.getmProfile());
 			
-			while(rset.next()) {
-				 Member m = new Member(rset.getInt("M_NO"),
-                         rset.getString("M_NAME"),
-                         rset.getString("M_ID"),
-                         rset.getString("M_NICKNAME"),
-                         rset.getString("M_PWD"),
-                         rset.getInt("M_RRN"),
-                         rset.getInt("M_PHONE"),
-                         rset.getString("M_EMAIL"),
-                         rset.getString("M_ADDRESS"),
-                         rset.getDate("M_DATE"),
-                         rset.getString("M_MODIFY"),
-                         rset.getString("M_STATUS"),
-                         rset.getInt("M_REPORT"),
-                         rset.getString("M_GRADE"),
-                         rset.getString("M_PROFILE"));
-				 list.add(m);
-			}
+			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
-			close(rset);
+		} finally {
 			close(pstmt);
 		}
-
-		return list;
+		
+		return result;
 	}
 
 	public int selectMemberCount(Connection conn) {
@@ -155,22 +144,23 @@ public class MemberDao {
 			
 			while(rset.next()) {
 				list.add(new Member(rset.getInt("M_NO"),
-			                        rset.getString("M_NAME"),
-			                        rset.getString("M_ID"),
-			                        rset.getString("M_NICKNAME"),
-			                        rset.getString("M_PWD"),
-			                        rset.getInt("M_RRN"),
-			                        rset.getInt("M_PHONE"),
-			                        rset.getString("M_EMAIL"),
-			                        rset.getString("M_ADDRESS"),
-			                        rset.getDate("M_DATE"),
-			                        rset.getString("M_MODIFY"),
-			                        rset.getString("M_STATUS"),
-			                        rset.getInt("M_REPORT"),
-			                        rset.getString("M_GRADE"),
-			                        rset.getString("M_PROFILE")));
+								   rset.getString("M_NAME"),
+								   rset.getString("M_ID"),
+								   rset.getString("M_NICKNAME"),
+								   rset.getString("M_PWD"),
+								   rset.getString("M_RRN"),
+								   rset.getString("M_PHONE"),
+								   rset.getString("M_EMAIL"),
+								   rset.getString("M_ADDRESS"),
+								   rset.getDate("M_DATE"),
+								   rset.getDate("M_MODIFY"),
+								   rset.getString("M_STATUS"),
+								   rset.getInt("M_REPORT"),
+								   rset.getString("M_GRADE"),
+								   rset.getString("M_PROFILE"))
+						);
 			}
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -180,6 +170,23 @@ public class MemberDao {
 		}
 		
 		return list;
+	}
+
+	public int blockMember(Connection conn, int mNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("blockMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1,mNo);
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
 	}
 
 }

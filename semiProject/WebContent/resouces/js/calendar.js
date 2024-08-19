@@ -77,6 +77,9 @@ $(document).ready(function() {
             highlightRange();
         }
         updateRangeInfo();
+        
+        $('#sDate').val(startDate);
+        $('#eDate').val(endDate);
     }
 
     function highlightRange() {

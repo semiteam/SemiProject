@@ -22,18 +22,20 @@ public class MemberService {
 		return m;
 	}
 
-	public ArrayList<Member> selectMemberList() {
+	public int insertMember(Member m) {
 		Connection conn = getConnection();
 		
-		ArrayList<Member> list = new MemberDao().selectMemberList(conn);
+		int result = new MemberDao().insertMember(conn, m);
+		
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
 		
 		close(conn);
 		
-		for (Member member : list) {
-	        System.out.println(member.toString());
-	    }
-		
-		return list;
+		return result;
 	}
 
 	public int selectMemberCount() {
@@ -55,6 +57,20 @@ public class MemberService {
 		close(conn);
 		
 		return list;
+	}
+
+	public int blockMember(int mNo) {
+		Connection conn = getConnection();
+		 
+		int result = new MemberDao().blockMember(conn, mNo);
+		
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+			close(conn);
+		return result;
 	}
 
 }
