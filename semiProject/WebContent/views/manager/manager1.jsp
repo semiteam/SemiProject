@@ -124,9 +124,9 @@
                                         <td><%=m.getmId()%></td>
                                         <td><%=m.getmName() %></td>
                                         <td>누적신고횟수 : <%=m.getmReport() %></td>
-                                        <td>회원상태 : <%=m.getmStatus() %></td>
-                                        <td><button class="btn btn-danger">차단</button></td>
-                                        <td><button class="btn">차단해제</button></td>
+                                        <td>회원상태 : <%=m.getmStatus()%></td>
+									    <td><button class="btn btn-danger">차단</button></td>
+                                        <td><button class="btn btn-wide">차단해제</button></td>                            
                                     </tr>
                                 </div>
                              <% } %>
@@ -135,7 +135,7 @@
                             
                          </div>    
                         </div>
-				
+				<script></script>
 						
 
            <div class="paging-area" align="center">
