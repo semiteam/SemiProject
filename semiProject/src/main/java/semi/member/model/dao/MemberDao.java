@@ -47,7 +47,7 @@ public class MemberDao {
 							   rset.getString("M_NICKNAME"),
 							   rset.getString("M_PWD"),
 							   rset.getInt("M_RRN"),
-							   rset.getInt("M_PHONE"),
+							   rset.getString("M_PHONE"),
 							   rset.getString("M_EMAIL"),
 							   rset.getString("M_ADDRESS"),
 							   rset.getDate("M_DATE"),
@@ -78,7 +78,7 @@ public class MemberDao {
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, m.getmNickname());
-			pstmt.setInt(2, m.getmPhone());
+			pstmt.setString(2, m.getmPhone());
 			pstmt.setString(3, m.getmEmail());
 			pstmt.setString(4, m.getmId());
 			
@@ -114,7 +114,7 @@ public class MemberDao {
 						       rset.getString("m_nickname"),
 						       rset.getString("m_pwd"),
 						       rset.getInt("m_rrn"),
-						       rset.getInt("m_phone"),
+						       rset.getString("m_phone"),
 						       rset.getString("m_email"),
 						       rset.getString("m_address"),
 						       rset.getDate("m_date"),

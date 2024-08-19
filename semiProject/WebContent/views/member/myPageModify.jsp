@@ -1,5 +1,11 @@
+<%@page import="semi.member.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<!-- <%
+
+	Member m = (Member)request.getAttribute("updateMem");
+%>     -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,11 +43,11 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@100..900&display=swap" rel="stylesheet">
         
-        <link rel="stylesheet" href="myPageModify.css">
+        <link rel="stylesheet" href="resouces/css/myPageModify.css">
 </head>
 <body>
 
-	<%@ include file="../goTrip/goTripLogin_O.jsp" %>
+	<!-- <%@ include file="../goTrip/goTripLogin_O.jsp" %> -->
 	 <div class="wrap">
             <div class="top">
                 <div class="logo" onclick="location.href='../main/main_로그인_O.html'">우리 여행가조</div>
@@ -79,8 +85,8 @@
     
                 <div class="content">
                     <div class="min_content" align="center">
-                        <form id="myPage-form" action="<%= contextPath %>/update.me" method="post">
-                            <input type="hidden" name="userId" value="<%= userId %>">
+                        <!-- <form id="myPage-form" action="<%= contextPath %>/update.me" method="post"> -->
+                            <!-- <input type="hidden" name="userId" value="<%= m.getmId() %>"> -->
                             <table>
                                 <tr>
                                     <!-- <th colspan="2" class="text">내 정보 수정</th> -->
@@ -99,7 +105,7 @@
                                 </tr>
 
                                 <tr>
-                                    <td><input type="password" id="newPassword" class="height" name="newPwd"></td>
+                                    <!-- <td><input type="password" id="newPassword" class="height" name="newPwd" value="<%= m.getmPwd()%>"></td> -->
                                 </tr>
 
                                 <tr>
@@ -162,7 +168,7 @@
                                 <tr>
                                     <td class="height"></td>
                                     <td id="email">
-                                        <input type="text" class="email" name="newEamil"><div class="text" id="email_t">@</div>
+                                        <!-- <input type="text" class="email" name="newEamil" value="<%= m.getmEmail() %>"><div class="text" id="email_t">@</div> -->
                                         <select>
                                             <option value="">직접입력</option>
                                             <option value="">naver.com</option>

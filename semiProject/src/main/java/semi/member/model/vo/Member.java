@@ -10,7 +10,7 @@ public class Member {
 		private String mNickname;
 		private String mPwd;
 		private int mRrn;
-		private int mPhone;
+		private String mPhone;
 		private String mEmail;
 		private String mAddress; 
 		private Date mDate;
@@ -22,7 +22,7 @@ public class Member {
 		
 public Member() {}
 
-public Member(int mNo, String mName, String mId, String mNickname, String mPwd, int mRrn, int mPhone, String mEmail,
+public Member(int mNo, String mName, String mId, String mNickname, String mPwd, int mRrn, String mPhone, String mEmail,
 		String mAddress, Date mDate, String mModify, String mStatus, int mReport, String mGrade, String mProfile) {
 	super();
 	this.mNo = mNo;
@@ -44,7 +44,7 @@ public Member(int mNo, String mName, String mId, String mNickname, String mPwd, 
 
 
 
-public Member(String mId, String mNickname, String mPwd, int mPhone, String mEmail) {
+public Member(String mId, String mNickname, String mPwd, String mPhone, String mEmail) {
 	super();
 	this.mId = mId;
 	this.mNickname = mNickname;
@@ -101,11 +101,11 @@ public void setmRrn(int mRrn) {
 	this.mRrn = mRrn;
 }
 
-public int getmPhone() {
+public String getmPhone() {
 	return mPhone;
 }
 
-public void setmPhone(int mPhone) {
+public void setmPhone(String mPhone) {
 	this.mPhone = mPhone;
 }
 

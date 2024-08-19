@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import semi.member.model.service.MemberService;
 import semi.member.model.vo.Member;
@@ -35,12 +36,21 @@ public class MyPageUpateController extends HttpServlet {
 		String userId = request.getParameter("userId");
 		String newNickName = request.getParameter("newNickName");
 		String newPwd = request.getParameter("newPwd");
-		int newPhone = Integer.parseInt(request.getParameter("newPhone"));
+		String newPhone = request.getParameter("newPhone");
 		String newEmail = request.getParameter("newEmail");
 		
 		Member m = new Member(userId,newNickName,newPwd,newPhone,newEmail);  
 		
 		Member updateMem = new MemberService().updateMember(m);
+		
+		if(updateMem == null) {
+			
+		}else {
+			HttpSession session = request.getSession();
+			session.setAttribute("updateMem", updateMem);
+			
+			response.sendRedirect(request.getContextPath() + "/myPage.me");
+		}
 		
 		
 	}
