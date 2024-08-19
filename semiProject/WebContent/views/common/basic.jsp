@@ -1,3 +1,4 @@
+<%@page import="semi.admin.model.vo.Admin"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page import = "semi.member.model.vo.Member" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -5,6 +6,8 @@
 <%
 	String contextPath = request.getContextPath();
 	String alertMsg = (String)session.getAttribute("alertMsg");
+	// Member loginUser = (Member)session.getAttribute("loginUser");
+	// Admin loginAdmin = (Admin)session.getAttribute("loginAdmin");
 %>
 <!DOCTYPE html>
 <html>
@@ -19,6 +22,5 @@
 	    	</script>
 	    	<% session.removeAttribute("alertMsg"); %>
     	<% } %>
-
 	</body>
 </html>

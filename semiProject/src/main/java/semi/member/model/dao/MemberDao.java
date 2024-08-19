@@ -71,7 +71,6 @@ public class MemberDao {
 		return m;
 	}
 
-<<<<<<< HEAD
 	public int insertMember(Connection conn, Member m) {
 		int result = 0;
 		
@@ -100,7 +99,7 @@ public class MemberDao {
 		}
 		
 		return result;
-=======
+	}
 	public ArrayList<Member> selectMemberList(Connection conn) {
 		ArrayList<Member> list = new ArrayList<>();
 	    PreparedStatement pstmt = null;
@@ -115,21 +114,21 @@ public class MemberDao {
 			
 			while(rset.next()) {
 				 Member m = new Member(rset.getInt("M_NO"),
-                         rset.getString("M_NAME"),
-                         rset.getString("M_ID"),
-                         rset.getString("M_NICKNAME"),
-                         rset.getString("M_PWD"),
-                         rset.getInt("M_RRN"),
-                         rset.getInt("M_PHONE"),
-                         rset.getString("M_EMAIL"),
-                         rset.getString("M_ADDRESS"),
-                         rset.getDate("M_DATE"),
-                         rset.getString("M_MODIFY"),
-                         rset.getString("M_STATUS"),
-                         rset.getInt("M_REPORT"),
-                         rset.getString("M_GRADE"),
-                         rset.getString("M_PROFILE"));
-				 list.add(m);
+				                         rset.getString("M_NAME"),
+				                         rset.getString("M_ID"),
+				                         rset.getString("M_NICKNAME"),
+				                         rset.getString("M_PWD"),
+				                         rset.getString("M_RRN"),
+				                         rset.getString("M_PHONE"),
+				                         rset.getString("M_EMAIL"),
+				                         rset.getString("M_ADDRESS"),
+				                         rset.getDate("M_DATE"),
+				                         rset.getDate("M_MODIFY"),
+				                         rset.getString("M_STATUS"),
+				                         rset.getInt("M_REPORT"),
+				                         rset.getString("M_GRADE"),
+				                         rset.getString("M_PROFILE"));
+				list.add(m);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -201,7 +200,6 @@ public class MemberDao {
 		}
 		
 		return list;
->>>>>>> 0525e6519daca48f5525b81e1b1ebfbd34c9bfdf
 	}
 
 }

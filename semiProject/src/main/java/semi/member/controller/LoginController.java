@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import semi.admin.model.service.AdminService;
+import semi.admin.model.vo.Admin;
 import semi.member.model.service.MemberService;
 import semi.member.model.vo.Member;
 
@@ -37,21 +39,27 @@ public class LoginController extends HttpServlet {
 		
 		Member loginUser = new MemberService().loginMember(mId, mPwd);
 		
+		HttpSession session = request.getSession();
+		
 		if(loginUser == null) {
-			request.getSession().setAttribute("alertMsg", "로그인 실패!");
-            response.sendRedirect(request.getContextPath());
+			Admin loginAdmin = new AdminService().loginAdmin(mId, mPwd);
 			
-		}else {
-			
-			HttpSession session = request.getSession();
-			
+			if (loginAdmin == null) {
+				session.setAttribute("alertMsg", "로그인에 실패하였습니다.");
+				
+				response.sendRedirect(request.getContextPath() + "/login.me");
+			} else {
+				session.setAttribute("loginAdmin", loginAdmin);
+	            session.setAttribute("alertMsg", loginAdmin.getaNickname() + "님의 방문을 환영합니다");
+	            
+	            response.sendRedirect(request.getContextPath() + "/adminList.ad?cpage=1");
+			}
+		} else {
 			session.setAttribute("loginUser", loginUser);
-            session.setAttribute("alertMsg", loginUser.getmName() + "님의 방문을 환영합니다");
-            response.sendRedirect(request.getContextPath() + "/list.ma?cpage=1");
-			
+            session.setAttribute("alertMsg", loginUser.getmNickname() + "님의 방문을 환영합니다");
+            
+            response.sendRedirect(request.getContextPath() + "/afterLogin.me");
 		}
-		
-		
 	}
 
 	/**

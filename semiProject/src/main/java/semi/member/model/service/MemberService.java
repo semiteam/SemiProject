@@ -22,7 +22,6 @@ public class MemberService {
 		return m;
 	}
 
-<<<<<<< HEAD
 	public int insertMember(Member m) {
 		Connection conn = getConnection();
 		
@@ -37,7 +36,8 @@ public class MemberService {
 		close(conn);
 		
 		return result;
-=======
+	}
+	
 	public ArrayList<Member> selectMemberList() {
 		Connection conn = getConnection();
 		
@@ -67,7 +67,6 @@ public class MemberService {
 		close(conn);
 		
 		return list;
->>>>>>> 0525e6519daca48f5525b81e1b1ebfbd34c9bfdf
 	}
 
 }

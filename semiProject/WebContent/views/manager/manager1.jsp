@@ -135,18 +135,18 @@
 
            <div class="paging-area" align="center">
             <% if (currentPage != 1) { %>    
-            <button onclick="location.href='<%= contextPath %>/list.ma?cpage=<%= currentPage - 1 %>'">&lt;</button>
+            <button onclick="location.href='<%= contextPath %>/adminList.ad?cpage=<%= currentPage - 1 %>'">&lt;</button>
             <% } %>
             <% for (int p = startPage; p <= endPage; p++) { %>
                 <% if (p == currentPage) { %>
                     <button disabled><%= p %></button>
                 <% } else { %>
-                    <button onclick="location.href='<%= contextPath %>/list.ma?cpage=<%= p %>'"><%= p %></button>
+                    <button onclick="location.href='<%= contextPath %>/adminList.ad?cpage=<%= p %>'"><%= p %></button>
                 <% } %>
             <% } %>
             
             <% if (currentPage != maxPage) { %>
-            <button onclick="location.href='<%= contextPath %>/list.ma?cpage=<%= currentPage + 1 %>'">&gt;</button>
+            <button onclick="location.href='<%= contextPath %>/adminList.ad?cpage=<%= currentPage + 1 %>'">&gt;</button>
             <% } %>
        	 </div>
                     </div>
