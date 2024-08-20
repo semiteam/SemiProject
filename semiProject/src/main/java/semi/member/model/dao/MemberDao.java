@@ -180,6 +180,7 @@ public class MemberDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1,mNo);
+			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
@@ -187,6 +188,33 @@ public class MemberDao {
 			close(pstmt);
 		}
 		return result;
+	}
+
+	public boolean memberStatus(Connection conn, int mNo) {
+		boolean mStatus = false;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("memberStatus");
+		
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, mNo);
+				
+				rset = pstmt.executeQuery();
+				
+				if(rset.next()) {
+					mStatus = "B".equals(rset.getString("M_STATUS"));
+				}
+			} catch (SQLException e) {
+	
+				e.printStackTrace();
+			}finally {
+				close(rset);
+				close(pstmt);
+			}
+
+		return mStatus;
 	}
 
 }

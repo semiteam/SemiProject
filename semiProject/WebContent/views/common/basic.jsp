@@ -7,11 +7,11 @@
 <%
 	String contextPath = request.getContextPath();
 	String alertMsg = (String)session.getAttribute("alertMsg");
-	Enumeration<String> attributeNames = request.getSession().getAttributeNames();
-	while(attributeNames.hasMoreElements()) {
-		String key = attributeNames.nextElement();
-		System.out.println(key + " : " + session.getAttribute(key));
-	};
+	//Enumeration<String> attributeNames = request.getSession().getAttributeNames();
+	//while(attributeNames.hasMoreElements()) {
+	//	String key = attributeNames.nextElement();
+	//	System.out.println(key + " : " + session.getAttribute(key));
+	//};
 	// Member loginUser = (Member)session.getAttribute("loginUser");
 	// Admin loginAdmin = (Admin)session.getAttribute("loginAdmin");
 %>

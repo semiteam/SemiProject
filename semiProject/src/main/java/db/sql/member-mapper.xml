@@ -96,4 +96,11 @@
 		   SET M_STATUS = 'B'
 		 WHERE M_NO = ?
 	</entry>
+	
+	
+	<entry key = "memberStatus">
+	SELECT M_STATUS
+  	  FROM MEMBER
+     WHERE M_NO = ?
+	</entry>
 </properties>

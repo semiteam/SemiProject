@@ -125,8 +125,13 @@
                                         <td><%=m.getmName() %></td>
                                         <td>누적신고횟수 : <%=m.getmReport() %></td>
                                         <td>회원상태 : <%=m.getmStatus()%></td>
-									    <td><button class="btn btn-danger">차단</button></td>
-                                        <td><button class="btn btn-wide">차단해제</button></td>                            
+									    <td>
+									    	 <button class="btn btn-danger block-btn" 
+                        						data-mno="<%=m.getmNo()%>">차단</button>
+									    </td>
+                                        <td>
+                                        	<button class="btn btn-wide">차단해제</button>
+                                        </td>                            
                                     </tr>
                                 </div>
                              <% } %>
@@ -135,7 +140,7 @@
                             
                          </div>    
                         </div>
-				<script></script>
+				
 						
 
            <div class="paging-area" align="center">
@@ -265,72 +270,66 @@
 
         
         
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                const modal = document.getElementById("myModal");
-                const span = document.getElementsByClassName("close")[0];
-                const cancelBtn = document.getElementById("cancel-btn");
-
-                document.querySelectorAll('.user-info').forEach(function(item){
-                    item.addEventListener('click', function () {
-
-                    	 const mNo = this.dataset.mno;
-                         const mId = this.dataset.mid;
-                         const mName = this.dataset.mname;
-                         const mPhone = this.dataset.mphone;
-                         const mEmail = this.dataset.memail;
-                         const mAddress = this.dataset.maddress;
-                         const mGrade = this.dataset.mgrade;
-                         const mReport = this.dataset.mreport;
-                         const mStatus = this.dataset.mstatus;
-
-                         
-                         document.getElementById('user_no').textContent = `회원 : ` + mNo;
-                         document.getElementById('user_name').textContent = `아이디 : ` + mId;
-                         document.getElementById('user_id').textContent = `이름 : ` + mName;
-                         document.getElementById('user_phone').textContent = `전화번호 : ` + mPhone;
-                         document.getElementById('user_email').textContent = `이메일 : ` + mEmail;
-                         document.getElementById('user_address').textContent = `주소 : ` + mAddress;
-                         document.getElementById('user_grade').textContent = `등급 : ` + mGrade;
-                         document.getElementById('user_report').textContent = `신고횟수 : ` + mReport;
-                         document.getElementById('user_status').textContent = `상태 :` + mStatus;
-                    	
-                    	modal.style.display = "block";
-                    });
-                });
-
-                span.onclick = function() {
-                    modal.style.display = "none";
-                }
-                cancelBtn.onclick = function(){
-                    modal.style.display= "none";
-                }
-
-                window.onclick = function(event) {
-                    if (event.target == modal) {
-                        modal.style.display = "none";
-                    }
+     <script>
+        $(document).ready(function() {
+            // Handle user info click to open modal
+            $('.user-info').on('click', function() {
+                const mNo = $(this).data('mno');
+                const mId = $(this).data('mid');
+                const mName = $(this).data('mname');
+                const mPhone = $(this).data('mphone');
+                const mEmail = $(this).data('memail');
+                const mAddress = $(this).data('maddress');
+                const mGrade = $(this).data('mgrade');
+                const mReport = $(this).data('mreport');
+                const mStatus = $(this).data('mstatus');
+    
+                $('#user_no').text(`회원 : ` + mNo);
+                $('#user_name').text(`아이디 : ` + mId);
+                $('#user_id').text(`이름 : ` + mName);
+                $('#user_phone').text(`전화번호 : ` + mPhone);
+                $('#user_email').text(`이메일 : ` + mEmail);
+                $('#user_address').text(`주소 : ` + mAddress);
+                $('#user_grade').text(`등급 : ` + mGrade);
+                $('#user_report').text(`신고횟수 : ` + mReport);
+                $('#user_status').text(`상태 : ` + mStatus);
+    
+                $('#myModal').css('display', 'block');
+            });
+    
+          
+            $('.close').on('click', function() {
+                $('#myModal').css('display', 'none');
+            });
+    
+          
+            $(window).on('click', function(event) {
+                if ($(event.target).is('#myModal')) {
+                    $('#myModal').css('display', 'none');
                 }
             });
-
-
-
-            document.querySelectorAll('.btn-danger').forEach(function(btn) {
-                btn.addEventListener('click', function () {
-                    if (btn.textContent === '차단') {
-                        alert('차단되었습니다.');
-                    } else if (btn.textContent === '차단해제') {
-                        alert('차단이 해제되었습니다.');
-                    }
-                });
+    
+          
+			 $('.btn-danger').on('click', function() {
+			    const mNo = $(this).data('mno');  
+                
+			    if (confirm('정말로 차단하시겠습니까?')) {
+			        window.location.href = `<%= contextPath %>/block.ad?mNo=` + mNo;
+			    }
+			});
+    
+            
+            $('.btn-wide').on('click', function() {
+                alert('차단이 해제되었습니다.');
+              
             });
-
-
-            document.querySelectorAll('.btn-del').forEach(function(btn){
-                btn.addEventListener('click',function(){
-                    alert('글이 삭제되었습니다.');
-                })
-            })
-        </script>
+    
+          
+            $('.btn-del').on('click', function() {
+                alert('글이 삭제되었습니다.');
+                
+            });
+        });
+    </script>
     </body>
 </html>

@@ -36,19 +36,26 @@ public class BlockController extends HttpServlet {
 			request.setCharacterEncoding("utf-8");
 			
 			int mNo = Integer.parseInt(request.getParameter("mNo"));
-		
 			
 			HttpSession session = request.getSession();
-			int result = new MemberService().blockMember(mNo);
 			
-			if(result >0) {
-				session.setAttribute("alretMsg", "성공적으로 차단되었습니다.");
-				
+			
+			if(new MemberService().memberStatus(mNo)) {
+				session.setAttribute("alertMsg", "이미차단된 사용자입니다");
+				response.sendRedirect(request.getContextPath()+"/adminList.ad?cpage=1");
 			}else {
-				session.setAttribute("alertMsg", "차단에 실패하였습니다. 다시 확인해주세요.");
+				int result = new MemberService().blockMember(mNo);
+				if(result>0) {
+					session.setAttribute("alertMsg", "성공적으로 차단되었습니다.");
+					
+				}else {
+					session.setAttribute("alertMsg", "차단에 실패하였습니다. 다시 확인해주세요.");
+				}
+				
+				response.sendRedirect(request.getContextPath()+"/adminList.ad?cpage=1");	
 			}
 			
-			response.sendRedirect(request.getContextPath()+"/adminList.ad?cpage=1");
+			
 		
 		
 		

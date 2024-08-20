@@ -72,5 +72,19 @@ public class MemberService {
 			close(conn);
 		return result;
 	}
+	
+	// member의 m_status를 확인하는 메소드 B면1 아니면0
+	public boolean memberStatus(int mNo) {
+		Connection conn = getConnection();
+		
+		boolean mStatus = new MemberDao().memberStatus(conn, mNo);
+		
+		close(conn);
+		
+		
+		
+		return mStatus; 
+		
+	}
 
 }
