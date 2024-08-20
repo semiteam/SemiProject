@@ -17,6 +17,7 @@
     border-radius: 20px;
     overflow: hidden;
     padding: 10px;
+    cursor: pointer;
 }
 
 .under .content .plan_title,
