@@ -36,6 +36,7 @@
         </style>
     </head>
     <body>
+    <%@ include file="../common/basic.jsp" %>
         <div class="wrap">
             <div class="top">
                 <div class="logo" onclick="location.href='<%= contextPath %>'">우리 여행가조</div>
@@ -50,25 +51,25 @@
 
             <div class="under">
                 <div class="side_menu">
-                    <div id="side_menu_open_1" onclick="location.href='views/manager/manager1.jsp'">회원 관리</div>
-                    <div id="side_menu_open_2" onclick="location.href='views/manager/manager2.jsp'">사용자 통계</div>
-                    <div id="side_menu_open_3" onclick="location.href='views/manager/manager3.jsp'">수익 관리</div>
-                    <div id="side_menu_open_4" onclick="location.href='views/goTrip/goTripLogin_O.jsp'">메인 메뉴</div>
+                    <div id="side_menu_open_1" onclick="location.href='<%= contextPath %>/GoAdminMain.ad'">회원 관리</div>
+                    <div id="side_menu_open_2" onclick="location.href='<%= contextPath %>/GoAdmin2.ad'">사용자 통계</div>
+                    <div id="side_menu_open_3" onclick="location.href='<%= contextPath %>/GoAdmin3.ad'">수익 관리</div>
+                    <div id="side_menu_open_4" onclick="location.href='<%= contextPath %>'">메인 메뉴</div>
                     <div id="close_btn" onclick="side_close()"><img src="resouces/img/chevron_left_24dp_5F6368.png" alt=""></div>
     
-                    <div id="side_menu_close_1" onclick="location.href='views/manager/manager1.jsp'">
+                    <div id="side_menu_close_1" onclick="location.href='<%= contextPath %>/GoAdminMain.ad'">
                         <img src="resouces/img/airplane_ticket_24dp_5F6368.png" alt="">
                         <div class="explanation">회원 관리</div>
                     </div>
-                    <div id="side_menu_close_2" onclick="location.href='views/manager/manager2.jsp'">
+                    <div id="side_menu_close_2" onclick="location.href='<%= contextPath %>/GoAdmin2.ad'">
                         <img src="resouces/img/edit_calendar_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png" alt="">
                         <div class="explanation">사용자 통계</div>
                     </div>
-                    <div id="side_menu_close_3" onclick="location.href='views/manager/manager3.jsp'">
+                    <div id="side_menu_close_3" onclick="location.href='<%= contextPath %>/GoAdmin3.ad'">
                         <img src="resouces/img/dynamic_feed_24dp_5F6368.png" alt="">
                         <div class="explanation">수익 관리</div>
                     </div>
-                    <div id="side_menu_close_4" onclick="location.href='views/goTrip/goTripLogin_O.jsp'">
+                    <div id="side_menu_close_4" onclick="location.href='<%= contextPath %>'">
                         <img src="resouces/img/dynamic_feed_24dp_5F6368.png" alt="">
                         <div class="explanation">메인 메뉴</div>
                     </div>
