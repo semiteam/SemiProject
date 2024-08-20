@@ -177,7 +177,13 @@
         <div class="under">
             <div class="side_menu">
                 <div id="side_menu_open_1" onclick="location.href='<%= contextPath %>'">여행 갈래?</div>
-                <div id="side_menu_open_2" onclick="location.href='<%= contextPath %>/GoScheduleMain.sd'" class="login">계획 짤래?</div>
+                <% if (loginAdmin == null && loginUser != null) { %>
+                	<div id="side_menu_open_2" onclick="location.href='<%= contextPath %>/GoScheduleMain.sd?mno=<%= loginUser.getmNo() %>'" class="login">계획 짤래?</div>
+                <% } else if (loginAdmin != null && loginUser == null) { %>
+                	<div id="side_menu_open_2" onclick="location.href='<%= contextPath %>/GoShowPlanMain'" class="login">계획 짤래?</div>
+                <% } else { %>
+                	<div id="side_menu_open_2" onclick="location.href='<%= contextPath %>/GoScheduleMain.sd'" class="login">계획 짤래?</div>
+                <% } %>
                 <div id="side_menu_open_3" onclick="location.href='<%= contextPath %>/GoPostMain.ps'" class="login">리뷰 볼래?</div>
                 <% if (loginAdmin != null) { %>
                 	<div id="side_menu_open_4" onclick="location.href='<%= contextPath %>/GoAdminMain.ad'">관리자 메뉴</div>
@@ -188,10 +194,22 @@
                     <img src="resouces/img/airplane_ticket_24dp_5F6368.png" alt="">
                     <div class="explanation">여행 갈래?</div>
                 </div>
-                <div id="side_menu_close_2" onclick="location.href='<%= contextPath %>/GoScheduleMain.sd'" class="login">
-                    <img src="resouces/img/edit_calendar_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png" alt="">
-                    <div class="explanation">계획 짤래?</div>
-                </div>
+                <% if (loginAdmin == null && loginUser != null) { %>
+	                <div id="side_menu_close_2" onclick="location.href='<%= contextPath %>/GoScheduleMain.sd?mno=<%= loginUser.getmNo() %>'" class="login">
+	                    <img src="resouces/img/edit_calendar_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png" alt="">
+	                    <div class="explanation">계획 짤래?</div>
+	                </div>
+                <% } else if (loginAdmin != null && loginUser == null) { %>
+               		<div id="side_menu_close_2" onclick="location.href='<%= contextPath %>/GoShowPlanMain'" class="login">
+	                    <img src="resouces/img/edit_calendar_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png" alt="">
+	                    <div class="explanation">계획 짤래?</div>
+	                </div>
+                <% } else { %>
+                	<div id="side_menu_close_2" onclick="location.href='<%= contextPath %>/GoScheduleMain.sd'" class="login">
+	                    <img src="resouces/img/edit_calendar_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png" alt="">
+	                    <div class="explanation">계획 짤래?</div>
+	                </div>
+                <% } %>
                 <div id="side_menu_close_3" onclick="location.href='<%= contextPath %>/GoPostMain.ps'" class="login">
                     <img src="resouces/img/dynamic_feed_24dp_5F6368.png" alt="">
                     <div class="explanation">리뷰 볼래?</div>

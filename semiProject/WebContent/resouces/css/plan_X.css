@@ -50,7 +50,7 @@ body * {
 .wrap .top #top_menu #small_menu {
     position: fixed;
     top: 1.75vh;
-    left: 89.68vw;
+    right: 0vw;
     font-size: 80%;
     width: 13vw;
     height: 2vh;

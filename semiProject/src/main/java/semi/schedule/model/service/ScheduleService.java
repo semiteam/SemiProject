@@ -1,6 +1,7 @@
 package semi.schedule.model.service;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import static semi.common.JDBCTemplate.*;
 
@@ -23,6 +24,16 @@ public class ScheduleService {
 		close(conn);
 		
 		return result;
+	}
+
+	public ArrayList<Schedule> selectSchedule(int mno) {
+		Connection conn = getConnection();
+		
+		ArrayList<Schedule> list = new ScheduleDao().selectSchedule(conn, mno);
+		
+		close(conn);
+		
+		return list;
 	}
 
 }

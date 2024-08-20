@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,9 +36,11 @@ public class addPlanController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		
+		int no = Integer.parseInt(request.getParameter("no"));
+
 		String sTitle = request.getParameter("plan_title");
 		String sPlace = request.getParameter("choice");
-		
+	
 		String sYear = request.getParameter("sDate").substring(11, 15);
 		String sMonth = "";
 		switch(request.getParameter("sDate").substring(4, 7)) {
@@ -136,20 +139,36 @@ public class addPlanController extends HttpServlet {
 		String sDescription = request.getParameter("explanation_e");
 		int rangeNo = Integer.parseInt(request.getParameter("range")); // 공개 범위
 		int bgiNo = Integer.parseInt(request.getParameter("img"));
+		int mno = Integer.parseInt(request.getParameter("mno"));
 		
-		Schedule sd = new Schedule(sTitle, sPlace, sSdate, sEdate, sDescription, rangeNo, bgiNo);
+		Schedule sd = new Schedule(sTitle, sPlace, sSdate, sEdate, sDescription, rangeNo, bgiNo, mno);
 		
 		int result = new ScheduleService().insertSchedule(sd);
 		
 		String alertMsg;
+		
 		if (result > 0) {
 			alertMsg = "성공적으로 일정을 등록하였습니다.";
+			request.setAttribute("alertMsg_success", alertMsg);
+			
+			ArrayList<Schedule> list = new ScheduleService().selectSchedule(mno);
+			
+			request.setAttribute("list", list);
+			
+			request.getRequestDispatcher("views/schedule/plan_O.jsp").forward(request, response);
 		} else {
 			alertMsg = "일정 등록에 실패하였습니다.";
+			request.setAttribute("alertMsg_fail", alertMsg);
+			
+			switch(no) {
+			case 1 : 
+				request.getRequestDispatcher("views/schedule/plan_X.jsp").forward(request, response);
+				break;
+			case 2 : 
+				request.getRequestDispatcher("views/schedule/plan_O.jsp").forward(request, response);
+				break;
+			}
 		}
-		
-		request.getSession().setAttribute("alertMsg", alertMsg);
-		response.sendRedirect(request.getContextPath() + "/planExist.sd");
 	}
 
 	/**

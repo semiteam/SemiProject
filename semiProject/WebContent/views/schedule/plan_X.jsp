@@ -47,13 +47,16 @@
         <%@ include file="../common/basic.jsp" %>
         <div class="wrap">
             <div class="top">
-                <div class="logo" onclick="location.href='<%= contextPath %>'">우리 여행가조</div>
-                <div class="top_menu">
-                    <ul>
-                        <li id="top_menu_1" onclick="location.href='<%= contextPath %>/GoMyPage.me'">My page</li>
-                        <li id="top_menu_2" onclick="location.href='<%= contextPath %>/GoServiceCenter.sc'">고객센터</li>
-                        <li id="top_menu_3">로그아웃</li>
-                    </ul>
+                <video id="main_video" src="resouces/img/산타_댄스.mp4" muted autoplay loop preload="auto"></video>
+                <div id="top_menu">
+                    <div id="logo" onclick="location.href='<%= contextPath %>'">우리 여행가조</div>
+                    <div id="small_menu">
+                        <ul>
+                            <li id="top_menu_1" onclick="location.href='<%= contextPath %>/GoMyPage.me'">My page</li>
+                            <li id="top_menu_2" onclick="location.href='<%= contextPath %>/GoServiceCenter.sc'">고객센터</li>
+                            <li id="top_menu_3">로그아웃</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
 
@@ -225,7 +228,7 @@
                             </div>
                         </div>
 
-                        <div id="add_plan" onclick="location.href='<%= contextPath %>/GoAddPlan.sd'">
+                        <div id="add_plan" onclick="location.href='<%= contextPath %>/GoAddPlan.sd?no=0'">
                             <div class="text">일정 추가하러 가기</div>
                         </div>
                     </div>

@@ -1,5 +1,9 @@
+<%@page import="semi.schedule.model.vo.Schedule"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	ArrayList<Schedule> list = (ArrayList<Schedule>)request.getAttribute("list");
+%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -96,19 +100,21 @@
                 </div>
     
                 <div class="content">
-                    <div class="plan">
-                        <div class="cover">
-                            <div class="plan_title">우정 여행</div>
-                            <div class="date">24.07.20 ~ 24.08.21</div>
-                            <div class="mini_bar material-symbols-outlined">
-                                <div class="material-symbols-outlined">edit</div>
-                                <div class="material-symbols-outlined">share</div>
-                                <div class="material-symbols-outlined" onclick="confirm('일정을 삭제하시겠습니까?')">delete</div>
-                            </div>
+                    <% for (Schedule sd : list) { %>
+                        <div class="plan">
+                        	<div class="cover">
+	                            <div class="plan_title"><%= sd.getsTitle() %></div>
+	                            <div class="date"><%= sd.getsSdate() %> ~ <%= sd.getsEdate() %></div>
+	                            <div class="mini_bar material-symbols-outlined">
+	                                <div class="material-symbols-outlined">edit</div>
+	                                <div class="material-symbols-outlined">share</div>
+	                                <div class="material-symbols-outlined" onclick="confirm('일정을 삭제하시겠습니까?')">delete</div>
+	                            </div>
+	                        </div>
                         </div>
-                    </div>
+                    <% } %>
 
-                    <div class="add_plan" onclick="location.href='views/schedule/addPlan.jsp'">
+                    <div class="add_plan" onclick="location.href='<%= contextPath %>/GoAddPlan.sd?no=1'">
                         <div class="material-symbols-outlined">add_circle</div>
                     </div>
                 </div>

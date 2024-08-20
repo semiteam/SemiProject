@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	int no = Integer.parseInt(request.getParameter("no"));
+%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -96,7 +99,8 @@
                 </div>
     
                 <div class="content">
-                    <form action="<%= contextPath %>/addPlan.sd" method="post" class="inner">
+                    <form action="<%= contextPath %>/addPlan.sd?no=<%= no %>" method="post" class="inner">
+                    	<input type="hidden" name="mno" value="<%= loginUser.getmNo() %>">
                         <table>
                             <tr>
                                 <td id="plan_name_t" class="white big"><div>여행명</div></td>

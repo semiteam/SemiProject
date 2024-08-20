@@ -28,12 +28,16 @@ public class GoAddPlanController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
+		// no = 0 : 일정 없음
+		// no = 1 : 일정 있음
+		int no = Integer.parseInt(request.getParameter("no"));
 		
 		if (session.getAttribute("loginUser") == null && session.getAttribute("loginAdmin") == null) {
 			session.setAttribute("alertMsg", "로그인 후 이용 가능한 서비스입니다.");
 			
 			response.sendRedirect(request.getContextPath());
 		} else {
+			request.setAttribute("no", no);
 			request.getRequestDispatcher("views/schedule/addPlan.jsp").forward(request, response);
 		}
 	}

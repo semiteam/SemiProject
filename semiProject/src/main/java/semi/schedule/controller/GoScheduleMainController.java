@@ -1,12 +1,17 @@
 package semi.schedule.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import semi.schedule.model.service.ScheduleService;
+import semi.schedule.model.vo.Schedule;
 
 /**
  * Servlet implementation class GoScheduleMainController
@@ -34,7 +39,16 @@ public class GoScheduleMainController extends HttpServlet {
 			
 			response.sendRedirect(request.getContextPath());
 		} else {
-			// request.getRequestDispatcher("views/schedule/admin1.jsp").forward(request, response);
+			int mno = Integer.parseInt(request.getParameter("mno"));
+			
+			ArrayList<Schedule> list = new ScheduleService().selectSchedule(mno);
+			
+			if (list.isEmpty()) {
+				request.getRequestDispatcher("views/schedule/plan_X.jsp").forward(request, response);
+			} else {
+				request.setAttribute("list", list);
+				request.getRequestDispatcher("views/schedule/plan_O.jsp").forward(request, response);
+			}
 		}
 	}
 
