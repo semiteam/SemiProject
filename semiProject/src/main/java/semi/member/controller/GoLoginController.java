@@ -10,14 +10,14 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class goLoginController
  */
-@WebServlet("/goLogin.me")
-public class goLoginController extends HttpServlet {
+@WebServlet("/GoLogin.me")
+public class GoLoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public goLoginController() {
+    public GoLoginController() {
         super();
         // TODO Auto-generated constructor stub
     }

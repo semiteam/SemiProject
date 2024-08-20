@@ -1,4 +1,4 @@
-package semi.admin.controller;
+package semi.member.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class afterLoginAdmin
+ * Servlet implementation class LogoutController
  */
-@WebServlet("/afterLogin.ad")
-public class afterLoginAdminController extends HttpServlet {
+@WebServlet("/Logout.me")
+public class LogoutController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public afterLoginAdminController() {
+    public LogoutController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,7 +26,9 @@ public class afterLoginAdminController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("views/manager/manager1.jsp").forward(request, response);
+		request.getSession().invalidate();
+		
+		response.sendRedirect(request.getContextPath());
 	}
 
 	/**
