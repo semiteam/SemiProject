@@ -3,7 +3,6 @@ package semi.member.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -87,7 +86,7 @@ public class LoginController extends HttpServlet {
 				session.setAttribute("loginAdmin", loginAdmin);
 	            session.setAttribute("alertMsg", loginAdmin.getaNickname() + "님의 방문을 환영합니다");
 				
-				request.getRequestDispatcher("views/manager/manager1.jsp").forward(request, response);
+				request.getRequestDispatcher("views/admin/admin1.jsp").forward(request, response);
 			}
 		} else {
 			session.setAttribute("loginUser", loginUser);

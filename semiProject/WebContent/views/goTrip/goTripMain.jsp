@@ -176,28 +176,28 @@
 
         <div class="under">
             <div class="side_menu">
-                <div id="side_menu_open_1" onclick="location.href=''">여행 갈래?</div>
-                <div id="side_menu_open_2" onclick="location.href=''" class="login">계획 짤래?</div>
-                <div id="side_menu_open_3" onclick="location.href=''" class="login">리뷰 볼래?</div>
+                <div id="side_menu_open_1" onclick="location.href='<%= contextPath %>'">여행 갈래?</div>
+                <div id="side_menu_open_2" onclick="location.href='<%= contextPath %>/GoScheduleMain.sd'" class="login">계획 짤래?</div>
+                <div id="side_menu_open_3" onclick="location.href='<%= contextPath %>/GoPostMain.ps'" class="login">리뷰 볼래?</div>
                 <% if (loginAdmin != null) { %>
-                	<div id="side_menu_open_4" onclick="location.href=''">관리자 메뉴</div>
+                	<div id="side_menu_open_4" onclick="location.href='<%= contextPath %>/GoAdminMain.ad'">관리자 메뉴</div>
                 <% } %>
                 <div id="close_btn" onclick="side_close()"><img src="resouces/img/chevron_left_24dp_5F6368.png" alt=""></div>
 
-                <div id="side_menu_close_1" onclick="location.href=''" class="login">
+                <div id="side_menu_close_1" onclick="location.href='<%= contextPath %>'" class="login">
                     <img src="resouces/img/airplane_ticket_24dp_5F6368.png" alt="">
                     <div class="explanation">여행 갈래?</div>
                 </div>
-                <div id="side_menu_close_2" onclick="location.href=''" class="login">
+                <div id="side_menu_close_2" onclick="location.href='<%= contextPath %>/GoScheduleMain.sd'" class="login">
                     <img src="resouces/img/edit_calendar_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png" alt="">
                     <div class="explanation">계획 짤래?</div>
                 </div>
-                <div id="side_menu_close_3" onclick="location.href=''" class="login">
+                <div id="side_menu_close_3" onclick="location.href='<%= contextPath %>/GoPostMain.ps'" class="login">
                     <img src="resouces/img/dynamic_feed_24dp_5F6368.png" alt="">
                     <div class="explanation">리뷰 볼래?</div>
                 </div>
                 <% if (loginAdmin != null) { %>
-	                <div id="side_menu_close_4" onclick="location.href=''">
+	                <div id="side_menu_close_4" onclick="location.href='<%= contextPath %>/GoAdminMain.ad'">
 	                    <img src="resouces/img/manage_accounts_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png" alt="">
 	                    <div class="explanation">관리자 메뉴</div>
 	                </div>
@@ -216,31 +216,31 @@
                     <!-- Swiper -->
                     <div class="swiper mySwiper">
                         <div class="swiper-wrapper"> 
-                            <div class="swiper-slide" type="button" onclick="location.href='views/goTrip/detailGyeongJu.jsp'">
+                            <div class="swiper-slide" type="button" onclick="location.href='<%= contextPath %>/GoDetailGyeongJu.gt'">
                                     <img src="resouces/img/1.경주.jpg" alt="">     
                                     <div class="cover">경주</div>
                             </div>
-                            <div class="swiper-slide" type="button" onclick="location.href='views/goTrip/detailBusan.jsp'">
+                            <div class="swiper-slide" type="button" onclick="location.href='<%= contextPath %>/GoDetailBusan.gt'">
                                 <img src="resouces/img/2.부산.jpg" alt="">
                                 <div class="cover">부산</div>
                             </div>
-                            <div class="swiper-slide" type="button" onclick="location.href='views/goTrip/detailSeoul.jsp'">
+                            <div class="swiper-slide" type="button" onclick="location.href='<%= contextPath %>/GoDetailSeoul.gt'">
                                 <img src="resouces/img/3.남산.jpg" alt="">
                                 <div class="cover">서울</div>
                             </div>
-                            <div class="swiper-slide" type="button" onclick="location.href='views/goTrip/detailJeju.jsp'">
+                            <div class="swiper-slide" type="button" onclick="location.href='<%= contextPath %>/GoDetailJeju.gt'">
                                 <img src="resouces/img/4.제주.jpg" alt="">
                                 <div class="cover">제주</div>
                             </div>
-                            <div class="swiper-slide" type="button" onclick="location.href='views/goTrip/detailGwangJu.jsp'">
+                            <div class="swiper-slide" type="button" onclick="location.href='<%= contextPath %>/GoDetailGwangJu.gt'">
                                 <img src="resouces/img/5.광주.jpg" alt="">
                                 <div class="cover">광주</div>
                             </div>
-                            <div class="swiper-slide" type="button" onclick="location.href='views/goTrip/detailPohang.jsp'">
+                            <div class="swiper-slide" type="button" onclick="location.href='<%= contextPath %>/GoDetailPohang.gt'">
                                 <img src="resouces/img/6.포항.jpg" alt="">
                                 <div class="cover">포항</div>
                             </div>
-                            <div class="swiper-slide" type="button" onclick="location.href='views/goTrip/detailYeosu.jsp'">
+                            <div class="swiper-slide" type="button" onclick="location.href='<%= contextPath %>/GoDetailYeosu.gt'">
                                 <img src="resouces/img/7.여수.jpg" alt="">
                                 <div class="cover">여수</div>
                             </div>
@@ -255,25 +255,25 @@
                     <!-- Swiper -->
                     <div class="swiper mySwiper">
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide" type="button" id="pop-up" onclick="location.href='views/goTrip/popupHush.jsp'">
+                            <div class="swiper-slide" type="button" id="pop-up" onclick="location.href='<%= contextPath %>/GoPopupHush.gt'">
                                 <img src="resouces/img/1. 강남허쉬.JPG" alt="">
                             </div>
-                            <div class="swiper-slide" type="button" id="pop-up" onclick="location.href='views/goTrip/popupDaegu.jsp'">
+                            <div class="swiper-slide" type="button" id="pop-up" onclick="location.href='<%= contextPath %>/GoPopupDaegu.gt'">
                                 <img src="resouces/img/2. 대구.JPG" alt="">
                             </div>
-                            <div class="swiper-slide" type="button" id="pop-up" onclick="location.href='views/goTrip/popupJjanggu.jsp'">
+                            <div class="swiper-slide" type="button" id="pop-up" onclick="location.href='<%= contextPath %>/GoPopupJjanggu.gt'">
                                 <img src="resouces/img/3. 짱구.JPG" alt="">
                             </div>
-                            <div class="swiper-slide" type="button" id="pop-up" onclick="location.href='views/goTrip/popupSeocheon.jsp'">
+                            <div class="swiper-slide" type="button" id="pop-up" onclick="location.href='<%= contextPath %>/GoPopupSeocheon.gt'">
                                 <img src="resouces/img/4. 서천.JPG" alt="">
                             </div>
-                            <div class="swiper-slide" type="button" id="pop-up" onclick="location.href='views/goTrip/popupHorok.jsp'">
+                            <div class="swiper-slide" type="button" id="pop-up" onclick="location.href='<%= contextPath %>/GoPopupHorok.gt'">
                                 <img src="resouces/img/5. 호록.JPG" alt="">
                             </div>
-                            <div class="swiper-slide" type="button" id="pop-up" onclick="location.href='views/goTrip/popupSpongebob.jspl'">
+                            <div class="swiper-slide" type="button" id="pop-up" onclick="location.href='<%= contextPath %>/GoPopupSpongebob.gt'">
                                 <img src="resouces/img/6. 스폰지밥.JPG" alt="">
                             </div>
-                            <div class="swiper-slide" type="button" id="pop-up" onclick="location.href='views/goTrip/popupPupg.jsp'">
+                            <div class="swiper-slide" type="button" id="pop-up" onclick="location.href='<%= contextPath %>/GoPopupPupg.gt'">
                                 <img src="resouces/img/7. 펍지.JPG" alt="">
                             </div>
                         </div>
@@ -287,25 +287,25 @@
                     <!-- Swiper -->
                     <div class="swiper mySwiper">
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide" type="button" id="low-cost" onclick="location.href='views/goTrip/courseGangneung.jsp'">
+                            <div class="swiper-slide" type="button" id="low-cost" onclick="location.href='<%= contextPath %>/GoCourseGangneung.gt'">
                                 <img src="resouces/img/1. 강릉.jpg" alt="">
                             </div>
-                            <div class="swiper-slide" type="button" id="low-cost" onclick="location.href='views/goTrip/courseJeju.jsp'">
+                            <div class="swiper-slide" type="button" id="low-cost" onclick="location.href='<%= contextPath %>/GoCourseJeju.gt'">
                                 <img src="resouces/img/1. 제주.jpg" alt="">
                             </div>
-                            <div class="swiper-slide" type="button" id="low-cost" onclick="location.href='views/goTrip/courseGyeongJu.jsp'">
+                            <div class="swiper-slide" type="button" id="low-cost" onclick="location.href='<%= contextPath %>/GoCourseGyeongJu.gt'">
                                 <img src="resouces/img/1. 경주.JPG" alt="">
                             </div>
-                            <div class="swiper-slide" type="button" id="low-cost" onclick="location.href='views/goTrip/courseGanghwa.jsp'">
+                            <div class="swiper-slide" type="button" id="low-cost" onclick="location.href='<%= contextPath %>/GoCourseGanghwa.gt'">
                                 <img src="resouces/img/1. 강화.jpg" alt="">
                             </div>
-                            <div class="swiper-slide" type="button" id="low-cost" onclick="location.href='views/goTrip/courseDanyang.jsp'">
+                            <div class="swiper-slide" type="button" id="low-cost" onclick="location.href='<%= contextPath %>/GoCourseDanyang.gt'">
                                 <img src="resouces/img/1. 단양.jpg" alt="">
                             </div>
-                            <div class="swiper-slide" type="button" id="low-cost" onclick="location.href='views/goTrip/courseBusan.jsp'">
+                            <div class="swiper-slide" type="button" id="low-cost" onclick="location.href='<%= contextPath %>/GoCourseBusan.gt'">
                                 <img src="resouces/img/1. 부산.jpg" alt="">
                             </div>
-                            <div class="swiper-slide" type="button" id="low-cost" onclick="location.href='views/goTrip/courseSokcho.jsp'">
+                            <div class="swiper-slide" type="button" id="low-cost" onclick="location.href='<%= contextPath %>/GoCourseSokcho.gt'">
                                 <img src="resouces/img/1. 속초.JPG" alt="">
                             </div>
                         </div>
