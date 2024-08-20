@@ -19,7 +19,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>관리자페이지 메인(회원관리)</title>
+        <title>여행가조</title>
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 

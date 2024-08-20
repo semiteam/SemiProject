@@ -14,7 +14,7 @@
 <html>
 	<head>
 	<meta charset="UTF-8">
-	<title>Insert title here</title>
+	<title>여행가조</title>
 	<style>
 		body {
 			-webkit-user-select:none;

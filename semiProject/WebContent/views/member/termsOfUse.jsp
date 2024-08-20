@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>이용약관</title>
+    <title>여행가조</title>
     <meta charset="UTF-8" />
     <script defer src="resouces/js/이용약관.js"></script>
     <link rel="stylesheet" href="https://cQdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css">

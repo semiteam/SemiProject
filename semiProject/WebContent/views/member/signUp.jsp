@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 	<head>
-	<title>회원가입</title>
+	<title>여행가조</title>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@4.0.1/reset.min.css" />
 	<link rel="stylesheet" href="resouces/css/sign up.css" />
 	
