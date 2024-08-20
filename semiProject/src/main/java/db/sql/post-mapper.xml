@@ -34,6 +34,47 @@
         WHERE RNUM BETWEEN ? AND ?
 </entry>
 
+<entry key="PostList">
+SELECT 
+       M_ID
+     , POST_TITLE
+     , POST_CONTENT
+     , POST_COUNT
+     , POST_RECOMMEND
+     , POST_DATE
+     , POST_MODIFYED
+  FROM POST
+  JOIN MEMBER USING (M_NO)
+ WHERE POST_STATUS = 'Y' 
+
+</entry>
+
+<entry key="increaseCount">
+
+UPDATE POST
+   SET POST_COUNT = POST_COUNT + 1
+ WHERE POST_NO = ?
+   AND POST_STATUS = 'Y
+
+</entry>
+
+<entry key="selectPost">
+SELECT
+        POST_NO
+      , M_NICKNAME
+      , POST_TITLE
+      , POST_CONTENT
+      , M_ID
+      , POST_COUNT
+      , POST_RECOMMEND
+      , POST_DATE
+      , POST_MODIFYED
+  FROM POST
+  JOIN MEMBER USING(M_NO)
+ WHERE POST_NO = ?
+   AND POST_STATUS = 'Y'
+
+</entry>
 
 
 </properties>

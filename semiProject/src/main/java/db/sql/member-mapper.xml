@@ -10,7 +10,7 @@
 	        ,M_PWD
 	        ,M_RRN
 	        ,M_PHONE
-	        ,M_EMAIL
+	        ,SUBSTR(M_EMAIL,1,INSTR(M_EMAIL,'@')-1) as "M_EMAIL"
 	        ,M_ADDRESS
 	        ,M_DATE
 	        ,M_MODIFY
@@ -76,7 +76,7 @@ UPDATE MEMBER
       , M_PWD
       , M_RRN
       , M_PHONE
-      , M_EMAIL
+      , SUBSTR(M_EMAIL,1,INSTR(M_EMAIL,'@')-1) as "M_EMAIL"
       , M_ADDRESS
       , M_DATE
       , M_MODIFY
@@ -87,5 +87,6 @@ UPDATE MEMBER
  FROM  MEMBER
  WHERE M_ID = ?
    AND M_STATUS = 'U' 
+    
 </entry>
 </properties>

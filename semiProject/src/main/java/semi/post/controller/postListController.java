@@ -34,43 +34,39 @@ public class postListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
-		int listCount;
-		int currentPage;
-		int pageLimit;
-		int boardLimit;
-		int maxPage;
-		int startPage;
-		int endPage;
-		
-		listCount = new MemberService().selectMemberCount();
-		
-		currentPage = Integer.parseInt(request.getParameter("cpage"));
-		
-		pageLimit = 10;
-		
-		boardLimit = 6;
-		
-		maxPage = (int)Math.ceil((double)listCount/boardLimit);
-		
-		startPage = (currentPage -1 )/pageLimit * pageLimit+1 ;
-		
-		endPage = startPage + pageLimit  - 1;
-		
-		if(endPage>maxPage) {
-			endPage = maxPage;
-		}
-		
-		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
-		
-		ArrayList<Post> list = new PostService().PostList(pi);
-		
-		request.setAttribute("pi", pi);
-		request.setAttribute("list", list);
-		
-	
-		
-		request.getRequestDispatcher("views/post/postMain.jsp").forward(request, response);
+				int listCount1;     
+				int currentPage1;   
+				int pageLimit1;     
+				int boardLimit1;    
+				int maxPage1;       
+				int startPage1;     
+				int endPage1;       
+				
+
+				listCount1 = new PostService().selectListCount();
+				currentPage1 = Integer.parseInt(request.getParameter("cpage"));
+				pageLimit1 = 10;
+				boardLimit1 = 10;
+				maxPage1 = (int)Math.ceil((double)listCount1 / boardLimit1);
+				
+				startPage1 = (currentPage1 - 1) / pageLimit1 * pageLimit1 + 1 ;
+				
+				endPage1 = startPage1 + pageLimit1 - 1;
+				
+				
+				if(endPage1 > maxPage1) {
+					endPage1 = maxPage1;
+				}
+				
+				
+				PageInfo pi = new PageInfo(listCount1,currentPage1,pageLimit1,boardLimit1,maxPage1,startPage1,endPage1);
+
+				
+				ArrayList<Post> list = new PostService().PostList(pi);
+				
+				request.setAttribute("pi", pi);
+				request.setAttribute("list", list);
+				request.getRequestDispatcher("views/post/postMain.jsp").forward(request, response);
 	
 		
 		

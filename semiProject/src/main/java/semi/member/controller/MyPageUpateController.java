@@ -39,6 +39,9 @@ public class MyPageUpateController extends HttpServlet {
 		String mPhone = request.getParameter("newPhone");
 		String mEmail = request.getParameter("newEmail");
 		
+		String naver = request.getParameter("naver");
+		String gmail = request.getParameter("gmail");
+		
 		Member m = new Member(mId,mNickname,mPwd,mPhone,mEmail);  
 		
 		Member updateMem = new MemberService().updateMember(m);
@@ -50,7 +53,7 @@ public class MyPageUpateController extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("loginUser", updateMem);
 			
-			request.getRequestDispatcher("views/goTrip/goTripLogin_O.jsp").forward(request, response);
+			response.sendRedirect(request.getContextPath() + "/myPage.me");
 		}
 		
 		

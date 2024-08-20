@@ -6,17 +6,8 @@
 
 	
 <%
-	PageInfo pi = (PageInfo)request.getAttribute("pi");
-	
 	ArrayList<Post> list = (ArrayList<Post>)request.getAttribute("list");
-	
-	int currentPage = pi.getCurrentPage();
-	int startPage = pi.getStartPage();
-	int endPage = pi.getEndPage();
-	int maxPage = pi.getMaxPage();
-
-
- %>	
+%>	
 	
 	
 	
@@ -172,68 +163,22 @@
                                 <button onclick="location.href='views/post/postWrite.jsp'"><div class="material-icons edit">edit</div></button>
                               </div>
                               <div class="container" id="post-container">
-                             	<% for(Post p : list){ %>
+                              <% for(Post p :list) {%>
                                 <div class="board-list">
                                   <div class="board">
                                     <div class="thumbnail"><img src="resouces/img/2.jpg" alt=""></div>
-                                    <div class="title"></div>
-                                    <div class="info">작성자 : | 조회수 : <%= p.getPostCount() %>| 추천수 : <%= p.getPostRecommend() %>| 작성일 : <%= p.getPostDate() %></div>
+                                    <div class="title"><%= p.getPostTitle() %></div>
+                                    <div class="info">작성자 : <%= p.getmId() %>| 조회수 :<%=p.getPostCount() %> | 추천수 : <%= p.getPostRecommend() %>| 작성일 : <%= p.getPostDate() %> </div>
                                     <div class="cover">
                                       <div class="material-icons arrow">arrow_forward</div>
-                                      <div class="preview" onclick="location.href='views/post/postDetail.jsp'">
-                                        
+                                      <div class="preview" id="preview">
                                       </div>
                                     </div>
                                   </div>
                                 </div>
-                                <% } %>
-                                <div class="board-list">
-                                  <div class="board">
-                                    <div class="thumbnail"><img src="resouces/img/1.jpg" alt=""></div>
-                                    <div class="title"></div>
-                                    <div class="info">작성자 : 김삿갓 | 조회수 : 73 | 추천수 : 14 | 작성일 : 2024-08-02</div>
-                                    <div class="cover">
-                                      <div class="material-icons arrow">arrow_forward</div>
-                                      <div class="preview" onclick="location.href='views/post/postDetail.jsp'">
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="board-list">
-                                  <div class="board">
-                                    <div class="thumbnail"><img src="resouces/img/2.jpg" alt=""></div>
-                                    <div class="title"></div>
-                                    <div class="info">작성자 : 김삿갓 | 조회수 : 73 | 추천수 : 14 | 작성일 : 2024-08-02</div>
-                                    <div class="cover">
-                                      <div class="material-icons arrow">arrow_forward</div>
-                                      <div class="preview" onclick="location.href='views/post/postDetail.jsp'">
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="board-list">
-                                  <div class="board">
-                                    <div class="thumbnail"><img src="resouces/img/2.jpg" alt=""></div>
-                                    <div class="title"></div>
-                                    <div class="info">작성자 : 김삿갓 | 조회수 : 73 | 추천수 : 14 | 작성일 : 2024-08-02</div>
-                                    <div class="cover">
-                                      <div class="material-icons arrow">arrow_forward</div>
-                                      <div class="preview" onclick="location.href='views/post/postDetail.jsp'">
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="board-list">
-                                  <div class="board">
-                                    <div class="thumbnail"><img src="resouces/img/2.jpg" alt=""></div>
-                                    <div class="title"></div>
-                                    <div class="info">작성자 : 김삿갓 | 조회수 : 73 | 추천수 : 14 | 작성일 : 2024-08-02</div>
-                                    <div class="cover">
-                                      <div class="material-icons arrow">arrow_forward</div>
-                                      <div class="preview" onclick="location.href='views/post/postDetail.jsp'">
-                                      </div>
-                                    </div>
-                                  </div>
+                                        <% } %>
+                                
+                                
                                 </div>
                               </div>
                              
@@ -245,7 +190,16 @@
                        <br><br><br><br><br>
                   </div> 
               
-              
+              	<script>
+              	$(function(){
+              		$("#preview").click(function(){
+              			location.href='<%= contextPath %>/postDetail.po?=pno=' + $(this).children().eq(0).text();
+              		})
+              	})
+              		
+              	
+              	
+              	</script>
               
                 </div>
             </div>

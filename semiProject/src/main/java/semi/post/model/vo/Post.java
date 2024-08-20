@@ -3,6 +3,8 @@ package semi.post.model.vo;
 import java.sql.Date;
 
 public class Post {
+	
+	 private String mId;
 	 private int postNo;
 	 private int mNO;
 	 private String postTitle;
@@ -12,6 +14,8 @@ public class Post {
 	 private Date postDate; 
 	 private Date postModifyed;
 	 private String status;
+	 
+	 private String mNickName;
 	 
 	 public Post() {}
 
@@ -31,6 +35,32 @@ public class Post {
 	
 	
 
+	public Post(String mId, int postNo, String postTitle, String postContent, int postCount, int postRecommend,
+			Date postDate, Date postModifyed, String mNickName) {
+		super();
+		this.mId = mId;
+		this.postNo = postNo;
+		this.postTitle = postTitle;
+		this.postContent = postContent;
+		this.postCount = postCount;
+		this.postRecommend = postRecommend;
+		this.postDate = postDate;
+		this.postModifyed = postModifyed;
+		this.mNickName = mNickName;
+	}
+
+	public Post(int mNO, String postTitle, String postContent, int postCount, int postRecommend, Date postDate,
+			Date postModifyed) {
+		super();
+		this.mNO = mNO;
+		this.postTitle = postTitle;
+		this.postContent = postContent;
+		this.postCount = postCount;
+		this.postRecommend = postRecommend;
+		this.postDate = postDate;
+		this.postModifyed = postModifyed;
+	}
+
 	public Post(int postNo, int mNO, String postTitle, String postContent, int postCount, int postRecommend,
 			Date postDate) {
 		super();
@@ -41,6 +71,28 @@ public class Post {
 		this.postCount = postCount;
 		this.postRecommend = postRecommend;
 		this.postDate = postDate;
+	}
+
+	
+	
+	public Post(String mId, String postTitle, String postContent, int postCount, int postRecommend, Date postDate,
+			Date postModifyed) {
+		super();
+		this.mId = mId;
+		this.postTitle = postTitle;
+		this.postContent = postContent;
+		this.postCount = postCount;
+		this.postRecommend = postRecommend;
+		this.postDate = postDate;
+		this.postModifyed = postModifyed;
+	}
+
+	public String getmId() {
+		return mId;
+	}
+
+	public void setmId(String mId) {
+		this.mId = mId;
 	}
 
 	public int getPostNo() {
@@ -114,13 +166,25 @@ public class Post {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	
+
+
+	public String getmNickName() {
+		return mNickName;
+	}
+
+	public void setmNickName(String mNickName) {
+		this.mNickName = mNickName;
+	}
 
 	@Override
 	public String toString() {
-		return "Post [postNo=" + postNo + ", mNO=" + mNO + ", postTitle=" + postTitle + ", postContent=" + postContent
-				+ ", postCount=" + postCount + ", postRecommend=" + postRecommend + ", postDate=" + postDate
-				+ ", postModifyed=" + postModifyed + ", status=" + status + "]";
+		return "Post [mId=" + mId + ", postNo=" + postNo + ", mNO=" + mNO + ", postTitle=" + postTitle
+				+ ", postContent=" + postContent + ", postCount=" + postCount + ", postRecommend=" + postRecommend
+				+ ", postDate=" + postDate + ", postModifyed=" + postModifyed + ", status=" + status + ", mNickName="
+				+ mNickName + "]";
 	}
-	 
+
+	
 	 
 }

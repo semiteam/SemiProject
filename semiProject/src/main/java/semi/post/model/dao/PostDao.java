@@ -27,36 +27,33 @@ public class PostDao {
 		}
 	}
 	
-	public ArrayList<Post> PostList(Connection conn , PageInfo pi){
+	public ArrayList<Post> PostList(Connection conn, PageInfo pi){
 		
 		ArrayList<Post> list = new ArrayList<Post>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String sql = prop.getProperty("selectList");
+		
+		String sql = prop.getProperty("PostList");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1; 
-			int endRow = startRow + pi.getBoardLimit() -1 ;
+			int startRow1 = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+			int endRow1 = startRow1 + pi.getBoardLimit() - 1 ;
 			
-			pstmt.setInt(1, startRow);
-			pstmt.setInt(2, endRow);
+			pstmt.setInt(1, startRow1);
+			pstmt.setInt(2, endRow1);
 			
 			rset = pstmt.executeQuery();
-			
 			while(rset.next()) {
-				list.add(new Post(rset.getInt("post_no"),
-						          rset.getInt("m_id"),
+				list.add(new Post(rset.getString("m_id"),
 						          rset.getString("post_title"),
 						          rset.getString("post_content"),
 						          rset.getInt("post_count"),
 						          rset.getInt("post_recommend"),
-						          rset.getDate("post_date")));
+						          rset.getDate("post_date"),
+						          rset.getDate("post_modifyed")));
 			}
-			
-			System.out.println(pi);
-			System.out.println(list);
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
@@ -65,8 +62,6 @@ public class PostDao {
 			close(pstmt);
 		}
 		
-		System.out.println(pi);
-		System.out.println(list);
 		return list;
 	}
 	
@@ -94,5 +89,63 @@ public class PostDao {
 		}
 		return listCount;
 	
+	}
+	
+	public int increaseCount(Connection conn, int postNo) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("increaseCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, postNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// 
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public Post selectPost(Connection conn, int postNo) {
+		
+		Post p = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectPost");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, postNo);
+			
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				p = new Post(rset.getString("m_id"),
+						     rset.getInt("post_no"),
+						     rset.getString("post_title"),
+						     rset.getString("post_content"),
+						     rset.getInt("post_count"),
+						     rset.getInt("post_recommend"),
+						     rset.getDate("post_date"),
+						     rset.getDate("post_modifyed"),
+						     rset.getString("m_nickname"));
+			}
+		} catch (SQLException e) {
+			 
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return p;	
 	}
 }

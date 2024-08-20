@@ -118,11 +118,11 @@
                                 </tr>
 
                                 <tr>
-                                    <td class="text height" width="500" name="newPwd2">새 비밀번호 확인</td>
+                                    <td class="text height" width="500" >새 비밀번호 확인</td>
                                 </tr>
 
                                 <tr>
-                                    <td><input type="password" id="confirmPassword" class="height"></td>
+                                    <td><input type="password" id="confirmPassword" class="height" name="newPwd2"></td>
                                 </tr>
 
                                 <tr>
@@ -178,10 +178,13 @@
                                     <td class="height"></td>
                                     <td id="email">
                                        <input type="text" class="email" name="newEmail" value="<%= email %>" ><div class="text" id="email_t">@</div>
-                                        <select>
-                                            <option value="">직접입력</option>
-                                            <option value="">naver.com</option>
-                                            <option value="">gmail.com</option>
+                                        
+                                        <input type="hidden" id="textEamil" >
+                                        <select id="select">
+                                         	<option value="" disabled selected>E-Mail 선택</option>
+                                            
+                                            <option value="naver.com" name="naver">naver.com</option>
+                                            <option value="gmail.com" name="gmail">gmail.com</option>
                                           </select>
                                     </td>
                                 </tr>
@@ -194,13 +197,36 @@
                             <button type="reset">취소</button>
                         </form>
                         
+
                         <script>
                         function pwd(){
                         	if($("input[name=newPwd]").val() != $("input[name=newPwd2]").val()){
+                                console.log($("input[name=newPwd]").val());
+                                console.log($("input[name=newPwd2]").val());
                         		alert("비밀번호 틀렸음 다시 바꾸셈");
                         		return false;
                         	}
                         }
+                        
+                        
+                        </script>
+                        
+                        <script>
+                        $(function(){
+                        	$("#select").change(function(){
+                        		if($("#select").val() == 'directly') {
+                        			$("#textEmail").attr("disabled",false);
+                        			$("#textEmail").val("");
+                        			$("#textEmail").focus();
+                        		}else{
+                        			$("#textEmail").val($("#select").val());
+                        		}
+                        	})
+                        })
+                        
+                        
+                        
+                        
                         
                         
                         </script>

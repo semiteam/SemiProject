@@ -1,5 +1,10 @@
+<%@page import="semi.post.model.vo.Post"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+<%
+	Post p = (Post)request.getAttribute("p");
+%>	
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -100,14 +105,15 @@
                         <img src="resouces/img/chevron_right_24dp_5F6368.png" alt="">
                     </div>
                 </div>
-    
+    	       <form> 
                 <div class="content">
                     <section>
                         <div class="board-area">
                             <div class="post">
                                 <form action="">
+                                 <input type="hidden" name="pno">
                                     <div class="title">
-                                        <div class="post-title">제목입니다.</div>
+                                        <div class="post-title"><%= p.getPostTitle() %></div>
                                     </div>
                                     <hr>
                                     <div class="info">
@@ -115,11 +121,11 @@
                                     </div>
                                     <hr>
                                     <div class="content">
-                                        <div class="post-content">내용입니다.</div>
+                                        <div class="post-content"><%= p.getPostContent() %></div>
                                     </div>
                                     <hr>
                                     <div class="recommend">
-                                        <span align="center">xxx님의 여행기가 마음에 드셨다면?</span>
+                                        <span align="center"><%= p.getmNickName() %>님의 여행기가 마음에 드셨다면?</span>
                                         <button>추천하기</button>
                                     </div>
                                     <div class="button-box" align="center"><br><br>

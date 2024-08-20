@@ -21,6 +21,9 @@ public class Member {
 		private String mGrade;
 		private String mProfile;
 		
+		private String naver;
+		private String gmail;
+		
 public Member() {}
 
 public Member(int mNo, String mName, String mId, String mNickname, String mPwd, int mRrn, String mPhone, String mEmail,
@@ -46,6 +49,29 @@ public Member(int mNo, String mName, String mId, String mNickname, String mPwd, 
 
 
 
+
+public Member(int mNo, String mName, String mId, String mNickname, String mPwd, int mRrn, String mPhone, String mEmail,
+		String mAddress, Date mDate, String mModify, String mStatus, int mReport, String mGrade, String mProfile,
+		String naver, String gmail) {
+	super();
+	this.mNo = mNo;
+	this.mName = mName;
+	this.mId = mId;
+	this.mNickname = mNickname;
+	this.mPwd = mPwd;
+	this.mRrn = mRrn;
+	this.mPhone = mPhone;
+	this.mEmail = mEmail;
+	this.mAddress = mAddress;
+	this.mDate = mDate;
+	this.mModify = mModify;
+	this.mStatus = mStatus;
+	this.mReport = mReport;
+	this.mGrade = mGrade;
+	this.mProfile = mProfile;
+	this.naver = naver;
+	this.gmail = gmail;
+}
 
 public Member(int mNo, String mName, String mId, String mStatus, int mReport, String mGrade) {
 	super();
@@ -184,6 +210,22 @@ public String getmProfile() {
 
 public void setmProfile(String mProfile) {
 	this.mProfile = mProfile;
+}
+
+public String getNaver() {
+	return naver;
+}
+
+public void setNaver(String naver) {
+	this.naver = naver;
+}
+
+public String getGmail() {
+	return gmail;
+}
+
+public void setGmail(String gmail) {
+	this.gmail = gmail;
 }
 
 @Override
