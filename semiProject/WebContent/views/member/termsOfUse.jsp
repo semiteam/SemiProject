@@ -92,7 +92,7 @@
               </div>
             </li>
           </ul>
-          <button type="submit" class="next-button" disabled onclick="location.href='views/member/signUp.jsp'">확인</button>
+          <button type="submit" class="next-button" disabled onclick="location.href='<%= contextPath %>/GoSignup.me'">확인</button>
         </form>
       </div>
       <br><br>

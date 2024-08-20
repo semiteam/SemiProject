@@ -225,7 +225,7 @@
                             </div>
                         </div>
 
-                        <div id="add_plan" onclick="location.href='views/schedule/addPlan.jsp'">
+                        <div id="add_plan" onclick="location.href='<%= contextPath %>/GoAddPlan.sd'">
                             <div class="text">일정 추가하러 가기</div>
                         </div>
                     </div>

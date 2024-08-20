@@ -166,7 +166,7 @@
 	                    <li id="top_menu_2" onclick="location.href='<%= contextPath %>/GoServiceCenter.sc'">고객센터</li>
 	                    <li id="top_menu_3">로그아웃</li>
                     <% } else { %>
-	                    <li id="top_menu_4" onclick="location.href='<%= contextPath %>/GoSignup.me'">회원가입</li>
+	                    <li id="top_menu_4" onclick="location.href='<%= contextPath %>//GoTermsOfUse.me'">회원가입</li>
 	                    <li id="top_menu_5" onclick="location.href='<%= contextPath %>/GoLogin.me'">로그인</li>
 	                    <li id="top_menu_6" onclick="location.href='<%= contextPath %>/GoServiceCenter.sc'">고객센터</li>
                     <% } %>
