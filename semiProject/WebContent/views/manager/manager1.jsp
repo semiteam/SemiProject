@@ -60,7 +60,7 @@
 
             <div class="under">
                 <div class="side_menu">
-                    <div id="side_menu_open_1" onclick="location.href='views/manager/manager1.jsp'">회원 관리</div>
+                    <div id="side_menu_open_1" onclick="location.href='<%=contextPath%>/adminList.ad?cpage=1'">회원 관리</div>
                     <div id="side_menu_open_2" onclick="location.href='views/manager/manager2.jsp'">사용자 통계</div>
                     <div id="side_menu_open_3" onclick="location.href='views/manager/manager3.jsp'">수익 관리</div>
                     <div id="side_menu_open_4" onclick="location.href='views/goTrip/goTripLogin_O.jsp'">메인 메뉴</div>
@@ -130,7 +130,8 @@
                         						data-mno="<%=m.getmNo()%>">차단</button>
 									    </td>
                                         <td>
-                                        	<button class="btn btn-wide">차단해제</button>
+                                        	<button class="btn btn-wide unblock-btn"
+                                                data-mno="<%=m.getmNo()%>">차단해제</button>
                                         </td>                            
                                     </tr>
                                 </div>
@@ -310,7 +311,7 @@
             });
     
           
-			 $('.btn-danger').on('click', function() {
+			 $('.block-btn').on('click', function() {
 			    const mNo = $(this).data('mno');  
                 
 			    if (confirm('정말로 차단하시겠습니까?')) {
@@ -319,8 +320,12 @@
 			});
     
             
-            $('.btn-wide').on('click', function() {
-                alert('차단이 해제되었습니다.');
+            $('.unblock-btn').on('click', function() {
+                const mNo = $(this).data("mno");
+
+                if(confirm('차단을 해제하시겠습니까?')){
+                    window.location.href = '<%=contextPath %>/unblock.ad?mNo=' + mNo;
+                }
               
             });
     

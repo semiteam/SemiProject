@@ -73,6 +73,21 @@ public class MemberService {
 		return result;
 	}
 	
+	public int unblockMember(int mNo) {
+		Connection conn = getConnection();
+		
+		int result = new MemberDao().unblockMember(conn,mNo);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+			close(conn);
+			
+		return result;
+	}
 	// member의 m_status를 확인하는 메소드 B면1 아니면0
 	public boolean memberStatus(int mNo) {
 		Connection conn = getConnection();
@@ -81,10 +96,9 @@ public class MemberService {
 		
 		close(conn);
 		
-		
-		
 		return mStatus; 
 		
 	}
+
 
 }

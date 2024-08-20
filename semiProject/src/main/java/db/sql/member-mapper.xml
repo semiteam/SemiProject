@@ -94,7 +94,16 @@
 	<entry key ="blockMember">
 		UPDATE MEMBER
 		   SET M_STATUS = 'B'
-		 WHERE M_NO = ?
+		 WHERE M_STATUS != 'N'
+		   AND M_NO = ?
+		   
+	</entry>
+	
+	<entry key ="unblockMember">
+		UPDATE MEMBER
+		   SET M_STATUS = 'U'
+		 WHERE M_STATUS != 'N'
+		   AND M_NO = ?
 	</entry>
 	
 	

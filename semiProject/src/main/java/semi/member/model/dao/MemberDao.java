@@ -189,6 +189,23 @@ public class MemberDao {
 		}
 		return result;
 	}
+	public int unblockMember(Connection conn, int mNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("unblockMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1,mNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
 
 	public boolean memberStatus(Connection conn, int mNo) {
 		boolean mStatus = false;
@@ -216,5 +233,6 @@ public class MemberDao {
 
 		return mStatus;
 	}
+
 
 }
