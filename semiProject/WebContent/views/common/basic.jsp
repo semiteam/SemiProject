@@ -15,6 +15,14 @@
 	<head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
+	<style>
+		body {
+			-webkit-user-select:none;
+			-moz-user-select:none;
+			-ms-user-select:none;
+			user-select:none;
+		}
+	</style>
 	</head>
 	<body>
 		<% if (alertMsg != null) { %>
@@ -29,17 +37,6 @@
 	    		$('#top_menu_3').on('click', function() {
 	    			window.location.href = '<%= contextPath %>/Logout.me';
 		    	});
-		    	
-		    	
-		    	<% if (loginUser == null && loginAdmin == null) { %>
-			   		$('.swiper-slide').on('click', function() {
-			    		alert("로그인 후 이용 가능한 페이지입니다.");
-			    	});
-			   		$('.login').on('click', function(event) {
-			    		alert("로그인 후 이용 가능한 페이지입니다.");
-			    	});
-			   	<% } %>
-			   	
 	    	})
     	</script>
 	</body>

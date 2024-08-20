@@ -1,4 +1,4 @@
-package semi.schedule.controller;
+package semi.member.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -9,16 +9,16 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class GoScheduleMainController
+ * Servlet implementation class GoMyPageController
  */
-@WebServlet("/GoScheduleMain.sd")
-public class GoScheduleMainController extends HttpServlet {
+@WebServlet("/GoMyPage.me")
+public class GoMyPageController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GoScheduleMainController() {
+    public GoMyPageController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,7 +34,7 @@ public class GoScheduleMainController extends HttpServlet {
 			
 			response.sendRedirect(request.getContextPath());
 		} else {
-			// request.getRequestDispatcher("views/schedule/admin1.jsp").forward(request, response);
+			// request.getRequestDispatcher("views/member/myPage.jsp").forward(request, response);
 		}
 	}
 

@@ -158,17 +158,17 @@
     <%@ include file="../common/basic.jsp" %>
     <div class="wrap">
         <div class="top">
-            <div class="logo" onclick="location.href='views/goTrip/goTripLogin_O.jsp'">우리 여행가조</div>
+            <div class="logo" onclick="<%= contextPath %>'">우리 여행가조</div>
             <div class="top_menu">
                 <ul>
                     <% if (loginUser != null || loginAdmin != null) { %>
-                   		<li id="top_menu_1" onclick="location.href=''">My page</li>
-	                    <li id="top_menu_2" onclick="location.href=''">고객센터</li>
+                   		<li id="top_menu_1" onclick="location.href='<%= contextPath %>/GoMyPage.me'">My page</li>
+	                    <li id="top_menu_2" onclick="location.href='<%= contextPath %>/GoServiceCenter.sc'">고객센터</li>
 	                    <li id="top_menu_3">로그아웃</li>
                     <% } else { %>
-	                    <li id="top_menu_4" onclick="location.href=''">회원가입</li>
+	                    <li id="top_menu_4" onclick="location.href='<%= contextPath %>/GoSignup.me'">회원가입</li>
 	                    <li id="top_menu_5" onclick="location.href='<%= contextPath %>/GoLogin.me'">로그인</li>
-	                    <li id="top_menu_6" onclick="location.href=''">고객센터</li>
+	                    <li id="top_menu_6" onclick="location.href='<%= contextPath %>/GoServiceCenter.sc'">고객센터</li>
                     <% } %>
                 </ul>
             </div>
