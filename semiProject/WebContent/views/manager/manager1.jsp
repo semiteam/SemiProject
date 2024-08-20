@@ -1,3 +1,4 @@
+<%@page import="semi.post.model.vo.Post"%>
 <%@page import="semi.common.model.vo.PageInfo"%>
 <%@page import="semi.member.model.vo.Member"%>
 <%@page import="java.util.ArrayList"%>
@@ -6,13 +7,21 @@
 	
 <%
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	PageInfo postPi = (PageInfo)request.getAttribute("postPi");
 
 	ArrayList<Member> list = (ArrayList<Member>)request.getAttribute("list");
+	ArrayList<Post> postList = (ArrayList<Post>)request.getAttribute("postList");
 
 	int currentPage = pi.getCurrentPage();
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();
 	int maxPage = pi.getMaxPage();
+	
+	int postCurrentPage = postPi.getCurrentPage();
+	int postSrartPage = postPi.getStartPage();
+	int postEndPage = postPi.getEndPage();
+	int postMaxPage = postPi.getMaxPage();
+	
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -146,18 +155,18 @@
 
            <div class="paging-area" align="center">
             <% if (currentPage != 1) { %>    
-            <button onclick="location.href='<%= contextPath %>/adminList.ad?cpage=<%= currentPage - 1 %>'">&lt;</button>
+            <button onclick="location.href='<%= contextPath %>/adminList.ad?cpage=<%= currentPage - 1 %>&pCpage=<%=postCurrentPage%>'">&lt;</button>
             <% } %>
             <% for (int p = startPage; p <= endPage; p++) { %>
                 <% if (p == currentPage) { %>
                     <button disabled><%= p %></button>
                 <% } else { %>
-                    <button onclick="location.href='<%= contextPath %>/adminList.ad?cpage=<%= p %>'"><%= p %></button>
+                    <button onclick="location.href='<%= contextPath %>/adminList.ad?cpage=<%= p %>&pCpage=<%=postCurrentPage%>'"><%= p %></button>
                 <% } %>
             <% } %>
             
             <% if (currentPage != maxPage) { %>
-            <button onclick="location.href='<%= contextPath %>/adminList.ad?cpage=<%= currentPage + 1 %>'">&gt;</button>
+            <button onclick="location.href='<%= contextPath %>/adminList.ad?cpage=<%= currentPage + 1 %>&pCpage=<%=postCurrentPage%>'">&gt;</button>
             <% } %>
        	 </div>
                     </div>
@@ -172,74 +181,53 @@
 
                             <div class="right-inner">
                                     <div class="right-inner-left">
+                                    <% if(postList == null || postList.isEmpty()) {  %>
                                         <div class="post-info" id="post1">
-                                            <p>글번호(pk) 제목/ 작성자/ 클릭시 그 게시글로 가게끔</p>
+                                            <p>게시글이 없습니다.</p>
                                         </div>
-    
-                                        <div class="post-info" id="post2">
-                                            <p>글번호(pk) 제목/ 작성자/ </p>
-                                        </div>
-    
-                                        <div class="post-info" id="post3">
-                                            <p>글번호(pk) 제목/ 작성자/</p>
-                                        </div>
-    
-                                        <div class="post-info" id="post4">
-                                            <p>글번호(pk) 제목/ 작성자/ </p>
-                                        </div>
-    
-                                        <div class="post-info" id="post5">
-                                            <p>글번호(pk) 제목/ 작성자/ </p>
-                                        </div>
-
-                                        <div class="post-info" id="post6">
-                                            <p>글번호(pk) 제목/ 작성자/ </p>
-                                        </div>
-                                    </div>
-                                <div class="right-inner-right">
-                                    <div class="report">
-                                        <button class="btn btn-del" id="del1">글삭제</button>
-                                    </div>
-
-                                    <div class="report">
-                                        <button class="btn btn-del" id="del2">글삭제</button>
-                                    </div>
-
-                                    <div class="report">
-                                        <button class="btn btn-del" id="del3">글삭제</button>
-                                    </div>
-
-                                    <div class="report">
-                                        <button class="btn btn-del" id="del4">글삭제</button>
-                                    </div>
-
-                                    <div class="report">
-                                        <button class="btn btn-del" id="del5">글삭제</button>
-                                    </div>
-
-                                    <div class="report">
-                                        <button class="btn btn-del" id="del6">글삭제</button>
-                                    </div>
+                                     <% } else { %>
+                         				  <% for(Post p : postList) { %> 
+                                        <div class="post-info"
+                                        			data-post-no= "<%=p.getPostNo()%>"
+                                        			data-post-title = "<%=p.getPostTitel() %>"
+                                        			data-mid = "<%=p.getmId() %>"
+                                        			data-mname = "<%=p.getmName() %>"
+                                        			data-post-recommend = "<%=p.getPostRecommend() %>"
+                                        			data-post-date="<%=p.getPostDate() %>">
+                                        			
+                                        <tr>
+                                        <td><%=p.getPostNo()%></td>
+                                        <td><%=p.getPostTitel()%></td>
+                                        <td><%=p.getmId()%></td>
+                                        <td><%=p.getPostRecommend()%></td>
+                                        <td><%=p.getPostDate()%></td>
+									    <td>
+									    	 <button class="btn btn btn-del" 
+                        						data-mno="<%=p.getPostNo()%>">글삭제</button>
+									    </td>                       
+                                    </tr>
                                 </div>
+                                <% } %>
                             </div>
+                             <% } %>
                         </div>
 
-                 <ul class="pagination justify-content-center">
-                            <li class="page-item disabled">
-                                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">이전</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#">4</a></li>
-                            <li class="page-item"><a class="page-link" href="#">5</a></li>
-
-
-                            <li class="page-item">
-                                <a class="page-link" href="#">다음</a>
-                            </li>
-                        </ul>
-                    </div>
+                        <div class="paging-area" align="center">
+                            <% if (postCurrentPage != 1) { %>    
+                            <button onclick="location.href='<%= contextPath %>/adminList.ad?cpage=<%= currentPage%>&pCpage=<%= postCurrentPage - 1 %>'">&lt;</button>
+                            <% } %>
+                            <% for (int p = postCurrentPage; p <= postEndPage; p++) { %>
+                                <% if (p == postCurrentPage) { %>
+                                    <button disabled><%= p %></button>
+                                <% } else { %>
+                                    <button onclick="location.href='<%= contextPath %>/adminList.ad?cpage=<%= currentPage%>&pCpage=<%=postCurrentPage%>'"><%= p %></button>
+                                <% } %>
+                            <% } %>
+                            
+                            <% if (postCurrentPage != postMaxPage) { %>
+                            <button onclick="location.href='<%= contextPath %>/adminList.ad?cpage=<%= currentPage%>&pCpage=<%= postCurrentPage + 1 %>'">&gt;</button>
+                            <% } %>
+                            </div>
                 </div>
             </div>     
         </div>
@@ -264,6 +252,7 @@
                         <div class="modal-text-contetn" id="user_report"></div>
                         <div class="modal-text-contetn" id="user_status"></div>
                     </div>
+                </div>
                 </div>
         </div>
      <% } %>
@@ -329,12 +318,9 @@
               
             });
     
-          
-            $('.btn-del').on('click', function() {
-                alert('글이 삭제되었습니다.');
                 
             });
-        });
+        
     </script>
     </body>
 </html>

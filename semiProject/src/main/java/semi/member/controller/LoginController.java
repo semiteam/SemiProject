@@ -36,30 +36,33 @@ public class LoginController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String mId = request.getParameter("mId");
 		String mPwd = request.getParameter("mPwd");
-		
+
 		Member loginUser = new MemberService().loginMember(mId, mPwd);
 		
 		HttpSession session = request.getSession();
-		
+			
 		if(loginUser == null) {
 			Admin loginAdmin = new AdminService().loginAdmin(mId, mPwd);
+		
 			
 			if (loginAdmin == null) {
 				session.setAttribute("alertMsg", "로그인에 실패하였습니다.");
+				
 				
 				response.sendRedirect(request.getContextPath() + "/goLogin.me");
 			} else {
 				session.setAttribute("loginAdmin", loginAdmin);
 	            session.setAttribute("alertMsg", loginAdmin.getaNickname() + "님의 방문을 환영합니다");
 	            
-	          
-	            response.sendRedirect(request.getContextPath() + "/adminList.ad?cpage=1");
+	         
+	            response.sendRedirect(request.getContextPath() + "/adminList.ad?cpage=1&pCpage=1");
 			}
 		} else {
 			session.setAttribute("loginUser", loginUser);
             session.setAttribute("alertMsg", loginUser.getmNickname() + "님의 방문을 환영합니다");
             
             response.sendRedirect(request.getContextPath() + "/afterLogin.me");
+           
 		}
 	}
 

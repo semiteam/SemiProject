@@ -12,16 +12,5 @@
 		   AND ADMIN_PWD = ?
 		   AND ADMIN_STATUS = 'Y'
 	</entry>
-	
-	<entry key ="">
-		
-	</entry>
 
-	<entry key = "">
-		
-	</entry>
-
-	<entry key = "">
-		
-	</entry>
 </properties>

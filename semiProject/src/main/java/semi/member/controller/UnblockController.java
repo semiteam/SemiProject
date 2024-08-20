@@ -39,7 +39,7 @@ public class UnblockController extends HttpServlet {
 		
 		if(!(new MemberService().memberStatus(mNo))) {
 			session.setAttribute("alertMsg", "차단되어있지 않은 이용자입니다.");
-			response.sendRedirect(request.getContextPath()+"/adminList.ad?cpage=1");
+			response.sendRedirect(request.getContextPath()+"/adminList.ad?cpage=1&pCpage=1");
 		}else {
 			int result = new MemberService().unblockMember(mNo);
 			if(result>0) {
@@ -49,7 +49,7 @@ public class UnblockController extends HttpServlet {
 				session.setAttribute("alertMsg", "해제가 실패하였습니다. 다시 확인해주세요.");
 			}
 			
-			response.sendRedirect(request.getContextPath()+"/adminList.ad?cpage=1");	
+			response.sendRedirect(request.getContextPath()+"/adminList.ad?cpage=1&pCpage=1");	
 		}
 		
 		
