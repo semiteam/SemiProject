@@ -11,14 +11,14 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class GoCourseBusanController
  */
-@WebServlet(name = "GoCourseGyeingJu.gt", urlPatterns = { "/GoCourseGyeingJu.gt" })
-public class GoCourseGyeingJuController extends HttpServlet {
+@WebServlet(name = "GoCourseGyeongJu.gt", urlPatterns = { "/GoCourseGyeongJu.gt" })
+public class GoCourseGyeongJuController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GoCourseGyeingJuController() {
+    public GoCourseGyeongJuController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,7 +34,7 @@ public class GoCourseGyeingJuController extends HttpServlet {
 			
 			response.sendRedirect(request.getContextPath());
 		} else {
-			request.getRequestDispatcher("views/goTrip/courseGyeingJu.jsp").forward(request, response);
+			request.getRequestDispatcher("views/goTrip/courseGyeongJu.jsp").forward(request, response);
 		}
 	}
 
