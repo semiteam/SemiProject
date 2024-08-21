@@ -89,4 +89,24 @@ public class PostDao {
 		return list;
 	}
 
+	public int deletePost(Connection conn, int postNo) {
+			int result = 0;
+			PreparedStatement pstmt = null;
+			String sql  =prop.getProperty("deletePost");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, postNo);
+				result = pstmt.executeUpdate();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally {
+				close(pstmt);
+			}
+			
+			
+		return result;
+	}
+
 }

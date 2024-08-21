@@ -31,4 +31,13 @@ SELECT
     )
     WHERE RNUM BETWEEN ? AND ?
 </entry>
+
+<entry key = "deletePost">
+UPDATE POST
+   SET POST_STATUS = 'N'
+ WHERE POST_NO = ?
+   AND POST_STATUS = 'Y'
+
+
+</entry>
 </properties>

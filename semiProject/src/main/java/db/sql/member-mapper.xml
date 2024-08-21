@@ -57,7 +57,7 @@
 		SELECT
 		        COUNT(*) COUNT
 		  FROM MEMBER
-		 WHERE M_STATUS = 'U'
+		 WHERE M_STATUS != 'N'
 	</entry>
 
 	<entry key = "selectList">

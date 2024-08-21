@@ -18,7 +18,7 @@
 	int maxPage = pi.getMaxPage();
 	
 	int postCurrentPage = postPi.getCurrentPage();
-	int postSrartPage = postPi.getStartPage();
+	int postStartPage = postPi.getStartPage();
 	int postEndPage = postPi.getEndPage();
 	int postMaxPage = postPi.getMaxPage();
 	
@@ -148,11 +148,13 @@
                              </div>
                           <% } %>
                             
-                         </div>    
+                         </div>  
+                         
+                         
                         </div>
 				
 						
-
+            <!--Member 페이징바-->
            <div class="paging-area" align="center">
             <% if (currentPage != 1) { %>    
             <button onclick="location.href='<%= contextPath %>/adminList.ad?cpage=<%= currentPage - 1 %>&pCpage=<%=postCurrentPage%>'">&lt;</button>
@@ -168,6 +170,7 @@
             <% if (currentPage != maxPage) { %>
             <button onclick="location.href='<%= contextPath %>/adminList.ad?cpage=<%= currentPage + 1 %>&pCpage=<%=postCurrentPage%>'">&gt;</button>
             <% } %>
+        
        	 </div>
                     </div>
     
@@ -203,7 +206,7 @@
                                         <td><%=p.getPostDate()%></td>
 									    <td>
 									    	 <button class="btn btn btn-del" 
-                        						data-mno="<%=p.getPostNo()%>">글삭제</button>
+                        						data-post-no="<%=p.getPostNo()%>">글삭제</button>
 									    </td>                       
                                     </tr>
                                 </div>
@@ -212,15 +215,17 @@
                              <% } %>
                         </div>
 
-                        <div class="paging-area" align="center">
+
+                        <!--POST 페이징바-->
+                        <div class="paging-area" align="center"> 
                             <% if (postCurrentPage != 1) { %>    
                             <button onclick="location.href='<%= contextPath %>/adminList.ad?cpage=<%= currentPage%>&pCpage=<%= postCurrentPage - 1 %>'">&lt;</button>
                             <% } %>
-                            <% for (int p = postCurrentPage; p <= postEndPage; p++) { %>
+                            <% for (int p = postStartPage; p <= postEndPage; p++) { %>
                                 <% if (p == postCurrentPage) { %>
                                     <button disabled><%= p %></button>
                                 <% } else { %>
-                                    <button onclick="location.href='<%= contextPath %>/adminList.ad?cpage=<%= currentPage%>&pCpage=<%=postCurrentPage%>'"><%= p %></button>
+                                    <button onclick="location.href='<%= contextPath %>/adminList.ad?cpage=<%= currentPage%>&pCpage=<%=p%>'"><%= p %></button>
                                 <% } %>
                             <% } %>
                             
@@ -261,7 +266,7 @@
         
         
      <script>
-        $(document).ready(function() {
+        $(function() {
             // Handle user info click to open modal
             $('.user-info').on('click', function() {
                 const mNo = $(this).data('mno');
@@ -301,6 +306,7 @@
     
           
 			 $('.block-btn').on('click', function() {
+                event.stopPropagation(); //  이벤트 전파를 멈추게 해주는 메소드
 			    const mNo = $(this).data('mno');  
                 
 			    if (confirm('정말로 차단하시겠습니까?')) {
@@ -310,6 +316,7 @@
     
             
             $('.unblock-btn').on('click', function() {
+                event.stopPropagation(); //  이벤트 전파를 멈추게 해주는 메소드
                 const mNo = $(this).data("mno");
 
                 if(confirm('차단을 해제하시겠습니까?')){
@@ -320,6 +327,21 @@
     
                 
             });
+
+
+            $(function(){
+
+            $('.btn-del').on('click',function(){
+            
+                const postNo = $(this).data('post-no'); 
+                
+                if (confirm('정말로 게시글을 지우시겠습니까?')) {
+                    window.location.href = `<%= contextPath %>/delete.po?postNo=` + postNo;
+                }
+
+            })
+            })
+
         
     </script>
     </body>

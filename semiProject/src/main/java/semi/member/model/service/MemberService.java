@@ -70,7 +70,8 @@ public class MemberService {
 			rollback(conn);
 		}
 			close(conn);
-		return result;
+			
+			return result;
 	}
 	
 	public int unblockMember(int mNo) {
