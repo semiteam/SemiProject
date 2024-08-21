@@ -19,7 +19,7 @@ $('.close_btn').on('click', function() {
 
 $('#cancle').on('click', function() {
     $('#add_detail').css('width', '');
-    $('#add_detail table').css('opacity', '');
+    $('#add_detail table').css('display', '');
     $('.map').css({
         height: '',
         width: '20vw',
@@ -29,7 +29,7 @@ $('#cancle').on('click', function() {
 
 $('.circle2').on('click', function() {
     $('#add_detail').css('width', '40%');
-    $('#add_detail table').css('opacity', '1');
+    $('#add_detail table').css('display', 'block');
     $('.map').css({
         height: '300px',
         width: '',

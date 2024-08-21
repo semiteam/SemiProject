@@ -1,5 +1,9 @@
+<%@page import="semi.detailSchedule.model.vo.DetailSchedule"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	ArrayList<DetailSchedule> list = (ArrayList<DetailSchedule>)request.getAttribute("list");
+%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -96,7 +100,7 @@
                     </div>
                 </div>
     
-                <div class="content">
+                <div class="content">  
                     <div class="detail">
                         <div class="date_div">
                             <div class="date">24.07.10</div>
@@ -121,84 +125,9 @@
                             <img src="resouces/img/maptest.png" alt="">
                         </div>
                     </div>
-
-                    <div class="detail">
-                        <div class="date_div">
-                            <div class="date">24.07.11</div>
-                            <div class="open_btn material-symbols-outlined">keyboard_arrow_down</div>
-                            <div class="close_btn material-symbols-outlined">keyboard_arrow_up</div>
-                        </div>
-                        <div class="plan">
-                            <div class="timeline">
-                                <div class="circle1 material-symbols-outlined">circle</div>
-                                <div class="bar"></div>
-                                <div class="circle2 material-symbols-outlined">add_circle</div>
-                            </div>
-                            <div class="detail_plan">
-                                <div class="plan_content">첫번째 일정임</div>
-                                <div class="plan_content">두번째 일정임</div>
-                                <div class="plan_content">세번째 일정임</div>
-                                <div class="plan_content">네번째 일정임</div>
-                            </div>
-                        </div>
-
-                        <div class="map">
-                            <img src="resouces/img/maptest.png" alt="">
-                        </div>
-                    </div>
-
-                    <div class="detail">
-                        <div class="date_div">
-                            <div class="date">24.07.12</div>
-                            <div class="open_btn material-symbols-outlined">keyboard_arrow_down</div>
-                            <div class="close_btn material-symbols-outlined">keyboard_arrow_up</div>
-                        </div>
-                        <div class="plan">
-                            <div class="timeline">
-                                <div class="circle1 material-symbols-outlined">circle</div>
-                                <div class="bar"></div>
-                                <div class="circle2 material-symbols-outlined">add_circle</div>
-                            </div>
-                            <div class="detail_plan">
-                                <div class="plan_content">첫번째 일정임</div>
-                                <div class="plan_content">두번째 일정임</div>
-                                <div class="plan_content">세번째 일정임</div>
-                                <div class="plan_content">네번째 일정임</div>
-                            </div>
-                        </div>
-
-                        <div class="map">
-                            <img src="resouces/img/maptest.png" alt="">
-                        </div>
-                    </div>
-
-                    <div class="detail">
-                        <div class="date_div">
-                            <div class="date">24.07.13</div>
-                            <div class="open_btn material-symbols-outlined">keyboard_arrow_down</div>
-                            <div class="close_btn material-symbols-outlined">keyboard_arrow_up</div>
-                        </div>
-                        <div class="plan">
-                            <div class="timeline">
-                                <div class="circle1 material-symbols-outlined">circle</div>
-                                <div class="bar"></div>
-                                <div class="circle2 material-symbols-outlined">add_circle</div>
-                            </div>
-                            <div class="detail_plan">
-                                <div class="plan_content">첫번째 일정임</div>
-                                <div class="plan_content">두번째 일정임</div>
-                                <div class="plan_content">세번째 일정임</div>
-                                <div class="plan_content">네번째 일정임</div>
-                            </div>
-                        </div>
-
-                        <div class="map">
-                            <img src="resouces/img/maptest.png" alt="">
-                        </div>
-                    </div>
                 </div>
 
-                <div id="add_detail">
+                <form id="add_detail" method="post" action="">
                     <span id="cancle" class="material-symbols-outlined" style="position: absolute; right: 10px; cursor: pointer;">close</span>
                     <table>
                         <tr>
@@ -211,9 +140,10 @@
                                     <input type="text">
                                     <div class="material-symbols-outlined" id="search-icon">search</div>
                                 </div>
-                                <div></div>
-                                <div></div>
-                                <div>장소 추가하기</div>
+                                <div class="result"></div>
+                                <div class="result"></div>
+                                <br><br>
+                                <span class="right">장소 추가하기</span>
                             </td>
                         </tr>
                         <tr>
@@ -233,8 +163,14 @@
                                 <textarea name="" id="" style="resize: none;"></textarea>
                             </td>
                         </tr>
+                        <tr>
+                            <td colspan="2">
+                                <br><br>
+                                <span class="right">계획 추가 완료하기</span>
+                            </td>
+                        </tr>
                     </table>
-                </div>
+                </form>
             </div>
         </div>
     </body>

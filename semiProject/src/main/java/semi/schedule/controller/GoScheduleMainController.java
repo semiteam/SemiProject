@@ -44,10 +44,12 @@ public class GoScheduleMainController extends HttpServlet {
 			ArrayList<Schedule> list = new ScheduleService().selectSchedule(mno);
 			
 			if (list.isEmpty()) {
-				request.getRequestDispatcher("views/schedule/plan_X.jsp").forward(request, response);
+				request.setAttribute("no", 0);
+				request.getRequestDispatcher("views/schedule/scheduleList.jsp").forward(request, response);
 			} else {
+				request.setAttribute("no", 1);
 				request.setAttribute("list", list);
-				request.getRequestDispatcher("views/schedule/plan_O.jsp").forward(request, response);
+				request.getRequestDispatcher("views/schedule/scheduleList.jsp").forward(request, response);
 			}
 		}
 	}

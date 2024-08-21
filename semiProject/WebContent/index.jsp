@@ -4,7 +4,7 @@
 <html>
 	<head>
 	<meta charset="UTF-8">
-	<title>Insert title here</title>
+	<title>여행가조</title>
 	</head>
 	<body>
 		<%@ include file="views/goTrip/goTripMain.jsp" %>

@@ -36,8 +36,6 @@ public class addPlanController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		
-		int no = Integer.parseInt(request.getParameter("no"));
-
 		String sTitle = request.getParameter("plan_title");
 		String sPlace = request.getParameter("choice");
 	
@@ -149,26 +147,17 @@ public class addPlanController extends HttpServlet {
 		
 		if (result > 0) {
 			alertMsg = "성공적으로 일정을 등록하였습니다.";
-			request.setAttribute("alertMsg_success", alertMsg);
+			request.getSession().setAttribute("alertMsg", alertMsg);
 			
 			ArrayList<Schedule> list = new ScheduleService().selectSchedule(mno);
 			
 			request.setAttribute("list", list);
-			
-			request.getRequestDispatcher("views/schedule/plan_O.jsp").forward(request, response);
 		} else {
 			alertMsg = "일정 등록에 실패하였습니다.";
-			request.setAttribute("alertMsg_fail", alertMsg);
-			
-			switch(no) {
-			case 1 : 
-				request.getRequestDispatcher("views/schedule/plan_X.jsp").forward(request, response);
-				break;
-			case 2 : 
-				request.getRequestDispatcher("views/schedule/plan_O.jsp").forward(request, response);
-				break;
-			}
+			request.getSession().setAttribute("alertMsg", alertMsg);
 		}
+		
+		response.sendRedirect(request.getContextPath() + "/GoScheduleMain.sd?mno=" + mno);
 	}
 
 	/**

@@ -1,4 +1,4 @@
-package semi.schedule.controller;
+package semi.detailSchedule.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -9,16 +9,16 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class GoPlanExistController
+ * Servlet implementation class GoAddDetailController
  */
-@WebServlet("/GoPlanExist.sd")
-public class GoPlanExistController extends HttpServlet {
+@WebServlet("/GoAddDetail.d")
+public class GoAddDetailController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GoPlanExistController() {
+    public GoAddDetailController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,12 +29,15 @@ public class GoPlanExistController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		
+		int sno = Integer.parseInt(request.getParameter("sno"));
+		
 		if (session.getAttribute("loginUser") == null && session.getAttribute("loginAdmin") == null) {
 			session.setAttribute("alertMsg", "로그인 후 이용 가능한 서비스입니다.");
 			
 			response.sendRedirect(request.getContextPath());
 		} else {
-			request.getRequestDispatcher("views/schedule/plan_O.jsp").forward(request, response);
+			request.setAttribute("sno", sno);
+			request.getRequestDispatcher("views/detailSchedule/addDetail.jsp").forward(request, response);
 		}
 	}
 
