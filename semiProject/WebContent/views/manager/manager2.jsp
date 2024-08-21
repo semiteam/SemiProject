@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
+<%
+    int mCount = (int)request.getAttribute("mCount");
+	int newCount = (int)request.getAttribute("newCount");
+	
+	int manCount = (int)request.getAttribute("manCount");
+	int womanCount = (int)request.getAttribute("womanCount");
+%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -33,6 +41,7 @@
         <link rel="stylesheet" href="resouces/css/common.css">
     </head>
     <body>
+    <%@ include file="../common/basic.jsp" %>
         <div class="wrap">
             <div class="top">
                 <div class="logo" onclick="location.href='views/goTrip/goTripLogin_O.jsp'">우리 여행가조</div>
@@ -47,8 +56,8 @@
 
             <div class="under">
                 <div class="side_menu">
-                    <div id="side_menu_open_1" onclick="location.href='views/manager/manager1.jsp'">회원 관리</div>
-                    <div id="side_menu_open_2" onclick="location.href='views/manager/manager2.jsp'">사용자 통계</div>
+                    <div id="side_menu_open_1" onclick="location.href='<%=contextPath%>/adminList.ad?cpage=1&pCpage=1'">회원 관리</div>
+                    <div id="side_menu_open_2" onclick="location.href='<%=contextPath%>/adminData.ad'">사용자 통계</div>
                     <div id="side_menu_open_3" onclick="location.href='views/manager/manager3.jsp'">수익 관리</div>
                     <div id="side_menu_open_4" onclick="location.href='views/goTrip/goTripLogin_O.jsp'">메인 메뉴</div>
                     <div id="close_btn" onclick="side_close()"><img src="resouces/img/chevron_left_24dp_5F6368.png" alt=""></div>
@@ -77,16 +86,16 @@
                 <div class="content"> 
                         <div class="main count-box">
                             <div class="count-item">
-                                <h4>금일 방문자 수</h4>
-                                <div id="daily-visitor-count" class="counter">5</div>
+                                <h4>총 회원 수</h4>
+                                <div id="total-member-count" class="counter"><%=mCount%></div>
                             </div>
                             <div class="count-item">
-                                <h4>총 회원 수</h4>
-                                <div id="total-member-count" class="counter">55</div>
+                                <h4>신규 회원 수</h4>
+                                <div id="daily-visitor-count" class="counter"><%=newCount%></div>
                             </div>
                             <div class="count-item">
                                 <h4>?</h4>
-                                <div id="" class="counter">555</div>
+                                <div id="" class="counter">뭐넣지</div>
                             </div>
 
                         </div>

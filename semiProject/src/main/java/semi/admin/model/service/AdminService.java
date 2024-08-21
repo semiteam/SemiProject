@@ -21,5 +21,38 @@ public class AdminService {
 		
 		return loginAdmin;
 	}
+
+	public int newCount() {
+		 Connection conn = getConnection();
+		 
+		 int newCount = new AdminDao().newCount(conn);
+		 
+		 close(conn);
+		 
+		return newCount;
+	}
+
+
+	public int manCount() {
+		Connection conn = getConnection();
+		
+		int manCount = new AdminDao().manCount(conn);
+		
+		close(conn);
+		
+		
+		return manCount;
+	}
+
+	public int womanCount() {
+		Connection conn = getConnection();
+		
+		int womanCount = new AdminDao().womanCount(conn);
+		
+		close(conn);
+		
+		
+		return womanCount;
+	}
 	
 }

@@ -12,5 +12,30 @@
 		   AND ADMIN_PWD = ?
 		   AND ADMIN_STATUS = 'Y'
 	</entry>
+	
+	<entry key = "newCount">
+	    SELECT
+		        COUNT(*) COUNT
+		  FROM MEMBER
+		 WHERE M_STATUS != 'N'
+		   AND TRUNC(M_DATE) = TRUNC(SYSDATE)
+	</entry>
+	
+	<entry key = "manCount">
+	  SELECT
+		        COUNT(*) COUNT
+		  FROM MEMBER
+		 WHERE M_STATUS != 'N'
+		   AND SUBSTR(M_RRN,7)IN(1,3);
+	</entry>
+	
+	<entry key = "wamanCount">
+	  SELECT
+		        COUNT(*) COUNT
+		  FROM MEMBER
+		 WHERE M_STATUS != 'N'
+		   AND SUBSTR(M_RRN,7)IN(2,4);
+	</entry>
+	
 
 </properties>
