@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -110,13 +112,15 @@
                         </section>
                         <section>
                         <div class="post">
-                            <form action="">
+                            <form action="<%= contextPath %>/insert.po" method="post">
+                            	<input type="hidden" name="mno"  value= "<%= loginUser.getmNo() %>">
+                            	
                                 <div class="title">
-                                    <input type="text" class="post-title" placeholder="제목을 입력해 주세요.">
+                                    <input type="text" class="post-title" placeholder="제목을 입력해 주세요." name="title">
                                 </div>
                                 <hr>
                                 <div class="content_text">
-                                    <input type="textarea" class="post-content" placeholder="내용을 입력해 주세요.">
+                                    <input type="textarea" class="post-content" placeholder="내용을 입력해 주세요." name="content">
                                 </div>
                                 <hr>
                                 <div class="thumbnail">

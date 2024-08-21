@@ -172,7 +172,7 @@
             <div class="side_menu">
                 <div id="side_menu_open_1" onclick="location.href='views/goTrip/goTripLogin_O.jsp'">여행 갈래?</div>
                 <div id="side_menu_open_2" onclick="location.href='views/schedule/plan_X.jsp'">계획 짤래?</div>
-                <div id="side_menu_open_3" onclick="location.href='<%= contextPath%>/list.po'">리뷰 볼래?</div>
+                <div id="side_menu_open_3" onclick="location.href='<%= contextPath%>/list.po?cpage=1'">리뷰 볼래?</div>
                 <div id="side_menu_open_4" onclick="location.href='views/manager/manager1.jsp'">관리자 메뉴</div>
                 <div id="close_btn" onclick="side_close()"><img src="resouces/img/chevron_left_24dp_5F6368.png" alt=""></div>
 

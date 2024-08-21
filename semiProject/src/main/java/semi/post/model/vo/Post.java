@@ -4,8 +4,8 @@ import java.sql.Date;
 
 public class Post {
 	
-	 private String mId;
 	 private int postNo;
+	 private String mId;
 	 private int mNO;
 	 private String postTitle;
 	 private String postContent;
@@ -60,6 +60,7 @@ public class Post {
 		this.postDate = postDate;
 		this.postModifyed = postModifyed;
 	}
+	
 
 	public Post(int postNo, int mNO, String postTitle, String postContent, int postCount, int postRecommend,
 			Date postDate) {
@@ -79,6 +80,37 @@ public class Post {
 			Date postModifyed) {
 		super();
 		this.mId = mId;
+		this.postTitle = postTitle;
+		this.postContent = postContent;
+		this.postCount = postCount;
+		this.postRecommend = postRecommend;
+		this.postDate = postDate;
+		this.postModifyed = postModifyed;
+	}
+	
+	
+
+	public Post(int postNo, String mId, String postTitle, String postContent, int postCount, int postRecommend,
+			Date postDate, Date postModifyed) {
+		super();
+		this.postNo = postNo;
+		this.mId = mId;
+		this.postTitle = postTitle;
+		this.postContent = postContent;
+		this.postCount = postCount;
+		this.postRecommend = postRecommend;
+		this.postDate = postDate;
+		this.postModifyed = postModifyed;
+	}
+	
+	
+
+	public Post(int postNo, String mId, int mNO, String postTitle, String postContent, int postCount, int postRecommend,
+			Date postDate, Date postModifyed) {
+		super();
+		this.postNo = postNo;
+		this.mId = mId;
+		this.mNO = mNO;
 		this.postTitle = postTitle;
 		this.postContent = postContent;
 		this.postCount = postCount;

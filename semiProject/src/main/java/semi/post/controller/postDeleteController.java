@@ -8,19 +8,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import semi.post.model.service.PostService;
-import semi.post.model.vo.Post;
 
 /**
- * Servlet implementation class postDetailController
+ * Servlet implementation class postDeleteController
  */
-@WebServlet("/postDetail.po")
-public class postDetailController extends HttpServlet {
+@WebServlet("/delete.po")
+public class postDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public postDetailController() {
+    public postDeleteController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,17 +32,13 @@ public class postDetailController extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		
 		int pno = Integer.parseInt(request.getParameter("pno"));
-		
-		int result = new PostService().increaseCount(pno);
+		System.out.println(pno + " @#213213213213213213213213213");
+		int result = new PostService().deletePost(pno);
 		
 		if(result > 0) {
 			
-			Post p = new PostService().selectPost(pno);
-			
-			request.setAttribute("p", p);
-			request.getRequestDispatcher("views/post/postDetail.jsp").forward(request, response);
+			response.sendRedirect(request.getContextPath() + "/list.po?cpage=1");
 		}
-		
 		
 	}
 

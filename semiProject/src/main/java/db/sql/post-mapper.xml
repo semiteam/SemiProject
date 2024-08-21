@@ -16,13 +16,14 @@
             SELECT ROWNUM AS RNUM,A.*
                 FROM (
                   SELECT
-                        POST_NO
-                      , M_ID
+                        
+                        M_ID
                       , POST_TITLE
                       , POST_CONTENT
                       , POST_COUNT
                       , POST_RECOMMEND
                       , TO_CHAR(POST_DATE,'YYYY/MM/DD') AS "POST_DATE"
+                 	  , POST_MODIFYED	
                   FROM POST P
                   JOIN MEMBER USING(M_NO)
                   WHERE POST_STATUS = 'Y'
@@ -35,17 +36,30 @@
 </entry>
 
 <entry key="PostList">
-SELECT 
-       M_ID
-     , POST_TITLE
-     , POST_CONTENT
-     , POST_COUNT
-     , POST_RECOMMEND
-     , POST_DATE
-     , POST_MODIFYED
-  FROM POST
-  JOIN MEMBER USING (M_NO)
- WHERE POST_STATUS = 'Y' 
+
+	SELECT * 
+  	  FROM (
+            SELECT ROWNUM AS RNUM,A.*
+                FROM (
+                  SELECT
+                        POST_NO 
+                      , M_ID
+                      , M_NO
+                      , POST_TITLE
+                      , POST_CONTENT
+                      , POST_COUNT
+                      , POST_RECOMMEND
+                      , POST_DATE
+                 	  , POST_MODIFYED	
+                  FROM POST P
+                  JOIN MEMBER USING(M_NO)
+                  WHERE POST_STATUS = 'Y'
+                  ORDER
+                     BY POST_NO DESC
+             ) A
+
+        )
+        WHERE RNUM BETWEEN ? AND ?
 
 </entry>
 
@@ -54,7 +68,7 @@ SELECT
 UPDATE POST
    SET POST_COUNT = POST_COUNT + 1
  WHERE POST_NO = ?
-   AND POST_STATUS = 'Y
+   AND POST_STATUS = 'Y'
 
 </entry>
 
@@ -75,6 +89,53 @@ SELECT
    AND POST_STATUS = 'Y'
 
 </entry>
+
+<entry key="updatePost">
+	UPDATE POST 
+	   SET POST_TITLE = ?
+	     , POST_CONTENT = ?
+	     , POST_DATE = SYSDATE
+	 WHERE POST_NO = ?
+	   AND POST_STATUS = 'Y'
+	
+</entry>
+
+<entry key="insertPost">
+INSERT
+  INTO POST
+     (
+       POST_NO
+     , M_NO
+     , POST_TITLE
+     , POST_CONTENT
+     , POST_COUNT
+     , POST_RECOMMEND
+     , POST_DATE
+     , POST_MODIFYED
+     , POST_STATUS
+     )
+VALUES
+     (
+       SEQ_POST.NEXTVAL
+     , ?  
+     , ?
+     , ?
+     , 0
+     , 0
+     , SYSDATE
+     , SYSDATE
+     , 'Y'
+     )
+     
+
+</entry>
+
+<entry key="deletePost">
+	UPDATE POST
+	   SET POST_STATUS = 'N'
+	 WHERE POST_NO = ?  
+</entry>
+
 
 
 </properties>

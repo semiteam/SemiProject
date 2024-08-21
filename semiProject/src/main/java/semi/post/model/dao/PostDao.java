@@ -27,9 +27,9 @@ public class PostDao {
 		}
 	}
 	
-	public ArrayList<Post> PostList(Connection conn, PageInfo pi){
+	public ArrayList<Post> PostList(Connection conn, PageInfo pi1){
 		
-		ArrayList<Post> list = new ArrayList<Post>();
+		ArrayList<Post> list1 = new ArrayList<Post>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
@@ -38,21 +38,24 @@ public class PostDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			int startRow1 = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
-			int endRow1 = startRow1 + pi.getBoardLimit() - 1 ;
+			int startRow1 = (pi1.getCurrentPage() - 1) * pi1.getBoardLimit() + 1;
+			int endRow1 = startRow1 + pi1.getBoardLimit() - 1 ;
 			
 			pstmt.setInt(1, startRow1);
 			pstmt.setInt(2, endRow1);
 			
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
-				list.add(new Post(rset.getString("m_id"),
+				list1.add(new Post(rset.getInt("post_no"),
+								  rset.getString("m_id"),
+								  rset.getInt("m_no"),
 						          rset.getString("post_title"),
 						          rset.getString("post_content"),
 						          rset.getInt("post_count"),
 						          rset.getInt("post_recommend"),
 						          rset.getDate("post_date"),
 						          rset.getDate("post_modifyed")));
+				
 			}
 		} catch (SQLException e) {
 			
@@ -62,7 +65,8 @@ public class PostDao {
 			close(pstmt);
 		}
 		
-		return list;
+	
+		return list1;
 	}
 	
 	public int selectListCount(Connection conn) {
@@ -91,7 +95,7 @@ public class PostDao {
 	
 	}
 	
-	public int increaseCount(Connection conn, int postNo) {
+	public int increaseCount(Connection conn, int pno) {
 		
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -100,7 +104,7 @@ public class PostDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, postNo);
+			pstmt.setInt(1, pno);
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -113,7 +117,7 @@ public class PostDao {
 		return result;
 	}
 	
-	public Post selectPost(Connection conn, int postNo) {
+	public Post selectPost(Connection conn, int pno) {
 		
 		Post p = null;
 		PreparedStatement pstmt = null;
@@ -124,7 +128,7 @@ public class PostDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setInt(1, postNo);
+			pstmt.setInt(1, pno);
 			
 			rset = pstmt.executeQuery();
 			if(rset.next()) {
@@ -138,6 +142,8 @@ public class PostDao {
 						     rset.getDate("post_modifyed"),
 						     rset.getString("m_nickname"));
 			}
+			
+			
 		} catch (SQLException e) {
 			 
 			e.printStackTrace();
@@ -146,6 +152,75 @@ public class PostDao {
 			close(pstmt);
 		}
 		
+		
+		
 		return p;	
 	}
+	
+	public int updatePost(Connection conn, String title, String content, int pno) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updatePost");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, title);
+			pstmt.setString(2, content);
+			pstmt.setInt(3, pno);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int insertPost(Connection conn, int mno, String title, String content) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertPost");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, mno);
+			pstmt.setString(2, title);
+			pstmt.setString(3, content);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int deletePost(Connection conn, int pno) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deletePost");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, pno);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			 
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	
 }

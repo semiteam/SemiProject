@@ -11,16 +11,16 @@ import semi.post.model.service.PostService;
 import semi.post.model.vo.Post;
 
 /**
- * Servlet implementation class postDetailController
+ * Servlet implementation class postInsertController
  */
-@WebServlet("/postDetail.po")
-public class postDetailController extends HttpServlet {
+@WebServlet("/insert.po")
+public class postInsertController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public postDetailController() {
+    public postInsertController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,16 +32,33 @@ public class postDetailController extends HttpServlet {
 		
 		request.setCharacterEncoding("utf-8");
 		
-		int pno = Integer.parseInt(request.getParameter("pno"));
+		int mno = Integer.parseInt(request.getParameter("mno"));
 		
-		int result = new PostService().increaseCount(pno);
+		String title = request.getParameter("title");
+		String content = request.getParameter("content");
+		
+		
+		
+		int result = new PostService().insertPost(mno,title,content);
+		
+		
 		
 		if(result > 0) {
+			request.setAttribute("result", result);
 			
-			Post p = new PostService().selectPost(pno);
+			response.sendRedirect(request.getContextPath() + "/list.po?cpage=1");
+		}else {
 			
-			request.setAttribute("p", p);
-			request.getRequestDispatcher("views/post/postDetail.jsp").forward(request, response);
+		}
+		
+		
+		int pno = Integer.parseInt(request.getParameter("pno"));
+		System.out.println(pno + " @#213213213213213213213213213");
+		int result1 = new PostService().deletePost(pno);
+		
+		if(result1 > 0) {
+			
+			response.sendRedirect(request.getContextPath() + "/list.po?cpage=1");
 		}
 		
 		

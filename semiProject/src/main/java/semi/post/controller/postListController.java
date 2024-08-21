@@ -42,11 +42,12 @@ public class postListController extends HttpServlet {
 				int startPage1;     
 				int endPage1;       
 				
+				
 
 				listCount1 = new PostService().selectListCount();
 				currentPage1 = Integer.parseInt(request.getParameter("cpage"));
-				pageLimit1 = 10;
-				boardLimit1 = 10;
+				pageLimit1 = 5;
+				boardLimit1 = 4;
 				maxPage1 = (int)Math.ceil((double)listCount1 / boardLimit1);
 				
 				startPage1 = (currentPage1 - 1) / pageLimit1 * pageLimit1 + 1 ;
@@ -59,13 +60,14 @@ public class postListController extends HttpServlet {
 				}
 				
 				
-				PageInfo pi = new PageInfo(listCount1,currentPage1,pageLimit1,boardLimit1,maxPage1,startPage1,endPage1);
+				PageInfo pi1 = new PageInfo(listCount1,currentPage1,pageLimit1,boardLimit1,maxPage1,startPage1,endPage1);
 
 				
-				ArrayList<Post> list = new PostService().PostList(pi);
+				ArrayList<Post> list1 = new PostService().PostList(pi1);
 				
-				request.setAttribute("pi", pi);
-				request.setAttribute("list", list);
+				
+				request.setAttribute("pi", pi1);
+				request.setAttribute("list", list1);
 				request.getRequestDispatcher("views/post/postMain.jsp").forward(request, response);
 	
 		

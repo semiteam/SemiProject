@@ -8,19 +8,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import semi.post.model.service.PostService;
-import semi.post.model.vo.Post;
 
 /**
- * Servlet implementation class postDetailController
+ * Servlet implementation class postUpdateController
  */
-@WebServlet("/postDetail.po")
-public class postDetailController extends HttpServlet {
+@WebServlet("/update.po")
+public class postUpdateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public postDetailController() {
+    public postUpdateController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,19 +31,18 @@ public class postDetailController extends HttpServlet {
 		
 		request.setCharacterEncoding("utf-8");
 		
+		String title = request.getParameter("title");
+		String content = request.getParameter("content");
 		int pno = Integer.parseInt(request.getParameter("pno"));
 		
-		int result = new PostService().increaseCount(pno);
+		int result = new PostService().updatePost(title,content,pno);
 		
 		if(result > 0) {
 			
-			Post p = new PostService().selectPost(pno);
+			response.sendRedirect(request.getContextPath() + "/list.po?cpage=1");
+		}else {
 			
-			request.setAttribute("p", p);
-			request.getRequestDispatcher("views/post/postDetail.jsp").forward(request, response);
 		}
-		
-		
 	}
 
 	/**

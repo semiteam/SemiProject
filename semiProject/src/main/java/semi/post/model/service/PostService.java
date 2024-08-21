@@ -13,14 +13,14 @@ import semi.post.model.vo.Post;
 
 public class PostService {
 	
-	public ArrayList<Post> PostList(PageInfo pi) {
+	public ArrayList<Post> PostList(PageInfo pi1) {
 		Connection conn = getConnection();
 		
-	    ArrayList<Post> list = new PostDao().PostList(conn,pi);
+	    ArrayList<Post> list1 = new PostDao().PostList(conn,pi1);
 		
 		close(conn);
 		
-		return list;
+		return list1;
 	}
 	
 	public int selectListCount() {
@@ -34,10 +34,10 @@ public class PostService {
 		
 	}
 	
-	public int increaseCount(int postNo) {
+	public int increaseCount(int pno) {
 		Connection conn = getConnection();
 		
-		int result = new PostDao().increaseCount(conn, postNo);
+		int result = new PostDao().increaseCount(conn, pno);
 		
 		if(result > 0) {
 			commit(conn);
@@ -50,14 +50,61 @@ public class PostService {
 				
 	}
 	
-	public Post selectPost(int postNo) {
+	public Post selectPost(int mno) {
 		Connection conn = getConnection();
 		
-		Post p = new PostDao().selectPost(conn,postNo);
+		Post p = new PostDao().selectPost(conn,mno);
+	
 		close(conn);
+		
 		return p;
 		
 	}
 
+	public int updatePost(String title, String content,int pno) {
+		Connection conn = getConnection();
+		
+		int result =  new PostDao().updatePost(conn,title,content,pno);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		return result;
+	}
+	
+	public int insertPost(int mno, String title, String content ) {
+		Connection conn = getConnection();
+		
+		int result = new PostDao().insertPost(conn,mno,title,content);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		return result;
+	}
+	
+	public int deletePost(int pno) {
+		Connection conn = getConnection();
+		
+		int result = new PostDao().deletePost(conn,pno);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
+	
 	
 }

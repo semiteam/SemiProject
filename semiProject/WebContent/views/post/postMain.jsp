@@ -6,7 +6,17 @@
 
 	
 <%
-	ArrayList<Post> list = (ArrayList<Post>)request.getAttribute("list");
+	ArrayList<Post> list1 = (ArrayList<Post>)request.getAttribute("list");
+	PageInfo pi1 = (PageInfo)request.getAttribute("pi");
+
+	 
+	 
+	int currentPage1 = pi1.getCurrentPage();
+	int startPage1 = pi1.getStartPage();
+	int endPage1 = pi1.getEndPage();
+	int maxPage1 = pi1.getMaxPage();
+
+
 %>	
 	
 	
@@ -160,46 +170,60 @@
                               <div class="search">
                                 <input type="text" name="search-bar">
                                 <div class="material-icons search">search</div>
-                                <button onclick="location.href='views/post/postWrite.jsp'"><div class="material-icons edit">edit</div></button>
+                                <button onclick="location.href='<%= contextPath %>/insertPage.po'"><div class="material-icons edit">edit</div></button>
                               </div>
                               <div class="container" id="post-container">
-                              <% for(Post p :list) {%>
+                             
+                             
+                              <% for(Post p :list1) { %>
                                 <div class="board-list">
+                                <input type="hidden" value="<%= p.getmNO() %>" name="mno">
+                                <input type="hidden" value="<%= p.getPostNo()%>" name="pno">
                                   <div class="board">
                                     <div class="thumbnail"><img src="resouces/img/2.jpg" alt=""></div>
                                     <div class="title"><%= p.getPostTitle() %></div>
                                     <div class="info">작성자 : <%= p.getmId() %>| 조회수 :<%=p.getPostCount() %> | 추천수 : <%= p.getPostRecommend() %>| 작성일 : <%= p.getPostDate() %> </div>
                                     <div class="cover">
                                       <div class="material-icons arrow">arrow_forward</div>
-                                      <div class="preview" id="preview">
+                             		        
+                                      <div class="preview" id="preview" onclick="location.href='<%= contextPath %>/postDetail.po?pno=<%= p.getPostNo()%>'">
                                       </div>
+                               		
+                                    
+                                    
                                     </div>
                                   </div>
                                 </div>
                                         <% } %>
-                                
-                                
+                               
+                                	
                                 </div>
                               </div>
                              
                           
                         </section>
                         <div align="center" class="paging-area">
-                       
+                       	
+                       	 <% if (currentPage1 != 1) { %>    
+				            <button onclick="location.href='<%= contextPath %>/list.po?cpage=<%= currentPage1 - 1 %>'">&lt;</button>
+				            <% } %>
+				            <% for (int p = startPage1; p <= endPage1; p++) { %>
+				                <% if (p == currentPage1) { %>
+				                    <button disabled><%= p %></button>
+				                <% } else { %>
+				                    <button onclick="location.href='<%= contextPath %>/list.po?cpage=<%= p %>'"><%= p %></button>
+				                <% } %>
+				            <% } %>
+				            
+				            <% if (currentPage1 != maxPage1) { %>
+				            <button onclick="location.href='<%= contextPath %>/list.po?cpage=<%= currentPage1 + 1 %>'">&gt;</button>
+				            <% } %>
                   	  
                        <br><br><br><br><br>
                   </div> 
               
-              	<script>
-              	$(function(){
-              		$("#preview").click(function(){
-              			location.href='<%= contextPath %>/postDetail.po?=pno=' + $(this).children().eq(0).text();
-              		})
-              	})
-              		
               	
               	
-              	</script>
               
                 </div>
             </div>
