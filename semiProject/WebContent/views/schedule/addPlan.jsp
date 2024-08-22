@@ -5,7 +5,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>add_plan</title>
+        <title>여행가조</title>
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 
@@ -52,47 +52,52 @@
         <%@ include file="../common/basic.jsp" %>
         <div class="wrap">
             <div class="top">
-                <div class="logo" onclick="location.href='views/goTrip/goTripLogin_O.jsp'">우리 여행가조</div>
+                <div class="logo" onclick="location.href='<%= contextPath %>'">우리 여행가조</div>
                 <div class="top_menu">
                     <ul>
-                        <li id="top_menu_1" onclick="location.href=''">My page</li>
-                        <li id="top_menu_2" onclick="location.href=''">고객센터</li>
-                        <li id="top_menu_3" onclick="location.href='views/goTrip/goTripLogin_X.jsp'">로그아웃</li>
+                        <li id="top_menu_1" onclick="location.href='<%= contextPath %>/GoMyPage.me'">My page</li>
+                        <li id="top_menu_2" onclick="location.href='<%= contextPath %>/GoServiceCenter.sc'">고객센터</li>
+                        <li id="top_menu_3">로그아웃</li>
                     </ul>
                 </div>
             </div>
     
             <div class="under">
                 <div class="side_menu">
-                    <div id="side_menu_open_1" onclick="location.href='views/goTrip/goTripLogin_O.jsp'">여행 갈래?</div>
-                    <div id="side_menu_open_2" onclick="location.href='views/schedule/plan_X.jsp'">계획 짤래?</div>
-                    <div id="side_menu_open_3" onclick="location.href='views/post/postMain.jsp'">리뷰 볼래?</div>
-                    <div id="side_menu_open_4" onclick="location.href='views/manager/manager1.jsp'">관리자 메뉴</div>
+                    <div id="side_menu_open_1" onclick="location.href='<%= contextPath %>'">여행 갈래?</div>
+                    <div id="side_menu_open_2" onclick="location.href='<%= contextPath %>/GoScheduleMain.sd'" class="login">계획 짤래?</div>
+                    <div id="side_menu_open_3" onclick="location.href='<%= contextPath %>/GoPostMain.ps'" class="login">리뷰 볼래?</div>
+                    <% if (loginAdmin != null) { %>
+                        <div id="side_menu_open_4" onclick="location.href='<%= contextPath %>/GoAdminMain.ad'">관리자 메뉴</div>
+                    <% } %>
                     <div id="close_btn" onclick="side_close()"><img src="resouces/img/chevron_left_24dp_5F6368.png" alt=""></div>
     
-                    <div id="side_menu_close_1" onclick="location.href='views/goTrip/goTripLogin_O'">
+                    <div id="side_menu_close_1" onclick="location.href='<%= contextPath %>'" class="login">
                         <img src="resouces/img/airplane_ticket_24dp_5F6368.png" alt="">
                         <div class="explanation">여행 갈래?</div>
                     </div>
-                    <div id="side_menu_close_2" onclick="location.href='views/schedule/plan_X.jsp'">
+                    <div id="side_menu_close_2" onclick="location.href='<%= contextPath %>/GoScheduleMain.sd'" class="login">
                         <img src="resouces/img/edit_calendar_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png" alt="">
                         <div class="explanation">계획 짤래?</div>
                     </div>
-                    <div id="side_menu_close_3" onclick="location.href='views/post/postMain.jsp'">
+                    <div id="side_menu_close_3" onclick="location.href='<%= contextPath %>/GoPostMain.ps'" class="login">
                         <img src="resouces/img/dynamic_feed_24dp_5F6368.png" alt="">
                         <div class="explanation">리뷰 볼래?</div>
                     </div>
-                    <div id="side_menu_close_4" onclick="location.href='views/manager/manager1.jsp'">
-                        <img src="resouces/img/manage_accounts_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png" alt="">
-                        <div class="explanation">관리자 메뉴</div>
-                    </div>
+                    <% if (loginAdmin != null) { %>
+                        <div id="side_menu_close_4" onclick="location.href='<%= contextPath %>/GoAdminMain.ad'">
+                            <img src="resouces/img/manage_accounts_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png" alt="">
+                            <div class="explanation">관리자 메뉴</div>
+                        </div>
+                    <% } %>
                     <div id="open_btn" onclick="side_open()">
                         <img src="resouces/img/chevron_right_24dp_5F6368.png" alt="">
                     </div>
                 </div>
     
                 <div class="content">
-                    <form action="" method="post" class="inner">
+                    <form action="<%= contextPath %>/addPlan.sd" method="post" class="inner">
+                    	<input type="hidden" name="mno" value="<%= loginUser.getmNo() %>">
                         <table>
                             <tr>
                                 <td id="plan_name_t" class="white big"><div>여행명</div></td>
@@ -104,12 +109,10 @@
                                     <div id="search_place_t" class="white big">장소 검색</div>
                                     <div id="search_place_b">
                                         <input type="text" name="place_name" id="place_name">
-                                        <button type="submit" class="material-symbols-outlined" id="search_btn">search</button>
+                                        <button type="button" class="material-symbols-outlined" id="search_btn">search</button>
                                     </div>
-                                    <div id="search_result">
-                                        <div id="search_place_result">
-                                            결과들 유동적으로 추가할 예정
-                                        </div>
+                                    <div class="search_result">
+                                        결과들 유동적으로 추가할 예정
                                     </div>
                                     <div id="search_place_add" class="white">장소 추가하기</div>
                                 </td>
@@ -131,6 +134,9 @@
                                                 <button id="next" aria-label="Next month" type="button" class="material-symbols-outlined">arrow_forward_ios</button>
                                             </div>
                                         </div>
+
+                                        <input type="hidden" id="sDate" name="sDate">
+                                        <input type="hidden" id="eDate" name="eDate">
                                     </div>
                                 </td>
                             </tr>
@@ -159,10 +165,10 @@
                             <tr class="white">
                                 <td class="big" colspan="2">배경 이미지</td>
                                 <td>
-                                    <input type="radio" name="img" id="random" value="" checked>
+                                    <input type="radio" name="img" id="random" value="1"checked>
                                     <label for="random">랜덤</label>
 
-                                    <input type="radio" name="img" id="choice" value="">
+                                    <input type="radio" name="img" id="choice" value="2">
                                     <label for="choice">선택</label>
                                 </td>
                             </tr>
@@ -238,7 +244,7 @@
 
                         <br><br>
 
-                        <input type="submit" value="일정 추가 완료하기" formaction="" id="add_done_plan" class="white">
+                        <input type="submit" value="일정 추가 완료하기" id="add_done_plan" class="white">
                     </form>
 
                     <br><br>

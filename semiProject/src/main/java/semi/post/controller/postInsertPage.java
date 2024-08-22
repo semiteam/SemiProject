@@ -32,6 +32,7 @@ public class postInsertPage extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		
 		
+		
 		request.getRequestDispatcher("views/post/postWrite.jsp").forward(request, response);
 		
 		

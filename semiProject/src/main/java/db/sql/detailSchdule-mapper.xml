@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key ="selectDetailSchedule">
+		SELECT D_NO
+		     , D_PLACE
+		     , TO_CHAR(D_STIME, 'HH24:MI:SS') "D_STIME"
+		     , TO_CHAR(D_ETIME, 'HH24:MI:SS') "D_ETIME"
+		     , D_ELSE
+		     , D_DATE
+		     , M_NO
+		     , SD_NO
+		  FROM DETAIL_SCHEDULE
+		 WHERE M_NO = ?
+		   AND SD_NO = ?
+		 ORDER
+		    BY D_STIME
+	</entry>
+
+	<entry key = "insertDetailSchedule">
+		INSERT
+		  INTO DETAIL_SCHEDULE
+		     (
+		       D_NO
+		     , D_PLACE
+		     , D_STIME
+		     , D_ETIME
+		     , D_ELSE
+		     , D_DATE
+		     , M_NO
+		     , SD_NO
+		     )
+		VALUES 
+		     (
+		       SEQ_D.NEXTVAL
+		     , ?
+		     , ?
+		     , ?
+		     , ?
+		     , ?
+		     , ?
+		     , ?
+		     )
+	</entry>
+
+	<entry key = "">
+		
+	</entry>
+</properties>

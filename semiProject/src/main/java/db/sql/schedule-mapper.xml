@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key ="insertSchedule">
+		INSERT
+		  INTO SCHEDULE
+		     ( 
+		       SD_NO
+		     , SD_TITLE
+		     , SD_PLACE
+		     , SD_SDATE
+		     , SD_EDATE
+		     , SD_DESCRIPTION
+		     , RANGE_NO
+		     , BGI_NO
+		     , SD_CDATE
+		     , SD_STATUS
+		     , M_NO
+		     )
+		VALUES
+		     (
+		       SEQ_SD.NEXTVAL
+		     , ?
+		     , ?
+		     , ?
+		     , ?
+		     , ?
+		     , ?
+		     , ?
+		     , SYSDATE
+		     , 'N'
+		     , ?
+		     )
+	</entry>
+	
+	<entry key ="selectSchedule">
+		SELECT SD_NO
+		     , SD_TITLE
+		     , SD_PLACE
+		     , SD_SDATE
+		     , SD_EDATE
+		     , SD_DESCRIPTION
+		     , RANGE_NO
+		     , BGI_NO
+		     , SD_CDATE
+		     , SD_STATUS
+		     , M_NO
+		     , BBGI_PATH
+		     , UBGI_PATH
+		  FROM SCHEDULE
+		  LEFT OUTER
+		  JOIN BASIC_BGI ON (BBGI_NO = BGI_NO)
+		  LEFT OUTER
+		  JOIN USER_BGI ON (UBGI_NO = BGI_NO)
+		  WHERE M_NO = ?
+	</entry>
+</properties>

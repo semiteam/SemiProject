@@ -10,13 +10,17 @@ body *{
   box-sizing: border-box;
 }
 
-body input:not(#gender_number):not(#zip_code) {padding-left: 15px;}
+body input:not(#gender_number):not(#zip_code) {padding: 0 15px;}
 
 body {
   display: flex;
   flex-direction: row;
   justify-content: center;
 }
+
+#id_check {cursor: pointer;}
+
+#id_check:hover {background-color: #6CAFD9;}
 
 .container {
   display: flex;
@@ -39,7 +43,7 @@ body {
 }
 
 select{
-  width: 200px;
+  width: 195px;
   padding: 5px;
 }
 
@@ -53,7 +57,7 @@ select{
 
 .user-info input:not(#gender_firstnumber):not(#gender_number) {
   font-weight: 400;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 24px;
   border-radius: 5px;
   height: 35px;
@@ -85,6 +89,8 @@ input:focus {outline: none;}
   height: 23.94px;
 }
 
+.bold {font-weight: bold !important;}
+
 .gender input {
   width: 20px;
   height: 19.95px;
@@ -106,7 +112,6 @@ input:focus {outline: none;}
   line-height: 21px;
   color: #000000;
 }
-
   
 .min_user_join{
   background-color: #aacdff;
@@ -159,9 +164,9 @@ input:focus {outline: none;}
 
 #birthdayGender input:not(:nth-child(2)) {width: 205px;}
 
-#min_phone {width: 260px;}
+#min_phone {width: 278px;}
 
-#address_div {
+#address_div, #id_div {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
