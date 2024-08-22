@@ -8,13 +8,11 @@
 		     , TO_CHAR(D_ETIME, 'HH24:MI:SS') "D_ETIME"
 		     , D_ELSE
 		     , D_DATE
-		     , M_NO
-		     , SD_NO
 		  FROM DETAIL_SCHEDULE
 		 WHERE M_NO = ?
 		   AND SD_NO = ?
 		 ORDER
-		    BY D_STIME
+		    BY D_DATE ASC, D_STIME ASC
 	</entry>
 
 	<entry key = "insertDetailSchedule">
@@ -41,9 +39,5 @@
 		     , ?
 		     , ?
 		     )
-	</entry>
-
-	<entry key = "">
-		
 	</entry>
 </properties>

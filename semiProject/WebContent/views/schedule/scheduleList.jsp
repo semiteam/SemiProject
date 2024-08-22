@@ -297,8 +297,8 @@
         
                     <div class="content">
                         <% for (Schedule sd : list) { %>
-                            <div class="plan" onclick="location.href='<%= contextPath %>/GoAddDetail.d?sno=<%= sd.getsNo() %>'">
-                                <div class="cover">
+                            <div class="plan">
+                                <div class="cover" onclick="location.href='<%= contextPath %>/GoAddDetail.d?mno=<%= sd.getMno() %>&sno=<%= sd.getsNo() %>&howlong=<%= sd.getHowlong() %>'">
                                     <div class="plan_title"><%= sd.getsTitle() %></div>
                                     <div class="date"><%= sd.getsSdate() %> ~ <%= sd.getsEdate() %></div>
                                     <div class="mini_bar material-symbols-outlined">

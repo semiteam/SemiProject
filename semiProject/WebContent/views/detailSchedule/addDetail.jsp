@@ -1,8 +1,11 @@
+<%@page import="semi.schedule.model.vo.Schedule"%>
 <%@page import="semi.detailSchedule.model.vo.DetailSchedule"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
 	ArrayList<DetailSchedule> list = (ArrayList<DetailSchedule>)request.getAttribute("list");
+	ArrayList<Schedule> days = (ArrayList<Schedule>)request.getAttribute("days");
+	int howlong = (int)request.getAttribute("howlong");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -101,30 +104,69 @@
                 </div>
     
                 <div class="content">  
-                    <div class="detail">
-                        <div class="date_div">
-                            <div class="date">24.07.10</div>
-                            <div class="open_btn material-symbols-outlined">keyboard_arrow_down</div>
-                            <div class="close_btn material-symbols-outlined">keyboard_arrow_up</div>
-                        </div>
-                        <div class="plan">
-                            <div class="timeline">
-                                <div class="circle1 material-symbols-outlined">circle</div>
-                                <div class="bar"></div>
-                                <div class="circle2 material-symbols-outlined">add_circle</div>
-                            </div>
-                            <div class="detail_plan">
-                                <div class="plan_content">첫번째 일정임</div>
-                                <div class="plan_content">두번째 일정임</div>
-                                <div class="plan_content">세번째 일정임</div>
-                                <div class="plan_content">네번째 일정임</div>
-                            </div>
-                        </div>
+                    <% for (int i = 0; i < howlong; i ++) { %>
+                    	<div class="detail">
+	                        <div class="date_div">
+	                            <div class="date"><%= days.get(i).getsSdate() %></div>
+	                            <div class="open_btn material-symbols-outlined">keyboard_arrow_down</div>
+	                            <div class="close_btn material-symbols-outlined">keyboard_arrow_up</div>
+	                        </div>
+	                        <div class="plan">
+	                            <div class="notMap">
+                                    <div class="timeline">
+                                        <div class="circle1 material-symbols-outlined">circle</div>
+                                        <div class="bar" id="bar<%= i %>"></div>
+                                        <div class="circle2 material-symbols-outlined">add_circle</div>
+                                    </div>
+                                    <div class="detail_plan">
+                                        <% for (DetailSchedule dSmall : list) { %>
+                                            <% if (dSmall.getdDate().equals(days.get(i).getsSdate())) { %>
+                                                <div class="plan_content plan_content<%= i %>">
+                                                    <div class="dTime"><%= dSmall.getdStime() %> ~ <%= dSmall.getdEtime() %></div>
+                                                    <div class="dElse"><%= dSmall.getdElse() %></div>
+                                                    <div class="dPlace"><%= dSmall.getdPlace() %></div>
+                                                </div>
+                                            <% } %>
+                                        <% } %>
+                                    </div>
+                                </div>
+                                <div class="map" id="map<%= i %>">
+                                    <img src="resouces/img/maptest.png" alt="">
+                                </div>
+	                        </div>
+	                    </div>
 
-                        <div class="map">
-                            <img src="resouces/img/maptest.png" alt="">
-                        </div>
-                    </div>
+                        <script>
+                            $(function() {
+                                let length = 'calc(100px * ' + $('.plan_content<%= i %>').length + ' + 31px * ' + ($('.plan_content<%= i %>').length - 1) + ')';
+                                $('#bar<%= i %>').css('height', length);
+                                $('#map<%= i %>').css('height', length);
+
+                                $('#cancle').on('click', function() {
+                                    $('#add_detail').css('width', '');
+                                    $('#add_detail table').css('display', '');
+                                    $('#map<%= i %>').css({
+                                        height: length,
+                                        width: '20vw',
+                                        margin: '30px 0 0 20px'
+                                    });
+                                    $('.plan').css('flex-direction', '');
+                                });
+
+                                $('.circle2').on('click', function() {
+                                    $('#add_detail').css('width', '40%');
+                                    $('#add_detail table').css('display', 'block');
+                                    $('.map').css({
+                                        height: '300px',
+                                        width: '650px',
+                                        margin: '0 0 0 41px'
+                                    });
+                                    $('.plan').css('flex-direction', 'column');
+                                });
+                            });
+                        </script>
+                    <% } %>
+                    <br><br>
                 </div>
 
                 <form id="add_detail" method="post" action="">

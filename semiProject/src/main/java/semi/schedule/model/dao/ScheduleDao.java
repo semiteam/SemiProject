@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import static semi.common.JDBCTemplate.*;
+
+import semi.detailSchedule.model.vo.DetailSchedule;
 import semi.schedule.model.vo.Schedule;
 
 public class ScheduleDao {
@@ -44,6 +46,7 @@ public class ScheduleDao {
 			pstmt.setInt(6, sd.getRangeNo());
 			pstmt.setInt(7, sd.getBgiNo());
 			pstmt.setInt(8, sd.getMno());
+			pstmt.setInt(9, sd.getHowlong());
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -83,6 +86,7 @@ public class ScheduleDao {
 									  rset.getDate("SD_CDATE"),
 									  rset.getString("SD_STATUS"),
 									  rset.getInt("M_NO"),
+									  rset.getInt("SD_HOWLONG"),
 									  rset.getString("BBGI_PATH"),
 									  rset.getString("UBGI_PATH")
 									 )
@@ -96,5 +100,32 @@ public class ScheduleDao {
 		}
 		
 		return list;
+	}
+	
+	public ArrayList<Schedule> selectDays(Connection conn, int mno, int sno) {
+		ArrayList<Schedule> days = new ArrayList<Schedule>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectDays");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, mno);
+			pstmt.setInt(2, sno);
+			
+			rset = pstmt.executeQuery();
+			
+			while (rset.next()) {
+				days.add(new Schedule(rset.getDate("SD_SDATE"),
+									  rset.getDate("SD_EDATE")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return days;
 	}
 }

@@ -135,6 +135,7 @@
                                             </div>
                                         </div>
 
+										<input type="hidden" id="howlong" name="howlong">
                                         <input type="hidden" id="sDate" name="sDate">
                                         <input type="hidden" id="eDate" name="eDate">
                                     </div>

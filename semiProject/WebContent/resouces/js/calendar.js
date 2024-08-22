@@ -77,7 +77,7 @@ $(document).ready(function() {
             highlightRange();
         }
         updateRangeInfo();
-        
+
         $('#sDate').val(startDate);
         $('#eDate').val(endDate);
     }
@@ -120,6 +120,7 @@ $(document).ready(function() {
         if (startDate && endDate) {
             let days = (endDate - startDate) / (1000 * 60 * 60 * 24) + 1;
             $('#range-info').text(`${days}일`);
+            $('#howlong').val(days);
         } else {
             $('#range-info').text('0일');
         }

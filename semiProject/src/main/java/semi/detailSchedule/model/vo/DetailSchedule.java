@@ -26,7 +26,17 @@ public class DetailSchedule {
 		this.mNo = mNo;
 		this.sdNo = sdNo;
 	}
-
+	
+	public DetailSchedule(int dNo, String dPlace, String dStime, String dEtime, String dElse, Date dDate) {
+		super();
+		this.dNo = dNo;
+		this.dPlace = dPlace;
+		this.dStime = dStime;
+		this.dEtime = dEtime;
+		this.dElse = dElse;
+		this.dDate = dDate;
+	}
+	
 	public int getdNo() {
 		return dNo;
 	}

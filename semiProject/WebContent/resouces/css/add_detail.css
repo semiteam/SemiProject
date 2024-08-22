@@ -8,19 +8,16 @@
 .under > .content {
     color: white;
     font-size: 20px; 
-    display: flex;
-    flex-direction: column;
 }
 
-.under > .content > .detail {margin: 2vw 3vw;}
-
-.under > .content > .detail > * {display: flex;}
+.under > .content > .detail {margin: 2vw 0 0 3vw;}
 
 .under > .content > .detail > .date_div {
     border-bottom: 1px solid white;
     margin-bottom: 20px;
     width: 175px;
     position: relative;
+    display: flex;
 }
 .under > .content > .detail .date {margin: auto;}
 
@@ -31,7 +28,6 @@
 
 .plan .timeline .bar {
     width: 1px;
-    height: 500px;
     border-right: 1px solid white;
     margin: 3px 0 3px 11px;
 }
@@ -46,12 +42,19 @@
     font-size: 17px;
 }
 
-.map {
-    margin: -532px 0 0 750px;
-    height: calc(131px * 3 + 100px);
+.notMap {display: flex;}
+
+.map {margin: 30px 0 0 20px;}
+
+.map img {
+    width: 100%;
+    height: 100%;
 }
 
-img {width: 650px;}
+.plan {
+    display: flex;
+    flex-direction: row;
+}
 
 .circle2 {cursor: pointer;}
 

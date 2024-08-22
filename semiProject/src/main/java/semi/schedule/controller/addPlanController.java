@@ -138,8 +138,11 @@ public class addPlanController extends HttpServlet {
 		int rangeNo = Integer.parseInt(request.getParameter("range")); // 공개 범위
 		int bgiNo = Integer.parseInt(request.getParameter("img"));
 		int mno = Integer.parseInt(request.getParameter("mno"));
+		int howlong = Integer.parseInt(request.getParameter("howlong"));
+		String bbgiPath = request.getParameter("bbgiPath");
+		String ubgiPath = request.getParameter("ubgiPath");
 		
-		Schedule sd = new Schedule(sTitle, sPlace, sSdate, sEdate, sDescription, rangeNo, bgiNo, mno);
+		Schedule sd = new Schedule(sTitle, sPlace, sSdate, sEdate, sDescription, rangeNo, bgiNo, mno, howlong, bbgiPath, ubgiPath);
 		
 		int result = new ScheduleService().insertSchedule(sd);
 		
