@@ -1,3 +1,7 @@
+<%@page import="java.sql.Date"%>
+<%@page import="java.text.ParseException"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Calendar"%>
 <%@page import="semi.schedule.model.vo.Schedule"%>
 <%@page import="semi.detailSchedule.model.vo.DetailSchedule"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -104,37 +108,116 @@
                 </div>
     
                 <div class="content">  
-                    <% for (int i = 0; i < howlong; i ++) { %>
-                    	<div class="detail">
-	                        <div class="date_div">
-	                            <div class="date"><%= days.get(i).getsSdate() %></div>
-	                            <div class="open_btn material-symbols-outlined">keyboard_arrow_down</div>
-	                            <div class="close_btn material-symbols-outlined">keyboard_arrow_up</div>
-	                        </div>
-	                        <div class="plan">
-	                            <div class="notMap">
-                                    <div class="timeline">
-                                        <div class="circle1 material-symbols-outlined">circle</div>
-                                        <div class="bar" id="bar<%= i %>"></div>
-                                        <div class="circle2 material-symbols-outlined">add_circle</div>
-                                    </div>
-                                    <div class="detail_plan">
-                                        <% for (DetailSchedule dSmall : list) { %>
-                                            <% if (dSmall.getdDate().equals(days.get(i).getsSdate())) { %>
-                                                <div class="plan_content plan_content<%= i %>">
-                                                    <div class="dTime"><%= dSmall.getdStime() %> ~ <%= dSmall.getdEtime() %></div>
-                                                    <div class="dElse"><%= dSmall.getdElse() %></div>
-                                                    <div class="dPlace"><%= dSmall.getdPlace() %></div>
-                                                </div>
-                                            <% } %>
-                                        <% } %>
-                                    </div>
-                                </div>
-                                <div class="map" id="map<%= i %>">
-                                    <img src="resouces/img/maptest.png" alt="">
-                                </div>
-	                        </div>
-	                    </div>
+                    <% for (int i = 0; i < howlong; i ++) {
+                    	Calendar cal = Calendar.getInstance();
+            			cal.setTime(days.get(0).getsSdate());
+            			cal.add(Calendar.DAY_OF_MONTH, i);
+            			
+            			String year = cal.get(Calendar.YEAR) + "";
+            			String month = "";
+            			switch(cal.get(Calendar.MONTH) + 1) {
+            				case 1:
+            					month = "01";
+            					break;
+            				case 2:
+            					month = "02";
+            					break;
+            				case 3:
+            					month = "03";
+            					break;
+            				case 4:
+            					month = "04";
+            					break;
+            				case 5:
+            					month = "05";
+            					break;
+            				case 6:
+            					month = "06";
+            					break;
+            				case 7:
+            					month = "07";
+            					break;
+            				case 8:
+            					month = "08";
+            					break;
+            				case 9:
+            					month = "09";
+            					break;
+            				case 10:
+            					month = "10";
+            					break;
+            				case 11:
+            					month = "11";
+            					break;
+            				case 12:
+            					month = "12";
+            					break;
+            			}
+            			String day = cal.get(Calendar.DAY_OF_MONTH) + "";
+            			
+            			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            			Date date = null;
+
+            			try {
+            				date = new Date(dateFormat.parse(year.trim() + "-" + month.trim() + "-" + day.trim()).getTime());
+            			} catch (ParseException e) {
+            			    e.printStackTrace();
+            			}
+            			
+                   		if (list.isEmpty()) { %>
+                    		<div class="detail">
+		                        <div class="date_div">
+		                            <div class="date"><%= date %></div>
+		                            <div class="open_btn material-symbols-outlined">keyboard_arrow_down</div>
+		                            <div class="close_btn material-symbols-outlined">keyboard_arrow_up</div>
+		                        </div>
+		                        <div class="plan">
+		                            <div class="notMap">
+	                                    <div class="timeline">
+	                                        <div class="circle1 material-symbols-outlined">circle</div>
+	                                        <div class="bar" id="bar<%= i %>"></div>
+	                                        <div class="circle2 material-symbols-outlined">add_circle</div>
+	                                    </div>
+	                                    <div class="detail_plan">
+	                                       <div class="plan_content plan_content<%= i %> add_detail_plan">
+                                               계획 추가하기
+                                           </div>
+	                                    </div>
+	                                </div>
+		                        </div>
+		                    </div>
+                    	<% } else { %>
+	                    	<div class="detail">
+		                        <div class="date_div">
+		                            <div class="date"><%= date %></div>
+		                            <div class="open_btn material-symbols-outlined">keyboard_arrow_down</div>
+		                            <div class="close_btn material-symbols-outlined">keyboard_arrow_up</div>
+		                        </div>
+		                        <div class="plan">
+		                            <div class="notMap">
+	                                    <div class="timeline">
+	                                        <div class="circle1 material-symbols-outlined">circle</div>
+	                                        <div class="bar" id="bar<%= i %>"></div>
+	                                        <div class="circle2 material-symbols-outlined">add_circle</div>
+	                                    </div>
+	                                    <div class="detail_plan">
+	                                        <% for (DetailSchedule dSmall : list) { %>
+	                                            <% if (dSmall.getdDate().equals(days.get(0).getsSdate())) { %>
+	                                                <div class="plan_content plan_content<%= i %>">
+	                                                    <div class="dTime"><%= dSmall.getdStime() %> ~ <%= dSmall.getdEtime() %></div>
+	                                                    <div class="dElse"><%= dSmall.getdElse() %></div>
+	                                                    <div class="dPlace"><%= dSmall.getdPlace() %></div>
+	                                                </div>
+	                                            <% } %>
+	                                        <% } %>
+	                                    </div>
+	                                </div>
+	                                <div class="map" id="map<%= i %>">
+	                                    <img src="resouces/img/maptest.png" alt="">
+	                                </div>
+		                        </div>
+		                    </div>
+		                <% } %>
 
                         <script>
                             $(function() {
@@ -151,6 +234,17 @@
                                         margin: '30px 0 0 20px'
                                     });
                                     $('.plan').css('flex-direction', '');
+                                });
+
+                                $('.add_detail_plan').on('click', function() {
+                                    $('#add_detail').css('width', '40%');
+                                    $('#add_detail table').css('display', 'block');
+                                    $('.map').css({
+                                        height: '300px',
+                                        width: '650px',
+                                        margin: '0 0 0 41px'
+                                    });
+                                    $('.plan').css('flex-direction', 'column');
                                 });
 
                                 $('.circle2').on('click', function() {

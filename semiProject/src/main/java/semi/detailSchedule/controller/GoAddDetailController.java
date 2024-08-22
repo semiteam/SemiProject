@@ -1,9 +1,6 @@
 package semi.detailSchedule.controller;
 
 import java.io.IOException;
-import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -53,7 +50,6 @@ public class GoAddDetailController extends HttpServlet {
 			
 			request.setAttribute("list", list);
 			request.setAttribute("days", days);
-			System.out.println(days);
 			request.setAttribute("howlong", howlong);
 			request.getRequestDispatcher("views/detailSchedule/addDetail.jsp").forward(request, response);
 		}

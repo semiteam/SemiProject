@@ -115,6 +115,8 @@
     height: 35px;
 }
 
+.add_detail_plan {cursor: pointer;}
+
 #add_detail textarea {
     height: 300px;
     padding: 10px;

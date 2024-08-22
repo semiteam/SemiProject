@@ -43,10 +43,6 @@ public class ScheduleService {
 		
 		ArrayList<Schedule> days = new ScheduleDao().selectDays(conn, mno, sno);
 		
-		for (Schedule s : days) {
-			System.out.println(s);
-		}
-		
 		close(conn);
 		
 		return days;
