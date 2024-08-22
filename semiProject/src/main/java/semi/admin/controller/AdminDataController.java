@@ -41,8 +41,24 @@ public class AdminDataController extends HttpServlet {
 		
 		int manCount = new AdminService().manCount(); // 남자 회원수
 		request.setAttribute("manCount", manCount);
+		
 		int womanCount = new AdminService().womanCount(); // 여자 회원수
 		request.setAttribute("womanCount", womanCount);
+		
+		int under10s = new AdminService().under10sCount();
+		request.setAttribute("under10s", under10s);
+		
+		int age20s = new AdminService().age20sCount();
+		request.setAttribute("age20s", age20s);
+		
+		int age30s = new AdminService().age30sCount();
+		request.setAttribute("age30s", age30s);
+		
+		int over40s = new AdminService().over40sCount();
+		request.setAttribute("over40s", over40s);
+		
+		
+		
 		
 		request.getRequestDispatcher("views/manager/manager2.jsp").forward(request, response);
 	}

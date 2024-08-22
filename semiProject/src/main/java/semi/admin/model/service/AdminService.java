@@ -54,5 +54,44 @@ public class AdminService {
 		
 		return womanCount;
 	}
+
+	public int under10sCount() {
+		Connection conn = getConnection();
+		
+		int count = new AdminDao().under10sCount(conn);
+		
+		close(conn);
+		
+		return count;
+	}
+
+	public int age20sCount() {
+		Connection conn = getConnection();
+		int count = new AdminDao().age20sCount(conn);
+		
+		close(conn);
+		
+		return count;
+	}
+
+	public int age30sCount() {
+		Connection conn = getConnection();
+		
+		int count = new AdminDao().age30sCount(conn);
+		
+		close(conn);
+		
+		return count;
+	}
+
+	public int over40sCount() {
+		Connection conn = getConnection();
+		
+		int count = new AdminDao().over40sCount(conn);
+		
+		close(conn);
+		
+		return count;
+	}
 	
 }
