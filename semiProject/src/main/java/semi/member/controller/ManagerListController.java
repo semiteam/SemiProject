@@ -97,7 +97,7 @@ public class ManagerListController extends HttpServlet {
 		request.setAttribute("postPi", postPi);
 		request.setAttribute("postList", postList);
 
-		request.getRequestDispatcher("views/manager/manager1.jsp").forward(request, response);
+		request.getRequestDispatcher("views/admin/admin1.jsp").forward(request, response);
 		
 		
 	}

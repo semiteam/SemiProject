@@ -1,29 +1,24 @@
-package semi.member.controller;
+package semi.goTrip;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import semi.member.model.service.MemberService;
-import semi.member.model.vo.Member;
-
+import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class MemberSelectController
+ * Servlet implementation class GoCourseBusanController
  */
-@WebServlet("/selectMember.ma")
-public class afterLoginMemberController extends HttpServlet {
+@WebServlet(name = "GoDetailYeosu.gt", urlPatterns = { "/GoDetailYeosu.gt" })
+public class GoDetailYeosuController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public afterLoginMemberController() {
+    public GoDetailYeosuController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,12 +27,15 @@ public class afterLoginMemberController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
 		
-		//ArrayList<Member> list = new MemberService().
-		//request.setAttribute("list",list);
-		
-		
-		request.getRequestDispatcher("/views/manager/manager1.jsp").forward(request, response);
+		if (session.getAttribute("loginUser") == null && session.getAttribute("loginAdmin") == null) {
+			session.setAttribute("alertMsg", "로그인 후 이용 가능한 서비스입니다.");
+			
+			response.sendRedirect(request.getContextPath());
+		} else {
+			request.getRequestDispatcher("views/goTrip/detailYeosu.jsp").forward(request, response);
+		}
 	}
 
 	/**

@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>이용약관</title>
+    <title>여행가조</title>
     <meta charset="UTF-8" />
     <script defer src="resouces/js/이용약관.js"></script>
     <link rel="stylesheet" href="https://cQdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css">
@@ -92,7 +92,7 @@
               </div>
             </li>
           </ul>
-          <button type="submit" class="next-button" disabled onclick="location.href='views/member/signUp.jsp'">확인</button>
+          <button type="submit" class="next-button" disabled onclick="location.href='<%= contextPath %>/GoSignup.me'">확인</button>
         </form>
       </div>
       <br><br>

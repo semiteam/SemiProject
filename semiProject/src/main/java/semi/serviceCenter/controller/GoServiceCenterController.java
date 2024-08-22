@@ -1,4 +1,4 @@
-package semi.schedule.controller;
+package semi.serviceCenter.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class planExistController
+ * Servlet implementation class GoServiceCenterController
  */
-@WebServlet("/planExist.sd")
-public class planExistController extends HttpServlet {
+@WebServlet("/GoServiceCenter.sc")
+public class GoServiceCenterController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public planExistController() {
+    public GoServiceCenterController() {
         super();
         // TODO Auto-generated constructor stub
     }

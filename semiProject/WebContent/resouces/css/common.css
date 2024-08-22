@@ -132,6 +132,6 @@ body *:not(:hover:not(#place_add):not(.side_menu)) {
 
 .content {
     width: 85%;
-    margin: 0 0 0 14.8475%;
+    margin: 0 0 0 15%;
     position: relative;
 }

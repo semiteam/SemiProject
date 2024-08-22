@@ -20,7 +20,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>관리자페이지 사용자통계</title>
+        <title>여행가조</title>
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 
@@ -51,12 +51,12 @@
     <%@ include file="../common/basic.jsp" %>
         <div class="wrap">
             <div class="top">
-                <div class="logo" onclick="location.href='views/goTrip/goTripLogin_O.jsp'">우리 여행가조</div>
+                <div class="logo" onclick="location.href='<%= contextPath %>'">우리 여행가조</div>
                 <div class="top_menu">
                     <ul>
-                        <li id="top_menu_1" onclick="location.href=''">My page</li>
-                        <li id="top_menu_2" onclick="location.href=''">고객센터</li>
-                        <li id="top_menu_3" onclick="location.href='views/goTrip/goTripLogin_X.jsp'">로그아웃</li>
+                        <li id="top_menu_1" onclick="location.href='<%= contextPath %>/GoMyPage.me'">My page</li>
+                        <li id="top_menu_2" onclick="location.href='<%= contextPath %>/GoServiceCenter.sc'">고객센터</li>
+                        <li id="top_menu_3">로그아웃</li>
                     </ul>
                 </div>
             </div>
@@ -69,19 +69,19 @@
                     <div id="side_menu_open_4" onclick="location.href='views/goTrip/goTripLogin_O.jsp'">메인 메뉴</div>
                     <div id="close_btn" onclick="side_close()"><img src="resouces/img/chevron_left_24dp_5F6368.png" alt=""></div>
     
-                    <div id="side_menu_close_1" onclick="location.href='views/manager/manager1.jsp'">
+                    <div id="side_menu_close_1" onclick="location.href='<%= contextPath %>/GoAdminMain.ad'">
                         <img src="resouces/img/airplane_ticket_24dp_5F6368.png" alt="">
                         <div class="explanation">회원 관리</div>
                     </div>
-                    <div id="side_menu_close_2" onclick="location.href='views/manager/manager2.jsp'">
+                    <div id="side_menu_close_2" onclick="location.href='<%= contextPath %>/GoAdmin2.ad'">
                         <img src="resouces/img/edit_calendar_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png" alt="">
                         <div class="explanation">사용자 통계</div>
                     </div>
-                    <div id="side_menu_close_3" onclick="location.href='views/manager/manager3.jsp'">
+                    <div id="side_menu_close_3" onclick="location.href='<%= contextPath %>/GoAdmin3.ad'">
                         <img src="resouces/img/dynamic_feed_24dp_5F6368.png" alt="">
                         <div class="explanation">수익 관리</div>
                     </div>
-                    <div id="side_menu_close_4" onclick="location.href='views/goTrip/goTripLogin_O.jsp'">
+                    <div id="side_menu_close_4" onclick="location.href='<%= contextPath %>'">
                         <img src="resouces/img/dynamic_feed_24dp_5F6368.png" alt="">
                         <div class="explanation">메인 메뉴</div>
                     </div>

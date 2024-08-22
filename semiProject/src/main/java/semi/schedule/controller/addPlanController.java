@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -37,7 +38,7 @@ public class addPlanController extends HttpServlet {
 		
 		String sTitle = request.getParameter("plan_title");
 		String sPlace = request.getParameter("choice");
-		
+	
 		String sYear = request.getParameter("sDate").substring(11, 15);
 		String sMonth = "";
 		switch(request.getParameter("sDate").substring(4, 7)) {
@@ -136,20 +137,30 @@ public class addPlanController extends HttpServlet {
 		String sDescription = request.getParameter("explanation_e");
 		int rangeNo = Integer.parseInt(request.getParameter("range")); // 공개 범위
 		int bgiNo = Integer.parseInt(request.getParameter("img"));
+		int mno = Integer.parseInt(request.getParameter("mno"));
+		int howlong = Integer.parseInt(request.getParameter("howlong"));
+		String bbgiPath = request.getParameter("bbgiPath");
+		String ubgiPath = request.getParameter("ubgiPath");
 		
-		Schedule sd = new Schedule(sTitle, sPlace, sSdate, sEdate, sDescription, rangeNo, bgiNo);
+		Schedule sd = new Schedule(sTitle, sPlace, sSdate, sEdate, sDescription, rangeNo, bgiNo, mno, howlong, bbgiPath, ubgiPath);
 		
 		int result = new ScheduleService().insertSchedule(sd);
 		
 		String alertMsg;
+		
 		if (result > 0) {
 			alertMsg = "성공적으로 일정을 등록하였습니다.";
+			request.getSession().setAttribute("alertMsg", alertMsg);
+			
+			ArrayList<Schedule> list = new ScheduleService().selectSchedule(mno);
+			
+			request.setAttribute("list", list);
 		} else {
 			alertMsg = "일정 등록에 실패하였습니다.";
+			request.getSession().setAttribute("alertMsg", alertMsg);
 		}
 		
-		request.getSession().setAttribute("alertMsg", alertMsg);
-		response.sendRedirect(request.getContextPath() + "/planExist.sd");
+		response.sendRedirect(request.getContextPath() + "/GoScheduleMain.sd?mno=" + mno);
 	}
 
 	/**

@@ -6,7 +6,7 @@
 }
 
 .under > .content {
-    padding: 2vw 3vw;
+    padding: 2vw 0 0 3vw;
     color: white;
     font-size: 20px; 
     display: flex;

@@ -1,4 +1,4 @@
-package semi.admin.controller;
+package semi.goTrip;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -6,18 +6,19 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class afterLoginAdmin
+ * Servlet implementation class GoCourseBusanController
  */
-@WebServlet("/afterLogin.ad")
-public class afterLoginAdminController extends HttpServlet {
+@WebServlet(name = "GoDetailJeju.gt", urlPatterns = { "/GoDetailJeju.gt" })
+public class GoDetailJejuController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public afterLoginAdminController() {
+    public GoDetailJejuController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,7 +27,15 @@ public class afterLoginAdminController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("views/manager/manager1.jsp").forward(request, response);
+		HttpSession session = request.getSession();
+		
+		if (session.getAttribute("loginUser") == null && session.getAttribute("loginAdmin") == null) {
+			session.setAttribute("alertMsg", "로그인 후 이용 가능한 서비스입니다.");
+			
+			response.sendRedirect(request.getContextPath());
+		} else {
+			request.getRequestDispatcher("views/goTrip/detailJeju.jsp").forward(request, response);
+		}
 	}
 
 	/**

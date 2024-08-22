@@ -13,11 +13,15 @@ public class Schedule {
 	private int bgiNo;
 	private Date sCdate;
 	private String sStatus;
+	private int mno;
+	private int howlong;
+	private String bbgiPath;
+	private String ubgiPath;
 	
 	public Schedule() {}
 
 	public Schedule(int sNo, String sTitle, String sPlace, Date sSdate, Date sEdate, String sDescription, int rangeNo,
-			int bgiNo, Date sCdate, String sStatus) {
+			int bgiNo, Date sCdate, String sStatus, int mno, int howlong, String bbgiPath, String ubgiPath) {
 		super();
 		this.sNo = sNo;
 		this.sTitle = sTitle;
@@ -29,10 +33,14 @@ public class Schedule {
 		this.bgiNo = bgiNo;
 		this.sCdate = sCdate;
 		this.sStatus = sStatus;
+		this.mno = mno;
+		this.howlong = howlong;
+		this.bbgiPath = bbgiPath;
+		this.ubgiPath = ubgiPath;
 	}
-
-	public Schedule(String sTitle, String sPlace, Date sSdate, Date sEdate, String sDescription, int rangeNo,
-			int bgiNo) {
+	
+	public Schedule(String sTitle, String sPlace, Date sSdate, Date sEdate, String sDescription, int rangeNo, int bgiNo,
+			int mno, int howlong, String bbgiPath, String ubgiPath) {
 		super();
 		this.sTitle = sTitle;
 		this.sPlace = sPlace;
@@ -41,6 +49,16 @@ public class Schedule {
 		this.sDescription = sDescription;
 		this.rangeNo = rangeNo;
 		this.bgiNo = bgiNo;
+		this.mno = mno;
+		this.howlong = howlong;
+		this.bbgiPath = bbgiPath;
+		this.ubgiPath = ubgiPath;
+	}
+
+	public Schedule(Date sSdate, Date sEdate) {
+		super();
+		this.sSdate = sSdate;
+		this.sEdate = sEdate;
 	}
 
 	public int getsNo() {
@@ -123,10 +141,43 @@ public class Schedule {
 		this.sStatus = sStatus;
 	}
 
+	public int getMno() {
+		return mno;
+	}
+
+	public void setMno(int mno) {
+		this.mno = mno;
+	}
+
+	public int getHowlong() {
+		return howlong;
+	}
+
+	public void setHowlong(int howlong) {
+		this.howlong = howlong;
+	}
+
+	public String getBbgiPath() {
+		return bbgiPath;
+	}
+
+	public void setBbgiPath(String bbgiPath) {
+		this.bbgiPath = bbgiPath;
+	}
+
+	public String getUbgiPath() {
+		return ubgiPath;
+	}
+
+	public void setUbgiPath(String ubgiPath) {
+		this.ubgiPath = ubgiPath;
+	}
+
 	@Override
 	public String toString() {
 		return "Schedule [sNo=" + sNo + ", sTitle=" + sTitle + ", sPlace=" + sPlace + ", sSdate=" + sSdate + ", sEdate="
 				+ sEdate + ", sDescription=" + sDescription + ", rangeNo=" + rangeNo + ", bgiNo=" + bgiNo + ", sCdate="
-				+ sCdate + ", sStatus=" + sStatus + "]";
+				+ sCdate + ", sStatus=" + sStatus + ", mno=" + mno + ", howlong=" + howlong + ", bbgiPath=" + bbgiPath
+				+ ", ubgiPath=" + ubgiPath + "]";
 	}
 }
