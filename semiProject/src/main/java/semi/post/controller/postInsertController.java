@@ -41,10 +41,10 @@ public class postInsertController extends HttpServlet {
 		
 		int result = new PostService().insertPost(mno,title,content);
 		
-		
+		System.out.println(result + "1");
 		
 		if(result > 0) {
-			request.setAttribute("result", result);
+			
 			
 			response.sendRedirect(request.getContextPath() + "/list.po?cpage=1");
 		}else {
@@ -52,14 +52,7 @@ public class postInsertController extends HttpServlet {
 		}
 		
 		
-		int pno = Integer.parseInt(request.getParameter("pno"));
-		System.out.println(pno + " @#213213213213213213213213213");
-		int result1 = new PostService().deletePost(pno);
 		
-		if(result1 > 0) {
-			
-			response.sendRedirect(request.getContextPath() + "/list.po?cpage=1");
-		}
 		
 		
 	}

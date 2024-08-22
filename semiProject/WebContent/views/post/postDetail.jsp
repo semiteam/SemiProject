@@ -154,7 +154,7 @@
                                         <button type="submit" id="view-btn">수정하기</button>
                                         <button type="submit" id="submit-btn">삭제하기</button>
                                         <% } %>
-                                        <!--  onclick="location.href='<%= contextPath%>/delete.po" -->
+                                        <!--  onclick="location.href='<%= contextPath %>/delete.po'" -->
                                     </div>
                         
                         

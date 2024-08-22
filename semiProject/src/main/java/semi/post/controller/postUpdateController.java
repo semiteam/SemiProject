@@ -43,6 +43,15 @@ public class postUpdateController extends HttpServlet {
 		}else {
 			
 		}
+		
+
+		int result1 = new PostService().deletePost(pno);
+		
+		if(result1 > 0) {
+			
+			
+			request.getRequestDispatcher("views/post/postMain.jsp");
+		}
 	}
 
 	/**

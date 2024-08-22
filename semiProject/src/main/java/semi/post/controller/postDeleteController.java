@@ -37,6 +37,7 @@ public class postDeleteController extends HttpServlet {
 		
 		if(result > 0) {
 			
+			
 			response.sendRedirect(request.getContextPath() + "/list.po?cpage=1");
 		}
 		
