@@ -45,16 +45,16 @@ public class AdminDataController extends HttpServlet {
 		int womanCount = new AdminService().womanCount(); // 여자 회원수
 		request.setAttribute("womanCount", womanCount);
 		
-		int under10s = new AdminService().under10sCount();
+		int under10s = new AdminService().under10sCount(); // 10대이하 회원수
 		request.setAttribute("under10s", under10s);
 		
-		int age20s = new AdminService().age20sCount();
+		int age20s = new AdminService().age20sCount(); // 20대 회원수
 		request.setAttribute("age20s", age20s);
 		
-		int age30s = new AdminService().age30sCount();
+		int age30s = new AdminService().age30sCount(); // 30대 회원수
 		request.setAttribute("age30s", age30s);
 		
-		int over40s = new AdminService().over40sCount();
+		int over40s = new AdminService().over40sCount(); // 40대이상 회원수
 		request.setAttribute("over40s", over40s);
 		
 		
