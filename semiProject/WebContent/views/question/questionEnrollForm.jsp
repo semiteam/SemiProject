@@ -5,7 +5,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>고객센터메인</title>
+        <title>고객센터글쓰기</title>
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 
@@ -26,16 +26,15 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@100..900&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="../../resouces/css/questionListView.css">
-        <link rel="stylesheet" href="../../resouces/css/common.css">
-      
+        <link rel="stylesheet" href="resouces/css/questionEnrollForm.css">
+        <link rel="stylesheet" href="resouces/css/common.css">
 
         <style>
             
         </style>
     </head>
     <body>
-     <%@ include file="../common/basic.jsp" %>
+    <%@ include file="../common/basic.jsp" %>
         <div class="wrap">
             <div class="background"></div>
 
@@ -69,82 +68,40 @@
                     </div>
                 </div>
 
-                <div class="content" > 
-                    <div class="title" align="center">문의사항</div>
-
-                    <form method="post" align="right">
-                        <button class="btn btn-sm btn-secondary">작성하기</button>
-                    </form>
-                    
-                    <div class="question" align="center">
-                        <table class="table-list">
-                            <thead>
+                <div class="content" align = 'center'> 
+                    <form action="" method="post">
+                        <input type="hidden" name="userNo" value="">
+                        <div class="content-back">
+                            <table class="question-table">
                                 <tr>
-                                    <th width ="80px">글번호</th>
-                                    <th>제목</th>
-                                    <th width ="170px">작성자</th>
-                                    <th width ="80px">조회수</th>
-                                    <th width ="80px">작성일</th>
-                                    <th width ="80px">답변여부</th>
-                                </tr>
-                            </thead>
-    
-                            <tbody>
-                                <tr>
-                                    <td>예시</td>
-                                    <td>예시</td>
-                                    <td>예시</td>
-                                    <td>예시</td>
-                                    <td>예시</td>
-                                    <td>예시</td>
+                                    <td class="input-cell"><input type="text" name="title" class="input-title" required placeholder="제목을 입력하세요"></td>
                                 </tr>
                                 <tr>
-                                    <td>예시</td>
-                                    <td>예시</td>
-                                    <td>예시</td>
-                                    <td>예시</td>
-                                    <td>예시</td>
-                                    <td>예시</td>
+                                    <td class="input-cell"><textarea name="content" class="input-content" required placeholder="문의내용을 입력하세요"></textarea></td>
                                 </tr>
                                 <tr>
-                                    <td>예시</td>
-                                    <td>예시</td>
-                                    <td>예시</td>
-                                    <td>예시</td>
-                                    <td>예시</td>
-                                    <td>예시</td>
+                                    <td class="input-cell"><input type="number" name="pwd" class="input-pwd" placeholder="비밀번호 숫자 4자리" maxlength="4" oninput="numberMaxLength(this)"></td>
                                 </tr>
-                                <tr>
-                                    <td>예시</td>
-                                    <td>예시</td>
-                                    <td>예시</td>
-                                    <td>예시</td>
-                                    <td>예시</td>
-                                    <td>예시</td>
-                                </tr>
-                                <tr>
-                                    <td>예시</td>
-                                    <td>예시</td>
-                                    <td>예시</td>
-                                    <td>예시</td>
-                                    <td>예시</td>
-                                    <td>예시</td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                        <div class="paging-area" align="center">
-                            <button onclick="location.href='<%= contextPath %>/list.bo?cpage=<%=  %>'">&lt;</button>
-                            <button disabled><%= p %></button>
-                            <button onclick="location.href='<%= contextPath %>/list.bo?cpage=<%=%>'"><%= %></button>
-                            <button onclick="location.href='<%= contextPath %>/list.bo?cpage=<%= + 1 %>'">&gt;</button>
+                            </table>
                         </div>
-                    </div>
+                        <button type="submit" class="btn btn-secondary">등록</button>
+                        <button type="button" class="btn btn-secondary">목록</button>
+                        <button type="button" class="btn btn-secondary">삭제</button>
+                    </form>    
                 </div>
-            </div>      
-        </div>
+            </div>
+        </div>      
+    </div>
 
-        <script>
+
+    <script>
+         function numberMaxLength(e){
+        if(e.value.length > e.maxLength){
+            e.value = e.value.slice(0, e.maxLength);
+        }
+    }
+
+
             const side_menu = document.getElementsByClassName('side_menu');
             const content = document.getElementsByClassName('content');
             const close_btn = document.getElementById('close_btn');
@@ -182,7 +139,7 @@
                 open_btn.style.display = 'none';
             }
 
-        </script>
+    </script>
     </body>
    
 </html>

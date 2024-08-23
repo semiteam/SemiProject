@@ -1,6 +1,7 @@
-package semi.serviceCenter.controller;
+package semi.question.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,16 +9,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class GoServiceCenterController
+ * Servlet implementation class QuestionEnrollForm
  */
-@WebServlet("/GoServiceCenter.sc")
-public class GoServiceCenterController extends HttpServlet {
+@WebServlet("/enrollForm.sc")
+public class QuestionEnrollForm extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GoServiceCenterController() {
+    public QuestionEnrollForm() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,8 +27,7 @@ public class GoServiceCenterController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.getRequestDispatcher("views/question/questionEnrollForm.jsp").forward(request, response);
 	}
 
 	/**

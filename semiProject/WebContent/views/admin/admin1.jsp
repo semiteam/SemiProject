@@ -171,7 +171,7 @@
             <button onclick="location.href='<%= contextPath %>/adminList.ad?cpage=<%= currentPage + 1 %>&pCpage=<%=postCurrentPage%>'">&gt;</button>
             <% } %>
         
-       	 </div>
+       	    </div>
                     </div>
     
                     <div class="main right-main">
@@ -232,7 +232,7 @@
                             <% if (postCurrentPage != postMaxPage) { %>
                             <button onclick="location.href='<%= contextPath %>/adminList.ad?cpage=<%= currentPage%>&pCpage=<%= postCurrentPage + 1 %>'">&gt;</button>
                             <% } %>
-                            </div>
+                        </div>
                 </div>
             </div>     
         </div>

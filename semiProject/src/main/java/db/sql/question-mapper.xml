@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<entry key = "selectQuestionCount">
+SELECT
+		        COUNT(*) COUNT
+		  FROM QUESTION
+		 WHERE Q_STATUS != 'N'
+</entry>
+
+<entry key = "selectQuestion">
+SELECT *
+		FROM (
+		SELECT ROWNUM RNUM, A.* 
+	      FROM (
+				SELECT 
+	                   Q_NO
+				     , M_NAME
+				     , Q_TITLE
+				     , Q_CONTENT
+				     , Q_DATE
+				     , Q_STATUS
+				     , Q_ANSWER
+				     , Q_PWD
+	             FROM  QUESTION
+                 JOIN  MEMBER USING(M_NO)
+	            WHERE Q_STATUS != 'N'
+                
+	            ORDER
+	               BY Q_NO DESC
+	           ) A
+		    )
+		    WHERE RNUM BETWEEN ? AND ?
+
+
+</entry>
+
+</properties>

@@ -1,11 +1,28 @@
+<%@page import="semi.question.model.vo.Question"%>
+<%@page import="semi.common.model.vo.PageInfo"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
+
+<%
+
+ 	PageInfo pi = (PageInfo)request.getAttribute("pi");
+
+ 	ArrayList<Question>list = (ArrayList<Question>)request.getAttribute("list");
+ 	
+ 	int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();
+
+%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>고객센터글쓰기</title>
+        <title>고객센터메인</title>
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 
@@ -26,14 +43,16 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@100..900&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="../../resouces/css/questionEnrollForm.css">
-        <link rel="stylesheet" href="./common.css">
+        <link rel="stylesheet" href="resouces/css/questionListView.css">
+        <link rel="stylesheet" href="resouces/css/common.css">
+      
 
         <style>
             
         </style>
     </head>
     <body>
+     <%@ include file="../common/basic.jsp" %>
         <div class="wrap">
             <div class="background"></div>
 
@@ -48,9 +67,9 @@
 
             <div class="under">
                 <div class="side_menu">
-                    <div id="side_menu_open_1" onclick="location.href='../관리자페이지/index.html'">회원 관리</div>
-                    <div id="side_menu_open_2" onclick="location.href='../관리자페이지/index2.html' ">사용자 통계</div>
-                    <div id="side_menu_open_3" onclick="location.href='../관리자페이지/index3.html'" style="font-weight: 900;">수익 관리</div>
+                    <div id="side_menu_open_1" onclick="location.href='../관리자페이지/index.html'">여행 갈래?</div>
+                    <div id="side_menu_open_2" onclick="location.href='../관리자페이지/index2.html' ">계획 짤래?</div>
+                    <div id="side_menu_open_3" onclick="location.href='../관리자페이지/index3.html'" style="font-weight: 900;">리뷰 볼래?</div>
                     <div id="close_btn" onclick="side_close()"><img src="./resources/img/chevron_left_24dp_5F6368.png" alt="왼쪽화살표"></div>
                     
                     <div id="side_menu_close_1" onclick="location.href='../여행_갈래/여행_갈래.html'">
@@ -67,40 +86,69 @@
                     </div>
                 </div>
 
-                <div class="content" align = 'center'> 
-                    <form action="" method="post">
-                        <input type="hidden" name="userNo" value="">
-                        <div class="content-back">
-                            <table class="question-table">
+                <div class="content" > 
+                    <div class="title" align="center">문의사항</div>
+
+                    <form method="post" align="right">
+                        <button type="button" class="btn btn-sm btn-secondary" onclick="location.href='<%= contextPath %>/enrollForm.sc'">작성하기</button>
+                    </form>
+                    
+                    <div class="question" align="center">
+                        <%if(list==null || list.isEmpty()) {%>
+                            <table class="table-list">
                                 <tr>
-                                    <td class="input-cell"><input type="text" name="title" class="input-title" required placeholder="제목을 입력하세요"></td>
-                                </tr>
-                                <tr>
-                                    <td class="input-cell"><textarea name="content" class="input-content" required placeholder="문의내용을 입력하세요"></textarea></td>
-                                </tr>
-                                <tr>
-                                    <td class="input-cell"><input type="number" name="pwd" class="input-pwd" placeholder="비밀번호 숫자 4자리" maxlength="4" oninput="numberMaxLength(this)"></td>
+                                    <td>조회된 회원정보가 없습니다.</td>
                                 </tr>
                             </table>
+                        <% }else{ %>
+                            <table class="table-list">
+                                <thead>
+                                    <tr>
+                                        <th width ="120px">글번호</th>
+                                        <th>문의 제목</th>
+                                        <th width ="120px">작성자</th>              
+                                        <th width ="120px">작성일</th>
+                                        <th width ="100px">답변여부</th>
+                                    </tr>
+                                </thead>
+                            <% for(Question q : list ) { %>
+                                <tbody>
+                                    <tr>
+                                        <td><%=q.getqNo()%></td>
+                                        <td><%=q.getQtitle()%></td>
+                                        <td><%=q.getmName()%></td>
+                                        <td><%=q.getqDate()%></td>
+                                        <td><%=q.getqAnswer()%></td>
+                                      
+                                    </tr>
+                                </tbody>
+                                <% } %>
+                            </table>
+                       <% } %>
+ 
+                        <!--question 페이징바-->
+                        <div class="paging-area" align="center"> 
+                            <% if (currentPage != 1) { %>    
+                            <button onclick="location.href='<%= contextPath %>/GoServiceCenter.sc?qCpage=<%= currentPage - 1 %>'">&lt;</button>
+                            <% } %>
+                            <% for (int p = startPage; p <= endPage; p++) { %>
+                                <% if (p == currentPage) { %>
+                                    <button disabled><%= p %></button>
+                                <% } else { %>
+                                    <button onclick="location.href='<%=contextPath %>/GoServiceCenter.sc?qCpage=<%=p%>'"><%= p %></button>
+                                <% } %>
+                            <% } %>
+                            
+                            <% if (currentPage != maxPage) { %>
+                            <button onclick="location.href='<%= contextPath %>/GoServiceCenter.sc?qCpage=<%= currentPage + 1%>'">&gt;</button>
+                            <% } %>
                         </div>
-                        <button type="submit" class="btn btn-secondary">등록</button>
-                        <button type="button" class="btn btn-secondary">목록</button>
-                        <button type="button" class="btn btn-secondary">삭제</button>
-                    </form>    
+                    </div>
                 </div>
-            </div>
-        </div>      
-    </div>
+            </div>      
+        </div>
 
-
-    <script>
-         function numberMaxLength(e){
-        if(e.value.length > e.maxLength){
-            e.value = e.value.slice(0, e.maxLength);
-        }
-    }
-
-
+        <script>
             const side_menu = document.getElementsByClassName('side_menu');
             const content = document.getElementsByClassName('content');
             const close_btn = document.getElementById('close_btn');
@@ -138,7 +186,7 @@
                 open_btn.style.display = 'none';
             }
 
-    </script>
+        </script>
     </body>
    
 </html>
