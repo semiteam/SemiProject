@@ -166,7 +166,7 @@
                                 <div class="cover">항공편 조회 하기</div>
                             </div>
                             <div class="swiper-slide" type="button"
-                                onclick="location.href='https://www.google.com/maps/?hl=ko'">
+                                onclick="location.href='<%= contextPath %>/GoMap.gm'">
                                 <img src="resouces/img/지도.jpg" alt="">
                                 <div class="cover">내 맘 대로 <br> 소요시간 조회 하기</div>
                             </div>
@@ -182,31 +182,31 @@
                         <div class="swiper-wrapper">
                             <div class="swiper-slide" type="button">
                                 <img src="resouces/img/1913 송정역 시장.jpg" alt="">
-                                <div class="cover">1913 송정역 시장</div>
+                                <div class="cover">1913 송정역 시장 <br><br> 광주 광산구 송정로8번길 13 </div>
                             </div>
                             <div class="swiper-slide" type="button">
                                 <img src="resouces/img/광주호 호수생태원.jpg" alt="">
-                                <div class="cover">광주호 호수 생태원</div>
+                                <div class="cover">광주호 호수 생태원 <br><br> 광주 북구 충효동 905 </div>
                             </div>
                             <div class="swiper-slide" type="button">
                                 <img src="resouces/img/국립광주과학관.jpg" alt="">
-                                <div class="cover">국립 광주 과학관</div>
+                                <div class="cover">국립 광주 과학관 <br><br> 광주 북구 첨단과기로 235</div>
                             </div>
                             <div class="swiper-slide" type="button">
                                 <img src="resouces/img/국립광주박물관.jpg" alt="">
-                                <div class="cover">국립 광주 박물관</div>
+                                <div class="cover">국립 광주 박물관 <br><br> 광주 북구 하서로 110 </div>
                             </div>
                             <div class="swiper-slide" type="button">
                                 <img src="resouces/img/국립아시아문화전당.jpg" alt="">
-                                <div class="cover">국립 아시아 문화전당</div>
+                                <div class="cover">국립 아시아 문화전당 <br><br> 광주 동구 문화전당로 38 </div>
                             </div>
                             <div class="swiper-slide" type="button">
                                 <img src="resouces/img/무등산.jpg" alt="">
-                                <div class="cover">무등산</div>
+                                <div class="cover">무등산 <br><br> 광주 북구 무등산천왕봉길 792 </div>
                             </div>
                             <div class="swiper-slide" type="button">
                                 <img src="resouces/img/패밀리 랜드.jpg" alt="">
-                                <div class="cover">광주 패밀리 랜드</div>
+                                <div class="cover">광주 패밀리 랜드 <br><br> 광주 북구 우치로 677 </div>
                             </div>
                         </div>
                     </div>

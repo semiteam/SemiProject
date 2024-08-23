@@ -180,7 +180,7 @@
                                 <div class="cover">항공편 조회 하기</div>
                             </div>
                             <div class="swiper-slide" type="button"
-                                onclick="location.href='https://www.google.com/maps/?hl=ko'">
+                                onclick="location.href='<%= contextPath %>/GoMap.gm'">
                                 <img src="resouces/img/지도.jpg" alt="">
                                 <div class="cover">내 맘 대로 <br> 소요시간 조회 하기</div>
                             </div>
@@ -219,7 +219,7 @@
                                 <div class="cover">송도 스카이 워크 <br><br><br> 부산광역시 서구 암남동 129-4 </div>
                             </div>
                             <div class="swiper-slide" type="button">
-                                <img src="resouces//자갈치시장.jpg" alt="">
+                                <img src="resouces/img/자갈치시장.jpg" alt="">
                                 <div class="cover">자갈치 시장 <br><br><br> 부산 중구 자갈치해안로 52 </div>
                             </div>
                         </div>

@@ -166,7 +166,7 @@
                                 <div class="cover">항공편 조회 하기</div>
                             </div>
                             <div class="swiper-slide" type="button"
-                                onclick="location.href='https://www.google.com/maps/?hl=ko'">
+                                onclick="location.href='<%= contextPath %>/GoMap.gm'">
                                 <img src="resouces/img/지도.jpg" alt="">
                                 <div class="cover">내 맘 대로 <br> 소요시간 조회 하기</div>
                             </div>
@@ -182,31 +182,31 @@
                         <div class="swiper-wrapper"> 
                             <div class="swiper-slide" type="button">
                                 <img src="resouces/img/1. 호미곶.jpg" alt="">
-                                <div class="cover">호미곶 해맞이 광장</div>
+                                <div class="cover">호미곶 해맞이 광장 <br><br> 경북 포항시 남구 호미곶면 대보리 ~ </div>
                             </div>
                             <div class="swiper-slide" type="button">
                                 <img src="resouces/img/2. 포항함 박물관.jpg" alt="">
-                                <div class="cover">포항함 박물관</div>
+                                <div class="cover">포항함 체험관 <br><br> 경북 포항시 남구 송도동 ~ </div>
                             </div>
                             <div class="swiper-slide" type="button">
                                 <img src="resouces/img/3. 국립 등대 박물관.jpg" alt="">
-                                <div class="cover">국립 등대 박물관</div>
+                                <div class="cover">국립 등대 박물관 <br><br> 경북 포항시 남구 호미곶면 해맞이로150번길 20 </div>
                             </div>
                             <div class="swiper-slide" type="button">
                                 <img src="resouces/img/4. 덕동 문화마을.jpg" alt="">
-                                <div class="cover">덕동 문화마을</div>
+                                <div class="cover">덕동 문화마을 <br><br> 경북 포항시 북구 기북면 오덕리 210 </div>
                             </div>
                             <div class="swiper-slide" type="button">
                                 <img src="resouces/img/5. 죽도시장.jpg" alt="">
-                                <div class="cover">죽도시장</div>
+                                <div class="cover">죽도시장 <br><br> 경북 포항시 북구 죽도시장13길 13 </div>
                             </div>
                             <div class="swiper-slide" type="button">
                                 <img src="resouces/img/6. 영일대 해수욕장.jpg" alt="">
-                                <div class="cover">영일대 해수욕장</div>
+                                <div class="cover">영일대 해수욕장 <br><br> 경북 포항시 북구 두호동 685-1 </div>
                             </div>
                             <div class="swiper-slide" type="button">
                                 <img src="resouces/img/7. 오어사.jpg" alt="">
-                                <div class="cover">오어사</div>
+                                <div class="cover">오어사 <br><br> 경북 포항시 남구 오천읍 항사리 산28-14 </div>
                             </div>
                         </div>
                     </div>

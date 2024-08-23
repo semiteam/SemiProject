@@ -197,7 +197,7 @@
 										<div class="cover">항공편 조회 하기</div>
 									</div>
 									<div class="swiper-slide" type="button"
-										onclick="location.href='https://www.google.com/maps/?hl=ko'">
+										onclick="location.href='<%= contextPath %>/GoMap.gm'">
 										<img src="resouces/img/지도.jpg" alt="">
 										<div class="cover">내 맘 대로 <br> 소요시간 조회 하기</div>
 									</div>
@@ -213,31 +213,31 @@
 								<div class="swiper-wrapper">
 									<div class="swiper-slide" type="button">
 										<img src="resouces/img/1. 경복궁.jpg" alt="">
-										<div class="cover">경복궁</div>
+										<div class="cover">경복궁 <br><br> 서울 종로구 사직로 161 </div>
 									</div>
 									<div class="swiper-slide" type="button">
 										<img src="resouces/img/2. 한국 전쟁 기념관.jpg" alt="">
-										<div class="cover">한국 전쟁 기념관</div>
+										<div class="cover">한국 전쟁 기념관 <br><br> 서울 용산구 이태원로 29 </div>
 									</div>
 									<div class="swiper-slide" type="button">
 										<img src="resouces/img/3. 남산 타워.jpg" alt="">
-										<div class="cover">남산 타워</div>
+										<div class="cover">남산 서울 타워 <br><br> 서울 용산구 남산공원길 105 </div>
 									</div>
 									<div class="swiper-slide" type="button">
 										<img src="resouces/img/4. 국립 중앙 박물관.jpg" alt="">
-										<div class="cover">국립 중앙 박물관</div>
+										<div class="cover">국립 중앙 박물관 <br><br> 서울 용산구 서빙고로 137 </div>
 									</div>
 									<div class="swiper-slide" type="button">
 										<img src="resouces/img/5. 롯데타워몰.jpg" alt="">
-										<div class="cover">롯데타워 몰</div>
+										<div class="cover">롯데타워 몰 <br><br> 서울 송파구 올림픽로 300 </div>
 									</div>
 									<div class="swiper-slide" type="button">
 										<img src="resouces/img/6. DDP.jpg" alt="">
-										<div class="cover">동대문 디자인 플라자(DDP)</div>
+										<div class="cover">동대문 디자인 플라자(DDP) <br><br> 서울 중구 을지로 281 </div>
 									</div>
 									<div class="swiper-slide" type="button">
 										<img src="resouces/img/7. 광화문.jpg" alt="">
-										<div class="cover">광화문</div>
+										<div class="cover">광화문 <br><br> 서울 종로구 효자로 12 </div>
 									</div>
 								</div>
 							</div>

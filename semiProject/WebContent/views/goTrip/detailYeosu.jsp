@@ -197,7 +197,7 @@
 										<div class="cover">항공편 조회 하기</div>
 									</div>
 									<div class="swiper-slide" type="button"
-										onclick="location.href='https://www.google.com/maps/?hl=ko'">
+										onclick="location.href='<%= contextPath %>/GoMap.gm'">
 										<img src="resouces/img/지도.jpg" alt="">
 										<div class="cover">내 맘 대로 <br> 소요시간 조회 하기</div>
 									</div>
@@ -213,31 +213,31 @@
 								<div class="swiper-wrapper">
 									<div class="swiper-slide" type="button">
 										<img src="resouces/img/1. 향일암.jpg" alt="">
-										<div class="cover">향일암</div>
+										<div class="cover">향일암 <br><br> 전남 여수시 돌산읍 향일암로 60 </div>
 									</div>
 									<div class="swiper-slide" type="button">
 										<img src="resouces/img/2. 여수 해상 케이블카.jpg" alt="">
-										<div class="cover">여수 해상 케이블카</div>
+										<div class="cover">여수 해상 케이블카 <br><br> 전남 여수시 돌산읍 돌산로 3600-1 </div>
 									</div>
 									<div class="swiper-slide" type="button">
 										<img src="resouces/img/3. 오동도.jpg" alt="">
-										<div class="cover">오동도</div>
+										<div class="cover">오동도 <br><br> 전남 여수시 수정동 산1-11</div>
 									</div>
 									<div class="swiper-slide" type="button">
 										<img src="resouces/img/4. 이순신 광장.jpg" alt="">
-										<div class="cover">이순신 광장</div>
+										<div class="cover">이순신 광장 <br><br> 전남 여수시 선어시장길 6 </div>
 									</div>
 									<div class="swiper-slide" type="button">
 										<img src="resouces/img/5. 아쿠아 플라넷 여수.jpg" alt="">
-										<div class="cover">아쿠아 플라넷 여수</div>
+										<div class="cover">아쿠아 플라넷 여수 <br><br> 전남 여수시 오동도로 61-11 </div>
 									</div>
 									<div class="swiper-slide" type="button">
 										<img src="resouces/img/6. 흥국사.jpg" alt="">
-										<div class="cover">흥국사</div>
+										<div class="cover">흥국사 <br><br> 전남 여수시 흥국사길 160 </div>
 									</div>
 									<div class="swiper-slide" type="button">
 										<img src="resouces/img/7. 낭만 포차로.jpg" alt="">
-										<div class="cover">여수 낭만포차길</div>
+										<div class="cover">여수 낭만포차길 <br><br> 전남 여수시 하멜로 102 </div>
 									</div>
 								</div>
 							</div>

@@ -197,7 +197,7 @@
                                         <div class="cover">항공편 조회 하기</div>
                                     </div>
                                     <div class="swiper-slide" type="button"
-                                        onclick="location.href='https://www.google.com/maps/?hl=ko'">
+                                        onclick="location.href='<%= contextPath %>/GoMap.gm'">
                                         <img src="resouces/img/지도.jpg" alt="">
                                         <div class="cover">내 맘 대로 <br> 소요시간 조회 하기</div>
                                     </div>
@@ -213,31 +213,31 @@
                                 <div class="swiper-wrapper">
                                     <div class="swiper-slide" type="button">
                                         <img src="./resouces/img/2. 우도.jpg" alt="">
-                                        <div class="cover">우도</div>
+                                        <div class="cover">우도 <br><br> 제주 제주시 우도면 ~ </div>
                                     </div>
                                     <div class="swiper-slide" type="button">
                                         <img src="./resouces/img/3. 만장굴.jpg" alt="">
-                                        <div class="cover">만장굴</div>
+                                        <div class="cover">만장굴 <br><br> 제주 제주시 구좌읍 만장굴길 182 </div>
                                     </div>
                                     <div class="swiper-slide" type="button">
                                         <img src="./resouces/img/4. 함덕 서우봉 해변.jpg" alt="">
-                                        <div class="cover">함덕 서우봉 해변</div>
+                                        <div class="cover">함덕 서우봉 해변 <br><br> 제주 제주시 조천읍 조함해안로 525 </div>
                                     </div>
                                     <div class="swiper-slide" type="button">
                                         <img src="./resouces/img/5. 동문 재래시장.jpg" alt="">
-                                        <div class="cover">동문 재래시장</div>
+                                        <div class="cover">동문 재래시장 <br><br> 제주 제주시 관덕로14길 20 </div>
                                     </div>
                                     <div class="swiper-slide" type="button">
                                         <img src="./resouces/img/6. 협재 해수욕장.jpg" alt="">
-                                        <div class="cover">협재 해수욕장</div>
+                                        <div class="cover">협재 해수욕장 <br><br> 제주 제주시 한림읍 협재리 2497-1 </div>
                                     </div>
                                     <div class="swiper-slide" type="button">
                                         <img src="./resouces/img/7. 김녕 미로공원.jpg" alt="">
-                                        <div class="cover">김녕 미로공원</div>
+                                        <div class="cover">김녕 미로공원 <br><br> 제주 제주시 구좌읍 만장굴길 122 </div>
                                     </div>
                                     <div class="swiper-slide" type="button">
                                         <img src="./resouces/img/1. 금능해수욕장.jpg" alt="">
-                                        <div class="cover">금능 해수욕장</div>
+                                        <div class="cover">금능 해수욕장 <br><br> 제주 제주시 한림읍 금능리</div>
                                     </div>
                                 </div>
                             </div>
