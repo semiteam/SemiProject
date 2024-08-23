@@ -21,3 +21,8 @@ $('.close_btn').on('click', function() {
 setTimeout(function(){
     $('.detail').children('div:eq(0)').children('.open_btn').trigger('click');
 }, 0);
+
+$('.result').on('click', function() {
+    $('#place_name').val($(this).text().trim());
+    $('#place_name').attr('name', 'choice');
+});

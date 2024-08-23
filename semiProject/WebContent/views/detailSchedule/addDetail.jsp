@@ -57,8 +57,10 @@
 
         <script defer src="resouces/js/common.js"></script>
         <script defer src="resouces/js/add_detail.js"></script>
+        <script defer src="resouces/js/calendar1.js"></script>
         <link rel="stylesheet" href="resouces/css/add_detail.css">
         <link rel="stylesheet" href="resouces/css/common.css">
+        <link rel="stylesheet" href="resouces/css/calendar1.css">
     </head>
     <body>
         <%@ include file="../common/basic.jsp" %>
@@ -194,27 +196,40 @@
 		                            <div class="close_btn material-symbols-outlined">keyboard_arrow_up</div>
 		                        </div>
 		                        <div class="plan">
-		                            <div class="notMap">
-	                                    <div class="timeline">
-	                                        <div class="circle1 material-symbols-outlined">circle</div>
-	                                        <div class="bar" id="bar<%= i %>"></div>
-	                                        <div class="circle2 material-symbols-outlined">add_circle</div>
-	                                    </div>
-	                                    <div class="detail_plan">
-	                                        <% for (DetailSchedule dSmall : list) { %>
-	                                            <% if (dSmall.getdDate().equals(days.get(0).getsSdate())) { %>
+                                    <% for (DetailSchedule dSmall : list) { %>
+                                        <% if (dSmall.getdDate().equals(date)) { %>
+                                            <div class="notMap">
+                                                <div class="timeline">
+                                                    <div class="circle1 material-symbols-outlined">circle</div>
+                                                    <div class="bar" id="bar<%= i %>"></div>
+                                                    <div class="circle2 material-symbols-outlined">add_circle</div>
+                                                </div>
+                                                <div class="detail_plan">
 	                                                <div class="plan_content plan_content<%= i %>">
 	                                                    <div class="dTime"><%= dSmall.getdStime() %> ~ <%= dSmall.getdEtime() %></div>
 	                                                    <div class="dElse"><%= dSmall.getdElse() %></div>
 	                                                    <div class="dPlace"><%= dSmall.getdPlace() %></div>
 	                                                </div>
-	                                            <% } %>
-	                                        <% } %>
-	                                    </div>
-	                                </div>
-	                                <div class="map" id="map<%= i %>">
-	                                    <img src="resouces/img/maptest.png" alt="">
-	                                </div>
+                                                </div>
+                                            </div>
+                                            <div class="map" id="map<%= i %>">
+                                                <img src="resouces/img/maptest.png" alt="">
+                                            </div>
+                                        <% } else { %>
+                                            <div class="notMap">
+                                                <div class="timeline">
+                                                    <div class="circle1 material-symbols-outlined">circle</div>
+                                                    <div class="bar" id="bar<%= i %>"></div>
+                                                    <div class="circle2 material-symbols-outlined">add_circle</div>
+                                                </div>
+                                                <div class="detail_plan">
+	                                                <div class="plan_content plan_content<%= i %> add_detail_plan">
+                                                        계획 추가하기
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <% } %>
+                                    <% } %>
 		                        </div>
 		                    </div>
 		                <% } %>
@@ -273,10 +288,10 @@
                         <tr>
                             <td colspan="2">
                                 <div id="search">
-                                    <input type="text">
+                                    <input type="text" id="place_name">
                                     <div class="material-symbols-outlined" id="search-icon">search</div>
                                 </div>
-                                <div class="result"></div>
+                                <div class="result">헤이</div>
                                 <div class="result"></div>
                                 <br><br>
                                 <span class="right">장소 추가하기</span>
@@ -284,7 +299,20 @@
                         </tr>
                         <tr>
                             <td class="detail_title">날짜</td>
-                            <td>+ 클릭한 날로 기본 설정 but 변경 가능</td>
+                            <td>
+                                <div id="making_plan">
+                                    <div id="calendar-container">
+                                        <div id="calendar">
+                                            <div id="calendar-left"></div>
+                                        </div>
+                                        <div id="btn">
+                                            <button id="prev" aria-label="Previous month" type="button" class="material-symbols-outlined">arrow_back_ios</button>
+                                            <button id="today" aria-label="Go to current month" type="button">Today</button>
+                                            <button id="next" aria-label="Next month" type="button" class="material-symbols-outlined">arrow_forward_ios</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
                         </tr>
                         <tr>
                             <td class="detail_title">시간 설정</td>
