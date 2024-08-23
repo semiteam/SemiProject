@@ -304,7 +304,7 @@
                                     <div class="mini_bar material-symbols-outlined">
                                         <div class="material-symbols-outlined">edit</div>
                                         <div class="material-symbols-outlined">share</div>
-                                        <div class="material-symbols-outlined" onclick="confirm('일정을 삭제하시겠습니까?')">delete</div>
+                                        <div class="material-symbols-outlined" onclick="deletePlan()">delete</div>
                                     </div>
                                 </div>
                             </div>
@@ -314,6 +314,20 @@
                             <div class="material-symbols-outlined">add_circle</div>
                         </div>
     
+                        <script>
+                            $(function() {
+                                function deletePlan() {
+                                    if (confirm("일정을 삭제하시겠습니까?") == true){
+                                        $.ajax({
+
+                                        });
+                                    } else {
+                                        return false;
+                                    }
+                                }
+                            })
+                        </script>
+
                         <br><br>
                     </div>
                 </div>

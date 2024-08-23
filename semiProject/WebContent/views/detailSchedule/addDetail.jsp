@@ -196,40 +196,32 @@
 		                            <div class="close_btn material-symbols-outlined">keyboard_arrow_up</div>
 		                        </div>
 		                        <div class="plan">
-                                    <% for (DetailSchedule dSmall : list) { %>
-                                        <% if (dSmall.getdDate().equals(date)) { %>
-                                            <div class="notMap">
-                                                <div class="timeline">
-                                                    <div class="circle1 material-symbols-outlined">circle</div>
-                                                    <div class="bar" id="bar<%= i %>"></div>
-                                                    <div class="circle2 material-symbols-outlined">add_circle</div>
+                                    <div class="notMap">
+                                        <div class="timeline">
+                                            <div class="circle1 material-symbols-outlined">circle</div>
+                                            <div class="bar" id="bar<%= i %>"></div>
+                                            <div class="circle2 material-symbols-outlined">add_circle</div>
+                                        </div>
+                                        <div class="detail_plan">
+                                        <% for (DetailSchedule dSmall : list) { %>
+                                            <% if (dSmall.getdDate().equals(date)) { %>
+                                                <div class="plan_content plan_content<%= i %>">
+                                                    <div class="dTime"><%= dSmall.getdStime() %> ~ <%= dSmall.getdEtime() %></div>
+                                                    <div class="dElse"><%= dSmall.getdElse() %></div>
+                                                    <div class="dPlace"><%= dSmall.getdPlace() %></div>
                                                 </div>
-                                                <div class="detail_plan">
-	                                                <div class="plan_content plan_content<%= i %>">
-	                                                    <div class="dTime"><%= dSmall.getdStime() %> ~ <%= dSmall.getdEtime() %></div>
-	                                                    <div class="dElse"><%= dSmall.getdElse() %></div>
-	                                                    <div class="dPlace"><%= dSmall.getdPlace() %></div>
-	                                                </div>
+                                            <% } else { %>
+                                                <div class="plan_content plan_content<%= i %> add_detail_plan">
+                                                    계획 추가하기
                                                 </div>
-                                            </div>
-                                            <div class="map" id="map<%= i %>">
-                                                <img src="resouces/img/maptest.png" alt="">
-                                            </div>
-                                        <% } else { %>
-                                            <div class="notMap">
-                                                <div class="timeline">
-                                                    <div class="circle1 material-symbols-outlined">circle</div>
-                                                    <div class="bar" id="bar<%= i %>"></div>
-                                                    <div class="circle2 material-symbols-outlined">add_circle</div>
-                                                </div>
-                                                <div class="detail_plan">
-	                                                <div class="plan_content plan_content<%= i %> add_detail_plan">
-                                                        계획 추가하기
-                                                    </div>
-                                                </div>
-                                            </div>
+                                                <!-- 다른 날에 일정이 존재하고, 기준 날에 일정이 없을 때도 생성되는 문제 발생 -->
+                                            <% } %>
                                         <% } %>
-                                    <% } %>
+                                        </div>
+                                    </div>
+                                    <div class="map" id="map<%= i %>">
+                                        <img src="resouces/img/maptest.png" alt="">
+                                    </div>
 		                        </div>
 		                    </div>
 		                <% } %>
