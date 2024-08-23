@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
+
 import static semi.common.JDBCTemplate.*;
 
 import semi.common.model.vo.PageInfo;
@@ -234,86 +236,111 @@ public class MemberDao {
 		return result;
 	}
 
-	public Member findMemberById(Connection conn, String mId) {
-	    Member m = null;
-	    PreparedStatement pstmt = null;
-	    ResultSet rset = null;
-	    String sql = prop.getProperty("findMemberById");
-
-	    try {
-	        pstmt = conn.prepareStatement(sql);
-	        pstmt.setString(1, mId);
-
-	        rset = pstmt.executeQuery();
-
-	        if (rset.next()) {
-	            m = new Member(
-	                rset.getInt("M_NO"),
-	                rset.getString("M_NAME"),
-	                rset.getString("M_ID"),
-	                rset.getString("M_NICKNAME"),
-	                rset.getString("M_PWD"),
-	                rset.getString("M_RRN"),
-	                rset.getString("M_PHONE"),
-	                rset.getString("M_EMAIL"),
-	                rset.getString("M_ADDRESS"),
-	                rset.getDate("M_DATE"),
-	                rset.getDate("M_MODIFY"),
-	                rset.getString("M_STATUS"),
-	                rset.getInt("M_REPORT"),
-	                rset.getString("M_GRADE"),
-	                rset.getString("M_PROFILE")
-	            );
-	        }
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	    } finally {
-	        close(rset);
-	        close(pstmt);
-	    }
-
-	    return m;
+	
+	
+	
+    
+	
+	public Member kakaoLoginMember(Connection conn, String userId) {
+		Member m = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("kakaoLoginMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				m = new Member(rset.getInt("M_NO"),
+						   rset.getString("M_NAME"),
+						   rset.getString("M_ID"),
+						   rset.getString("M_NICKNAME"),
+						   rset.getString("M_PWD"),
+						   rset.getString("M_RRN"),
+						   rset.getString("M_PHONE"),
+						   rset.getString("M_EMAIL"),
+						   rset.getString("M_ADDRESS"),
+						   rset.getDate("M_DATE"),
+						   rset.getDate("M_MODIFY"),
+						   rset.getString("M_STATUS"),
+						   rset.getInt("M_REPORT"),
+						   rset.getString("M_GRADE"),
+						   rset.getString("M_PROFILE"));
+			}
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return m;
 	}
 	
-	public String insertMember1(Connection conn, Member m) {
-        String newMemberId = null;
-        PreparedStatement pstmt = null;
-        ResultSet rset = null;
-
-        String sql = prop.getProperty("insertMember1");
-
-        try {
-            pstmt = conn.prepareStatement(sql, new String[] {"M_ID"}); 
-            pstmt.setString(1, m.getmName());
-            pstmt.setString(2, m.getmId());
-            pstmt.setString(3, m.getmNickname());
-            pstmt.setString(4, m.getmPwd());
-            pstmt.setString(5, m.getmRrn());
-            pstmt.setString(6, m.getmPhone());
-            pstmt.setString(7, m.getmEmail());
-            pstmt.setString(8, m.getmAddress());
-            pstmt.setString(9, m.getmProfile());
-
-            int result = pstmt.executeUpdate();
-
-            if (result > 0) {
-                rset = pstmt.getGeneratedKeys(); // 생성된 키를 가져옴
-                if (rset.next()) {
-                    newMemberId = rset.getString(1);  // 첫 번째 열의 값을 가져옴 (M_ID)
-                }
-                commit(conn);
-            } else {
-                rollback(conn);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            rollback(conn);
-        } finally {
-            close(rset);
-            close(pstmt);
-        }
-
-        return newMemberId;
-    }
+	public int insertKakaoMember(Connection conn, Member m) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, m.getmName());
+			pstmt.setString(2, m.getmId());
+			pstmt.setString(3, m.getmNickname());
+			pstmt.setString(4, m.getmPwd());
+			pstmt.setString(5, m.getmRrn());
+			pstmt.setString(6, m.getmPhone());
+			pstmt.setString(7, m.getmEmail());
+			pstmt.setString(8, m.getmAddress());
+			pstmt.setString(9, m.getmProfile());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 	
+	public int idCheck(Connection conn, String checkId) {
+		int count = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+String sql = prop.getProperty("idCheck");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, checkId);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				count = rset.getInt("count");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return count;
+	}
 }

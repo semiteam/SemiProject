@@ -7,7 +7,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    
+    <script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+    <script>
+		Kakao.init('07971e9ec052320c8e179d9629e8ede2'); // 사용하려는 앱의 JavaScript 키 입력
+	</script>
 
     <title>여행가조</title>
     <link rel="stylesheet" href="resouces/css/login.css">
@@ -52,62 +58,85 @@
         </div>
         <br>
         <div>
-           <button id="kakao-login-btn"><img src="resouces/img/kakao_login_medium_wide.png" alt=""></button>
+           <a href="javascript:kakaoLogin()" id="kakao-login-btn"><img src="resouces/img/kakao_login_medium_wide.png" alt=""></a>
         </div>
     </form>
 
     <script>
-    // 19e91fd74a6cd923699ec6ba05f2e827
-    Kakao.init('e72b2fb14cc913f2e1c849b90d6a116c');
+   
 
-    document.getElementById('kakao-login-btn').addEventListener('click', function() {
-    	Kakao.Auth.login({
-    	    success: function(authObj) {
-    	        Kakao.API.request({
-    	            url: '/v2/user/me',
-    	            success: function(response) {
-    	                var kakaoId = response.id; // 이 값이 실제로 존재하는지 확인
-    	                var nickname = response.properties.nickname;
-    	                var email = response.kakao_account.email;
+    function kakaoLogin() {
+        Kakao.Auth.login({
+            success: function (response) {
+                Kakao.API.request({
+                    url: '/v2/user/me',
+                    success: function (response) {
+						$.ajax({
+							url: 'idCheck.me',
+							data: {checkId: response.id},
+							success: function(result) {
+								if(result == "NNNNN") {
+									// 카카오로그인
+									loginKakaoUser(response.id);
+									console.log("카카오 로그인/회원가입용 ajax 통신 실패");
+								} else {
+									// 카카오 회원가입
+									insertKakaoUser(response.id, response.kakao_account.email, response.kakao_account.name, response.properties.nickname, response.kakao_account.birthday);
+									console.log("카카오 로그인/회원가입용 ajax 통신 실패");
+								}
+							},
+							error: function() {
+								console.log("카카오 로그인/회원가입용 ajax 통신 실패");
+							}
+						});
 
-    	                // 서버로 전송
-    	                fetch('/kakaoLogin.ad', {
-    	                    method: 'POST',
-    	                    headers: {
-    	                    	'Content-Type': 'application/json'
-    	                    },
-    	                    body: JSON.stringify({
-    	                        kakaoId: kakaoId,
-    	                        nickname: nickname,
-    	                        email: email
-    	                    })
-    	                })
-    	                .then(response => response.json())
-    	                .then(data => {
-    	                    if (data.success) {
-    	                        alert('로그인 성공!');
-    	                        window.location.href = '/';
-    	                    } else {
-    	                        alert('로그인 실패: ' + data.message);
-    	                    }
-    	                })
-    	                .catch(error => {
-    	                    console.error('Error:', error);
-    	                    alert('서버와의 통신 중 오류가 발생했습니다.');
-    	                });
-    	            },
-    	            fail: function(error) {
-    	                console.log(error);
-    	                alert('사용자 정보 요청 실패');
-    	            }
-    	        });
-    	    },
-    	    fail: function(err) {
-    	        console.log(err);
-    	        alert('로그인 실패');
-    	    }
-    	});
+                    },
+                    fail: function (error) {
+                        alert(JSON.stringify(error));
+                    },
+                })
+            },
+            fail: function (error) {
+                alert(JSON.stringify(error));
+            },
+        })
     }
+
+	function loginKakaoUser(id) {
+		$.ajax({
+			url: "kakaoLogin.me",
+			type: "post",
+			data: {userId: id},
+			success: function() {
+				location.href="<%= contextPath %>";
+				console.log("카카오 로그인/회원가입용 ajax 통신 실패");
+			},
+			error: function() {
+				console.log("kakao user login ajax 실패");
+			}
+		});
+	}
+
+	function insertKakaoUser(id, email, name, nickname) {
+		$.ajax({
+			url: "kakaoInsert.me",
+			type: "post",
+			data: {
+				userId: id,
+				email: email,
+				userName: name,
+				nickname: nickname
+			},
+			success: function() {
+				alert(nickname + "님, 회원가입이 완료되었습니다.");
+				location.href="<%= contextPath %>";
+			},
+			error: function() {
+				console.log("kakao user insert ajax 호출 실패");
+			}
+		});
+	}
+
     </script>
 </body>
 </html>

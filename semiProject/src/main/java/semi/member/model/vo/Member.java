@@ -67,9 +67,19 @@ public class Member {
 		this.mProfile = mProfile;
 	}
 	
+	
+	
+	
+	public Member(String mName, String mId, String mNickname, String mPwd, String mEmail, String mAddress) {
+		super();
+		this.mName = mName;
+		this.mId = mId;
+		this.mNickname = mNickname;
+		this.mPwd = mPwd;
+		this.mEmail = mEmail;
+		this.mAddress = mAddress;
+	}
 
-	
-	
 	public int getmNo() {
 		return mNo;
 	}

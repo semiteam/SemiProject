@@ -8,19 +8,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import semi.member.model.service.MemberService;
-import semi.member.model.vo.Member;
 
 /**
- * Servlet implementation class KakaoLoginController
+ * Servlet implementation class AjaxsIdCheckController
  */
-@WebServlet("/kakaoLogin.me")
-public class KakaoLoginController extends HttpServlet {
+@WebServlet("/idCheck.me")
+public class AjaxsIdCheckController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public KakaoLoginController() {
+    public AjaxsIdCheckController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,21 +29,15 @@ public class KakaoLoginController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String userId = (String)request.getParameter("userId");
-		System.out.println(userId + "유저아이디");
-		
-		Member loginUser = new MemberService().kakaoLoginMember(userId);
-		
-		System.out.println(loginUser);
-		if(loginUser == null) {
-			request.getSession().setAttribute("alertMsg", "실패");
-			response.sendRedirect(request.getContextPath() );
-			
-		} else {
-			request.getSession().setAttribute("loginUser", loginUser);
-			response.sendRedirect(request.getContextPath() + "/login.ad");
+		String checkId = request.getParameter("checkId");
+		System.out.println(checkId + "asd");
+		int count = new MemberService().idCheck(checkId);
+		System.out.println(count + "카운트");
+		if(count > 0) { 
+			response.getWriter().print("NNNNN");
+		} else { 
+			response.getWriter().print("NNNNY");
 		}
-		
 	}
 
 	/**

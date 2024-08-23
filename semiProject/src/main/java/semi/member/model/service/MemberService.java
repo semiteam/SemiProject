@@ -5,15 +5,14 @@ import java.util.ArrayList;
 import static semi.common.JDBCTemplate.*;
 
 import semi.common.model.vo.PageInfo;
-import semi.member.model.dao.KakaoDao;
+
 import semi.member.model.dao.MemberDao;
 import semi.member.model.vo.Member;
 
 
 public class MemberService {
 	
-	private MemberDao memberDao = new MemberDao();
-    private KakaoDao kakaoDao = new KakaoDao();
+	
 
 	public Member loginMember(String mId, String mPwd) {
 		Connection conn = getConnection();
@@ -80,21 +79,41 @@ public class MemberService {
 		return result;
 	}
 	
-	public Member loginWithKakao(String kakaoId, String nickname, String email) {
-        Connection conn = getConnection();
-
-        // KAKAO_USER 테이블에 사용자가 있는지 확인
-        Member loginUser = kakaoDao.findMemberByKakaoId(conn, kakaoId);
-
-        if (loginUser == null) {
-            // 사용자가 없다면 MEMBER 및 KAKAO_USER 테이블에 새 사용자 생성
-            String newMemberId = memberDao.insertMember1(conn, new Member(nickname, kakaoId, nickname, null, null, null, email, null, null));
-            kakaoDao.insertKakaoUser(conn, kakaoId, newMemberId, email, nickname);
-            loginUser = memberDao.findMemberById(conn, newMemberId);
-        }
-
-        close(conn);
-        return loginUser;
+    public Member kakaoLoginMember(String userId) {
+    	Connection conn = getConnection();
+    	
+    	Member m = new MemberDao().kakaoLoginMember(conn,userId);
+    	
+    	close(conn);
+    	
+    	return m;
+    }
+    
+    public int insertKakaoMember(Member m) {
+    	Connection conn = getConnection();
+		
+		int result = new MemberDao().insertKakaoMember(conn, m);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+    }
+    
+    public int idCheck(String checkId) {
+    	
+    	Connection conn = getConnection();
+		
+		int count = new MemberDao().idCheck(conn, checkId);
+		
+		close(conn);
+		
+		return count;
     }
 
 }
