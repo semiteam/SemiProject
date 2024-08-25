@@ -52,7 +52,7 @@ public class LoginController extends HttpServlet {
 				session.setAttribute("alertMsg", "로그인에 실패하였습니다.");
 				
 				
-				response.sendRedirect(request.getContextPath() + "/goLogin.me");
+				response.sendRedirect(request.getContextPath() + "/GoLogin.me");
 			} else {
 				int listCount;
 				int currentPage;
@@ -126,7 +126,8 @@ public class LoginController extends HttpServlet {
 			session.setAttribute("loginUser", loginUser);
             session.setAttribute("alertMsg", loginUser.getmNickname() + "님의 방문을 환영합니다");
             
-            response.sendRedirect(request.getContextPath());
+            	response.sendRedirect(request.getContextPath());
+            
            
 		}
 	}
