@@ -128,4 +128,27 @@ public class ScheduleDao {
 		
 		return days;
 	}
+
+	public int deleteSchedule(Connection conn, int mno, int sno) {
+		int reulst = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("deleteSchedule");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, sno);
+			pstmt.setInt(2, mno);
+			
+			reulst = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return reulst;
+	}
 }

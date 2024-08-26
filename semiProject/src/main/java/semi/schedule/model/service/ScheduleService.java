@@ -47,4 +47,20 @@ public class ScheduleService {
 		
 		return days;
 	}
+
+	public int deletSchedule(int mno, int sno) {
+		Connection conn = getConnection();
+		
+		int result = new ScheduleDao().deleteSchedule(conn, mno, sno);
+		
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
 }

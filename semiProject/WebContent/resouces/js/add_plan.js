@@ -33,10 +33,12 @@ $('#explanation_p').on('keyup', function() {
 });
 
 $('.img').on('click', function() {
-    $('.img').removeClass('notClicked').removeAttr('id', 'clicked');
+    $('.img').attr('class', 'img');
     $(this).addClass('clicked');
-    $('.clicked img').attr('id', 'clicked');
     $('.img').not(this).addClass('notClicked');
+
+    $('img').attr('id', '');
+    $('.clicked img').attr('id', 'clicked');
 })
 
 $('#basic').on('click', function() {
@@ -58,13 +60,13 @@ $('#computer').on('click', function() {
 
 $('#random').on('click', function() {
     if ($('#random').is(':checked')) {
-        $('#img_choice_tr').css('display', '')
+        $('#img_choice_tr').css('display', '');
     }
 })
 
 $('#choice').on('click', function() {
     if ($('#choice').is(':checked')) {
-        $('#img_choice_tr').css('display', 'contents')
+        $('#img_choice_tr').css('display', 'contents');
     }
 })
 
@@ -72,3 +74,8 @@ $('.search_result').on('click', function() {
     $('#place_name').val($(this).text().trim());
     $('#place_name').attr('name', 'choice');
 });
+
+$('#computer').on('click', function() {
+    $('#random').val('');
+    $('#choice').val('');
+})

@@ -173,6 +173,11 @@ input[type=radio]:checked {accent-color: black;}
 
 input[type="file"] {display: none;}
 
+#image_section {
+    width: 90%;
+    height: 90%;
+}
+
 #userImgBtn {
     background-color: black;
     height: 40px;

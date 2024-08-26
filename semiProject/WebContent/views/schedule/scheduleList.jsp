@@ -15,7 +15,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 
         <!-- jQuery library -->
-        <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
         <!-- Popper JS -->
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
@@ -298,35 +298,63 @@
                     <div class="content">
                         <% for (Schedule sd : list) { %>
                             <div class="plan">
-                                <div class="cover" onclick="location.href='<%= contextPath %>/GoAddDetail.d?mno=<%= sd.getMno() %>&sno=<%= sd.getsNo() %>&howlong=<%= sd.getHowlong() %>'">
+                                <div class="cover" id="cover<%= sd.getsNo() %>" onclick="location.href='<%= contextPath %>/GoAddDetail.d?mno=<%= sd.getMno() %>&sno=<%= sd.getsNo() %>&howlong=<%= sd.getHowlong() %>'">
                                     <div class="plan_title"><%= sd.getsTitle() %></div>
                                     <div class="date"><%= sd.getsSdate() %> ~ <%= sd.getsEdate() %></div>
                                     <div class="mini_bar material-symbols-outlined">
                                         <div class="material-symbols-outlined">edit</div>
                                         <div class="material-symbols-outlined">share</div>
-                                        <div class="material-symbols-outlined" onclick="deletePlan()">delete</div>
+                                        <div class="material-symbols-outlined" id="delete<%= sd.getsNo() %>" onclick="deletePlan(event)">delete</div>
                                     </div>
                                 </div>
                             </div>
+                            
+                            <script>
+                            	$(function() {
+                                    // background-image: url('../img/random/1.jpg');
+                            		if (<%= sd.getBbgiPath().isEmpty() %>) {
+                                    	$('#cover<%= sd.getsNo() %>').css('background-image', "url('<%= sd.getUbgiPath() %>')");
+                            		} else {                            			
+                                    	$('#cover<%= sd.getsNo() %>').css('background-image', "url('<%= sd.getBbgiPath() %>')");
+                            		}
+                                });
+                            </script>
                         <% } %>
     
                         <div class="add_plan" onclick="location.href='<%= contextPath %>/GoAddPlan.sd'">
                             <div class="material-symbols-outlined">add_circle</div>
                         </div>
-    
+                        
                         <script>
-                            $(function() {
-                                function deletePlan() {
-                                    if (confirm("일정을 삭제하시겠습니까?") == true){
-                                        $.ajax({
+						    function deletePlan(event) {
+						        event.stopPropagation();
+					            
+						        if (confirm("일정을 삭제하시겠습니까?")) {
+						            $.ajax({
+						                url: '<%= contextPath %>/DeleteSchedule.sd',
+						                method: 'post',
+						                data: {
+						                    mno: <%= loginUser.getmNo() %>,
+						                    sno: $(event.target).attr('id').replace('delete', '').trim(),
+						                },
+						                success: function(response) {
+						                	if (response > 0) {
+							                	alert('일정 삭제에 성공하였습니다. 1');
+						                	} else {
+						                		alert('일정 삭제에 실패하였습니다. 2');
+						                	}
+						                    location.reload();
+						                },
+						                error: function() {
+						                    alert('일정 삭제에 실패하였습니다.');
+						                    location.reload();
+						                }
+						            });
+						        }
+						    }
+						</script>
 
-                                        });
-                                    } else {
-                                        return false;
-                                    }
-                                }
-                            })
-                        </script>
+
 
                         <br><br>
                     </div>

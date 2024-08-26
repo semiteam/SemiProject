@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>	
+<%
+	int random = (int)(Math.random()*20 + 1);
+%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -96,7 +99,7 @@
                 </div>
     
                 <div class="content">
-                    <form action="<%= contextPath %>/addPlan.sd" method="post" class="inner">
+                    <form action="<%= contextPath %>/addPlan.sd" method="post" class="inner" enctype="multipart/form-data">
                     	<input type="hidden" name="mno" value="<%= loginUser.getmNo() %>">
                         <table>
                             <tr>
@@ -166,10 +169,10 @@
                             <tr class="white">
                                 <td class="big" colspan="2">배경 이미지</td>
                                 <td>
-                                    <input type="radio" name="img" id="random" value="1"checked>
+                                    <input type="radio" name="img" id="random" value="<%= random %>" checked>
                                     <label for="random">랜덤</label>
 
-                                    <input type="radio" name="img" id="choice" value="2">
+                                    <input type="radio" name="img" id="choice" value="">
                                     <label for="choice">선택</label>
                                 </td>
                             </tr>
@@ -181,6 +184,7 @@
                                             <div id="basic">기본 이미지</div>
                                             <div id="computer">컴퓨터에서 가져오기</div>
                                         </div>
+
                                         <div id="img_content1">
                                             <div class="img">
                                                 <img src="resouces/img/random/1.jpg" alt="">
@@ -207,37 +211,87 @@
                                                 <img src="resouces/img/random/8.jpg" alt="">
                                             </div>
                                             <div class="img">
-                                                <img src="resouces/img/random/1.jpg" alt="">
+                                                <img src="resouces/img/random/9.jpg" alt="">
                                             </div>
                                             <div class="img">
-                                                <img src="resouces/img/random/2.jpg" alt="">
+                                                <img src="resouces/img/random/10.jpg" alt="">
                                             </div>
                                             <div class="img">
-                                                <img src="resouces/img/random/3.jpg" alt="">
+                                                <img src="resouces/img/random/11.jpg" alt="">
                                             </div>
                                             <div class="img">
-                                                <img src="resouces/img/random/4.jpg" alt="">
+                                                <img src="resouces/img/random/12.jpg" alt="">
                                             </div>
                                             <div class="img">
-                                                <img src="resouces/img/random/5.jpg" alt="">
+                                                <img src="resouces/img/random/13.jpg" alt="">
                                             </div>
                                             <div class="img">
-                                                <img src="resouces/img/random/6.jpg" alt="">
+                                                <img src="resouces/img/random/14.jpg" alt="">
                                             </div>
                                             <div class="img">
-                                                <img src="resouces/img/random/7.jpg" alt="">
+                                                <img src="resouces/img/random/15.jpg" alt="">
                                             </div>
                                             <div class="img">
-                                                <img src="resouces/img/random/8.jpg" alt="">
+                                                <img src="resouces/img/random/16.jpg" alt="">
+                                            </div>
+                                            <div class="img">
+                                                <img src="resouces/img/random/17.jpg" alt="">
+                                            </div>
+                                            <div class="img">
+                                                <img src="resouces/img/random/18.jpg" alt="">
+                                            </div>
+                                            <div class="img">
+                                                <img src="resouces/img/random/19.jpg" alt="">
+                                            </div>
+                                            <div class="img">
+                                                <img src="resouces/img/random/20.jpg" alt="">
                                             </div>
                                         </div>
 
                                         <div id="img_content2">
-                                            여기로 사진 드래그<br><br>
-                                            - 또는 -<br><br>
-                                            <input type="file" name="userImg" id="userImg">
+                                            <div id="image_section_div">
+                                                여기로 사진 드래그<br><br>
+                                                - 또는 -<br><br>
+                                            </div>
+                                            <input type="file" name="userImg" id="userImg" onchange="loadFile(this)">
                                             <label for="userImg" id="userImgBtn">컴퓨터에서 가져오기</label>
                                         </div>
+
+                                        <script>
+                                            $(function() {
+                                                $('.img').on('click', function() {
+                                                    $('#choice').attr('value', $('#clicked').attr('src').substring(20).replace('.jpg', ''));
+                                                })
+                                            })
+
+                                            function readURL(input) {
+                                                if (input.files && input.files[0]) {
+                                                    var reader = new FileReader();
+                                                    
+                                                    reader.onload = function (e) {
+                                                        $('#image_section_div').html('<img id="image_section" src="" alt="your image">');
+                                                        $('#image_section').attr('src', e.target.result);  
+                                                    }
+                                                
+                                                    reader.readAsDataURL(input.files[0]);
+
+                                                    $('#img_content2').css({
+                                                        height: 'auto',
+                                                        padding: '10px 0' 
+                                                    });
+                                                }
+                                            }
+                                                
+                                            $("#userImg").change(function(){
+                                                readURL(this);
+                                            });
+
+                                            $('#random').on('click', function() {
+                                                if ($('#random').is(':checked')) {
+                                                    $('#random').val(<%= random %>);
+                                                }
+                                            })
+                                        </script>
                                     </div>
                                 </td>
                             </tr>
