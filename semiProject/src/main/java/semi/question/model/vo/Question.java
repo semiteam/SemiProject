@@ -6,7 +6,7 @@ public class Question {
 	
 	private int qNo;
 	private int mNo;
-	private String qtitle;
+	private String qTitle;
 	private String qContent;
 	private Date qDate;
 	private String qStatus;
@@ -21,12 +21,12 @@ public class Question {
 	
 	
 
-	public Question(int qNo, int mNo, String qtitle, String qContent, Date qDate, String qStatus, String qAnswer,
+	public Question(int qNo, int mNo, String qTitle, String qContent, Date qDate, String qStatus, String qAnswer,
 			int qPwd, String mName) {
 		super();
 		this.qNo = qNo;
 		this.mNo = mNo;
-		this.qtitle = qtitle;
+		this.qTitle = qTitle;
 		this.qContent = qContent;
 		this.qDate = qDate;
 		this.qStatus = qStatus;
@@ -38,11 +38,11 @@ public class Question {
 
 
 
-	public Question(int qNo, String mName,String qtitle, String qContent, Date qDate, String qStatus, String qAnswer, int qPwd
+	public Question(int qNo, String mName,String qTitle, String qContent, Date qDate, String qStatus, String qAnswer, int qPwd
 			) {
 		super();
 		this.qNo = qNo;
-		this.qtitle = qtitle;
+		this.qTitle = qTitle;
 		this.qContent = qContent;
 		this.qDate = qDate;
 		this.qStatus = qStatus;
@@ -80,11 +80,11 @@ public class Question {
 	}
 
 	public String getQtitle() {
-		return qtitle;
+		return qTitle;
 	}
 
-	public void setQtitle(String qtitle) {
-		this.qtitle = qtitle;
+	public void setQtitle(String qTitle) {
+		this.qTitle = qTitle;
 	}
 
 	public String getqContent() {
@@ -129,7 +129,7 @@ public class Question {
 
 	@Override
 	public String toString() {
-		return "Question [qNo=" + qNo + ", mNo=" + mNo + ", qtitle=" + qtitle + ", qContent=" + qContent + ", qDate="
+		return "Question [qNo=" + qNo + ", mNo=" + mNo + ", qTitle=" + qTitle + ", qContent=" + qContent + ", qDate="
 				+ qDate + ", qStatus=" + qStatus + ", qAnswer=" + qAnswer + ", qPwd=" + qPwd + "]";
 	}
 	

@@ -69,8 +69,8 @@
                 </div>
 
                 <div class="content" align = 'center'> 
-                    <form action="" method="post">
-                        <input type="hidden" name="userNo" value="">
+                    <form action="<%=contextPath%>/insert.sc" method="post">
+                        <input type="hidden" name="mNo" value="<%=loginUser.getmNo()%>">
                         <div class="content-back">
                             <table class="question-table">
                                 <tr>
@@ -84,9 +84,9 @@
                                 </tr>
                             </table>
                         </div>
-                        <button type="submit" class="btn btn-secondary">등록</button>
-                        <button type="button" class="btn btn-secondary">목록</button>
-                        <button type="button" class="btn btn-secondary">삭제</button>
+                        <button onclick="location.href='<%=contextPath%>/GoServiceCenter.sc'" class="btn btn-secondary">목록이동</button>
+                        <button type="submit" class="btn btn-secondary">등록하기</button>
+                        
                     </form>    
                 </div>
             </div>

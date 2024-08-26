@@ -35,4 +35,30 @@ SELECT *
 
 </entry>
 
+
+<entry key = "insertQuestion">
+INSERT
+  INTO QUESTION
+(   Q_NO 
+  , M_NO 
+  , Q_TITLE
+  , Q_CONTENT 
+  , Q_DATE 
+  , Q_STATUS
+  , Q_ANSWER 
+  , Q_PWD
+)
+VALUES
+(
+   SEQ_QUESTION.NEXTVAL
+ , ?
+ , ? 
+ , ?
+ , DEFAULT
+ , DEFAULT
+ , DEFAULT
+ , ?
+)
+</entry>
+
 </properties>

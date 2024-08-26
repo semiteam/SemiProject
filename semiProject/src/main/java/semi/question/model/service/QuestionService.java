@@ -30,4 +30,14 @@ public class QuestionService {
 		return list;
 	}
 
+	public int insertQuestion(Question q) {
+		Connection conn = getConnection();
+		
+		int result = new QuestionDao().insertQuestion(conn,q);
+		
+		close(conn);
+		
+		return result;
+	}
+
 }

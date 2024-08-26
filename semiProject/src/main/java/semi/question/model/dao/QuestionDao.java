@@ -90,5 +90,34 @@ public class QuestionDao {
 		}
 		return list;
 	}
+
+	public int insertQuestion(Connection conn, Question q) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		
+		String sql = prop.getProperty("insertQuestion");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1,q.getmNo());
+			pstmt.setString(2, q.getQtitle());
+			pstmt.setString(3, q.getqContent());
+			pstmt.setInt(4, q.getqPwd());
+			
+			result = pstmt.executeUpdate();
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
+	}
 	
 }
