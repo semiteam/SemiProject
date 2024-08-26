@@ -1,12 +1,17 @@
+<%@page import="semi.question.model.vo.Question"%>
 <%@page import="oracle.net.aso.q"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
+<%
+	Question q = (Question)request.getAttribute("q");
+%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>고객센터글쓰기</title>
+        <title></title>
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 
@@ -71,29 +76,32 @@
 
                 <div class="content" align = 'center'> 
                     <form action="<%=contextPath%>/insert.sc" method="post">
+                     <%if(loginUser != null) {%> 
                         <input type="hidden" name="mNo" value="<%=loginUser.getmNo()%>">
+                       <% }  %>
                         <div class="content-back">
                             <table class="question-table">
                                 <tr>
-                                    <td class="input-cell"><input type="text" name="title" class="input-title" required placeholder="제목을 입력하세요"></td>
+                                    <td class="input-cell"><p name="title" class="input-title"><%=q.getQtitle() %></p></td>
                                 </tr>
                                 <tr>
-                                    <td class="input-cell"><textarea name="content" class="input-content" required placeholder="문의내용을 입력하세요"></textarea></td>
+                                    <td class="input-cell"><p name="content" class="input-content"><%=q.getqContent() %></p></td>
                                 </tr>
-                                <tr>
-                                    <td class="input-cell"><input type="number" name="pwd" class="input-pwd" placeholder="비밀번호 숫자 4자리" maxlength="4" oninput="numberMaxLength(this)"></td>
-                                </tr>
+                                    
+                               
                             </table>
                         </div>
-                        <button onclick="location.href='<%=contextPath%>/GoServiceCenter.sc'" class="btn btn-secondary">목록이동</button>
-                        <button type="submit" class="btn btn-secondary">등록하기</button>
+                        <button type="button" onclick="location.href='<%=request.getContextPath() %>/GoServiceCenter.sc'" class="btn btn-secondary">목록이동</button>
+                        <%if(loginUser != null && loginUser.getmNo() == q.getmNo() || loginAdmin != null){ %>
+                            <button type="button" onclick ="location.href ='<%=request.getContextPath() %>/delete.sc?qNo=<%=q.getqNo()%>'" class="btn btn-secondary" style="background-color: red;">삭제하기</button>
+                        <%}%>
                         
                         
                     </form>    
                 </div>
             </div>
         </div>      
-    </div>
+
 
 
     <script>

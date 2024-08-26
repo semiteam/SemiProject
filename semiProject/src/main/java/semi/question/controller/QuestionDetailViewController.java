@@ -6,23 +6,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import semi.question.model.dao.QuestionDao;
 import semi.question.model.service.QuestionService;
 import semi.question.model.vo.Question;
 
 /**
- * Servlet implementation class QuestionInsertController
+ * Servlet implementation class QuestionDetailViewController
  */
-@WebServlet("/insert.sc")
-public class QuestionInsertController extends HttpServlet {
+@WebServlet("/detail.sc")
+public class QuestionDetailViewController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QuestionInsertController() {
+    public QuestionDetailViewController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,36 +29,23 @@ public class QuestionInsertController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		request.setCharacterEncoding("utf-8");
+		int qNo = Integer.parseInt(request.getParameter("qNo")) ;
 		
-		int mNo = Integer.parseInt(request.getParameter("mNo"));
-		String qTitle = request.getParameter("title");
-		String qContent = request.getParameter("content");
-		int qPwd = Integer.parseInt(request.getParameter("pwd"));
+		Question q = new QuestionService().selectQuestion(qNo);
 		
-		
-		Question q = new Question();
-		
-		q.setmNo(mNo);
-		q.setQtitle(qTitle);
-		q.setqContent(qContent);
-		q.setqPwd(qPwd);
-		
-		
-		
-		int result = new QuestionService().insertQuestion(q);
-		
-		
-		if(result > 0) {
-			session.setAttribute("alertMsg", "문의가 등록되었습니다");
-			response.sendRedirect(request.getContextPath()+"/GoServiceCenter.sc");
+		if(q == null) {
+			
+			request.getSession().setAttribute("alertMsg", "글 불러오기가 실패했습니다");
+			response.sendRedirect(request.getContextPath()+"/questionListView.jsp");
 			
 		}else {
-			session.setAttribute("alertMsg", "문의 등록에 실패하였습니다");
-			response.sendRedirect(request.getContextPath()+"/enrollForm.sc");
+			
+			request.setAttribute("q", q);
+			request.getRequestDispatcher("views/question/questionDetailView.jsp").forward(request, response);
 			
 		}
+		
+		
 	}
 
 	/**

@@ -88,10 +88,13 @@
 
                 <div class="content" > 
                     <div class="title" align="center">문의사항</div>
-
+					
+					
+					<%if(loginUser != null){ %>
                     <form method="post" align="right">
                         <button type="button" class="btn btn-sm btn-secondary" onclick="location.href='<%= contextPath %>/enrollForm.sc'">작성하기</button>
                     </form>
+                    <% }%>
                     
                     <div class="question" align="center">
                         <%if(list==null || list.isEmpty()) {%>
@@ -113,7 +116,7 @@
                                 </thead>
                             <% for(Question q : list ) { %>
                                 <tbody>
-                                    <tr>
+                                    <tr data-pwd="<%=q.getqPwd()%>">
                                         <td><%=q.getqNo()%></td>
                                         <td><%=q.getQtitle()%></td>
                                         <td><%=q.getmName()%></td>
@@ -149,6 +152,24 @@
         </div>
 
         <script>
+            $(function(){
+                $(".table-list>tbody>tr").click(function(){
+                    
+                    var correctpwd = $(this).data("pwd");
+                    if(correctpwd == null || correctpwd == 0){
+                        location.href = '<%=contextPath%>/detail.sc?qNo=' + $(this).children().eq(0).text();
+                    }else{
+                        var enteredPwd = prompt("문의 작성시 설정했던 비밀번호를 입력해주세요 : ");
+                             if(enteredPwd == correctpwd){
+                                location.href = '<%=contextPath%>/detail.sc?qNo=' + $(this).children().eq(0).text();
+                            } else {
+                               alert("잘못된 비밀번호 입니다.");
+                      }
+                    }
+                    
+                });
+            })
+
             const side_menu = document.getElementsByClassName('side_menu');
             const content = document.getElementsByClassName('content');
             const close_btn = document.getElementById('close_btn');

@@ -8,7 +8,7 @@ SELECT
 		 WHERE Q_STATUS != 'N'
 </entry>
 
-<entry key = "selectQuestion">
+<entry key = "selectQuestionList">
 SELECT *
 		FROM (
 		SELECT ROWNUM RNUM, A.* 
@@ -59,6 +59,28 @@ VALUES
  , DEFAULT
  , ?
 )
+</entry>
+
+<entry key = "selectQuestion">
+SELECT 
+        Q_NO
+       ,M_NO
+       ,Q_TITLE
+       ,Q_CONTENT
+       ,Q_DATE
+       ,Q_STATUS
+       ,Q_ANSWER
+       ,Q_PWD
+  FROM QUESTION
+ WHERE Q_NO = ?
+   AND Q_STATUS = 'Y'
+</entry>
+
+<entry key = "deleteQuestion">
+UPDATE 
+	   QUESTION
+   SET Q_STATUS = 'N'
+ WHERE Q_NO = ?
 </entry>
 
 </properties>

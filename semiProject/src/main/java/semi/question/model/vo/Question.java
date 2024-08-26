@@ -20,6 +20,24 @@ public class Question {
 	
 	
 	
+	
+	
+	public Question(int qNo, int mNo, String qTitle, String qContent, Date qDate, String qStatus, String qAnswer,
+			int qPwd) {
+		super();
+		this.qNo = qNo;
+		this.mNo = mNo;
+		this.qTitle = qTitle;
+		this.qContent = qContent;
+		this.qDate = qDate;
+		this.qStatus = qStatus;
+		this.qAnswer = qAnswer;
+		this.qPwd = qPwd;
+	}
+
+
+
+
 
 	public Question(int qNo, int mNo, String qTitle, String qContent, Date qDate, String qStatus, String qAnswer,
 			int qPwd, String mName) {

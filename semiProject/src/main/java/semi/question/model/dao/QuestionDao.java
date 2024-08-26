@@ -59,7 +59,7 @@ public class QuestionDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String sql = prop.getProperty("selectQuestion");
+		String sql = prop.getProperty("selectQuestionList");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -117,6 +117,65 @@ public class QuestionDao {
 		}
 		
 		
+		return result;
+	}
+
+	public Question selectQuestion(Connection conn, int qNo) {
+		Question q = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset =null;
+		
+		String sql = prop.getProperty("selectQuestion");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, qNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				q = new Question(rset.getInt("Q_NO"),
+								 rset.getInt("M_NO"),
+								 rset.getString("Q_TITLE"),
+								 rset.getString("Q_CONTENT"),
+								 rset.getDate("Q_DATE"),
+								 rset.getString("Q_STATUS"),
+								 rset.getString("Q_ANSWER"),
+								 rset.getInt("Q_PWD"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+	
+		
+		
+		return q;
+	
+	
+}
+
+	public int deleteQuestion(Connection conn, int qNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql =prop.getProperty("deleteQuestion");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, qNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
 		return result;
 	}
 	
