@@ -294,54 +294,7 @@
                         </tr>
                         <tr>
                             <td class="detail_title">시간 설정</td>
-                            <td id="swiper">
-                                <div class="swiper mySwiper">
-                                    <div class="swiper-wrapper">
-                                        <% for (int i = 0; i < 24; i++) { %>
-                                            <% if (i < 10) { %>
-                                                <div id="startHour0<%= i %>" class="swiper-slide swiper-hour">0<%= i %></div>
-                                            <% } else { %>
-                                                <div id="startHour<%= i %>" class="swiper-slide swiper-hour"><%= i %></div>
-                                            <% } %>
-                                        <% } %>
-                                    </div>
-                                </div>
-                            
-                                <div class="swiper mySwiper">
-                                    <div class="swiper-wrapper">
-                                        <% for (int i = 0; i < 60; i++) {  %>
-                                            <% if (i < 10) { %>
-                                                <div id="startMinute0<%= i %>" class="swiper-slide swiper-minute">0<%= i %></div>
-                                            <% } else { %>
-                                                <div id="startMinute<%= i %>" class="swiper-slide swiper-minute"><%= i %></div>
-                                            <% } %>
-                                        <% } %>
-                                    </div>
-                                </div>
-
-                                <div class="swiper mySwiper">
-                                    <div class="swiper-wrapper">
-                                        <% for (int i = 0; i < 24; i++) { %>
-                                            <% if (i < 10) { %>
-                                                <div id="endHour0<%= i %>" class="swiper-slide swiper-hour">0<%= i %></div>
-                                            <% } else { %>
-                                                <div id="endHour<%= i %>" class="swiper-slide swiper-hour"><%= i %></div>
-                                            <% } %>
-                                        <% } %>
-                                    </div>
-                                </div>
-
-                                <div class="swiper mySwiper">
-                                    <div class="swiper-wrapper">
-                                        <% for (int i = 0; i < 60; i++) {  %>
-                                            <% if (i < 10) { %>
-                                                <div id="endMinute0<%= i %>" class="swiper-slide swiper-minute">0<%= i %></div>
-                                            <% } else { %>
-                                                <div id="endMinute<%= i %>" class="swiper-slide swiper-minute"><%= i %></div>
-                                            <% } %>
-                                        <% } %>
-                                    </div>
-                                </div>
+                            <td>
                             </td>
                         </tr>
                         <tr>

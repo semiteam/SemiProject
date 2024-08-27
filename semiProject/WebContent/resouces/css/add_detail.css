@@ -147,35 +147,3 @@
     right: 0;
     bottom: 0;
 }
-
-.swiper-wrapper * {
-    height: 100px;
-}
-
-.swiper {
-    width: 100px;
-    height: 300px;
-}
-
-.swiper-slide {
-    text-align: center;
-    font-size: 16px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.swiper-slide-prev,
-.swiper-slide-next {
-    color: gray;
-}
-.swiper-slide-active {
-    color: #000;
-    font-size: 20px;
-}
-
-#swiper {
-    display: flex;
-    transition: none !important;
-    overflow:hidden
-}
