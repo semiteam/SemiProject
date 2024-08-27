@@ -28,19 +28,74 @@
 }
 .under .content .plan .cover > * {display: flex;}
 
-.under .content .date {margin: 17.1% 0 0 53%;}
+.under .content .mini_bar {margin-left: 50%;}
 
-.under .content .mini_bar {margin: -3.5% 0 0 89%;}
-
-.under .content .mini_bar div {
-    margin: 5px;
-    font-size: 21px;
-    cursor: pointer;
-}
+.under .content .mini_bar div {cursor: pointer;}
 
 .under .content .add_plan {
     color: white;
     font-size: 26px;
     cursor: pointer;
     margin: -10px 0 0 27%;
+}
+
+.date {
+    margin-top: 14vh;
+}
+
+#full_cover {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.521);
+    z-index: 10000;
+    display: none;
+}
+
+#share {
+    position: fixed;
+    width: 750px;
+    height: 350px;
+    background-color: #fff;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    z-index: 10001;
+    padding: 40px;
+    border-radius: 35px;
+    display: none;
+}
+
+#share_title {
+    font-size: 25px;
+    margin-bottom: 40px;
+}
+
+#circles {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 40px;
+    
+}
+
+.circle {
+    border: 1px solid #000;
+    width: 80px;
+    height: 80px;
+    border-radius: 100%;
+    margin: auto;
+    text-align: center;
+    padding-top: 30px;
+}
+
+#link {
+    border: 1px solid #000;
+    border-radius: 15px;
+    height: 50px;
+    margin: auto;
+    width: 98%;
+    padding: 15px;
 }

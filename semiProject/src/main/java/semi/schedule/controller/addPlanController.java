@@ -150,15 +150,17 @@ public class addPlanController extends HttpServlet {
 			
 			String sDescription = multiRequest.getParameter("explanation_e");
 			int rangeNo = Integer.parseInt(multiRequest.getParameter("range")); // 공개 범위
-			int bgiNo = 1;
+			int bgiNo;
 			if (!multiRequest.getParameter("img").equals("")) {
 				bgiNo = Integer.parseInt(multiRequest.getParameter("img"));
-			} else if (multiRequest.getParameter("userImg") != null) {
-				UserBgi ub = new UserBgi(multiRequest.getOriginalFileName("userImg"), multiRequest.getFilesystemName("userImg"), "resources/thumbnail_upfiles/");
+			} else if (multiRequest.getOriginalFileName("userImg") != null) {
+				UserBgi ub = new UserBgi(multiRequest.getOriginalFileName("userImg"), multiRequest.getFilesystemName("userImg"), "resouces/scheduleUpfiles/");
 				
 				new userBgiService().insertUserBgi(ub);
 				
 				bgiNo = new userBgiService().selectUserBgiNo(ub).getuBgiNo();
+			} else {
+				bgiNo = 1;
 			}
 			int mno = Integer.parseInt(multiRequest.getParameter("mno"));
 			int howlong = Integer.parseInt(multiRequest.getParameter("howlong"));

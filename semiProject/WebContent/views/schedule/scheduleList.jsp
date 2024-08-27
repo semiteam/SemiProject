@@ -251,6 +251,7 @@
                     </div>
                 </div>
             <% } else { %>
+                <div id="full_cover"></div>
                 <div class="top">
                     <div class="logo" onclick="location.href='<%= contextPath %>'">우리 여행가조</div>
                     <div class="top_menu">
@@ -300,11 +301,13 @@
                             <div class="plan">
                                 <div class="cover" id="cover<%= sd.getsNo() %>" onclick="location.href='<%= contextPath %>/GoAddDetail.d?mno=<%= sd.getMno() %>&sno=<%= sd.getsNo() %>&howlong=<%= sd.getHowlong() %>'">
                                     <div class="plan_title"><%= sd.getsTitle() %></div>
-                                    <div class="date"><%= sd.getsSdate() %> ~ <%= sd.getsEdate() %></div>
-                                    <div class="mini_bar material-symbols-outlined">
-                                        <div class="material-symbols-outlined">edit</div>
-                                        <div class="material-symbols-outlined">share</div>
-                                        <div class="material-symbols-outlined" id="delete<%= sd.getsNo() %>" onclick="deletePlan(event)">delete</div>
+                                    <div class="date">
+                                        <%= sd.getsSdate() %> ~ <%= sd.getsEdate() %>
+                                        <div class="mini_bar material-symbols-outlined">
+                                            <div class="material-symbols-outlined">edit</div>
+                                            <div class="material-symbols-outlined share" onclick="sharePlan(event)">share</div>
+                                            <div class="material-symbols-outlined" id="delete<%= sd.getsNo() %>" onclick="deletePlan(event)">delete</div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -312,7 +315,7 @@
                             <script>
                             	$(function() {
                                     // background-image: url('../img/random/1.jpg');
-                            		if (<%= sd.getBbgiPath().isEmpty() %>) {
+                            		if (<%= sd.getBbgiPath() == null %>) {
                                     	$('#cover<%= sd.getsNo() %>').css('background-image', "url('<%= sd.getUbgiPath() %>')");
                             		} else {                            			
                                     	$('#cover<%= sd.getsNo() %>').css('background-image', "url('<%= sd.getBbgiPath() %>')");
@@ -323,6 +326,20 @@
     
                         <div class="add_plan" onclick="location.href='<%= contextPath %>/GoAddPlan.sd'">
                             <div class="material-symbols-outlined">add_circle</div>
+                        </div>
+
+                        <div id="share">
+                            <div id="share_title">공&nbsp;유</div>
+                            <div id="circles">
+                                <div class="circle" id="member">회원</div>
+                                <div class="circle" id="twitter">트위터</div>
+                                <div class="circle" id="facebook">페이스북</div>
+                                <div class="circle" id="instagram">인스타</div>
+                                <div class="circle" id="whatsapp">왓츠앱</div>
+                                <div class="circle" id="kakaotalk">카카오톡</div>
+                                <div class="circle" id="email">이메일</div>
+                            </div>
+                            <div id="link">링크</div>
                         </div>
                         
                         <script>
@@ -351,6 +368,18 @@
 						                }
 						            });
 						        }
+						    }
+
+                            function sharePlan(event) {
+						        event.stopPropagation();
+
+                                $('#share').css('display', 'block');
+                                $('#full_cover').css('display', 'block');
+
+                                $(document).not($('#share *')).on('click', function() {
+                                    $('#share').css('display', '');
+                                    $('#full_cover').css('display', '');
+                                });
 						    }
 						</script>
 

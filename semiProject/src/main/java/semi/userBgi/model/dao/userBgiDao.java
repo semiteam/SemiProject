@@ -37,7 +37,7 @@ public class userBgiDao {
 			
 			pstmt.setString(1, ub.getuBgiOname());
 			pstmt.setString(2, ub.getuBgiRname());
-			pstmt.setString(3, ub.getuBgiPath());
+			pstmt.setString(3, ub.getuBgiPath() + ub.getuBgiRname());
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -60,9 +60,11 @@ public class userBgiDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
+			String path = ub.getuBgiPath() + ub.getuBgiRname();
+			
 			pstmt.setString(1, ub.getuBgiOname());
 			pstmt.setString(2, ub.getuBgiRname());
-			pstmt.setString(3, ub.getuBgiPath());
+			pstmt.setString(3, path);
 			
 			rset = pstmt.executeQuery();
 			

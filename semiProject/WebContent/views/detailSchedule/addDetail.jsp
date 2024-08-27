@@ -57,10 +57,8 @@
 
         <script defer src="resouces/js/common.js"></script>
         <script defer src="resouces/js/add_detail.js"></script>
-        <script defer src="resouces/js/calendar1.js"></script>
         <link rel="stylesheet" href="resouces/css/add_detail.css">
         <link rel="stylesheet" href="resouces/css/common.css">
-        <link rel="stylesheet" href="resouces/css/calendar1.css">
     </head>
     <body>
         <%@ include file="../common/basic.jsp" %>
@@ -278,7 +276,7 @@
                             <td></td>
                         </tr>
                         <tr>
-                            <td colspan="2">
+                            <td colspan="2" style="width: 600px;">
                                 <div id="search">
                                     <input type="text" id="place_name">
                                     <div class="material-symbols-outlined" id="search-icon">search</div>
@@ -291,20 +289,7 @@
                         </tr>
                         <tr>
                             <td class="detail_title">날짜</td>
-                            <td>
-                                <div id="making_plan">
-                                    <div id="calendar-container">
-                                        <div id="calendar">
-                                            <div id="calendar-left"></div>
-                                        </div>
-                                        <div id="btn">
-                                            <button id="prev" aria-label="Previous month" type="button" class="material-symbols-outlined">arrow_back_ios</button>
-                                            <button id="today" aria-label="Go to current month" type="button">Today</button>
-                                            <button id="next" aria-label="Next month" type="button" class="material-symbols-outlined">arrow_forward_ios</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
+                            <td><input type="text" name="adit_date" id="adit_date" readonly></td>
                         </tr>
                         <tr>
                             <td class="detail_title">시간 설정</td>

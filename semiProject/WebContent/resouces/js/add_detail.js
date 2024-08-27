@@ -26,3 +26,7 @@ $('.result').on('click', function() {
     $('#place_name').val($(this).text().trim());
     $('#place_name').attr('name', 'choice');
 });
+
+$('.circle2').on('click', function() {
+    $('#adit_date').val($(this).closest('.detail').children('.date_div').children('.date').text());
+})
