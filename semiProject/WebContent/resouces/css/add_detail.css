@@ -78,9 +78,10 @@
     width: 20%;
     height: 40px;
     padding: 20px 0;
+    vertical-align: middle;
 }
 
-#add_detail tr td > div:not(:last-child),
+#add_detail tr td > div:not(:last-child):not(.swiper),
 #add_detail textarea {
     border-radius: 10px;
     border: 1px solid #000;
@@ -97,6 +98,7 @@
     width: 100%;
     border: none;
     font-size: 20px;
+    padding-top: 17px;
 }
 
 #adit_date:focus {outline: none;}
@@ -144,4 +146,36 @@
     cursor: pointer;
     right: 0;
     bottom: 0;
+}
+
+.swiper-wrapper * {
+    height: 100px;
+}
+
+.swiper {
+    width: 100px;
+    height: 300px;
+}
+
+.swiper-slide {
+    text-align: center;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.swiper-slide-prev,
+.swiper-slide-next {
+    color: gray;
+}
+.swiper-slide-active {
+    color: #000;
+    font-size: 20px;
+}
+
+#swiper {
+    display: flex;
+    transition: none !important;
+    overflow:hidden
 }

@@ -13,9 +13,6 @@ body * {
     box-sizing: border-box;
 }
 
-body *:not(:hover:not(#place_add):not(.side_menu)) {
-    transition: .6s;
-}
 
 .wrap {
     width: 100%;

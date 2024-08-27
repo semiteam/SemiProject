@@ -30,3 +30,12 @@ $('.result').on('click', function() {
 $('.circle2').on('click', function() {
     $('#adit_date').val($(this).closest('.detail').children('.date_div').children('.date').text());
 })
+
+var swiper = new Swiper(".mySwiper", {
+    direction: "vertical",
+    slidesPerView: 3, // Adjust as needed
+    centeredSlides: true,
+    spaceBetween: 10, // Adjust as needed
+    mousewheel: true,
+    freeMode: true // This allows for smooth scrolling
+});
