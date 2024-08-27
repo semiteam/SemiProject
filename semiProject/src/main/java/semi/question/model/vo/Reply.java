@@ -1,4 +1,4 @@
-package semi.reply.model.vo;
+package semi.question.model.vo;
 
 import java.sql.Date;
 
@@ -11,7 +11,19 @@ public class Reply {
 	private String rStatus;
 	 
 	public Reply() {}
+	
+	
+	
 	 
+	public Reply(int rNo, String rContent) {
+		super();
+		this.rNo = rNo;
+		this.rContent = rContent;
+	}
+
+
+
+
 	public Reply(int rNo, int aNo, int qNo, String rContent, Date rDate, String rStatus) {
 		super();
 		this.rNo = rNo;

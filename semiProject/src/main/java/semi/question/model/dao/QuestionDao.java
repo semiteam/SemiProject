@@ -13,6 +13,7 @@ import java.util.Properties;
 
 import semi.common.model.vo.PageInfo;
 import semi.question.model.vo.Question;
+import semi.question.model.vo.Reply;
 
 public class QuestionDao {
 	
@@ -177,6 +178,61 @@ public class QuestionDao {
 			close(pstmt);
 		}
 		return result;
+	}
+
+	public int insertReply(Connection conn, Reply r) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertReply");
+		
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, r.getaNo());
+			pstmt.setInt(2, r.getqNo());
+			pstmt.setString(3, r.getrContent());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public ArrayList<Reply> selectReplyList(Connection conn, int qNo) {
+		ArrayList<Reply>list = new ArrayList<Reply>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectReplyList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, qNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Reply(rset.getInt("R_NO"),
+								   rset.getString("R_CONTENT")));
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
 	}
 	
 }

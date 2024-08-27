@@ -83,4 +83,33 @@ UPDATE
  WHERE Q_NO = ?
 </entry>
 
+
+<entry key = "insertReply">
+INSERT 
+	  INTO REPLY
+	  (
+	    R_NO
+	  , A_NO
+	  , Q_NO
+	  , R_CONTENT
+	  )
+	  VALUES
+	  (
+	   SEQ_REPLY.NEXTVAL
+	  , ?
+	  , ?
+	  , ?
+	  )
+</entry>
+
+<entry key = "selectReplyList">
+SELECT
+        R_NO
+       ,R_CONTENT
+  FROM REPLY 
+ WHERE R_STATUS = 'Y'
+   AND Q_NO = ?
+
+
+</entry>
 </properties>

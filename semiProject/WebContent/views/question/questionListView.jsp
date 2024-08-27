@@ -87,7 +87,7 @@
                 </div>
 
                 <div class="content" > 
-                    <div class="title" align="center">문의사항</div>
+                    <div class="title" align="center">문의사항</div><br><br>
 					
 					
 					<%if(loginUser != null){ %>

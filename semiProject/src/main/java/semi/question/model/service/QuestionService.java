@@ -9,6 +9,7 @@ import java.util.Properties;
 import semi.common.model.vo.PageInfo;
 import semi.question.model.dao.QuestionDao;
 import semi.question.model.vo.Question;
+import semi.question.model.vo.Reply;
 
 public class QuestionService {
 
@@ -61,6 +62,26 @@ public class QuestionService {
 		close(conn);
 		
 		return result;
+	}
+
+	public int insertReply(Reply r) {
+		Connection conn = getConnection();
+		
+		int result = new QuestionDao().insertReply(conn, r);
+		
+		close(conn);
+		
+		return result;
+	}
+
+	public ArrayList<Reply> selectReplyList(int qNo) {
+		Connection conn = getConnection();
+		
+		ArrayList<Reply>list = new QuestionDao().selectReplyList(conn, qNo);
+		
+		close(conn);
+		
+		return list;
 	}
 
 }

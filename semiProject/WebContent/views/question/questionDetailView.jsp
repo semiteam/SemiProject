@@ -16,7 +16,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 
         <!-- jQuery library -->
-        <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.js"></script>
 
         <!-- Popper JS -->
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
@@ -32,7 +32,7 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@100..900&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="resouces/css/questionEnrollForm.css">
+        <link rel="stylesheet" href="resouces/css/questionDetailView.css">
         <link rel="stylesheet" href="resouces/css/common.css">
 
         <style>
@@ -86,18 +86,32 @@
                                 </tr>
                                 <tr>
                                     <td class="input-cell"><p name="content" class="input-content"><%=q.getqContent() %></p></td>
-                                </tr>
-                                    
-                               
+                                </tr>    
                             </table>
                         </div>
                         <button type="button" onclick="location.href='<%=request.getContextPath() %>/GoServiceCenter.sc'" class="btn btn-secondary">목록이동</button>
                         <%if(loginUser != null && loginUser.getmNo() == q.getmNo() || loginAdmin != null){ %>
                             <button type="button" onclick ="location.href ='<%=request.getContextPath() %>/delete.sc?qNo=<%=q.getqNo()%>'" class="btn btn-secondary" style="background-color: red;">삭제하기</button>
                         <%}%>
-                        
-                        
                     </form>    
+
+                        <% if(loginAdmin != null) {%>
+                        <div class="content-reply" id="reply-area">
+                            <table class="reply-table">
+                            <thead>
+                                <tr>
+                                     <td><p name="aName" class="reply-top">작성자 :<%=loginAdmin.getaId()%></p></td>
+                                </tr>
+                                <tr>
+                                    <td><textarea name="reply" id="replyContent" class="input-reply" required placeholder="문의답변작성"></textarea></td>
+                                </tr>
+                             </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                        <button onclick="insertReply()" class="btn btn-secondary">답변등록</button>
+                        <% } %>
                 </div>
             </div>
         </div>      
@@ -105,6 +119,61 @@
 
 
     <script>
+    
+		$(function(){
+			selectReplyList();
+		})
+		
+		
+        function insertReply(){
+            $.ajax({
+                url:"rinsert.sc",
+                data : {
+                    content:$("#replyContent").val(),
+                    qNo :<%= q.getqNo()%>,
+                    aNo :<%= loginAdmin.getaNo()%>,
+                    
+                },
+                type:"post",
+                success: function(result){
+                    if(result>0){
+                        selectReplyList();
+
+                        $("#replyContent").val("")
+
+                    }
+                },
+                error: function(){
+                    console.log("댓글작성 ajax통신실패");
+
+                },
+            })
+        }
+		
+		
+		function selectReplyList() {
+			$.ajax({
+				url : "rlist.sc",
+				data : {qNo : <%= q.getqNo()%>},
+				type : "post",
+				success : function(list) {
+					
+					let value = "";
+					for(let i = 0; i<list.length; i++){
+						value += "<tr>"
+								+ "<td>" + list[i].replyContent + "</td>"
+							  +"</tr>";
+					}
+					$("#reply-area table tbody textarea").html(value);
+					
+				},
+				error : function() {
+					console.log("통신실패");
+				},
+			})
+			
+		}
+
          function numberMaxLength(e){
         if(e.value.length > e.maxLength){
             e.value = e.value.slice(0, e.maxLength);
