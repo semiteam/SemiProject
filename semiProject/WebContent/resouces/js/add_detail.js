@@ -31,11 +31,59 @@ $('.circle2').on('click', function() {
     $('#adit_date').val($(this).closest('.detail').children('.date_div').children('.date').text());
 })
 
-var swiper = new Swiper(".mySwiper", {
-    direction: "vertical",
-    slidesPerView: 3, // Adjust as needed
-    centeredSlides: true,
-    spaceBetween: 10, // Adjust as needed
-    mousewheel: true,
-    freeMode: true // This allows for smooth scrolling
+$('.add_detail_plan').on('click', function() {
+    $('#adit_date').val($(this).closest('.detail').children('.date_div').children('.date').text());
+})
+
+$('.hour').on('keyup', function() {
+    let $this = $(this);
+    let value = $this.val();
+    
+    if (value > 23) {
+        $this.val(23);
+    } else if (value < 0) {
+        $this.val('00');
+    } else if (value >= 0 && value <= 23) {
+        $this.val(value);
+    } else {
+        $this.val('');
+    }
+});
+
+
+$('.minute').on('keyup', function() {
+    let $this = $(this);
+    let value = $this.val();
+    
+    if (value > 59) {
+        $this.val(59);
+    } else if (value < 0) {
+        $this.val('00');
+    } else if (value >= 0 && value <= 59) {
+        $this.val(value);
+    } else {
+        $this.val('');
+    }
+});
+
+$('.edit').on('click', function() {
+    let dTime = $(this).closest('.plan_content').children('.dTime').text();
+    let dPlace = $(this).closest('.plan_content').children('.dPlace').text();
+    let dElse = $(this).closest('.plan_content').children('.dElse').text();
+
+    let dTimeInput = '<input type="text" name="editTime" class="editInput" value="' + dTime + '">';
+    let dPlaceInput = '<input type="text" name="editPlace" class="editInput" value="' + dPlace + '">';
+    let dElseInput = '<textarea name="editElse" class="editInput" style="resize: none; width: 600px; height: 30px; padding: 10px;">' + dElse + '</textarea>';
+
+    $(this).closest('.plan_content').children('.dTime').html(dTimeInput);
+    $(this).closest('.plan_content').children('.dPlace').html(dPlaceInput);
+    $(this).closest('.plan_content').children('.dElse').html(dElseInput);
+
+    console.log(dTime);
+    console.log(dPlace);
+    console.log(dElse);
+    console.log(dTimeInput);
+    console.log(dPlaceInput);
+    console.log(dElseInput);
+    console.log($(this).text());
 });

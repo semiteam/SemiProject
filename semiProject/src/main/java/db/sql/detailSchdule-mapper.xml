@@ -15,7 +15,7 @@
 		    BY D_DATE ASC, D_STIME ASC
 	</entry>
 
-	<entry key = "insertDetailSchedule">
+	<entry key = "insertDetail">
 		INSERT
 		  INTO DETAIL_SCHEDULE
 		     (
@@ -40,4 +40,10 @@
 		     , ?
 		     )
 	</entry>
+	
+	<entry key="deleteDetail">
+		DELETE DETAIL_SCHEDULE
+		 WHERE D_NO = ?
+		   AND M_NO = ?
+   </entry>
 </properties>

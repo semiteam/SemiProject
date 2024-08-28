@@ -9,6 +9,7 @@
 <%
 	ArrayList<DetailSchedule> list = (ArrayList<DetailSchedule>)request.getAttribute("list");
 	ArrayList<Schedule> days = (ArrayList<Schedule>)request.getAttribute("days");
+	int sno = (int)request.getAttribute("sno");
 	int howlong = (int)request.getAttribute("howlong");
 %>
 <!DOCTYPE html>
@@ -21,7 +22,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 
         <!-- jQuery library -->
-        <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
         <!-- Popper JS -->
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
@@ -202,74 +203,122 @@
                                             <div class="circle2 material-symbols-outlined">add_circle</div>
                                         </div>
                                         <div class="detail_plan">
-                                        <% for (DetailSchedule dSmall : list) { %>
-                                            <% if (dSmall.getdDate().equals(date)) { %>
-                                                <div class="plan_content plan_content<%= i %>">
-                                                    <div class="dTime"><%= dSmall.getdStime() %> ~ <%= dSmall.getdEtime() %></div>
-                                                    <div class="dElse"><%= dSmall.getdElse() %></div>
-                                                    <div class="dPlace"><%= dSmall.getdPlace() %></div>
-                                                </div>
-                                            <% } else { %>
-                                                <div class="plan_content plan_content<%= i %> add_detail_plan">
-                                                    계획 추가하기
-                                                </div>
-                                                <!-- 다른 날에 일정이 존재하고, 기준 날에 일정이 없을 때도 생성되는 문제 발생 -->
+                                            <!-- DetailSchedule dSmall : list -->
+                                            <% for (int j = 0; j < list.size(); j++) { %>
+                                                <% if (list.get(j).getdDate().equals(date)) { %>
+                                                    <div class="plan_content plan_content<%= j %><%= i %> plan_content_count<%= i %>">
+                                                        <div class="dTime"><%= list.get(j).getdStime() %> ~ <%= list.get(j).getdEtime() %></div>
+                                                        <div class="dPlace"><%= list.get(j).getdPlace() %></div>
+                                                        <div class="dElse"><%= list.get(j).getdElse() %></div>
+                                                        <div class="mini_bar material-symbols-outlined">
+                                                            <div class="material-symbols-outlined fs edit">edit</div>
+                                                            <div class="material-symbols-outlined fs" id="delete<%= list.get(j).getdNo() %>" onclick="deletePlan(event)">delete</div>
+                                                        </div>
+                                                    </div>
+                                                <% } else { %>
+                                                    <div class="plan_content plan_content<%= j %><%= i %> plan_content_count<%= i %> add_detail_plan">
+                                                        계획 추가하기
+                                                    </div>
+                                                    <!-- 다른 날에 일정이 존재하고, 기준 날에 일정이 없을 때도 생성되는 문제 발생 -->
+                                                <% } %>
                                             <% } %>
-                                        <% } %>
+                                            
+                                            <script>
+						                        $(function() {
+						                            let finalHeight = 0;
+						                            
+                                                    console.log($('.plan_content_count<%= i %>').length);
+
+						                            for (let j = 0; j < $('.plan_content_count<%= i %>').length; j++) {
+						                                let className = '.plan_content' + j + <%= i %> + '.plan_content_count<%= i %>';
+						                                finalHeight += $(className).height();
+						                                console.log(className, finalHeight);
+						                            }
+						
+						                            let length = 'calc(' + finalHeight + 'px + (31px * ' + ($('.plan_content').length - 1) + '))';
+						                            
+						                            console.log(length)
+						
+                                                    $('#bar<%= i %>').css('height', length);
+                                                    $('#map<%= i %>').css('height', length);
+                    
+                                                    $('#cancle').on('click', function() {
+                                                        console.log(length);
+                                                        $('#add_detail').css('width', '');
+                                                        $('#add_detail table').css('display', '');
+                                                        $('#map<%= i %>').css({
+                                                            height: auto,
+                                                            width: '20vw',
+                                                            margin: '30px 0 0 20px'
+                                                        });
+                                                        $('.plan').css('flex-direction', '');
+                                                    });
+						
+						                            $('.add_detail_plan').on('click', function() {
+						                                $('#add_detail').css('width', '40%');
+						                                $('#add_detail table').css('display', 'block');
+						                                $('.map').css({
+						                                    height: '300px',
+						                                    width: '650px',
+						                                    margin: '0 0 0 41px'
+						                                });
+						                                $('.plan').css('flex-direction', 'column');
+						                            });
+						
+						                            $('.circle2').on('click', function() {
+						                                $('#add_detail').css('width', '40%');
+						                                $('#add_detail table').css('display', 'block');
+						                                $('.map').css({
+						                                    height: '300px',
+						                                    width: '650px',
+						                                    margin: '0 0 0 41px'
+						                                });
+						                                $('.plan').css('flex-direction', 'column');
+						                            });
+						                        });
+						                    </script>
+
+                                            <script>
+                                                function deletePlan(event) {
+                                                    event.stopPropagation();
+                                                    
+                                                    if (confirm("세부 일정을 삭제하시겠습니까?")) {
+                                                        $.ajax({
+                                                            url: '<%= contextPath %>/DeleteDetail.d',
+                                                            method: 'post',
+                                                            data: {
+                                                                mno: <%= loginUser.getmNo() %>,
+                                                                dno: $(event.target).attr('id').replace('delete', '').trim(),
+                                                            },
+                                                            success: function(response) {
+                                                                if (response > 0) {
+                                                                    alert('세부 일정 삭제에 성공하였습니다. 1');
+                                                                } else {
+                                                                    alert('세부 일정 삭제에 실패하였습니다. 2');
+                                                                }
+                                                                location.reload();
+                                                            },
+                                                            error: function() {
+                                                                alert('세부 일정 삭제에 실패하였습니다.');
+                                                                location.reload();
+                                                            }
+                                                        });
+                                                    }
+                                                }
+                                            </script>
                                         </div>
                                     </div>
-                                    <div class="map" id="map<%= i %>">
+                                    <div class="map" id="map<%= i %>" style="height:auto;">
                                         <img src="resouces/img/maptest.png" alt="">
                                     </div>
 		                        </div>
 		                    </div>
 		                <% } %>
-
-                        <script>
-                            $(function() {
-                                let length = 'calc(100px * ' + $('.plan_content<%= i %>').length + ' + 31px * ' + ($('.plan_content<%= i %>').length - 1) + ')';
-                                $('#bar<%= i %>').css('height', length);
-                                $('#map<%= i %>').css('height', length);
-
-                                $('#cancle').on('click', function() {
-                                    $('#add_detail').css('width', '');
-                                    $('#add_detail table').css('display', '');
-                                    $('#map<%= i %>').css({
-                                        height: length,
-                                        width: '20vw',
-                                        margin: '30px 0 0 20px'
-                                    });
-                                    $('.plan').css('flex-direction', '');
-                                });
-
-                                $('.add_detail_plan').on('click', function() {
-                                    $('#add_detail').css('width', '40%');
-                                    $('#add_detail table').css('display', 'block');
-                                    $('.map').css({
-                                        height: '300px',
-                                        width: '650px',
-                                        margin: '0 0 0 41px'
-                                    });
-                                    $('.plan').css('flex-direction', 'column');
-                                });
-
-                                $('.circle2').on('click', function() {
-                                    $('#add_detail').css('width', '40%');
-                                    $('#add_detail table').css('display', 'block');
-                                    $('.map').css({
-                                        height: '300px',
-                                        width: '650px',
-                                        margin: '0 0 0 41px'
-                                    });
-                                    $('.plan').css('flex-direction', 'column');
-                                });
-                            });
-                        </script>
                     <% } %>
                     <br><br>
                 </div>
 
-                <form id="add_detail" method="post" action="">
+                <form id="add_detail" method="post" action="<%= contextPath %>/InsertDetail.d">
                     <span id="cancle" class="material-symbols-outlined" style="position: absolute; right: 10px; cursor: pointer;">close</span>
                     <table>
                         <tr>
@@ -279,7 +328,7 @@
                         <tr>
                             <td colspan="2" style="width: 600px;">
                                 <div id="search">
-                                    <input type="text" id="place_name">
+                                    <input type="text" id="place_name" name="place_name">
                                     <div class="material-symbols-outlined" id="search-icon">search</div>
                                 </div>
                                 <div class="result">헤이</div>
@@ -294,7 +343,14 @@
                         </tr>
                         <tr>
                             <td class="detail_title">시간 설정</td>
-                            <td>
+                            <td id="watch">
+                                <input type="number" name="startHour" class="time hour" id="startHour" max="23" min="0" value="11">
+                                <div class="bb">:</div>
+                                <input type="number" name="startMinute" class="time minute" id="startMinute" max="59" min="0" value="00">
+                                <div class="aa">~</div>
+                                <input type="number" name="endHour" class="time hour" id="endHour" max="23" min="0" value="13">
+                                <div class="bb">:</div>
+                                <input type="number" name="endMinute" class="time minute" id="endMinute" max="59" min="0" value="00">
                             </td>
                         </tr>
                         <tr>
@@ -303,13 +359,16 @@
                         </tr>
                         <tr>
                             <td colspan="2">
-                                <textarea name="" id="" style="resize: none;"></textarea>
+                                <textarea name="else" id="" style="resize: none;"></textarea>
                             </td>
                         </tr>
                         <tr>
                             <td colspan="2">
                                 <br><br>
-                                <span class="right">계획 추가 완료하기</span>
+                                <input type="hidden" name="mno" value="<%= loginUser.getmNo() %>">
+                                <input type="hidden" name="sno" value="<%= sno %>">
+                                <input type="hidden" name="howlong" value="<%= howlong %>">
+                                <span class="right" onclick="document.forms[0].submit()">계획 추가 완료하기</span>
                             </td>
                         </tr>
                     </table>

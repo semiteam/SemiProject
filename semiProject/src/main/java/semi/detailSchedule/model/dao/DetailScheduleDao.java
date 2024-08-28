@@ -60,11 +60,54 @@ public class DetailScheduleDao {
 		
 		return list;
 	}
-	
-	public int insertDetailSchedule() {
-		// TO_DATE('2024-08-01 10:00', 'YYYY-MM-DD HH24:MI')
-		// TO_DATE('2024-08-01', 'YYYY-MM-DD')
+
+	public int insertDetail(Connection conn, DetailSchedule ds) {
 		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertDetail");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, ds.getdPlace());
+			pstmt.setTimestamp(2, ds.getdStimeT());
+			pstmt.setTimestamp(3, ds.getdEtimeT());
+			pstmt.setString(4, ds.getdElse());
+			pstmt.setDate(5, ds.getdDate());
+			pstmt.setInt(6, ds.getmNo());
+			pstmt.setInt(7, ds.getSdNo());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int deleteDetail(Connection conn, int mno, int dno) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("deleteDetail");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, dno);
+			pstmt.setInt(2, mno);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
 		
 		return result;
 	}

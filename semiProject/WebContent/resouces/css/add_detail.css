@@ -34,13 +34,17 @@
 
 .plan .detail_plan .plan_content {
     width: 650px;
-    height: 100px;
+    height: auto;
     margin-left: 20px;
     margin-top: 31px;
     background-color: rgba(148, 148, 148, 0.4);
     padding: 15px;
     font-size: 17px;
 }
+
+.plan_content > div:not(:last-child) {margin-bottom: 5px;}
+
+.plan_content > div:last-child {margin-top: -15px;}
 
 .notMap {display: flex;}
 
@@ -81,7 +85,7 @@
     vertical-align: middle;
 }
 
-#add_detail tr td > div:not(:last-child):not(.swiper),
+#add_detail tr td > div:not(:last-child):not(.aa):not(.bb),
 #add_detail textarea {
     border-radius: 10px;
     border: 1px solid #000;
@@ -147,3 +151,30 @@
     right: 0;
     bottom: 0;
 }
+
+.time {
+    width: 70px;
+    height: 70px;
+    text-align: center;
+    font-size: 20px;
+}
+
+.time:focus {outline: none;}
+
+#watch {display: flex;}
+
+.aa {padding: 30px;}
+
+.bb {padding: 30px 10px;}
+
+.mini_bar {
+    font-size: 10px;
+    margin-left: 570px;
+}
+
+.fs {
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.editInput:focus {outline: none;}

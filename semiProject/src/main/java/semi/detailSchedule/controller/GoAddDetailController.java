@@ -50,6 +50,7 @@ public class GoAddDetailController extends HttpServlet {
 			
 			request.setAttribute("list", list);
 			request.setAttribute("days", days);
+			request.setAttribute("sno", sno);
 			request.setAttribute("howlong", howlong);
 			request.getRequestDispatcher("views/detailSchedule/addDetail.jsp").forward(request, response);
 		}
