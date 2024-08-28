@@ -40,12 +40,10 @@ public class AjaxReplyInsertController extends HttpServlet {
 		r.setaNo(aNo);
 		r.setrContent(replyContent);
 		
-		System.out.println(r);
-
-		
-		int result = new QuestionService().insertReply(r);
-		
+		int result1 = new QuestionService().insertReply(r);
+		int result2 = new QuestionService().updateQuestion(qNo);
 	
+		int result = result1 * result2;
 		response.getWriter().print(result);
 		
 	}

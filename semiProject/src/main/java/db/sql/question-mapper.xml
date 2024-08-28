@@ -106,10 +106,16 @@ INSERT
 SELECT
         R_NO
        ,R_CONTENT
+       ,ADMIN_ID
   FROM REPLY 
+  JOIN ADMIN ON (A_NO= ADMIN_NO)
  WHERE R_STATUS = 'Y'
    AND Q_NO = ?
+</entry>
 
-
+<entry key = "updateQuestion">
+UPDATE QUESTION
+   SET Q_ANSWER = 'Y'
+ WHERE Q_NO = ?
 </entry>
 </properties>

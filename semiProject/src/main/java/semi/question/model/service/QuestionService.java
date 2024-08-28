@@ -84,4 +84,14 @@ public class QuestionService {
 		return list;
 	}
 
+	public int updateQuestion(int qNo) {
+		Connection conn = getConnection();
+		
+		int result = new QuestionDao().updateQuestion(conn,qNo);
+		
+		close(conn);
+		
+		return result;
+	}
+
 }

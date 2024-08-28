@@ -37,6 +37,7 @@ public class AjaxReplyListController extends HttpServlet {
 		
 		ArrayList<Reply> list = new QuestionService().selectReplyList(qNo);
 		
+		
 		response.setContentType("application/json; charset=utf-8");
 		new Gson().toJson(list,response.getWriter());
 	}

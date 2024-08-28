@@ -15,6 +15,7 @@ import semi.member.model.service.MemberService;
 import semi.member.model.vo.Member;
 import semi.question.model.service.QuestionService;
 import semi.question.model.vo.Question;
+import semi.question.model.vo.Reply;
 
 /**
  * Servlet implementation class GoServiceCenterController
@@ -73,6 +74,8 @@ public class GoServiceCenterController extends HttpServlet {
 		
 		request.setAttribute("pi",pi);
 		request.setAttribute("list", list);
+		
+		
 		
 		
 		request.getRequestDispatcher("views/question/questionListView.jsp").forward(request, response);

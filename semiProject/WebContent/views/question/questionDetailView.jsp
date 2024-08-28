@@ -1,3 +1,4 @@
+<%@page import="semi.question.model.vo.Reply"%>
 <%@page import="semi.question.model.vo.Question"%>
 <%@page import="oracle.net.aso.q"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -5,6 +6,7 @@
 
 <%
 	Question q = (Question)request.getAttribute("q");
+	ArrayList<Reply> rlist = (ArrayList<Reply>)request.getAttribute("rlist");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,6 +38,15 @@
         <link rel="stylesheet" href="resouces/css/common.css">
 
         <style>
+            #replyContent{
+                margin-top: 25px;
+                width: 100%;
+                height: 100px;
+                border: none;
+                box-sizing: border-box;
+                background-color: #e5e5e5;
+                resize: none;
+            }
             
         </style>
     </head>
@@ -105,16 +116,16 @@
                                 <tr>
                                     <td><textarea name="reply" id="replyContent" class="input-reply" required placeholder="문의답변작성"></textarea></td>
                                 </tr>
-                             </thead>
-                                <tbody>
-                                </tbody>
-                            </table>
-                        </div>
-                        <button onclick="insertReply()" class="btn btn-secondary">답변등록</button>
-                        <% } %>
+                                    <td><button onclick="insertReply()" class="btn btn-secondary" style="margin-bottom: 20px; margin-top: 0;">답변등록</button></td>
+                       <% } %>
+ 				             </thead>
+		                       <tbody>
+                               </tbody>
+                           </table>
+                         </div>
+                       
                 </div>
-            </div>
-        </div>      
+            </div>    
 
 
 
@@ -161,10 +172,11 @@
 					let value = "";
 					for(let i = 0; i<list.length; i++){
 						value += "<tr>"
-								+ "<td>" + list[i].replyContent + "</td>"
+								+ "<td>" + list[i].rContent + "</td>"
+								+ "<td>" + list[i].adminId + "</td>" 
 							  +"</tr>";
 					}
-					$("#reply-area table tbody textarea").html(value);
+					$("#reply-area tbody").html(value);
 					
 				},
 				error : function() {

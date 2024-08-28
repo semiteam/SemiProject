@@ -9,12 +9,27 @@ public class Reply {
 	private String rContent;
 	private Date rDate;
 	private String rStatus;
+	private String adminId;
 	 
 	public Reply() {}
 	
 	
 	
+	
+	
 	 
+	public Reply(int rNo, String rContent, String adminId) {
+		super();
+		this.rNo = rNo;
+		this.rContent = rContent;
+		this.adminId = adminId;
+	}
+
+
+
+
+
+
 	public Reply(int rNo, String rContent) {
 		super();
 		this.rNo = rNo;

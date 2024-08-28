@@ -221,7 +221,8 @@ public class QuestionDao {
 			
 			while(rset.next()) {
 				list.add(new Reply(rset.getInt("R_NO"),
-								   rset.getString("R_CONTENT")));
+								   rset.getString("R_CONTENT"),
+								   rset.getString("ADMIN_ID")));
 			}
 			
 		} catch (SQLException e) {
@@ -233,6 +234,29 @@ public class QuestionDao {
 		}
 		
 		return list;
+	}
+
+	public int updateQuestion(Connection conn, int qNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		
+		String sql = prop.getProperty("updateQuestion");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, qNo);
+			
+			result = pstmt.executeUpdate();		
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 	
 }
