@@ -40,7 +40,7 @@
 
         <div class="abcd">
             <a href="views/member/termsOfUse.jsp" id="newId">회원가입</a>
-            <a href="views/member/idSearch.jsp" id="IdPwdSearch">아이디/비밀번호 찾기</a>
+            <a href="<%= contextPath %>/id.me" id="IdPwdSearch">아이디/비밀번호 찾기</a>
         </div>
 
         <button id="login-btn" type="submit">로그인</button>

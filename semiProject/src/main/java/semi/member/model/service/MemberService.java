@@ -116,4 +116,24 @@ public class MemberService {
 		return count;
     }
 
+    public Member idFindSearch(String name, String email) {
+    	
+    	Connection conn = getConnection();
+    	
+    	Member m = new MemberDao().idFindSearch(conn,name,email);
+    	
+    	close(conn);
+    	return m;
+    }
+    
+    public String pwdFindSearch(String email) {
+    	Connection conn = getConnection();
+    	
+    	String findPwd = new MemberDao().pwdFindSearch(conn,email);
+    	
+    	close(conn);
+    	
+    	return findPwd;
+    }
+    
 }

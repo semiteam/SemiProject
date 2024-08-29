@@ -125,4 +125,26 @@
 		  FROM MEMBER
 		 WHERE M_ID = ?
 	</entry>
+	
+	<entry key="idFindSearch">
+	SELECT 
+			M_NO
+	      , M_ID
+	      
+	  FROM  MEMBER
+	 WHERE  M_NAME = ?
+	   AND  M_EMAIL = ?
+	   AND  M_STATUS = 'U' 
+	</entry>
+	
+	<entry key="pwdFindSearch">
+	SELECT 
+	        M_NO
+	      , M_NAME
+	      , M_EMAIL
+	  FROM  MEMBER
+	 WHERE  
+	    	M_EMAIL = ?
+	   AND  M_STATUS = 'U' 
+	</entry>
 </properties>
