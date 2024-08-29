@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import semi.common.model.vo.PageInfo;
 import semi.member.model.service.MemberService;
+import semi.member.model.vo.Commentery;
 import semi.member.model.vo.Member;
 import semi.post.model.service.PostService;
 import semi.post.model.vo.Post;
@@ -92,10 +93,17 @@ public class ManagerListController extends HttpServlet {
 		PageInfo postPi = new PageInfo(postListCount, postCurrentPage, postPageLimit, postBoardLimit, postMaxPage, postStartPage, postEndPage);
 		ArrayList<Post> postList = new PostService().selectPostList(postPi);
 
+		
+		
+		ArrayList<Commentery> cList  = new MemberService().selectCommentery();
+		request.setAttribute("cList", cList);
 		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);
 		request.setAttribute("postPi", postPi);
 		request.setAttribute("postList", postList);
+		
+		
+		
 
 		request.getRequestDispatcher("views/admin/admin1.jsp").forward(request, response);
 		

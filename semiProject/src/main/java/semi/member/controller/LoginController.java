@@ -14,6 +14,7 @@ import semi.admin.model.service.AdminService;
 import semi.admin.model.vo.Admin;
 import semi.common.model.vo.PageInfo;
 import semi.member.model.service.MemberService;
+import semi.member.model.vo.Commentery;
 import semi.member.model.vo.Member;
 import semi.post.model.service.PostService;
 import semi.post.model.vo.Post;
@@ -81,7 +82,6 @@ public class LoginController extends HttpServlet {
 				}
 				
 				PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
-				
 				ArrayList<Member> list = new MemberService().selectList(pi);
 
 				int postListCount;
@@ -110,11 +110,18 @@ public class LoginController extends HttpServlet {
 				
 				PageInfo postPi = new PageInfo(postListCount, postCurrentPage, postPageLimit, postBoardLimit, postMaxPage, postStartPage, postEndPage);
 				ArrayList<Post> postList = new PostService().selectPostList(postPi);
+				
+				
+				
+				ArrayList<Commentery> cList  = new MemberService().selectCommentery();
+				request.setAttribute("cList", cList);
+				
 
 				request.setAttribute("pi", pi);
 				request.setAttribute("list", list);
 				request.setAttribute("postPi", postPi);
 				request.setAttribute("postList", postList);
+				
 				
 				session.setAttribute("loginAdmin", loginAdmin);
 	            session.setAttribute("alertMsg", loginAdmin.getaNickname() + "님의 방문을 환영합니다");

@@ -6,6 +6,7 @@ import static semi.common.JDBCTemplate.*;
 
 import semi.common.model.vo.PageInfo;
 import semi.member.model.dao.MemberDao;
+import semi.member.model.vo.Commentery;
 import semi.member.model.vo.Member;
 
 
@@ -99,6 +100,16 @@ public class MemberService {
 		
 		return mStatus; 
 		
+	}
+
+	public ArrayList<Commentery> selectCommentery() {
+		Connection conn = getConnection();
+		
+		ArrayList<Commentery> cList = new MemberDao().selectCommnetery(conn);
+		
+		close(conn);
+		
+		return cList;
 	}
 
 

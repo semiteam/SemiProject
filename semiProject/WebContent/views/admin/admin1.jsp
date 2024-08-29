@@ -1,3 +1,4 @@
+<%@page import="semi.member.model.vo.Commentery"%>
 <%@page import="semi.post.model.vo.Post"%>
 <%@page import="semi.common.model.vo.PageInfo"%>
 <%@page import="semi.member.model.vo.Member"%>
@@ -11,7 +12,8 @@
 
 	ArrayList<Member> list = (ArrayList<Member>)request.getAttribute("list");
 	ArrayList<Post> postList = (ArrayList<Post>)request.getAttribute("postList");
-
+	ArrayList<Commentery>cList = (ArrayList<Commentery>)request.getAttribute("cList"); 
+	
 	int currentPage = pi.getCurrentPage();
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();
@@ -108,7 +110,7 @@
                          
                             
                         <div class="left-inner">
-                             <div class="left-inner-left">
+                             <div class="left-inner-left" style="width: 850px;">
                          <% if(list == null || list.isEmpty()) {  %>
                                 <div class="user-info">
                            			<p>조회된 회원정보가 없습니다</p>
@@ -118,7 +120,7 @@
                            <% } else { %>
                            <% for(Member m : list) { %>
                             
-                                <div class="user-info" 
+                                <div class="user-info" style="width: 800px;"
                                 			 data-mno="<%=m.getmNo()%>"
 										     data-mid="<%=m.getmId()%>"
 										     data-mname="<%=m.getmName()%>"
@@ -141,7 +143,12 @@
                                         <td>
                                         	<button class="btn btn-wide unblock-btn"
                                                 data-mno="<%=m.getmNo()%>">차단해제</button>
-                                        </td>                            
+                                        </td> 
+                                       <td>
+										    <button class="btn btn-secondary comment-btn"
+										        data-mno="<%= m.getmNo() %>">작성댓글</button>
+										</td>
+                                      
                                     </tr>
                                 </div>
                              <% } %>
@@ -242,30 +249,96 @@
             <div class="modal-content">
                 <span class="close">&times;</span>
                 <div class="modal-info">
-              
                     <div class="modal-profile">
                         <div class="profile-photo" id="user-profile-photo">프로필사진</div>
                     </div>
                     <div class="modal-text" align="left" >
-                        <div class="modal-text-contetn" id="user_no"></div>
-                        <div class="modal-text-contetn" id="user_name"></div>
-                        <div class="modal-text-contetn" id="user_id"></div>
-                        <div class="modal-text-contetn" id="user_phone"></div>
-                        <div class="modal-text-contetn" id="user_email"></div>
-                        <div class="modal-text-contetn" id="user_address"></div>
-                        <div class="modal-text-contetn" id="user_grade"></div>
-                        <div class="modal-text-contetn" id="user_report"></div>
-                        <div class="modal-text-contetn" id="user_status"></div>
+                        <div class="modal-text-content" id="user_no"></div>
+                        <div class="modal-text-content" id="user_name"></div>
+                        <div class="modal-text-content" id="user_id"></div>
+                        <div class="modal-text-content" id="user_phone"></div>
+                        <div class="modal-text-content" id="user_email"></div>
+                        <div class="modal-text-content" id="user_address"></div>
+                        <div class="modal-text-content" id="user_grade"></div>
+                        <div class="modal-text-content" id="user_report"></div>
+                        <div class="modal-text-content" id="user_status"></div>
                     </div>
                 </div>
                 </div>
+            </div>
         </div>
      <% } %>
+
+
+     <div id="commentModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <div class="modal-info">
+            <h3>작성한 댓글 목록</h3>
+            <div class="comments-list">
+                <!-- This is where the comment details will be dynamically inserted -->
+            </div>
+        </div>
+    </div></div>
+
+
+
         
 
         
         
      <script>
+
+     $(function() {
+    	  
+    	    $('.comment-btn').on('click', function(event) {
+    	        event.stopPropagation();  
+
+    	        const mNo = $(this).data('mno'); 
+    	        let commentsHtml = '';  // Variable to build the comments HTML
+
+    	        // Filter and display comments for the selected user
+    	        <% if (cList != null && !cList.isEmpty()) { %>
+    	            <% for (Commentery c : cList) { %>
+    	                if ('<%= c.getmNo() %>' == mNo) {
+    	                    commentsHtml += `
+    	                        <div class="comment">
+    	                            <p>댓글번호: <%= c.getcNo() %></p>
+    	                            <p>내용: <%= c.getcContent() %></p>
+    	                            <p>작성일: <%= c.getcDate() %></p>
+    	                        </div>
+    	                        <hr>
+    	                    `;
+    	                }
+    	            <% } %>
+    	        <% } %>
+
+    	        if(commentsHtml === '') {
+    	            commentsHtml = '<p>이 사용자가 작성한 댓글이 없습니다.</p>';
+    	        }
+
+    	       
+    	        $('#commentModal .comments-list').html(commentsHtml);
+    	        $('#commentModal').css('display', 'block');
+    	    });
+
+    	    // Close the comment modal when the close button is clicked
+    	    $('#commentModal .close').on('click', function() {
+    	        $('#commentModal').css('display', 'none');
+    	    });
+
+    	    // Close the comment modal when clicking outside of it
+    	    $(window).on('click', function(event) {
+    	        if ($(event.target).is('#commentModal')) {
+    	            $('#commentModal').css('display', 'none');
+    	        }
+    	    });
+    	});
+
+     
+     
+     
+     
         $(function() {
             // Handle user info click to open modal
             $('.user-info').on('click', function() {
@@ -336,7 +409,7 @@
                 const postNo = $(this).data('post-no'); 
                 
                 if (confirm('정말로 게시글을 지우시겠습니까?')) {
-                    window.location.href = `<%= contextPath %>/delete.po?postNo=` + postNo;
+                    window.location.href = `<%=contextPath %>/delete.po?postNo=` + postNo;
                 }
 
             })

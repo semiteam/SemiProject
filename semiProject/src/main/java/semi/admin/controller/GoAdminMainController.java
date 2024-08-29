@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import semi.common.model.vo.PageInfo;
 import semi.member.model.service.MemberService;
+import semi.member.model.vo.Commentery;
 import semi.member.model.vo.Member;
 import semi.post.model.service.PostService;
 import semi.post.model.vo.Post;
@@ -100,6 +101,10 @@ public class GoAdminMainController extends HttpServlet {
 			PageInfo postPi = new PageInfo(postListCount, postCurrentPage, postPageLimit, postBoardLimit, postMaxPage, postStartPage, postEndPage);
 			ArrayList<Post> postList = new PostService().selectPostList(postPi);
 
+			
+			
+			
+			
 			request.setAttribute("pi", pi);
 			request.setAttribute("list", list);
 			request.setAttribute("postPi", postPi);

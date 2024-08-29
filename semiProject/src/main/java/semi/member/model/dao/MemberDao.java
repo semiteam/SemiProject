@@ -9,9 +9,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import javax.swing.event.AncestorListener;
+
 import static semi.common.JDBCTemplate.*;
 
 import semi.common.model.vo.PageInfo;
+import semi.member.model.vo.Commentery;
 import semi.member.model.vo.Member;
 
 
@@ -232,6 +235,40 @@ public class MemberDao {
 			}
 
 		return mStatus;
+	}
+
+	public ArrayList<Commentery> selectCommnetery(Connection conn) {
+		ArrayList<Commentery> cList = new ArrayList<Commentery>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectCommnetery");
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				cList.add(new Commentery(rset.getInt("C_NO"),
+						   rset.getInt("M_NO"),
+						   rset.getString("C_CONTENT"),
+						   rset.getDate("C_DATE"),
+						   rset.getString("C_TYPE"),
+						   rset.getString("C_STATUS"))
+						);	
+				}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return cList;
 	}
 
 
