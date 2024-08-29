@@ -235,7 +235,7 @@
 						                                console.log(className, finalHeight);
 						                            }
 						
-						                            let length = 'calc(' + finalHeight + 'px + (31px * ' + ($('.plan_content').length - 1) + '))';
+						                            let length = 'calc(' + finalHeight + 'px + (30px * ' + ($('.plan_content').length - 1) + '))';
 						                            
 						                            console.log(length)
 						
@@ -247,7 +247,7 @@
                                                         $('#add_detail').css('width', '');
                                                         $('#add_detail table').css('display', '');
                                                         $('#map<%= i %>').css({
-                                                            height: auto,
+                                                            height: length,
                                                             width: '20vw',
                                                             margin: '30px 0 0 20px'
                                                         });
@@ -275,10 +275,28 @@
 						                                });
 						                                $('.plan').css('flex-direction', 'column');
 						                            });
-						                        });
-						                    </script>
 
-                                            <script>
+                                                    $('.done').on('click', function() {
+                                                        $.ajax({
+                                                            url: '<%= contextPath %>/EditDetail.d',
+                                                            method: 'post',
+                                                            data: {
+                                                                dTime: $(this).closest('.plan_content').children('dTime').val(),
+                                                                dPlace: $(this).closest('.plan_content').children('dPlace').val(),
+                                                                dElse: $(this).closest('.plan_content').children('dElse').text(),
+                                                            },
+                                                            success: function() {
+                                                                alert('세부 일정 수정에 성공하였습니다.');
+                                                                location.reload();
+                                                            },
+                                                            error: function() {
+                                                                alert('세부 일정 수정에 실패하였습니다..');
+                                                                location.reload();
+                                                            }
+                                                        });
+                                                    })
+						                        });
+                                                
                                                 function deletePlan(event) {
                                                     event.stopPropagation();
                                                     
@@ -291,11 +309,7 @@
                                                                 dno: $(event.target).attr('id').replace('delete', '').trim(),
                                                             },
                                                             success: function(response) {
-                                                                if (response > 0) {
-                                                                    alert('세부 일정 삭제에 성공하였습니다. 1');
-                                                                } else {
-                                                                    alert('세부 일정 삭제에 실패하였습니다. 2');
-                                                                }
+                                                                alert('세부 일정 삭제에 성공하였습니다.');
                                                                 location.reload();
                                                             },
                                                             error: function() {

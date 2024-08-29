@@ -177,4 +177,15 @@
     cursor: pointer;
 }
 
+.editInput {
+    background-color: rgba(0, 0, 0, 0);
+    border: 1px solid rgba(255, 255, 255, 0.363);
+    color: white;
+}
+
 .editInput:focus {outline: none;}
+
+.editInput:not(textarea) {
+    padding-left: 10px;
+    font-size: 17px;
+}

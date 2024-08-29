@@ -355,11 +355,7 @@
 						                    sno: $(event.target).attr('id').replace('delete', '').trim(),
 						                },
 						                success: function(response) {
-						                	if (response > 0) {
-							                	alert('일정 삭제에 성공하였습니다. 1');
-						                	} else {
-						                		alert('일정 삭제에 실패하였습니다. 2');
-						                	}
+						                	alert('일정 삭제에 성공하였습니다.');
 						                    location.reload();
 						                },
 						                error: function() {

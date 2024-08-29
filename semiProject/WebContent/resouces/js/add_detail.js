@@ -12,15 +12,19 @@ $('.open_btn').on('click', function() {
 
 $('.close_btn').on('click', function() {
     $(this).closest('.detail').children().not('.date_div').css('display', 'none');
-    $(this).closest('.date_div').find('.open_btn').css('display', '');
-    $(this).closest('.date_div').find('.close_btn').css('display', '');
-    $(this).closest('.date_div').css('width', '');
-    $(this).closest('.detail').css('margin-bottom', '');
+    $(this).closest('.date_div').find('.open_btn').css('display', 'block');
+    $(this).closest('.date_div').find('.close_btn').css('display', 'none');
+    $(this).closest('.date_div').css('width', '175px');
+    $(this).closest('.detail').css('margin-bottom', '20px');
 });
 
 setTimeout(function(){
-    $('.detail').children('div:eq(0)').children('.open_btn').trigger('click');
+    $('.detail').children('div').children('.open_btn').trigger('click');
 }, 0);
+
+setTimeout(function() {
+    $('.detail').children('div').not('div:eq(0)').children('.close_btn').trigger('click');
+}, 1)
 
 $('.result').on('click', function() {
     $('#place_name').val($(this).text().trim());
@@ -73,17 +77,12 @@ $('.edit').on('click', function() {
 
     let dTimeInput = '<input type="text" name="editTime" class="editInput" value="' + dTime + '">';
     let dPlaceInput = '<input type="text" name="editPlace" class="editInput" value="' + dPlace + '">';
-    let dElseInput = '<textarea name="editElse" class="editInput" style="resize: none; width: 600px; height: 30px; padding: 10px;">' + dElse + '</textarea>';
+    let dElseInput = '<textarea name="editElse" class="editInput" style="resize: none; width: 600px; height: 300px; padding: 10px;">' + dElse + '</textarea>';
 
     $(this).closest('.plan_content').children('.dTime').html(dTimeInput);
     $(this).closest('.plan_content').children('.dPlace').html(dPlaceInput);
     $(this).closest('.plan_content').children('.dElse').html(dElseInput);
 
-    console.log(dTime);
-    console.log(dPlace);
-    console.log(dElse);
-    console.log(dTimeInput);
-    console.log(dPlaceInput);
-    console.log(dElseInput);
-    console.log($(this).text());
+    $(this).removeClass('edit').addClass('done');
+    $(this).off('click');
 });
