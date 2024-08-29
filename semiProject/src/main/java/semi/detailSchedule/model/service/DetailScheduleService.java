@@ -50,4 +50,20 @@ public class DetailScheduleService {
 		
 		return result;
 	}
+
+	public int updateDetail(DetailSchedule ds) {
+		Connection conn = getConnection();
+		
+		int result = new DetailScheduleDao().updateDetail(conn, ds);
+		
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
 }

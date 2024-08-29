@@ -32,6 +32,8 @@ public class DeleteDetailScheduleController extends HttpServlet {
 		int dno = Integer.parseInt(request.getParameter("dno"));
 		
 		int result = new DetailScheduleService().deleteDetail(mno, dno);
+		
+		response.getWriter().print(result);
 	}
 
 	/**

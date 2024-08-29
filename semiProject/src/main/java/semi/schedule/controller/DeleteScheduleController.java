@@ -31,6 +31,8 @@ public class DeleteScheduleController extends HttpServlet {
 		int sno = Integer.parseInt(request.getParameter("sno"));
 		
 		int result = new ScheduleService().deletSchedule(mno, sno);
+		
+		response.getWriter().print(result);
 	}
 
 	/**

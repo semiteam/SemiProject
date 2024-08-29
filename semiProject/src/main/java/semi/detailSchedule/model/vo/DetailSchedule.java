@@ -16,6 +16,16 @@ public class DetailSchedule {
 	private int sdNo;
 	
 	public DetailSchedule() {}
+	
+	public DetailSchedule(int dNo, String dPlace, Timestamp dStimeT, Timestamp dEtimeT, String dElse, int mNo) {
+		super();
+		this.dNo = dNo;
+		this.dPlace = dPlace;
+		this.dStimeT = dStimeT;
+		this.dEtimeT = dEtimeT;
+		this.dElse = dElse;
+		this.mNo = mNo;
+	}
 
 	public DetailSchedule(int dNo, String dPlace, String dStime, String dEtime, Timestamp dStimeT, Timestamp dEtimeT,
 			String dElse, Date dDate, int mNo, int sdNo) {

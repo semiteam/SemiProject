@@ -46,4 +46,14 @@
 		 WHERE D_NO = ?
 		   AND M_NO = ?
    </entry>
+   
+   <entry key="updateDetail">
+   		UPDATE DETAIL_SCHEDULE
+		   SET D_PLACE = ?
+		     , D_STIME = ?
+		     , D_ETIME = ?
+		     , D_ELSE = ?
+		 WHERE M_NO = ?
+		   AND D_NO = ?
+   </entry>
 </properties>

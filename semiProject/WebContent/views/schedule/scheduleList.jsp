@@ -354,8 +354,12 @@
 						                    mno: <%= loginUser.getmNo() %>,
 						                    sno: $(event.target).attr('id').replace('delete', '').trim(),
 						                },
-						                success: function(response) {
-						                	alert('일정 삭제에 성공하였습니다.');
+						                success: function(result) {
+						                	if (result > 0) {
+                                                alert('일정 삭제에 성공하였습니다.');
+                                            } else {
+                                                alert('일정 삭제에 실패하였습니다.');
+                                            }
 						                    location.reload();
 						                },
 						                error: function() {

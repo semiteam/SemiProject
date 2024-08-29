@@ -212,7 +212,8 @@
                                                         <div class="dElse"><%= list.get(j).getdElse() %></div>
                                                         <div class="mini_bar material-symbols-outlined">
                                                             <div class="material-symbols-outlined fs edit">edit</div>
-                                                            <div class="material-symbols-outlined fs" id="delete<%= list.get(j).getdNo() %>" onclick="deletePlan(event)">delete</div>
+                                                            <div class="material-symbols-outlined fs done" id="done<%= list.get(j).getdNo() %>" style="display: none;">check</div>
+                                                            <div class="material-symbols-outlined fs last" id="delete<%= list.get(j).getdNo() %>" onclick="deletePlan(event)">delete</div>
                                                         </div>
                                                     </div>
                                                 <% } else { %>
@@ -226,24 +227,18 @@
                                             <script>
 						                        $(function() {
 						                            let finalHeight = 0;
-						                            
-                                                    console.log($('.plan_content_count<%= i %>').length);
 
 						                            for (let j = 0; j < $('.plan_content_count<%= i %>').length; j++) {
 						                                let className = '.plan_content' + j + <%= i %> + '.plan_content_count<%= i %>';
 						                                finalHeight += $(className).height();
-						                                console.log(className, finalHeight);
 						                            }
 						
 						                            let length = 'calc(' + finalHeight + 'px + (30px * ' + ($('.plan_content').length - 1) + '))';
-						                            
-						                            console.log(length)
 						
                                                     $('#bar<%= i %>').css('height', length);
                                                     $('#map<%= i %>').css('height', length);
                     
                                                     $('#cancle').on('click', function() {
-                                                        console.log(length);
                                                         $('#add_detail').css('width', '');
                                                         $('#add_detail table').css('display', '');
                                                         $('#map<%= i %>').css({
@@ -275,50 +270,7 @@
 						                                });
 						                                $('.plan').css('flex-direction', 'column');
 						                            });
-
-                                                    $('.done').on('click', function() {
-                                                        $.ajax({
-                                                            url: '<%= contextPath %>/EditDetail.d',
-                                                            method: 'post',
-                                                            data: {
-                                                                dTime: $(this).closest('.plan_content').children('dTime').val(),
-                                                                dPlace: $(this).closest('.plan_content').children('dPlace').val(),
-                                                                dElse: $(this).closest('.plan_content').children('dElse').text(),
-                                                            },
-                                                            success: function() {
-                                                                alert('세부 일정 수정에 성공하였습니다.');
-                                                                location.reload();
-                                                            },
-                                                            error: function() {
-                                                                alert('세부 일정 수정에 실패하였습니다..');
-                                                                location.reload();
-                                                            }
-                                                        });
-                                                    })
 						                        });
-                                                
-                                                function deletePlan(event) {
-                                                    event.stopPropagation();
-                                                    
-                                                    if (confirm("세부 일정을 삭제하시겠습니까?")) {
-                                                        $.ajax({
-                                                            url: '<%= contextPath %>/DeleteDetail.d',
-                                                            method: 'post',
-                                                            data: {
-                                                                mno: <%= loginUser.getmNo() %>,
-                                                                dno: $(event.target).attr('id').replace('delete', '').trim(),
-                                                            },
-                                                            success: function(response) {
-                                                                alert('세부 일정 삭제에 성공하였습니다.');
-                                                                location.reload();
-                                                            },
-                                                            error: function() {
-                                                                alert('세부 일정 삭제에 실패하였습니다.');
-                                                                location.reload();
-                                                            }
-                                                        });
-                                                    }
-                                                }
                                             </script>
                                         </div>
                                     </div>
@@ -329,6 +281,72 @@
 		                    </div>
 		                <% } %>
                     <% } %>
+
+                    <script>
+                        $(function() {
+                            $('.done').on('click', function() {
+                                let timeInput = $('#editTime').val();
+
+                                let pattern = /^([01]\d|2[0-3]):([0-5]\d):([0-5]\d) ~ ([01]\d|2[0-3]):([0-5]\d):([0-5]\d)$/;
+                                
+                                if (pattern.test(timeInput)) {
+                                    $.ajax({
+                                        url: '<%= contextPath %>/EditDetail.d',
+                                        method: 'post',
+                                        data: {
+                                            dTime: $(this).closest('.plan_content').children('.dTime').children('input').val(),
+                                            dPlace: $(this).closest('.plan_content').children('.dPlace').children('input').val(),
+                                            dElse: $(this).closest('.plan_content').children('.dElse').text(),
+                                            dno: $(this).attr('id').replace('done', '').trim(),
+                                            mno: <%= loginUser.getmNo() %>,
+                                            dDate: $(this).closest('.detail').children('.date_div').children('.date').text(),
+                                        },
+                                        success: function(result) {
+                                            if (result > 0) {
+                                                alert('세부 일정 수정에 성공하였습니다.');
+                                            } else {
+                                                alert('세부 일정 수정에 실패하였습니다.');
+                                            }
+                                            location.reload();
+                                        },
+                                        error: function() {
+                                            alert('세부 일정 수정에 실패하였습니다.');
+                                            location.reload();
+                                        }
+                                    });
+                                } else {
+                                    alert('HH:MM:SS ~ HH:MM:SS와 같은 형식으로 입력 바랍니다.')
+                                }
+                            });
+                        })
+
+                        function deletePlan(event) {
+                            event.stopPropagation();
+                            
+                            if (confirm("세부 일정을 삭제하시겠습니까?")) {
+                                $.ajax({
+                                    url: '<%= contextPath %>/DeleteDetail.d',
+                                    method: 'post',
+                                    data: {
+                                        mno: <%= loginUser.getmNo() %>,
+                                        dno: $(event.target).attr('id').replace('delete', '').trim(),
+                                    },
+                                    success: function(result) {
+                                        if (result > 0) {
+                                            alert('세부 일정 삭제에 성공하였습니다.');
+                                        } else {
+                                            alert('세부 일정 삭제에 실패하였습니다.');
+                                        }
+                                        location.reload();
+                                    },
+                                    error: function() {
+                                        alert('세부 일정 삭제에 실패하였습니다.');
+                                        location.reload();
+                                    }
+                                });
+                            }
+                        }
+                    </script>
                     <br><br>
                 </div>
 

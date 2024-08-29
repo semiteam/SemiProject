@@ -70,19 +70,19 @@ $('.minute').on('keyup', function() {
     }
 });
 
-$('.edit').on('click', function() {
+$('.edit').one('click', function() {
     let dTime = $(this).closest('.plan_content').children('.dTime').text();
     let dPlace = $(this).closest('.plan_content').children('.dPlace').text();
     let dElse = $(this).closest('.plan_content').children('.dElse').text();
 
-    let dTimeInput = '<input type="text" name="editTime" class="editInput" value="' + dTime + '">';
-    let dPlaceInput = '<input type="text" name="editPlace" class="editInput" value="' + dPlace + '">';
-    let dElseInput = '<textarea name="editElse" class="editInput" style="resize: none; width: 600px; height: 300px; padding: 10px;">' + dElse + '</textarea>';
+    let dTimeInput = '<input type="text" name="editTime" id="editTime" class="editInput" value="' + dTime + '">';
+    let dPlaceInput = '<input type="text" name="editPlace" id="editPlace" class="editInput" value="' + dPlace + '">';
+    let dElseInput = '<textarea name="editElse" id="editElse" class="editInput" style="resize: none; width: 615px; height: 300px; padding: 10px;">' + dElse + '</textarea>';
 
     $(this).closest('.plan_content').children('.dTime').html(dTimeInput);
     $(this).closest('.plan_content').children('.dPlace').html(dPlaceInput);
     $(this).closest('.plan_content').children('.dElse').html(dElseInput);
 
-    $(this).removeClass('edit').addClass('done');
-    $(this).off('click');
+    $(this).closest('.mini_bar').children('.done').css('display', 'block');
+    $(this).css('display', 'none');
 });

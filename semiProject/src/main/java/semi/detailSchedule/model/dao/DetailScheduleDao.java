@@ -111,4 +111,31 @@ public class DetailScheduleDao {
 		
 		return result;
 	}
+
+	public int updateDetail(Connection conn, DetailSchedule ds) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("updateDetail");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, ds.getdPlace());
+			pstmt.setTimestamp(2, ds.getdStimeT());
+			pstmt.setTimestamp(3, ds.getdEtimeT());
+			pstmt.setString(4, ds.getdElse());
+			pstmt.setInt(5, ds.getmNo());
+			pstmt.setInt(6, ds.getdNo());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(conn);
+		}
+		
+		return result;
+	}
 }
