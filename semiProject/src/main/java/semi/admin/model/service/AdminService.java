@@ -93,5 +93,15 @@ public class AdminService {
 		
 		return count;
 	}
+
+	public int questionCount() {
+		Connection conn = getConnection();
+		
+		int count = new AdminDao().qusetionCount(conn);
+		
+		close(conn);
+		
+		return count;
+	}
 	
 }

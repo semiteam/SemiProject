@@ -11,7 +11,7 @@
 	int age20s = (int)request.getAttribute("age20s"); // 20대 회원수
 	int age30s = (int)request.getAttribute("age20s"); // 30대 회원수
 	int over40s = (int)request.getAttribute("over40s"); // 40대 이상 회원수
-	
+	int nRcount = (int)request.getAttribute("nRcount"); // 답변이 안달린 고객문의 글 수
 	
 	
 %>
@@ -101,8 +101,8 @@
                                 <div id="daily-visitor-count" class="counter"><%=newCount%></div>
                             </div>
                             <div class="count-item">
-                                <h4>?</h4>
-                                <div id="" class="counter">뭐넣지</div>
+                                <h4>답변 안된 문의글</h4>
+                                <div id="question-count" class="counter"><%=nRcount %></div>
                             </div>
 
                         </div>

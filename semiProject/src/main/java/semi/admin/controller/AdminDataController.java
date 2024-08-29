@@ -66,6 +66,10 @@ public class AdminDataController extends HttpServlet {
 			
 			int over40s = new AdminService().over40sCount(); // 40대이상 회원수
 			request.setAttribute("over40s", over40s);
+			
+			int nRcount = new AdminService().questionCount();
+			request.setAttribute("nRcount", nRcount);
+			
 			request.getRequestDispatcher("views/admin/admin2.jsp").forward(request, response);
 		}
 	}

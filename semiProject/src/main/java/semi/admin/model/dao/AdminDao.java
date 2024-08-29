@@ -232,4 +232,29 @@ public class AdminDao {
 		
 		return count;
 	}
+
+	public int qusetionCount(Connection conn) {
+		int count = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("qusetionCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				count = rset.getInt("COUNT");
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return count;
+	}
 }

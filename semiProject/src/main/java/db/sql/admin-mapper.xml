@@ -92,5 +92,13 @@
 	
 	</entry>
 	
+	<entry key="qusetionCount">
+SELECT 
+       COUNT(*) AS COUNT 
+  FROM QUESTION
+ WHERE Q_ANSWER = 'N'
+   AND Q_STATUS = 'Y'
+	</entry>
+	
 
 </properties>
