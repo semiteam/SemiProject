@@ -112,6 +112,9 @@
                                         <th width ="120px">작성자</th>              
                                         <th width ="120px">작성일</th>
                                         <th width ="100px">답변여부</th>
+                                      <%if(loginAdmin != null) { %>
+                                       	<th width ="120px">비밀번호</th>
+                                       	<% } %>
                                     </tr>
                                 </thead>
                             <% for(Question q : list ) { %>
@@ -122,6 +125,9 @@
                                         <td><%=q.getmName()%></td>
                                         <td><%=q.getqDate()%></td>
                                         <td><%=q.getqAnswer()%></td>
+                                         <%if(loginAdmin != null) { %>
+                                       	<th width ="120px"><%=q.getqPwd() %></th>
+                                       	<% } %>
                                       
                                     </tr>
                                 </tbody>
@@ -156,14 +162,20 @@
                 $(".table-list>tbody>tr").click(function(){
                     
                     var correctpwd = $(this).data("pwd");
+                   
+                  
+                    
                     if(correctpwd == null || correctpwd == 0){
                         location.href = '<%=contextPath%>/detail.sc?qNo=' + $(this).children().eq(0).text();
                     }else{
+                    	
                         var enteredPwd = prompt("문의 작성시 설정했던 비밀번호를 입력해주세요 : ");
                              if(enteredPwd == correctpwd){
                                 location.href = '<%=contextPath%>/detail.sc?qNo=' + $(this).children().eq(0).text();
                             } else {
                                alert("잘못된 비밀번호 입니다.");
+                    		
+                    	
                       }
                     }
                     

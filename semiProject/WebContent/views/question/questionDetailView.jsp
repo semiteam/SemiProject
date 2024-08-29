@@ -66,9 +66,9 @@
 
             <div class="under">
                 <div class="side_menu">
-                    <div id="side_menu_open_1" onclick="location.href='../관리자페이지/index.html'">회원 관리</div>
-                    <div id="side_menu_open_2" onclick="location.href='../관리자페이지/index2.html' ">사용자 통계</div>
-                    <div id="side_menu_open_3" onclick="location.href='../관리자페이지/index3.html'" style="font-weight: 900;">수익 관리</div>
+                    <div id="side_menu_open_1" onclick="location.href='../관리자페이지/index.html'">여행 갈래?</div>
+                    <div id="side_menu_open_2" onclick="location.href='../관리자페이지/index2.html' ">계획 짤래?</div>
+                    <div id="side_menu_open_3" onclick="location.href='../관리자페이지/index3.html'" style="font-weight: 900;">리뷰 볼래?</div>
                     <div id="close_btn" onclick="side_close()"><img src="./resources/img/chevron_left_24dp_5F6368.png" alt="왼쪽화살표"></div>
                     
                     <div id="side_menu_close_1" onclick="location.href='../여행_갈래/여행_갈래.html'">
@@ -105,10 +105,10 @@
                             <button type="button" onclick ="location.href ='<%=request.getContextPath() %>/delete.sc?qNo=<%=q.getqNo()%>'" class="btn btn-secondary" style="background-color: red;">삭제하기</button>
                         <%}%>
                     </form>    
-
-                        <% if(loginAdmin != null) {%>
+					<% if(q.getqAnswer().equals("Y") ||loginAdmin != null ){ %>
                         <div class="content-reply" id="reply-area">
                             <table class="reply-table">
+                        <% if(loginAdmin != null) {%>
                             <thead>
                                 <tr>
                                      <td><p name="aName" class="reply-top">작성자 :<%=loginAdmin.getaId()%></p></td>
@@ -117,8 +117,9 @@
                                     <td><textarea name="reply" id="replyContent" class="input-reply" required placeholder="문의답변작성"></textarea></td>
                                 </tr>
                                     <td><button onclick="insertReply()" class="btn btn-secondary" style="margin-bottom: 20px; margin-top: 0;">답변등록</button></td>
-                       <% } %>
  				             </thead>
+                       <% } %>
+                     <% } %>
 		                       <tbody>
                                </tbody>
                            </table>
@@ -142,7 +143,7 @@
                 data : {
                     content:$("#replyContent").val(),
                     qNo :<%= q.getqNo()%>,
-                    aNo :<%= loginAdmin.getaNo()%>,
+                    
                     
                 },
                 type:"post",

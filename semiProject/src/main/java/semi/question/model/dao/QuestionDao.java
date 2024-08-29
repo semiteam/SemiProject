@@ -190,9 +190,8 @@ public class QuestionDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, r.getaNo());
-			pstmt.setInt(2, r.getqNo());
-			pstmt.setString(3, r.getrContent());
+			pstmt.setInt(1, r.getqNo());
+			pstmt.setString(2, r.getrContent());
 			
 			result = pstmt.executeUpdate();
 			

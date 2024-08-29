@@ -96,7 +96,7 @@ INSERT
 	  VALUES
 	  (
 	   SEQ_REPLY.NEXTVAL
-	  , ?
+	  , 1
 	  , ?
 	  , ?
 	  )

@@ -33,11 +33,10 @@ public class AjaxReplyInsertController extends HttpServlet {
 		int qNo = Integer.parseInt(request.getParameter("qNo"));
 		String replyContent = request.getParameter("content");
 		
-		int aNo = ((Admin)request.getSession().getAttribute("loginAdmin")).getaNo();
+		
 		
 		Reply r = new Reply();
 		r.setqNo(qNo);
-		r.setaNo(aNo);
 		r.setrContent(replyContent);
 		
 		int result1 = new QuestionService().insertReply(r);
