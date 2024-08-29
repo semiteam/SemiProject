@@ -70,7 +70,7 @@ $('#choice').on('click', function() {
     }
 })
 
-$('.search_result').on('click', function() {
+$('#search___').on('click', '.search_result', function() {
     $('#place_name').val($(this).text().trim());
     $('#place_name').attr('name', 'choice');
 });

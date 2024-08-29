@@ -75,7 +75,7 @@ label {margin-right: 30px;}
     background-color: #fff;
     overflow: hidden;
     width: 98.5%;
-    height: 100px;
+    height: auto;
     padding: 10px;
     cursor: pointer;
 }

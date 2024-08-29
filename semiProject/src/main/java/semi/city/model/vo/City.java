@@ -14,6 +14,12 @@ public class City {
 		this.cityCountry = cityCountry;
 	}
 
+	public City(String cityName, String cityCountry) {
+		super();
+		this.cityName = cityName;
+		this.cityCountry = cityCountry;
+	}
+
 	public int getCityNo() {
 		return cityNo;
 	}

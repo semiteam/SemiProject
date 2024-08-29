@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
-	<entry key ="">
-		
-   </entry>
+	<entry key="selectCity">
+	  <![CDATA[
+		  SELECT CITY_NAME
+		       , CITY_COUNTRY
+		    FROM CITY
+		   WHERE (CITY_NAME LIKE ?
+		      OR CITY_COUNTRY LIKE ?)
+		     AND ROWNUM <= 10 
+		   GROUP
+		      BY CITY_NAME
+		       , CITY_COUNTRY
+	  ]]>
+	</entry>
+
 </properties>

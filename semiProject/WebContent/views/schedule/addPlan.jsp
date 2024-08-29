@@ -13,7 +13,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 
         <!-- jQuery library -->
-        <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
         <!-- Popper JS -->
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
@@ -108,16 +108,52 @@
                             </tr>
 
                             <tr>
-                                <td colspan="3">
+                                <td id="search___" colspan="3">
                                     <div id="search_place_t" class="white big">장소 검색</div>
                                     <div id="search_place_b">
-                                        <input type="text" name="place_name" id="place_name">
+                                        <input type="text" name="place_name" id="place_name" placeholder="도시 또는 나라 검색">
                                         <button type="button" class="material-symbols-outlined" id="search_btn">search</button>
                                     </div>
-                                    <div class="search_result">
-                                        결과들 유동적으로 추가할 예정
-                                    </div>
-                                    <div id="search_place_add" class="white">장소 추가하기</div>
+                                    <div id="search___result"></div>
+                                    <script>
+                                        function getResult(value) {
+                                            $.ajax({
+                                                type: "get",
+                                                url: "<%= contextPath%>/SelectCity.c",
+                                                dataType: 'json',
+                                                data: {
+                                                    value: value,
+                                                },
+                                                success: function(data) {
+                                                    $('#search___result').html('');
+
+                                                    let str = '';
+
+                                                    if (data === null) {
+                                                        str += '<div id="search_place_add" class="white">장소 추가하기</div>';
+                                                    } else {
+                                                        $.each(data, function(i) {
+                                                            str += '<div class="search_result">' + data[i].cityName + ' / ' + data[i].cityCountry + '</div>'
+                                                        });
+                                                        str += '<div id="search_place_add" class="white">장소 추가하기</div>';
+                                                    }
+
+                                                    $('#search___result').append(str);
+                                                },
+                                                error: function() {
+                                                    console.log("통신 실패");
+                                                }
+                                            })
+                                        };
+
+                                        $('#place_name').on('keyup', function() {
+                                            if ($(this).val() === '') {
+                                                $('#search___result').html('');
+                                            } else {
+                                                getResult($(this).val());
+                                            }
+                                        });
+                                    </script>
                                 </td>
                             </tr>
 
