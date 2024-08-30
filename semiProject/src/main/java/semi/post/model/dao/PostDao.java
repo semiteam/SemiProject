@@ -73,6 +73,7 @@ public class PostDao {
 			while(rset.next()) {
 				list.add(new Post(rset.getInt("POST_NO"),
 								  rset.getString("POST_TITLE"),
+								  rset.getString("POST_CONTENT"),
 								  rset.getString("M_ID"),
 								  rset.getString("M_NAME"),
 								  rset.getInt("POST_RECOMMEND"),

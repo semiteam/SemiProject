@@ -116,9 +116,6 @@ public class GoAdminMainController extends HttpServlet {
 			request.setAttribute("postPi", postPi);
 			request.setAttribute("postList", postList);
 			
-		
-			
-			
 			
 			
 			request.getRequestDispatcher("views/admin/admin1.jsp").forward(request, response);

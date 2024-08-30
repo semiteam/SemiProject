@@ -316,71 +316,70 @@
     </div>
 </div>
      <script>
-      $(()=>{
-        $('.post-info').on('click',(event)=>{
-            event.stopPropagation();
-
-            const pNo = $(this).data('pno');
-            const qNo= $(this).data('qno');
+     $(document).ready(function() {
+        // Handle post click to open modal
+        $(document).on('click', '.post-info', function(event) {
+            event.stopPropagation(); // Prevent event bubbling
+            
+            const postNo = $(this).data('post-no');
+            const questionNo = $(this).data('question-no');
 
             let contentHtml = '';
 
-            <% if (postList != null && postList.isEmpty()){ %>
-                <% for (Post p : postList) {%>
-                    if( '<%=p.getPostNo()%>'==pNo){
+            // Show post content if available
+            <% if (postList != null && !postList.isEmpty()) { %>
+                <% for (Post p : postList) { %>
+                    if ('<%=p.getPostNo()%>' == postNo) {
                         contentHtml += `
-                            <div class = 'comment'>
-                                <p>글 내용 : <%= p.getPostContent() %>
-                               
-                                </div>
-                                <hr>
-                                `;
+                            <div class='comment'>
+                                <p>글 내용: <%= p.getPostContent() %></p>
+                            </div>
+                            <hr>
+                        `;
                     }
-                    <% } %>
                 <% } %>
+            <% } %>
 
-            <% if (qList != null && qList.isEmpty()){ %>
-                <% for (Question q : qList) {%>
-                    if( '<%=q.getqNo()%>'==qNo){
+            // Show question content if available
+            <% if (qList != null && !qList.isEmpty()) { %>
+                <% for (Question q : qList) { %>
+                    if ('<%=q.getqNo()%>' == questionNo) {
                         contentHtml += `
-                            <div class = 'comment'>
-                                <p>문의내용 : <%= q.getqContent()%>
-                                </div>
-                                <hr>
-                                `;
+                            <div class='comment'>
+                                <p>문의내용: <%= q.getqContent() %></p>
+                            </div>
+                            <hr>
+                        `;
                     }
-                    <% } %>
                 <% } %>
+            <% } %>
 
-                if( contentHtml === '') {
-                    contentHtml = '<p>이 사용자가 작성한 글이 없습니다.</p>';
-    	        }
+            if (contentHtml === '') {
+                contentHtml = '<p>이 사용자가 작성한 글이 없습니다.</p>';
+            }
 
-                $('#commentModal .comments-list').html(contentHtml);
-    	        $('#commentModal').css('display', 'block');
-    	    });
+            $('#commentModal .comments-list').html(contentHtml);
+            $('#commentModal').css('display', 'block');
+        });
 
-    	    // Close the comment modal when the close button is clicked
-    	    $('#commentModal .close').on('click', function() {
-    	        $('#commentModal').css('display', 'none');
-    	    });
+        // Close modal logic
+        $('#commentModal .close').on('click', function() {
+            $('#commentModal').css('display', 'none');
+        });
 
-    	    // Close the comment modal when clicking outside of it
-    	    $(window).on('click', function(event) {
-    	        if ($(event.target).is('#commentModal')) {
-    	            $('#commentModal').css('display', 'none');
-    	        }
-            
-        })
+        $(window).on('click', function(event) {
+            if ($(event.target).is('#commentModal')) {
+                $('#commentModal').css('display', 'none');
+            }
+        });
 
-     })
-     
+        // Repeat similar handlers for user-info and other actions
+    });
      
      
      
 
      $(()=>{
-    	  
     	    $('.comment-btn').on('click', function(event) {
     	        event.stopPropagation();  
 
@@ -495,7 +494,7 @@
             $(function(){
 
             $('.btn-del').on('click',function(){
-            
+                event.stopPropagation(); //  이벤트 전파를 멈추게 해주는 메소드
                 const postNo = $(this).data('post-no'); 
                 
                 if (confirm('정말로 게시글을 지우시겠습니까?')) {

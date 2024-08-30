@@ -17,6 +17,7 @@ SELECT ROWNUM RNUM, A.*
 SELECT 
                     POST_NO
                   , POST_TITLE
+                  , POST_CONTENT
                   , M_ID
                   , M_NAME
                   , POST_RECOMMEND

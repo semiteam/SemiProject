@@ -34,10 +34,11 @@ public class Post {
 	
 	
 
-	public Post(int postNo, String postTitel,String mId, String mName, int postRecommend, Date postDate) {
+	public Post(int postNo, String postTitel, String postContent, String mId, String mName, int postRecommend, Date postDate) {
 		super();
 		this.postNo = postNo;
 		this.postTitel = postTitel;
+		this.postContent = postContent;
 		this.postRecommend = postRecommend;
 		this.postDate = postDate;
 		this.mId = mId;
