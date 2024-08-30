@@ -103,13 +103,13 @@
                     	<input type="hidden" name="mno" value="<%= loginUser.getmNo() %>">
                         <table>
                             <tr>
-                                <td id="plan_name_t" class="white big"><div>여행명</div></td>
+                                <td id="plan_name_t" class="white"><div>여행명</div></td>
                                 <td colspan="2"><input type="text" name="plan_title" id="plan_title"></td>
                             </tr>
 
                             <tr>
                                 <td id="search___" colspan="3">
-                                    <div id="search_place_t" class="white big">장소 검색</div>
+                                    <div id="search_place_t" class="white">도시 검색</div>
                                     <div id="search_place_b">
                                         <input type="text" name="place_name" id="place_name" placeholder="도시 또는 나라 검색">
                                         <button type="button" class="material-symbols-outlined" id="search_btn">search</button>
@@ -130,12 +130,12 @@
                                                     let str = '';
 
                                                     if (data === null) {
-                                                        str += '<div id="search_place_add" class="white">장소 추가하기</div>';
+                                                        str += '<div id="search_place_add" class="white">도시 추가하기</div>';
                                                     } else {
                                                         $.each(data, function(i) {
                                                             str += '<div class="search_result">' + data[i].cityName + ' / ' + data[i].cityCountry + '</div>'
                                                         });
-                                                        str += '<div id="search_place_add" class="white">장소 추가하기</div>';
+                                                        str += '<div id="search_place_add" class="white">도시 추가하기</div>';
                                                     }
 
                                                     $('#search___result').append(str);
@@ -146,20 +146,22 @@
                                             })
                                         };
 
-                                        $('#place_name').on('keyup', function() {
-                                            if ($(this).val() === '') {
-                                                $('#search___result').html('');
-                                            } else {
-                                                getResult($(this).val());
-                                            }
-                                        });
+                                        $(function() {
+                                            $('#place_name').on('keyup', function() {
+                                                if ($(this).val() === '') {
+                                                    $('#search___result').html('');
+                                                } else {
+                                                    getResult($(this).val());
+                                                }
+                                            });
+                                        })
                                     </script>
                                 </td>
                             </tr>
 
                             <tr>
                                 <td colspan="3">
-                                    <div id="trip_date_t" class="white big">여행 일정</div>
+                                    <div id="trip_date_t" class="white">여행 일정</div>
                                     <div id="making_plan">
                                         <div id="calendar-container">
                                             <div id="calendar">
@@ -183,13 +185,14 @@
 
                             <tr>
                                 <td colspan="3">
-                                    <div id="explanation_t" class="white big">설명</div>
+                                    <div id="explanation_t" class="white">설명</div>
                                     <textarea name="explanation_e" id="explanation_e" style="overflow-y: auto;"></textarea>
+                                    <div id="count_else" style="color: white;">0/1000</div>
                                 </td>
                             </tr>
 
                             <tr class="white">
-                                <td class="big" colspan="2">공개 범위 설정</td>
+                                <td colspan="2">공개 범위 설정</td>
                                 <td>
                                     <input type="radio" name="range" id="all" value="1"checked>
                                     <label for="all">전체 공개</label>
@@ -203,7 +206,7 @@
                             </tr>
 
                             <tr class="white">
-                                <td class="big" colspan="2">배경 이미지</td>
+                                <td colspan="2">배경 이미지</td>
                                 <td>
                                     <input type="radio" name="img" id="random" value="<%= random %>" checked>
                                     <label for="random">랜덤</label>
@@ -344,27 +347,21 @@
                 </div>
             </div>
             
-            <form action="" id="place_add">
+            <div id="place_add">
                 <span id="cancle" class="material-symbols-outlined">close</span>
                 <table id="place_add_table">
                     <tr>
-                        <th>장소명</th>
-                        <td><input type="text"></td>
+                        <th>* 도시명</th>
+                        <td><input type="text" id="cityName"></td>
                     </tr>
 
                     <tr>
-                        <th>주소</th>
-                        <td><input type="text"></td>
-                    </tr>
-
-                    <tr id="clock">
-                        <th>운영시간</th>
-                        <td>
-                        </td>
+                        <th>* 나라명</th>
+                        <td><input type="text" id="countryName"></td>
                     </tr>
 
                     <tr>
-                        <th>장소 설명</th>
+                        <th>도시 설명</th>
                         <td></td>
                     </tr>
 
@@ -375,9 +372,45 @@
                         </td>
                     </tr>
                     
-                    <input type="submit" value="장소 추가 완료하기" id="add_done_place">
+                    <input type="button" value="도시 추가 완료하기" id="add_done_place">
+
+                    <script>
+                        $(function() {
+                            $('#add_done_place').on('click', function() {
+                                if ($('#countryName').val() === '' || $('#cityName').val() === '') {
+                                    if ($('#cityName').val() === '') {
+                                        alert('도시명을 입력해주십시오.');
+                                    } else {
+                                        alert('나라명을 입력해주십시오.');
+                                    }
+                                } else {
+                                    $.ajax({
+                                        url: '<%= contextPath %>/InsertCity.c',
+                                        method: 'post',
+                                        data: {
+                                            cityName: $('#cityName').val(),
+                                            countryName: $('#countryName').val(),
+                                        },
+                                        success: function(result) {
+                                            if (result > 0) {
+                                                alert('도시 추가에 성공하였습니다.');
+                                                setTimeout(() => {
+                                                    $('#cancle').trigger('click');
+                                                }, 0)
+                                            } else {
+                                                alert('도시 추가에 실패하였습니다.');
+                                            }
+                                        },
+                                        error: function() {
+                                            alert('도시 추가에 실패하였습니다.');
+                                        }
+                                    });
+                                }
+                            })
+                        })
+                    </script>
                 </table>
-            </form>
+            </div>
         </div>
     </body>
 </html>

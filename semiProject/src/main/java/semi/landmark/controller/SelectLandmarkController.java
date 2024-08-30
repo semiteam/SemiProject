@@ -1,4 +1,4 @@
-package semi.city.controller;
+package semi.landmark.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,20 +11,20 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
-import semi.city.model.service.CityService;
-import semi.city.model.vo.City;
+import semi.landmark.model.service.LandmarkService;
+import semi.landmark.model.vo.Landmark;
 
 /**
- * Servlet implementation class SelectCityController
+ * Servlet implementation class SelectLandmarkController
  */
-@WebServlet("/SelectCity.c")
-public class SelectCityController extends HttpServlet {
+@WebServlet("/SelectLandmark.l")
+public class SelectLandmarkController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SelectCityController() {
+    public SelectLandmarkController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,7 +38,7 @@ public class SelectCityController extends HttpServlet {
 		String str = request.getParameter("value");
 		String value = "%" + str + "%";
 		
-		ArrayList<City> list = new CityService().selectCity(value);
+		ArrayList<Landmark> list = new LandmarkService().selectLandmark(value);
 		
 		response.setContentType("application/json; charset=utf-8");
 		new Gson().toJson(list, response.getWriter());

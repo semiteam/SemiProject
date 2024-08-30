@@ -70,26 +70,28 @@
     height: auto !important;
 }
 
-#add_detail table {
+#add_detail table:not(#place_add_table) {
     width: 75%;
     margin: 35px auto;
     display: none;
 }
 
-#add_detail table tr .detail_title {
+#add_detail table:not(#place_add_table) tr .detail_title {
     width: 20%;
     height: 40px;
-    padding: 20px 0;
+    padding: 30px 0;
     vertical-align: middle;
 }
 
-#add_detail tr td > div:not(:last-child):not(.aa):not(.bb),
+textarea:focus {outline: none;}
+
+#add_detail table:not(#place_add_table) tr td > div:not(:last-child):not(.aa):not(.bb):not(#search___result),
 #add_detail textarea {
-    border-radius: 10px;
+    border-radius: 20px;
     border: 1px solid #000;
 }
 
-#add_detail tr:nth-child(2) input {
+#add_detail table:not(#place_add_table) tr:nth-child(2) input {
     width: 92%;
     border: none;
     height: 35px;
@@ -100,7 +102,7 @@
     width: 100%;
     border: none;
     font-size: 20px;
-    padding-top: 17px;
+    padding-top: 27px;
 }
 
 #adit_date:focus {outline: none;}
@@ -113,34 +115,38 @@
     cursor: pointer;
 }
 
-#add_detail tr:nth-child(2) input:focus {outline: none;}
+#add_detail table:not(#place_add_table) tr:nth-child(2) input:focus {outline: none;}
 
-#add_detail tr:nth-child(2) td > div:not(:first-child) {
+#add_detail table:not(#place_add_table) tr:nth-child(2) td > div:not(:first-child):not(#search___result) {
     height: 100px;
     margin-top: 10px;
 }
 
-#add_detail tr:nth-child(2) td > div:first-child {
+#search___result {
+    height: auto;
+}
+
+#add_detail table:not(#place_add_table) tr:nth-child(2) td > div:first-child {
     overflow: hidden;
     border: 1px solid #000;
-    border-radius: 20px;
+    border-radius: 25px;
     height: 35px;
 }
 
 .add_detail_plan {cursor: pointer;}
 
-#add_detail textarea {
+#add_detail table:not(#place_add_table) textarea {
     height: 300px;
     padding: 10px;
     width: 100%;
 }
 
-#add_detail .result {
+#add_detail table:not(#place_add_table) .result {
     cursor: pointer;
     padding: 10px;
 }
 
-#add_detail td:last-child {position: relative;}
+#add_detail table:not(#place_add_table) td:last-child {position: relative;}
 
 .right {
     position: absolute;
@@ -160,6 +166,13 @@
 .time:focus {outline: none;}
 
 #watch {display: flex;}
+
+#watch input {
+    border: none;
+    border-bottom: 1px solid #000;
+}
+
+#watch1 {display: flex;}
 
 .aa {padding: 30px;}
 
@@ -191,3 +204,46 @@
 }
 
 .last {margin-left: 10px;}
+
+#place_add {
+    height: 95vh;
+    background-color: white;
+    font-size: 16px;
+    width: 75%;
+    margin: 70px auto;
+}
+
+#place_add input:not(#add_done_place) {
+    border: none;
+    border-bottom: 1px solid #000;
+    width: 100%;
+}
+
+#explanation_p {
+    width: 100%;
+    height: 300px;
+    padding: 10px;
+    resize: none;
+}
+
+#explanation_p:focus,
+#place_add input:focus {outline: none;}
+
+#place_add tr,
+#place_add td {width: 100%;}
+
+#place_add_table tr:not(:nth-child(n+4)) {height: 80px;}
+
+#place_add_table tr th:first-child {text-align: center;}
+
+#place_add_table tr:nth-child(4) {height: 25px;}
+
+#place_add_table tr:nth-child(5) td {padding-left: 12px;}
+
+#count {padding: 20px 0 0 510px;}
+
+#add_done_place {
+    border: none;
+    background-color: white;
+    padding: 20px 0 0 12px;
+}

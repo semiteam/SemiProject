@@ -14,5 +14,21 @@
 		       , CITY_COUNTRY
 	  ]]>
 	</entry>
+	
+	<entry key="insertCity">
+		INSERT
+		  INTO CITY
+		     (
+		       CITY_NO
+		     , CITY_NAME
+		     , CITY_COUNTRY
+		     ) 
+		VALUES
+		     (
+		       SEQ_CITY.NEXTVAL
+		     , ?
+		     , ?
+		     )
+	</entry>
 
 </properties>

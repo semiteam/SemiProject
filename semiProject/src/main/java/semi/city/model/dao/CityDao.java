@@ -58,4 +58,27 @@ public class CityDao {
 		
 		return list;
 	}
+
+	public int insertCity(Connection conn, String cityName, String countryName) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertCity");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, cityName);
+			pstmt.setString(2, countryName);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 }

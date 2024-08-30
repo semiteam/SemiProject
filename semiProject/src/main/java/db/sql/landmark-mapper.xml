@@ -1,1 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="selectLandmark">
+		<![CDATA[
+			SELECT LANDMARK_NAME
+			     , LANDMARK_CITY
+			  FROM LANDMARK
+			 WHERE (LANDMARK_NAME LIKE ?
+			    OR LANDMARK_CITY LIKE ?)
+			   AND ROWNUM <= 10 
+			 GROUP
+			    BY LANDMARK_NAME
+			     , LANDMARK_CITY
+		]]>
+	</entry>
+	
+	<entry key="insertLandmark">
+		INSERT
+		  INTO LANDMARK
+		     (
+		       LANDMARK_NO
+		     , LANDMARK_NAME
+		     , LANDMARK_CITY
+		     )
+		VALUES
+		     (
+		       SEQ_LANDMARK.NEXTVAL
+		     , ?
+		     , ?
+		     )
+	</entry>
+</properties>

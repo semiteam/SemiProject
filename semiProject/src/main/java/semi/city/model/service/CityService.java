@@ -18,5 +18,21 @@ public class CityService {
 		
 		return list;
 	}
+
+	public int insertCity(String cityName, String countryName) {
+		Connection conn = getConnection();
+		
+		int result = new CityDao().insertCity(conn, cityName, countryName);
+		
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
 	
 }

@@ -1,30 +1,25 @@
-package semi.city.controller;
+package semi.landmark.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
-
-import semi.city.model.service.CityService;
-import semi.city.model.vo.City;
+import semi.landmark.model.service.LandmarkService;
 
 /**
- * Servlet implementation class SelectCityController
+ * Servlet implementation class InsertLandmarkController
  */
-@WebServlet("/SelectCity.c")
-public class SelectCityController extends HttpServlet {
+@WebServlet("/InsertLandmark.l")
+public class InsertLandmarkController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SelectCityController() {
+    public InsertLandmarkController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,13 +30,12 @@ public class SelectCityController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		
-		String str = request.getParameter("value");
-		String value = "%" + str + "%";
+		String landmarkName = request.getParameter("landmarkName");
+		String landmarkCity = request.getParameter("landmarkCity");
 		
-		ArrayList<City> list = new CityService().selectCity(value);
+		int result = new LandmarkService().insertLandmark(landmarkCity, landmarkName);
 		
-		response.setContentType("application/json; charset=utf-8");
-		new Gson().toJson(list, response.getWriter());
+		response.getWriter().print(result);
 	}
 
 	/**

@@ -26,9 +26,10 @@ setTimeout(function() {
     $('.detail').children('div').not('div:eq(0)').children('.close_btn').trigger('click');
 }, 1)
 
-$('.result').on('click', function() {
+$('#search___result').on('click', '.result', function() {
     $('#place_name').val($(this).text().trim());
     $('#place_name').attr('name', 'choice');
+    $('#search___result').html('');
 });
 
 $('.circle2').on('click', function() {
@@ -39,7 +40,7 @@ $('.add_detail_plan').on('click', function() {
     $('#adit_date').val($(this).closest('.detail').children('.date_div').children('.date').text());
 })
 
-$('.hour').on('keyup', function() {
+$(document).on('keyup', '.hour', function() {
     let $this = $(this);
     let value = $this.val();
     
@@ -54,8 +55,7 @@ $('.hour').on('keyup', function() {
     }
 });
 
-
-$('.minute').on('keyup', function() {
+$(document).on('keyup', '.minute', function() {
     let $this = $(this);
     let value = $this.val();
     
@@ -85,4 +85,112 @@ $('.edit').one('click', function() {
 
     $(this).closest('.mini_bar').children('.done').css('display', 'block');
     $(this).css('display', 'none');
+});
+
+let origin = $('#add_detail').html();
+
+$('#search___result').on('click', '#add_place', function() {
+    $('#add_detail').html(`
+        <div id="place_add">
+            <span id="cancle" class="material-symbols-outlined" style="position: absolute; right: 10px; top: 0px; cursor: pointer;">close</span>
+            <table id="place_add_table">
+                <tr>
+                    <th>&nbsp;&nbsp;* 장소명&nbsp;&nbsp;</th>
+                    <td><input type="text" id="landmarkName"></td>
+                </tr>
+
+                <tr>
+                    <th>&nbsp;&nbsp;* 도시명&nbsp;&nbsp;</th>
+                    <td><input type="text" id="landmarkCity"></td>
+                </tr>
+
+                <tr id="clock">
+                    <th>&nbsp;&nbsp;운영시간&nbsp;&nbsp;</th>
+                    <td id="watch">
+                        <input type="number" name="startHour" class="time hour" id="startHour" max="23" min="0" value="11">
+                        <div class="bb">:</div>
+                        <input type="number" name="startMinute" class="time minute" id="startMinute" max="59" min="0" value="00">
+                        <div class="aa">~</div>
+                        <input type="number" name="endHour" class="time hour" id="endHour" max="23" min="0" value="13">
+                        <div class="bb">:</div>
+                        <input type="number" name="endMinute" class="time minute" id="endMinute" max="59" min="0" value="00">
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>&nbsp;&nbsp;장소 설명&nbsp;&nbsp;</th>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td id="ex_keyup" colspan="2">
+                        <textarea name="explanation_p" id="explanation_p" style="overflow: auto;"></textarea>
+                        <div id="count">0/1000</div>
+                    </td>
+                </tr>
+            </table>
+            <input type="button" value="장소 추가 완료하기" id="add_done_place">
+        </div>
+        
+        <script>
+            $(function() {
+                $('#ex_keyup').on('keyup', '#explanation_p', function() {
+                    let count = $('#explanation_p').val().length;
+    
+                    if (count >= 1000) {
+                        $('#explanation_p').val($('#explanation_p').val().substring(0,1000));
+                        $('#count').css('color', 'red').text('1000/1000');
+                    } else {
+                        $('#count').css('color', '').text(count + '/1000');
+                    }
+                });
+
+                $('#place_add').on('click', '#add_done_place', function() {
+                    if ($('#landmarkCity').val() === '' || $('#landmarkName').val() === '') {
+                        if ($('#landmarkName').val() === '') {
+                            alert('장소명을 입력해주십시오.');
+                        } else {
+                            alert('도시명을 입력해주십시오.');
+                        }
+                    } else {
+                        $.ajax({
+                            url: '<%= contextPath %>/InsertLandmark.l',
+                            method: 'post',
+                            data: {
+                                landmarkCity: $('#landmarkCity').val(),
+                                landmarkName: $('#landmarkName').val(),
+                            },
+                            success: function(result) {
+                                if (result > 0) {
+                                    alert('장소 추가에 성공하였습니다.');
+                                    setTimeout(() => {
+                                        $('#cancle').trigger('click');
+                                    }, 0)
+                                } else {
+                                    alert('장소 추가에 실패하였습니다.');
+                                }
+                            },
+                            error: function() {
+                            console.error('AJAX Error: ', status, error);
+                                alert('장소 추가에 실패하였습니다.');
+                            }
+                        });
+                    }
+                })
+            })
+        </script>
+        `
+    )
+});
+
+$('#else').on('keyup', function() {
+    let count = $('#else').val().length;
+
+    if (count >= 1000) {
+        $('#else').val($('#else').val().substring(0,1000));
+        $('#count_else').css('color', 'red').text('1000/1000');
+    } else {
+        $('#count_else').css('color', '').text(count + '/1000');
+    }
+    
 });

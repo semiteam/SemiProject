@@ -238,15 +238,8 @@
                                                     $('#bar<%= i %>').css('height', length);
                                                     $('#map<%= i %>').css('height', length);
                     
-                                                    $('#cancle').on('click', function() {
-                                                        $('#add_detail').css('width', '');
-                                                        $('#add_detail table').css('display', '');
-                                                        $('#map<%= i %>').css({
-                                                            height: length,
-                                                            width: '20vw',
-                                                            margin: '30px 0 0 20px'
-                                                        });
-                                                        $('.plan').css('flex-direction', '');
+                                                    $('#add_detail').on('click', '#cancle', function() {
+                                                        location.reload();
                                                     });
 						
 						                            $('.add_detail_plan').on('click', function() {
@@ -363,14 +356,51 @@
                                     <input type="text" id="place_name" name="place_name">
                                     <div class="material-symbols-outlined" id="search-icon">search</div>
                                 </div>
-                                <div class="result">헤이</div>
-                                <div class="result"></div>
-                                <br><br>
-                                <span class="right">장소 추가하기</span>
+                                <div id="search___result"></div>
+                                <script>
+                                    function getResult(value) {
+                                        $.ajax({
+                                            type: "get",
+                                            url: "<%= contextPath %>/SelectLandmark.l",
+                                            dataType: 'json',
+                                            data: {
+                                                value: value,
+                                            },
+                                            success: function(data) {
+                                                $("#search___result").html('');
+
+                                                let str = '';
+
+                                                if (data !== null) {
+                                                    $.each(data, function(i) {
+                                                        str += '<div class="result">' + data[i].landmarkName + ' / ' + data[i].landmarkCity + '</div>'
+                                                    });
+                                                }
+
+                                                str += '<br><br><span class="right" id="add_place">장소 추가하기</span>'
+
+                                                $('#search___result').append(str);
+                                            },
+                                            error: function() {
+                                                console.log('통신 실패')
+                                            }
+                                        });
+                                    }
+
+                                    $(function() {
+                                        $('#place_name').on('keyup', function() {
+                                            if ($(this).val() === '') {
+                                                $('#search___result').html('');
+                                            } else {
+                                                getResult($(this).val());
+                                            }
+                                        });
+                                    });
+                                </script>
                             </td>
                         </tr>
                         <tr>
-                            <td class="detail_title">날짜</td>
+                            <td id="just" class="detail_title">날짜</td>
                             <td><input type="text" name="adit_date" id="adit_date" readonly></td>
                         </tr>
                         <tr>
@@ -391,7 +421,8 @@
                         </tr>
                         <tr>
                             <td colspan="2">
-                                <textarea name="else" id="" style="resize: none;"></textarea>
+                                <textarea name="else" id="else" style="resize: none;"></textarea>
+                                <div id="count_else">0/1000</div>
                             </td>
                         </tr>
                         <tr>
