@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
-import javax.security.auth.message.callback.PrivateKeyCallback.Request;
+
 
 import static semi.common.JDBCTemplate.*;
 
@@ -377,11 +377,38 @@ public class MemberDao {
 		return m;
 	}
 	
-	public String pwdFindSearch(Connection conn, String email) {
+	/*public String pwdFindSearch(Connection conn, String email) {
 		String findPwd = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
 		String sql = prop.getProperty("pwdFindSearch");
+	}*/
+	
+	public int checkId(Connection conn, String mId) {
+	    int count = 0;
+	    PreparedStatement pstmt = null;
+	    ResultSet rset = null;
+	    
+	    String sql = prop.getProperty("checkId"); 
+
+	    try {
+	        pstmt = conn.prepareStatement(sql); 
+	        pstmt.setString(1, mId); 
+	       
+	        rset = pstmt.executeQuery();
+	        
+	        if (rset.next()) {
+	            count = rset.getInt("count");
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        close(rset);
+	        close(pstmt);
+	    }
+	   
+	    return count;
+	    
 	}
 }

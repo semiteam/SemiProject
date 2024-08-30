@@ -126,6 +126,7 @@ public class MemberService {
     	return m;
     }
     
+   /*
     public String pwdFindSearch(String email) {
     	Connection conn = getConnection();
     	
@@ -134,6 +135,15 @@ public class MemberService {
     	close(conn);
     	
     	return findPwd;
-    }
+    }*/
     
+    public int checkId(String mId) {
+    	Connection conn = getConnection();
+    	
+    	int count = new MemberDao().checkId(conn,mId);
+    	
+    	close(conn);
+    	
+    	return count;
+    }
 }

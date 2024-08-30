@@ -105,6 +105,27 @@ public class PostService {
 		return result;
 	}
 	
+	public int increaseRecommend(int postNo) {
+	    Connection conn = getConnection();
+	    int result = new PostDao().increaseRecommend(conn, postNo);
+
+	    if (result > 0) {
+	        commit(conn);
+	    } else {
+	        rollback(conn);
+	    }
+
+	    close(conn);
+	    return result;
+	}
 	
-	
+	public boolean hasRecommended(int pno, String userId) {
+	    Connection conn = getConnection();
+	    
+	    
+	    boolean result = new PostDao().hasRecommended(conn, pno, userId);
+	    
+	    close(conn);
+	    return result;
+	}
 }

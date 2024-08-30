@@ -85,3 +85,9 @@ input{
 .footer {
     background-color: black;
 }
+
+button[disabled] {
+    background-color: #aaa;
+    cursor: not-allowed;
+    color: #fff;
+}

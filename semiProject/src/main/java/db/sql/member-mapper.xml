@@ -147,4 +147,13 @@
 	    	M_EMAIL = ?
 	   AND  M_STATUS = 'U' 
 	</entry>
+	
+	<entry key="checkId">
+	SELECT 
+	       COUNT(*) "COUNT"
+	  FROM MEMBER
+	 WHERE M_ID = ?
+	</entry>
+	
+	
 </properties>

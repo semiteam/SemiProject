@@ -31,15 +31,17 @@
         <div class="user-input-id">
             <div  class="text_id" style="font-size: 20px;">ID</div>
             <input type="text" style="height: 25px; border-radius: 5px;" name="mId">
+        	
         </div>
 
         <div class="user-input-pwd">
             <div class="text_pwd" style="font-size: 20px;">PWD</div>
-            <input type="password" style="height: 25px; border-radius: 5px;" name="mPwd">
+            <input type="password" style="height: 25px; border-radius: 5px;" name="mPwd"  id="password">
+        	<div id="caps-lock-warning" style="color: red; display: none;">Caps Lock이 켜져 있습니다!</div>
         </div>
 
         <div class="abcd">
-            <a href="views/member/termsOfUse.jsp" id="newId">회원가입</a>
+            <a href="<%= contextPath %>/GoTermsOfUse.me" id="newId">회원가입</a>
             <a href="<%= contextPath %>/id.me" id="IdPwdSearch">아이디/비밀번호 찾기</a>
         </div>
 
@@ -63,7 +65,17 @@
     </form>
 
     <script>
-   
+    document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById("password").addEventListener("keyup", function(event) {
+            var capsLockWarning = document.getElementById("caps-lock-warning");
+            if (event.getModifierState("CapsLock")) {
+                capsLockWarning.style.display = "block";
+            } else {
+                capsLockWarning.style.display = "none";
+            }
+        });
+    });
+  
 
     function kakaoLogin() {
         Kakao.Auth.login({

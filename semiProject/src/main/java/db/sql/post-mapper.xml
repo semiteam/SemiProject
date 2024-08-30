@@ -136,6 +136,19 @@ VALUES
 	 WHERE POST_NO = ?  
 </entry>
 
+<entry key="increaseRecommend">
+	UPDATE POST 
+       SET POST_RECOMMEND = POST_RECOMMEND + 1 
+	 WHERE POST_NO = ?
 
+	</entry>
 
+<entry key="hasRecommended">
+SELECT 
+        COUNT(*) 
+  FROM POST 
+JOIN MEMBER USING(M_NO)  
+  WHERE  POST_NO = ?  
+    AND  M_ID = ?
+</entry>
 </properties>
