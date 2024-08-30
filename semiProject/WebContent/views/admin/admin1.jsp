@@ -1,3 +1,4 @@
+<%@page import="semi.question.model.vo.Question"%>
 <%@page import="semi.member.model.vo.Commentery"%>
 <%@page import="semi.post.model.vo.Post"%>
 <%@page import="semi.common.model.vo.PageInfo"%>
@@ -13,7 +14,7 @@
 	ArrayList<Member> list = (ArrayList<Member>)request.getAttribute("list");
 	ArrayList<Post> postList = (ArrayList<Post>)request.getAttribute("postList");
 	ArrayList<Commentery>cList = (ArrayList<Commentery>)request.getAttribute("cList"); 
-	
+	ArrayList<Question>qList = (ArrayList<Question>)request.getAttribute("qList");
 	int currentPage = pi.getCurrentPage();
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();
@@ -146,7 +147,7 @@
                                         </td> 
                                        <td>
 										    <button class="btn btn-secondary comment-btn"
-										        data-mno="<%= m.getmNo() %>">작성댓글</button>
+										        data-mno="<%= m.getmNo() %>">댓글내역</button>
 										</td>
                                       
                                     </tr>
@@ -190,37 +191,69 @@
                             </form>
 
                             <div class="right-inner">
-                                    <div class="right-inner-left">
+                                <div class="right-inner-left">
+                            
+                                    <!-- Check and display posts -->
                                     <% if(postList == null || postList.isEmpty()) {  %>
                                         <div class="post-info" id="post1">
                                             <p>게시글이 없습니다.</p>
                                         </div>
-                                     <% } else { %>
-                         				  <% for(Post p : postList) { %> 
-                                        <div class="post-info"
-                                        			data-post-no= "<%=p.getPostNo()%>"
-                                        			data-post-title = "<%=p.getPostTitel() %>"
-                                        			data-mid = "<%=p.getmId() %>"
-                                        			data-mname = "<%=p.getmName() %>"
-                                        			data-post-recommend = "<%=p.getPostRecommend() %>"
-                                        			data-post-date="<%=p.getPostDate() %>">
-                                        			
-                                        <tr>
-                                        <td><%=p.getPostNo()%></td>
-                                        <td><%=p.getPostTitel()%></td>
-                                        <td><%=p.getmId()%></td>
-                                        <td><%=p.getPostRecommend()%></td>
-                                        <td><%=p.getPostDate()%></td>
-									    <td>
-									    	 <button class="btn btn btn-del" 
-                        						data-post-no="<%=p.getPostNo()%>">글삭제</button>
-									    </td>                       
-                                    </tr>
+                                    <% } else { %>
+                                        <%                           
+                                            for(Post p : postList) {      
+                                        %>
+                                            <div class="post-info"
+                                                data-post-no= "<%=p.getPostNo()%>"
+                                                data-post-title = "<%=p.getPostTitel() %>"
+                                                data-mid = "<%=p.getmId() %>"
+                                                data-mname = "<%=p.getmName() %>"
+                                                data-post-recommend = "<%=p.getPostRecommend() %>"
+                                                data-post-date="<%=p.getPostDate() %>">
+                                                <tr>
+                                                    <td><%=p.getPostNo()%></td>
+                                                    <td><%=p.getPostTitel()%></td>
+                                                    <td><%=p.getmId()%></td>
+                                                    <td><%=p.getPostRecommend()%></td>
+                                                    <td><%=p.getPostDate()%></td>
+                                                    <td>
+                                                        <button class="btn btn-del" data-pno="<%=p.getPostNo()%>">글삭제</button>
+                                                    </td>                       
+                                                </tr>
+                                            </div>
+                                        <% } %>
+                                    <% } %>
+                                    
+                                  
+                            
+                                    <!-- Check and display questions -->
+                                    <% if(qList == null || qList.isEmpty()) {  %>
+                                        <div class="question-info" id="question1">
+                                            <p>문의글이 없습니다.</p>
+                                        </div>
+                                    <% } else { %>
+                                        <% 
+                                            for(Question q : qList) {  
+                                        %>
+                                            <div class="post-info"
+                                                data-question-no="<%=q.getqNo()%>"
+                                                data-question-title="<%=q.getQtitle()%>"
+                                                data-mno="<%=q.getmNo() %>"
+                                                data-mname="<%=q.getmName() %>"
+                                                data-question-date="<%=q.getqDate()%>">
+                                                <tr>
+                                                    <td><%=q.getqNo()%></td>
+                                                    <td><%=q.getQtitle()%></td>
+                                                    <td><%=q.getmNo()%></td>
+                                                    <td><%=q.getqDate()%></td>
+                                                    <td>
+                                                        <button class="btn btn-del-question" data-qno="<%=q.getqNo()%>">문의답변</button>
+                                                    </td>                       
+                                                </tr>
+                                            </div>
+                                        <% } %>
+                                    <% } %>
                                 </div>
-                                <% } %>
                             </div>
-                             <% } %>
-                        </div>
 
 
                         <!--POST 페이징바-->
@@ -274,22 +307,79 @@
     <div class="modal-content">
         <span class="close">&times;</span>
         <div class="modal-info">
-            <h3>작성한 댓글 목록</h3>
             <div class="comments-list">
-                <!-- This is where the comment details will be dynamically inserted -->
+               
+
+                
             </div>
         </div>
-    </div></div>
-
-
-
-        
-
-        
-        
+    </div>
+</div>
      <script>
+      $(()=>{
+        $('.post-info').on('click',(event)=>{
+            event.stopPropagation();
 
-     $(function() {
+            const pNo = $(this).data('pno');
+            const qNo= $(this).data('qno');
+
+            let contentHtml = '';
+
+            <% if (postList != null && postList.isEmpty()){ %>
+                <% for (Post p : postList) {%>
+                    if( '<%=p.getPostNo()%>'==pNo){
+                        contentHtml += `
+                            <div class = 'comment'>
+                                <p>글 내용 : <%= p.getPostContent() %>
+                               
+                                </div>
+                                <hr>
+                                `;
+                    }
+                    <% } %>
+                <% } %>
+
+            <% if (qList != null && qList.isEmpty()){ %>
+                <% for (Question q : qList) {%>
+                    if( '<%=q.getqNo()%>'==qNo){
+                        contentHtml += `
+                            <div class = 'comment'>
+                                <p>문의내용 : <%= q.getqContent()%>
+                                </div>
+                                <hr>
+                                `;
+                    }
+                    <% } %>
+                <% } %>
+
+                if( contentHtml === '') {
+                    contentHtml = '<p>이 사용자가 작성한 글이 없습니다.</p>';
+    	        }
+
+                $('#commentModal .comments-list').html(contentHtml);
+    	        $('#commentModal').css('display', 'block');
+    	    });
+
+    	    // Close the comment modal when the close button is clicked
+    	    $('#commentModal .close').on('click', function() {
+    	        $('#commentModal').css('display', 'none');
+    	    });
+
+    	    // Close the comment modal when clicking outside of it
+    	    $(window).on('click', function(event) {
+    	        if ($(event.target).is('#commentModal')) {
+    	            $('#commentModal').css('display', 'none');
+    	        }
+            
+        })
+
+     })
+     
+     
+     
+     
+
+     $(()=>{
     	  
     	    $('.comment-btn').on('click', function(event) {
     	        event.stopPropagation();  
@@ -336,7 +426,7 @@
     	});
 
      
-     
+       
      
      
         $(function() {

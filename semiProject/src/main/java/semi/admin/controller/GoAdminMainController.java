@@ -16,6 +16,8 @@ import semi.member.model.vo.Commentery;
 import semi.member.model.vo.Member;
 import semi.post.model.service.PostService;
 import semi.post.model.vo.Post;
+import semi.question.model.service.QuestionService;
+import semi.question.model.vo.Question;
 
 /**
  * Servlet implementation class GoCourseBusanController
@@ -57,7 +59,7 @@ public class GoAdminMainController extends HttpServlet {
 			
 			pageLimit = 10;
 			
-			boardLimit = 6;
+			boardLimit = 3;
 			
 			maxPage = (int)Math.ceil((double)listCount/boardLimit);
 			
@@ -81,16 +83,21 @@ public class GoAdminMainController extends HttpServlet {
 			int postMaxPage;
 			int postStartPage;
 			int postEndPage;
+			int questionListCount;
+			
 			
 			
 			postListCount = new PostService().selectPostCount();
+			questionListCount = new QuestionService().selectQuestionCount();
+			
+			int resultCount = Math.max(postListCount, questionListCount);
 			
 			postCurrentPage = 1;
 			
 			postPageLimit = 10;
 			
 			postBoardLimit = 6;
-			postMaxPage = (int) Math.ceil((double) postListCount / postBoardLimit);
+			postMaxPage = (int) Math.ceil((double) resultCount / postBoardLimit);
 			postStartPage = (postCurrentPage - 1) / postPageLimit * postPageLimit + 1;
 			postEndPage = postStartPage + postPageLimit - 1;
 			if (postEndPage > postMaxPage) {
@@ -98,18 +105,22 @@ public class GoAdminMainController extends HttpServlet {
 			}
 			
 			
-			PageInfo postPi = new PageInfo(postListCount, postCurrentPage, postPageLimit, postBoardLimit, postMaxPage, postStartPage, postEndPage);
+			PageInfo postPi = new PageInfo(resultCount, postCurrentPage, postPageLimit, postBoardLimit, postMaxPage, postStartPage, postEndPage);
 			ArrayList<Post> postList = new PostService().selectPostList(postPi);
-
+			ArrayList<Question> qList = new QuestionService().selectQuestion(postPi);
 			
 			
-			
-			
+			request.setAttribute("qList", qList);
 			request.setAttribute("pi", pi);
 			request.setAttribute("list", list);
 			request.setAttribute("postPi", postPi);
 			request.setAttribute("postList", postList);
-
+			
+		
+			
+			
+			
+			
 			request.getRequestDispatcher("views/admin/admin1.jsp").forward(request, response);
 		}
 	}

@@ -15,6 +15,8 @@ import semi.member.model.vo.Commentery;
 import semi.member.model.vo.Member;
 import semi.post.model.service.PostService;
 import semi.post.model.vo.Post;
+import semi.question.model.service.QuestionService;
+import semi.question.model.vo.Question;
 
 /**
  * Servlet implementation class ManagerListController
@@ -73,16 +75,24 @@ public class ManagerListController extends HttpServlet {
 		int postMaxPage;
 		int postStartPage;
 		int postEndPage;
+		int questionListCount;
+		
 		
 		
 		postListCount = new PostService().selectPostCount();
+		questionListCount = new QuestionService().selectQuestionCount();
+		
+		int resultCount = Math.max(postListCount, questionListCount);
+		
+		
 		
 		postCurrentPage = Integer.parseInt(request.getParameter("pCpage"));
 		
 		postPageLimit = 10;
 		
-		postBoardLimit = 6;
-		postMaxPage = (int) Math.ceil((double) postListCount / postBoardLimit);
+		postBoardLimit = 3;
+		
+		postMaxPage = (int) Math.ceil((double) resultCount / postBoardLimit);
 		postStartPage = (postCurrentPage - 1) / postPageLimit * postPageLimit + 1;
 		postEndPage = postStartPage + postPageLimit - 1;
 		if (postEndPage > postMaxPage) {
@@ -93,9 +103,11 @@ public class ManagerListController extends HttpServlet {
 		PageInfo postPi = new PageInfo(postListCount, postCurrentPage, postPageLimit, postBoardLimit, postMaxPage, postStartPage, postEndPage);
 		ArrayList<Post> postList = new PostService().selectPostList(postPi);
 
+		ArrayList<Question> qList = new QuestionService().selectQuestion(postPi);
 		
 		
 		ArrayList<Commentery> cList  = new MemberService().selectCommentery();
+		request.setAttribute("qList", qList);
 		request.setAttribute("cList", cList);
 		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);
