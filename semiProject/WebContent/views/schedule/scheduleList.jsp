@@ -15,7 +15,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 
         <!-- jQuery library -->
-        <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
         <!-- Popper JS -->
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
@@ -251,6 +251,7 @@
                     </div>
                 </div>
             <% } else { %>
+                <div id="full_cover"></div>
                 <div class="top">
                     <div class="logo" onclick="location.href='<%= contextPath %>'">우리 여행가조</div>
                     <div class="top_menu">
@@ -297,23 +298,93 @@
         
                     <div class="content">
                         <% for (Schedule sd : list) { %>
-                            <div class="plan" onclick="location.href='<%= contextPath %>/GoAddDetail.d?sno=<%= sd.getsNo() %>'">
-                                <div class="cover">
+                            <div class="plan">
+                                <div class="cover" id="cover<%= sd.getsNo() %>" onclick="location.href='<%= contextPath %>/GoAddDetail.d?mno=<%= sd.getMno() %>&sno=<%= sd.getsNo() %>&howlong=<%= sd.getHowlong() %>'">
                                     <div class="plan_title"><%= sd.getsTitle() %></div>
-                                    <div class="date"><%= sd.getsSdate() %> ~ <%= sd.getsEdate() %></div>
-                                    <div class="mini_bar material-symbols-outlined">
-                                        <div class="material-symbols-outlined">edit</div>
-                                        <div class="material-symbols-outlined">share</div>
-                                        <div class="material-symbols-outlined" onclick="confirm('일정을 삭제하시겠습니까?')">delete</div>
+                                    <div class="date">
+                                        <%= sd.getsSdate() %> ~ <%= sd.getsEdate() %>
+                                        <div class="mini_bar material-symbols-outlined">
+                                            <div class="material-symbols-outlined">edit</div>
+                                            <div class="material-symbols-outlined share" onclick="sharePlan(event)">share</div>
+                                            <div class="material-symbols-outlined" id="delete<%= sd.getsNo() %>" onclick="deletePlan(event)">delete</div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            
+                            <script>
+                            	$(function() {
+                                    // background-image: url('../img/random/1.jpg');
+                            		if (<%= sd.getBbgiPath() == null %>) {
+                                    	$('#cover<%= sd.getsNo() %>').css('background-image', "url('<%= sd.getUbgiPath() %>')");
+                            		} else {                            			
+                                    	$('#cover<%= sd.getsNo() %>').css('background-image', "url('<%= sd.getBbgiPath() %>')");
+                            		}
+                                });
+                            </script>
                         <% } %>
     
                         <div class="add_plan" onclick="location.href='<%= contextPath %>/GoAddPlan.sd'">
                             <div class="material-symbols-outlined">add_circle</div>
                         </div>
-    
+
+                        <div id="share">
+                            <div id="share_title">공&nbsp;유</div>
+                            <div id="circles">
+                                <div class="circle" id="member">회원</div>
+                                <div class="circle" id="twitter">트위터</div>
+                                <div class="circle" id="facebook">페이스북</div>
+                                <div class="circle" id="instagram">인스타</div>
+                                <div class="circle" id="whatsapp">왓츠앱</div>
+                                <div class="circle" id="kakaotalk">카카오톡</div>
+                                <div class="circle" id="email">이메일</div>
+                            </div>
+                            <div id="link">링크</div>
+                        </div>
+                        
+                        <script>
+						    function deletePlan(event) {
+						        event.stopPropagation();
+					            
+						        if (confirm("일정을 삭제하시겠습니까?")) {
+						            $.ajax({
+						                url: '<%= contextPath %>/DeleteSchedule.sd',
+						                method: 'post',
+						                data: {
+						                    mno: <%= loginUser.getmNo() %>,
+						                    sno: $(event.target).attr('id').replace('delete', '').trim(),
+						                },
+						                success: function(result) {
+						                	if (result > 0) {
+                                                alert('일정 삭제에 성공하였습니다.');
+                                            } else {
+                                                alert('일정 삭제에 실패하였습니다.');
+                                            }
+						                    location.reload();
+						                },
+						                error: function() {
+						                    alert('일정 삭제에 실패하였습니다.');
+						                    location.reload();
+						                }
+						            });
+						        }
+						    }
+
+                            function sharePlan(event) {
+						        event.stopPropagation();
+
+                                $('#share').css('display', 'block');
+                                $('#full_cover').css('display', 'block');
+
+                                $(document).not($('#share *')).on('click', function() {
+                                    $('#share').css('display', '');
+                                    $('#full_cover').css('display', '');
+                                });
+						    }
+						</script>
+
+
+
                         <br><br>
                     </div>
                 </div>

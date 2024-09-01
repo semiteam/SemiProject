@@ -16,6 +16,7 @@ public class Post {
 	 private String status;
 	 
 	 private String mNickName;
+	 private int mNo;
 	 
 	 public Post() {}
 
@@ -207,6 +208,16 @@ public class Post {
 
 	public void setmNickName(String mNickName) {
 		this.mNickName = mNickName;
+	}
+	
+	
+
+	public int getmNo() {
+		return mNo;
+	}
+
+	public void setmNo(int mNo) {
+		this.mNo = mNo;
 	}
 
 	@Override

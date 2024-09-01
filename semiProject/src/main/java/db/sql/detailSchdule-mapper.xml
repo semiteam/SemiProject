@@ -8,16 +8,14 @@
 		     , TO_CHAR(D_ETIME, 'HH24:MI:SS') "D_ETIME"
 		     , D_ELSE
 		     , D_DATE
-		     , M_NO
-		     , SD_NO
 		  FROM DETAIL_SCHEDULE
 		 WHERE M_NO = ?
 		   AND SD_NO = ?
 		 ORDER
-		    BY D_STIME
+		    BY D_DATE ASC, D_STIME ASC
 	</entry>
 
-	<entry key = "insertDetailSchedule">
+	<entry key = "insertDetail">
 		INSERT
 		  INTO DETAIL_SCHEDULE
 		     (
@@ -42,8 +40,20 @@
 		     , ?
 		     )
 	</entry>
-
-	<entry key = "">
-		
-	</entry>
+	
+	<entry key="deleteDetail">
+		DELETE DETAIL_SCHEDULE
+		 WHERE D_NO = ?
+		   AND M_NO = ?
+   </entry>
+   
+   <entry key="updateDetail">
+   		UPDATE DETAIL_SCHEDULE
+		   SET D_PLACE = ?
+		     , D_STIME = ?
+		     , D_ETIME = ?
+		     , D_ELSE = ?
+		 WHERE M_NO = ?
+		   AND D_NO = ?
+   </entry>
 </properties>

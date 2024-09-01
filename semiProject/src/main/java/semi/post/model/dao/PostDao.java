@@ -222,5 +222,43 @@ public class PostDao {
 		return result;
 	}
 	
+	public ArrayList<Post> searchPosts(Connection conn, String keyword) {
+	    ArrayList<Post> list = new ArrayList<>();
+	    PreparedStatement pstmt = null;
+	    ResultSet rset = null;
+
+	    String sql = prop.getProperty("searchPosts");
+
+	    try {
+	        pstmt = conn.prepareStatement(sql);
+	        String searchKeyword = "%" + keyword + "%";
+	        pstmt.setString(1, searchKeyword);
+	        pstmt.setString(2, searchKeyword);
+
+	        rset = pstmt.executeQuery();
+
+	        while (rset.next()) {
+	            Post p = new Post();
+	            p.setPostNo(rset.getInt("POST_NO"));  // 기존의 "P_NO"를 "POST_NO"로 수정
+	            p.setmNo(rset.getInt("M_NO"));        // 또한 "P_NO"가 아닌 "M_NO"로 수정
+	            p.setPostTitle(rset.getString("POST_TITLE"));
+	            p.setPostContent(rset.getString("POST_CONTENT"));
+	            p.setPostDate(rset.getDate("POST_DATE"));
+	            p.setPostCount(rset.getInt("POST_COUNT"));
+	            p.setPostRecommend(rset.getInt("POST_RECOMMEND"));
+	            p.setmId(rset.getString("M_ID"));
+
+	            list.add(p);
+	        }
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        close(rset);
+	        close(pstmt);
+	    }
+
+	    return list;
+	}
 	
 }

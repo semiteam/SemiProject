@@ -16,6 +16,7 @@
 		     , SD_CDATE
 		     , SD_STATUS
 		     , M_NO
+		     , SD_HOWLONG
 		     )
 		VALUES
 		     (
@@ -29,6 +30,7 @@
 		     , ?
 		     , SYSDATE
 		     , 'N'
+		     , ?
 		     , ?
 		     )
 	</entry>
@@ -45,6 +47,7 @@
 		     , SD_CDATE
 		     , SD_STATUS
 		     , M_NO
+		     , SD_HOWLONG
 		     , BBGI_PATH
 		     , UBGI_PATH
 		  FROM SCHEDULE
@@ -53,5 +56,24 @@
 		  LEFT OUTER
 		  JOIN USER_BGI ON (UBGI_NO = BGI_NO)
 		  WHERE M_NO = ?
+		    AND SD_STATUS != 'D'
+	      ORDER
+             BY SD_SDATE
+	</entry>
+	
+	<entry key = "selectDays">
+		SELECT SD_SDATE
+		     , SD_EDATE
+		  FROM SCHEDULE
+		 WHERE M_NO = ?
+		   AND SD_NO = ?
+	       AND SD_STATUS != 'D'
+	</entry>
+	
+	<entry key="deleteSchedule">
+		UPDATE SCHEDULE
+		   SET SD_STATUS = 'D'
+		 WHERE SD_NO = ?
+		   AND M_NO = ?
 	</entry>
 </properties>

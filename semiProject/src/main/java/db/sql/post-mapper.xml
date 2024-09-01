@@ -136,6 +136,12 @@ VALUES
 	 WHERE POST_NO = ?  
 </entry>
 
+<entry key="searchPosts">
+	SELECT *
+	  FROM POST  
+	JOIN MEMBER ON POST.M_NO = MEMBER.M_NO
+	WHERE POST.POST_TITLE LIKE ? OR MEMBER.M_ID = ?
+</entry>
 
 
 </properties>

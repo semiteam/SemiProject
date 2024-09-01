@@ -105,6 +105,14 @@ public class PostService {
 		return result;
 	}
 	
-	
+	 public ArrayList<Post> searchPosts(String keyword) {
+	        Connection conn = getConnection();
+
+	        ArrayList<Post> searchResults = new PostDao().searchPosts(conn, keyword);
+
+	        close(conn);
+
+	        return searchResults;
+	    }
 	
 }

@@ -33,7 +33,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 
         <!-- jQuery library -->
-        <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
         <!-- Popper JS -->
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
@@ -170,7 +170,11 @@
                             </div>
                             <div class="board">
                               <div class="search">
+                           
                                 <input type="text" name="search-bar">
+						
+							 
+							 
                                 <div class="material-icons search">search</div>
                                 <button onclick="location.href='<%= contextPath %>/insertPage.po'"><div class="material-icons edit">edit</div></button>
                               </div>
@@ -231,8 +235,59 @@
               
                 </div>
             </div>
-        </div>
+ 	<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const searchBar = document.querySelector('input[name="search-bar"]');
+    const postContainer = document.getElementById('post-container');
 
-       
-    </body>
+    searchBar.addEventListener('input', function() {
+      const keyword = searchBar.value;
+
+      if (keyword.trim() !== "") {  // 검색어가 있을 때만 서버 요청
+        const url = '<%= contextPath %>/searchPosts.do?keyword=' + encodeURIComponent(keyword);
+
+        // AJAX 요청 보내기
+        fetch(url)
+        .then(response => response.json())  // JSON 형식으로 응답을 받음
+        .then(data => {
+          console.log(data);  // 전체 데이터 출력
+
+          // 기존 게시물 목록을 비우고 새로운 검색 결과로 교체
+          postContainer.innerHTML = "";
+          if (data.length > 0) {
+              data.forEach(post => {
+                  
+                  postContainer.innerHTML += `
+                  	
+                      <div class="board-list">
+                          <input type="hidden" value="${post.mNo}" name="mno">
+                          <input type="hidden" value="${post.postNo}" name="pno">
+                          <div class="board">
+                              <div class="thumbnail"><img src="resouces/img/2.jpg" alt=""></div>
+                              <div class="title">${post.postTitle ? post.postTitle : '제목 없음'}</div>
+                              <div class="info">작성자 : ${post.mId ? post.mId : '작성자 없음'} | 조회수 : ${post.postCount} | 추천수 : ${post.postRecommend} | 작성일 : ${post.postDate}</div>
+                              <div class="cover">
+                                  <div class="material-icons arrow"></div>
+                                  <div class="preview" id="preview" onclick="location.href='<%= contextPath %>/postDetail.po?pno=${post.postNo}'">
+                                      ${post.postContent}
+                                  </div>
+                              </div>
+                          </div>
+                      </div>`;
+              });
+          } else {
+              postContainer.innerHTML = "<p>검색 결과가 없습니다.</p>";
+          }
+        })
+        .catch(error => console.error('Error:', error));
+      } else {
+        // 검색어가 비어 있을 경우 원래 게시물 목록을 다시 로드하거나 그대로 유지
+        postContainer.innerHTML = "<p>검색어를 입력하세요.</p>";
+      }
+    });
+  });
+</script>
+			
+
+</body>
 </html>

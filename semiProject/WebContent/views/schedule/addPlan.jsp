@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>	
+<%
+	int random = (int)(Math.random()*20 + 1);
+%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -10,7 +13,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 
         <!-- jQuery library -->
-        <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
         <!-- Popper JS -->
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
@@ -96,31 +99,69 @@
                 </div>
     
                 <div class="content">
-                    <form action="<%= contextPath %>/addPlan.sd" method="post" class="inner">
+                    <form action="<%= contextPath %>/addPlan.sd" method="post" class="inner" enctype="multipart/form-data">
                     	<input type="hidden" name="mno" value="<%= loginUser.getmNo() %>">
                         <table>
                             <tr>
-                                <td id="plan_name_t" class="white big"><div>여행명</div></td>
+                                <td id="plan_name_t" class="white"><div>여행명</div></td>
                                 <td colspan="2"><input type="text" name="plan_title" id="plan_title"></td>
                             </tr>
 
                             <tr>
-                                <td colspan="3">
-                                    <div id="search_place_t" class="white big">장소 검색</div>
+                                <td id="search___" colspan="3">
+                                    <div id="search_place_t" class="white">도시 검색</div>
                                     <div id="search_place_b">
-                                        <input type="text" name="place_name" id="place_name">
+                                        <input type="text" name="place_name" id="place_name" placeholder="도시 또는 나라 검색">
                                         <button type="button" class="material-symbols-outlined" id="search_btn">search</button>
                                     </div>
-                                    <div class="search_result">
-                                        결과들 유동적으로 추가할 예정
-                                    </div>
-                                    <div id="search_place_add" class="white">장소 추가하기</div>
+                                    <div id="search___result"></div>
+                                    <script>
+                                        function getResult(value) {
+                                            $.ajax({
+                                                type: "get",
+                                                url: "<%= contextPath%>/SelectCity.c",
+                                                dataType: 'json',
+                                                data: {
+                                                    value: value,
+                                                },
+                                                success: function(data) {
+                                                    $('#search___result').html('');
+
+                                                    let str = '';
+
+                                                    if (data === null) {
+                                                        str += '<div id="search_place_add" class="white">도시 추가하기</div>';
+                                                    } else {
+                                                        $.each(data, function(i) {
+                                                            str += '<div class="search_result">' + data[i].cityName + ' / ' + data[i].cityCountry + '</div>'
+                                                        });
+                                                        str += '<div id="search_place_add" class="white">도시 추가하기</div>';
+                                                    }
+
+                                                    $('#search___result').append(str);
+                                                },
+                                                error: function() {
+                                                    console.log("통신 실패");
+                                                }
+                                            })
+                                        };
+
+                                        $(function() {
+                                            $('#place_name').on('keyup', function() {
+                                                if ($(this).val() === '') {
+                                                    $('#search___result').html('');
+                                                } else {
+                                                    getResult($(this).val());
+                                                }
+                                            });
+                                        })
+                                    </script>
                                 </td>
                             </tr>
 
                             <tr>
                                 <td colspan="3">
-                                    <div id="trip_date_t" class="white big">여행 일정</div>
+                                    <div id="trip_date_t" class="white">여행 일정</div>
                                     <div id="making_plan">
                                         <div id="calendar-container">
                                             <div id="calendar">
@@ -135,6 +176,7 @@
                                             </div>
                                         </div>
 
+										<input type="hidden" id="howlong" name="howlong">
                                         <input type="hidden" id="sDate" name="sDate">
                                         <input type="hidden" id="eDate" name="eDate">
                                     </div>
@@ -143,13 +185,14 @@
 
                             <tr>
                                 <td colspan="3">
-                                    <div id="explanation_t" class="white big">설명</div>
+                                    <div id="explanation_t" class="white">설명</div>
                                     <textarea name="explanation_e" id="explanation_e" style="overflow-y: auto;"></textarea>
+                                    <div id="count_else" style="color: white;">0/1000</div>
                                 </td>
                             </tr>
 
                             <tr class="white">
-                                <td class="big" colspan="2">공개 범위 설정</td>
+                                <td colspan="2">공개 범위 설정</td>
                                 <td>
                                     <input type="radio" name="range" id="all" value="1"checked>
                                     <label for="all">전체 공개</label>
@@ -163,12 +206,12 @@
                             </tr>
 
                             <tr class="white">
-                                <td class="big" colspan="2">배경 이미지</td>
+                                <td colspan="2">배경 이미지</td>
                                 <td>
-                                    <input type="radio" name="img" id="random" value="1"checked>
+                                    <input type="radio" name="img" id="random" value="<%= random %>" checked>
                                     <label for="random">랜덤</label>
 
-                                    <input type="radio" name="img" id="choice" value="2">
+                                    <input type="radio" name="img" id="choice" value="">
                                     <label for="choice">선택</label>
                                 </td>
                             </tr>
@@ -180,6 +223,7 @@
                                             <div id="basic">기본 이미지</div>
                                             <div id="computer">컴퓨터에서 가져오기</div>
                                         </div>
+
                                         <div id="img_content1">
                                             <div class="img">
                                                 <img src="resouces/img/random/1.jpg" alt="">
@@ -206,37 +250,87 @@
                                                 <img src="resouces/img/random/8.jpg" alt="">
                                             </div>
                                             <div class="img">
-                                                <img src="resouces/img/random/1.jpg" alt="">
+                                                <img src="resouces/img/random/9.jpg" alt="">
                                             </div>
                                             <div class="img">
-                                                <img src="resouces/img/random/2.jpg" alt="">
+                                                <img src="resouces/img/random/10.jpg" alt="">
                                             </div>
                                             <div class="img">
-                                                <img src="resouces/img/random/3.jpg" alt="">
+                                                <img src="resouces/img/random/11.jpg" alt="">
                                             </div>
                                             <div class="img">
-                                                <img src="resouces/img/random/4.jpg" alt="">
+                                                <img src="resouces/img/random/12.jpg" alt="">
                                             </div>
                                             <div class="img">
-                                                <img src="resouces/img/random/5.jpg" alt="">
+                                                <img src="resouces/img/random/13.jpg" alt="">
                                             </div>
                                             <div class="img">
-                                                <img src="resouces/img/random/6.jpg" alt="">
+                                                <img src="resouces/img/random/14.jpg" alt="">
                                             </div>
                                             <div class="img">
-                                                <img src="resouces/img/random/7.jpg" alt="">
+                                                <img src="resouces/img/random/15.jpg" alt="">
                                             </div>
                                             <div class="img">
-                                                <img src="resouces/img/random/8.jpg" alt="">
+                                                <img src="resouces/img/random/16.jpg" alt="">
+                                            </div>
+                                            <div class="img">
+                                                <img src="resouces/img/random/17.jpg" alt="">
+                                            </div>
+                                            <div class="img">
+                                                <img src="resouces/img/random/18.jpg" alt="">
+                                            </div>
+                                            <div class="img">
+                                                <img src="resouces/img/random/19.jpg" alt="">
+                                            </div>
+                                            <div class="img">
+                                                <img src="resouces/img/random/20.jpg" alt="">
                                             </div>
                                         </div>
 
                                         <div id="img_content2">
-                                            여기로 사진 드래그<br><br>
-                                            - 또는 -<br><br>
-                                            <input type="file" name="userImg" id="userImg">
+                                            <div id="image_section_div">
+                                                여기로 사진 드래그<br><br>
+                                                - 또는 -<br><br>
+                                            </div>
+                                            <input type="file" name="userImg" id="userImg" onchange="loadFile(this)">
                                             <label for="userImg" id="userImgBtn">컴퓨터에서 가져오기</label>
                                         </div>
+
+                                        <script>
+                                            $(function() {
+                                                $('.img').on('click', function() {
+                                                    $('#choice').attr('value', $('#clicked').attr('src').substring(20).replace('.jpg', ''));
+                                                })
+                                            })
+
+                                            function readURL(input) {
+                                                if (input.files && input.files[0]) {
+                                                    var reader = new FileReader();
+                                                    
+                                                    reader.onload = function (e) {
+                                                        $('#image_section_div').html('<img id="image_section" src="" alt="your image">');
+                                                        $('#image_section').attr('src', e.target.result);  
+                                                    }
+                                                
+                                                    reader.readAsDataURL(input.files[0]);
+
+                                                    $('#img_content2').css({
+                                                        height: 'auto',
+                                                        padding: '10px 0' 
+                                                    });
+                                                }
+                                            }
+                                                
+                                            $("#userImg").change(function(){
+                                                readURL(this);
+                                            });
+
+                                            $('#random').on('click', function() {
+                                                if ($('#random').is(':checked')) {
+                                                    $('#random').val(<%= random %>);
+                                                }
+                                            })
+                                        </script>
                                     </div>
                                 </td>
                             </tr>
@@ -253,27 +347,21 @@
                 </div>
             </div>
             
-            <form action="" id="place_add">
+            <div id="place_add">
                 <span id="cancle" class="material-symbols-outlined">close</span>
                 <table id="place_add_table">
                     <tr>
-                        <th>장소명</th>
-                        <td><input type="text"></td>
+                        <th>* 도시명</th>
+                        <td><input type="text" id="cityName"></td>
                     </tr>
 
                     <tr>
-                        <th>주소</th>
-                        <td><input type="text"></td>
-                    </tr>
-
-                    <tr id="clock">
-                        <th>운영시간</th>
-                        <td>
-                        </td>
+                        <th>* 나라명</th>
+                        <td><input type="text" id="countryName"></td>
                     </tr>
 
                     <tr>
-                        <th>장소 설명</th>
+                        <th>도시 설명</th>
                         <td></td>
                     </tr>
 
@@ -284,9 +372,45 @@
                         </td>
                     </tr>
                     
-                    <input type="submit" value="장소 추가 완료하기" id="add_done_place">
+                    <input type="button" value="도시 추가 완료하기" id="add_done_place">
+
+                    <script>
+                        $(function() {
+                            $('#add_done_place').on('click', function() {
+                                if ($('#countryName').val() === '' || $('#cityName').val() === '') {
+                                    if ($('#cityName').val() === '') {
+                                        alert('도시명을 입력해주십시오.');
+                                    } else {
+                                        alert('나라명을 입력해주십시오.');
+                                    }
+                                } else {
+                                    $.ajax({
+                                        url: '<%= contextPath %>/InsertCity.c',
+                                        method: 'post',
+                                        data: {
+                                            cityName: $('#cityName').val(),
+                                            countryName: $('#countryName').val(),
+                                        },
+                                        success: function(result) {
+                                            if (result > 0) {
+                                                alert('도시 추가에 성공하였습니다.');
+                                                setTimeout(() => {
+                                                    $('#cancle').trigger('click');
+                                                }, 0)
+                                            } else {
+                                                alert('도시 추가에 실패하였습니다.');
+                                            }
+                                        },
+                                        error: function() {
+                                            alert('도시 추가에 실패하였습니다.');
+                                        }
+                                    });
+                                }
+                            })
+                        })
+                    </script>
                 </table>
-            </form>
+            </div>
         </div>
     </body>
 </html>
