@@ -246,7 +246,7 @@
                                                     <td><%=q.getmNo()%></td>
                                                     <td><%=q.getqDate()%></td>
                                                     <td>
-                                                        <button class="btn btn-del-question" data-qno="<%=q.getqNo()%>">문의답변</button>
+                                                        <button onclick="location.href='<%=contextPath%>/detail.sc?qNo=<%=q.getqNo()%>'" class="btn btn-del-question" data-qno="<%=q.getqNo()%>">문의답변</button>
                                                     </td>                       
                                                 </tr>
                                             </div>
