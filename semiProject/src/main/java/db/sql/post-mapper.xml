@@ -136,12 +136,28 @@ VALUES
 	 WHERE POST_NO = ?  
 </entry>
 
+<<<<<<< HEAD
 <entry key="searchPosts">
 	SELECT *
 	  FROM POST  
 	JOIN MEMBER ON POST.M_NO = MEMBER.M_NO
 	WHERE POST.POST_TITLE LIKE ? OR MEMBER.M_ID = ?
 </entry>
+=======
+<entry key="increaseRecommend">
+	UPDATE POST 
+       SET POST_RECOMMEND = POST_RECOMMEND + 1 
+	 WHERE POST_NO = ?
+>>>>>>> 88721f24e527e1cf23f344b0a1a5c859ee1b0a9a
 
+	</entry>
 
+<entry key="hasRecommended">
+SELECT 
+        COUNT(*) 
+  FROM POST 
+JOIN MEMBER USING(M_NO)  
+  WHERE  POST_NO = ?  
+    AND  M_ID = ?
+</entry>
 </properties>

@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
-import javax.security.auth.message.callback.PrivateKeyCallback.Request;
+
 
 import static semi.common.JDBCTemplate.*;
 
@@ -320,7 +320,7 @@ public class MemberDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-String sql = prop.getProperty("idCheck");
+		String sql = prop.getProperty("idCheck");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -342,5 +342,73 @@ String sql = prop.getProperty("idCheck");
 		}
 		
 		return count;
+	}
+	
+	public Member idFindSearch(Connection conn, String name, String email) {
+		Member m = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("idFindSearch");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, name);
+			pstmt.setString(2, email);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				m = new Member();
+				
+				m.setmNo(rset.getInt("m_no"));
+				m.setmId(rset.getString("m_id"));
+				
+				
+			}
+			
+		} catch (SQLException e) {
+			 
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return m;
+	}
+	
+	/*public String pwdFindSearch(Connection conn, String email) {
+		String findPwd = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("pwdFindSearch");
+	}*/
+	
+	public int checkId(Connection conn, String mId) {
+	    int count = 0;
+	    PreparedStatement pstmt = null;
+	    ResultSet rset = null;
+	    
+	    String sql = prop.getProperty("checkId"); 
+
+	    try {
+	        pstmt = conn.prepareStatement(sql); 
+	        pstmt.setString(1, mId); 
+	       
+	        rset = pstmt.executeQuery();
+	        
+	        if (rset.next()) {
+	            count = rset.getInt("count");
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        close(rset);
+	        close(pstmt);
+	    }
+	   
+	    return count;
+	    
 	}
 }

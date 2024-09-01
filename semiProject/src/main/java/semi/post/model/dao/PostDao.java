@@ -222,6 +222,7 @@ public class PostDao {
 		return result;
 	}
 	
+<<<<<<< HEAD
 	public ArrayList<Post> searchPosts(Connection conn, String keyword) {
 	    ArrayList<Post> list = new ArrayList<>();
 	    PreparedStatement pstmt = null;
@@ -259,6 +260,51 @@ public class PostDao {
 	    }
 
 	    return list;
+=======
+	public int increaseRecommend(Connection conn, int postNo) {
+	    int result = 0;
+	    PreparedStatement pstmt = null;
+	    
+	    String sql = prop.getProperty("increaseRecommend");
+
+	    try {
+	        pstmt = conn.prepareStatement(sql);
+	        pstmt.setInt(1, postNo);
+	        result = pstmt.executeUpdate();
+	        
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        close(pstmt);
+	    }
+	    
+	    return result;
+>>>>>>> 88721f24e527e1cf23f344b0a1a5c859ee1b0a9a
 	}
 	
+	public boolean hasRecommended(Connection conn, int postNo, String userId) {
+	    boolean result = false;
+	    PreparedStatement pstmt = null;
+	    ResultSet rset = null;
+	    
+	    String sql = prop.getProperty("hasRecommended");
+	    
+	    try {
+	        pstmt = conn.prepareStatement(sql);
+	        pstmt.setInt(1, postNo);
+	        pstmt.setString(2, userId);
+	        
+	        rset = pstmt.executeQuery();
+	        if (rset.next() && rset.getInt(1) > 0) {
+	            result = true;
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        close(rset);
+	        close(pstmt);
+	    }
+	    
+	    return result;
+	}
 }

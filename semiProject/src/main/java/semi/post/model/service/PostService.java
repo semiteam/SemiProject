@@ -105,6 +105,7 @@ public class PostService {
 		return result;
 	}
 	
+<<<<<<< HEAD
 	 public ArrayList<Post> searchPosts(String keyword) {
 	        Connection conn = getConnection();
 
@@ -115,4 +116,29 @@ public class PostService {
 	        return searchResults;
 	    }
 	
+=======
+	public int increaseRecommend(int postNo) {
+	    Connection conn = getConnection();
+	    int result = new PostDao().increaseRecommend(conn, postNo);
+
+	    if (result > 0) {
+	        commit(conn);
+	    } else {
+	        rollback(conn);
+	    }
+
+	    close(conn);
+	    return result;
+	}
+	
+	public boolean hasRecommended(int pno, String userId) {
+	    Connection conn = getConnection();
+	    
+	    
+	    boolean result = new PostDao().hasRecommended(conn, pno, userId);
+	    
+	    close(conn);
+	    return result;
+	}
+>>>>>>> 88721f24e527e1cf23f344b0a1a5c859ee1b0a9a
 }
