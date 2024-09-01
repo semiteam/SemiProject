@@ -218,7 +218,7 @@
 
                             <tr id="img_choice_tr">
                                 <td colspan="3">
-                                    <div id="img_choice_cover">
+                                    <div id="img_choice_cover" style="overflow: hidden;">
                                         <div id="img_header">
                                             <div id="basic">기본 이미지</div>
                                             <div id="computer">컴퓨터에서 가져오기</div>

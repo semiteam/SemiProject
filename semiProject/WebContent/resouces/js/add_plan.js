@@ -90,5 +90,57 @@ $('#explanation_e').on('keyup', function() {
     } else {
         $('#count_else').css('color', 'white').text(count + '/1000');
     }
-    
 });
+
+$('#img_content2').on("dragover", dragOver)
+                  .on("dragleave", dragOver)
+                  .on("drop", uploadFiles);
+ 
+function dragOver(e){
+  e.stopPropagation();
+  e.preventDefault();
+}
+ 
+function uploadFiles(e){
+  e.stopPropagation();
+  e.preventDefault();
+}
+
+function dragOver(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    if (e.type == "dragover") {
+        $("#img_content2").css({
+            "background-color": "#bebebe",
+        });
+    } else {
+        $('#img_content2').css({
+            "background-color": "white",
+        });
+    }
+}
+
+function uploadFiles(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    dragOver(e); //1
+ 
+    e.dataTransfer = e.originalEvent.dataTransfer; //2
+    var files = e.target.files || e.dataTransfer.files;
+ 
+    if (files.length > 1) {
+        alert('파일은 하나만 업로드해주세요.');
+        return;
+    }
+
+    if (files[0].type.match(/image.*/)) {
+        $(e.target).css({
+            "background-image": "url(" + window.URL.createObjectURL(files[0]) + ")",
+            "outline": "none",
+            "background-size": "100% 100%"
+        });
+    } else{
+        alert('이미지가 아닙니다.');
+        return;
+    }  
+}

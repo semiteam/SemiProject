@@ -299,7 +299,7 @@
                     <div class="content">
                         <% for (Schedule sd : list) { %>
                             <div class="plan">
-                                <div class="cover" id="cover<%= sd.getsNo() %>" onclick="location.href='<%= contextPath %>/GoAddDetail.d?mno=<%= sd.getMno() %>&sno=<%= sd.getsNo() %>&howlong=<%= sd.getHowlong() %>'">
+                                <div class="cover" id="cover<%= sd.getsNo() %>" onclick="location.href='<%= contextPath %>/GoAddDetail.d?mno=<%= sd.getMno() %>&sno=<%= sd.getsNo() %>&howlong=<%= sd.getHowlong() %>'" data-url='<%= contextPath %>/GoAddDetail.d?mno=<%= sd.getMno() %>&sno=<%= sd.getsNo() %>&howlong=<%= sd.getHowlong() %>'>
                                     <div class="plan_title"><%= sd.getsTitle() %></div>
                                     <div class="date">
                                         <%= sd.getsSdate() %> ~ <%= sd.getsEdate() %>
@@ -329,7 +329,7 @@
                         </div>
 
                         <div id="share">
-                            <div id="share_title">공&nbsp;유</div>
+                            <div id="share_title" style="">공&nbsp;유</div>
                             <div id="circles">
                                 <div class="circle" id="member">회원</div>
                                 <div class="circle" id="twitter">트위터</div>
@@ -339,7 +339,7 @@
                                 <div class="circle" id="kakaotalk">카카오톡</div>
                                 <div class="circle" id="email">이메일</div>
                             </div>
-                            <div id="link">링크</div>
+                            <div id="link"></div>
                         </div>
                         
                         <script>
@@ -371,16 +371,49 @@
 						    }
 
                             function sharePlan(event) {
-						        event.stopPropagation();
+                                event.stopPropagation();
 
                                 $('#share').css('display', 'block');
                                 $('#full_cover').css('display', 'block');
 
-                                $(document).not($('#share *')).on('click', function() {
-                                    $('#share').css('display', '');
-                                    $('#full_cover').css('display', '');
+                                // Attach a single event listener to the document to handle clicks outside #share
+                                $(document).on('click', function(event) {
+                                    if (!$(event.target).closest('#share').length && !$(event.target).is('#share')) {
+                                        $('#share').css('display', 'none');
+                                        $('#full_cover').css('display', 'none');
+                                    }
                                 });
-						    }
+
+                                // Update #link content
+                                $('#link').html(event.target.closest('.cover').getAttribute('data-url')
+                                                + `&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <button type="button" id="data-copy" style="background-color: black; border: none; color: white; height: 20px; border-radius: 10px;">복사</button>
+                                                <input type="hidden" id="data-area" value="` + event.target.closest('.cover').getAttribute('data-url') + `">`);
+                            }
+
+                            // Ensure the click handler for copy remains functional
+                            $('#link').on('click', '#data-copy', function() {
+                                const $dataArea = $('#data-area');
+
+                                $dataArea.attr('type', 'text').select();
+
+                                try {
+                                    const copySuccessful = document.execCommand('copy');
+                                    $dataArea.attr('type', 'hidden');
+
+                                    if (copySuccessful) {
+                                        alert("클립보드에 URL이 복사되었습니다.");
+                                    } else {
+                                        alert("URL 복사에 실패하였습니다.");
+                                    }
+                                } catch (err) {
+                                    console.error("Error:", err);
+                                    alert("URL 복사에 실패하였습니다.");
+                                }
+                            });
+
 						</script>
 
 

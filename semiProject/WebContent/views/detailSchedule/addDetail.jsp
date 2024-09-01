@@ -58,7 +58,8 @@
 
         <script defer src="resouces/js/common.js"></script>
         <script defer src="resouces/js/add_detail.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+        <script defer src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=07971e9ec052320c8e179d9629e8ede2"></script>
         <link rel="stylesheet" href="resouces/css/add_detail.css">
         <link rel="stylesheet" href="resouces/css/common.css">
     </head>
@@ -268,7 +269,16 @@
                                         </div>
                                     </div>
                                     <div class="map" id="map<%= i %>" style="height:auto;">
-                                        <img src="resouces/img/maptest.png" alt="">
+                                        <!-- <img src="resouces/img/maptest.png" alt=""> -->
+                                        <script>
+                                            var container = document.getElementById('map<%= i %>'); //지도를 담을 영역의 DOM 레퍼런스
+                                            var options = { //지도를 생성할 때 필요한 기본 옵션
+                                                center: new kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
+                                                level: 3 //지도의 레벨(확대, 축소 정도)
+                                            };
+
+                                            var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+                                        </script>
                                     </div>
 		                        </div>
 		                    </div>
