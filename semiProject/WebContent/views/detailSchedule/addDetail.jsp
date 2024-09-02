@@ -243,7 +243,7 @@
                                                         location.reload();
                                                     });
 						
-						                            $('.add_detail_plan').on('click', function() {
+						                            $(document).on('click', '.add_detail_plan', function() {
 						                                $('#add_detail').css('width', '40%');
 						                                $('#add_detail table').css('display', 'block');
 						                                $('.map').css({
@@ -254,7 +254,7 @@
 						                                $('.plan').css('flex-direction', 'column');
 						                            });
 						
-						                            $('.circle2').on('click', function() {
+						                            $(document).on('click', '.circle2', function() {
 						                                $('#add_detail').css('width', '40%');
 						                                $('#add_detail table').css('display', 'block');
 						                                $('.map').css({

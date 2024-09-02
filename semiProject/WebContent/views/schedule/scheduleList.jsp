@@ -329,7 +329,7 @@
                         </div>
 
                         <div id="share">
-                            <div id="share_title" style="">공&nbsp;유</div>
+                            <div id="share_title">공&nbsp;유</div>
                             <div id="circles">
                                 <div class="circle" id="member">회원</div>
                                 <div class="circle" id="twitter">트위터</div>

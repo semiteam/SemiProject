@@ -9,7 +9,7 @@ import semi.userBgi.model.vo.UserBgi;
 
 public class userBgiService {
 
-	public void insertUserBgi(UserBgi ub) {
+	public int insertUserBgi(UserBgi ub) {
 		Connection conn = getConnection();
 		
 		int result = new userBgiDao().insertUserBgi(conn, ub);
@@ -21,6 +21,8 @@ public class userBgiService {
 		}
 		
 		close(conn);
+		
+		return result;
 	}
 
 	public UserBgi selectUserBgiNo(UserBgi ub) {
