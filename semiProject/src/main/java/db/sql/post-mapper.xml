@@ -1,6 +1,166 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
+<entry key="selectListCount">
+ SELECT 
+        COUNT(*) AS COUNT
+   FROM POST
+  WHERE POST_STATUS = 'Y'
+
+
+</entry>
+
+<entry key="selectList">
+	SELECT * 
+  	  FROM (
+            SELECT ROWNUM AS RNUM,A.*
+                FROM (
+                  SELECT
+                        
+                        M_ID
+                      , POST_TITLE
+                      , POST_CONTENT
+                      , POST_COUNT
+                      , POST_RECOMMEND
+                      , TO_CHAR(POST_DATE,'YYYY/MM/DD') AS "POST_DATE"
+                 	  , POST_MODIFYED	
+                  FROM POST P
+                  JOIN MEMBER USING(M_NO)
+                  WHERE POST_STATUS = 'Y'
+                  ORDER
+                     BY POST_NO DESC
+             ) A
+
+        )
+        WHERE RNUM BETWEEN ? AND ?
+</entry>
+
+<entry key="PostList">
+
+	SELECT * 
+  	  FROM (
+            SELECT ROWNUM AS RNUM,A.*
+                FROM (
+                  SELECT
+                        POST_NO 
+                      , M_ID
+                      , M_NO
+                      , POST_TITLE
+                      , POST_CONTENT
+                      , POST_COUNT
+                      , POST_RECOMMEND
+                      , POST_DATE
+                 	  , POST_MODIFYED	
+                  FROM POST P
+                  JOIN MEMBER USING(M_NO)
+                  WHERE POST_STATUS = 'Y'
+                  ORDER
+                     BY POST_NO DESC
+             ) A
+
+        )
+        WHERE RNUM BETWEEN ? AND ?
+
+</entry>
+
+<entry key="increaseCount">
+
+UPDATE POST
+   SET POST_COUNT = POST_COUNT + 1
+ WHERE POST_NO = ?
+   AND POST_STATUS = 'Y'
+
+</entry>
+
+<entry key="selectPost">
+SELECT
+        POST_NO
+      , M_NICKNAME
+      , POST_TITLE
+      , POST_CONTENT
+      , M_ID
+      , POST_COUNT
+      , POST_RECOMMEND
+      , POST_DATE
+      , POST_MODIFYED
+  FROM POST
+  JOIN MEMBER USING(M_NO)
+ WHERE POST_NO = ?
+   AND POST_STATUS = 'Y'
+
+</entry>
+
+<entry key="updatePost">
+	UPDATE POST 
+	   SET POST_TITLE = ?
+	     , POST_CONTENT = ?
+	     , POST_DATE = SYSDATE
+	 WHERE POST_NO = ?
+	   AND POST_STATUS = 'Y'
+	
+</entry>
+
+<entry key="insertPost">
+INSERT
+  INTO POST
+     (
+       POST_NO
+     , M_NO
+     , POST_TITLE
+     , POST_CONTENT
+     , POST_COUNT
+     , POST_RECOMMEND
+     , POST_DATE
+     , POST_MODIFYED
+     , POST_STATUS
+     )
+VALUES
+     (
+       SEQ_POST.NEXTVAL
+     , ?  
+     , ?
+     , ?
+     , 0
+     , 0
+     , SYSDATE
+     , SYSDATE
+     , 'Y'
+     )
+     
+
+</entry>
+
+<entry key="deletePost">
+	UPDATE POST
+	   SET POST_STATUS = 'N'
+	 WHERE POST_NO = ?  
+</entry>
+
+<entry key="searchPosts">
+	SELECT *
+	  FROM POST  
+	JOIN MEMBER ON POST.M_NO = MEMBER.M_NO
+	WHERE POST.POST_TITLE LIKE ? OR MEMBER.M_ID = ?
+</entry>
+<entry key="increaseRecommend">
+	UPDATE POST 
+       SET POST_RECOMMEND = POST_RECOMMEND + 1 
+	 WHERE POST_NO = ?
+
+	</entry>
+
+<entry key="hasRecommended">
+SELECT 
+        COUNT(*) 
+  FROM POST 
+JOIN MEMBER USING(M_NO)  
+  WHERE  POST_NO = ?  
+    AND  M_ID = ?
+</entry>
+</properties>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
 <entry key ="selectPostCount">
 SELECT
 	   COUNT(*) COUNT

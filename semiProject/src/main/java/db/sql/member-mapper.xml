@@ -94,6 +94,68 @@
 	<entry key ="blockMember">
 		UPDATE MEMBER
 		   SET M_STATUS = 'B'
+		 WHERE M_NO = ?
+	</entry>
+	
+	<entry key="kakaoLoginMember">
+			
+	SELECT M_NO
+		     , M_NAME
+		     , M_ID
+		     , M_NICKNAME
+		     , M_PWD
+		     , M_RRN
+		     , M_PHONE
+		     , M_EMAIL
+		     , M_ADDRESS
+		     , M_DATE
+		     , M_MODIFY
+		     , M_STATUS
+		     , M_REPORT
+		     , M_GRADE
+		     , M_PROFILE  
+		  FROM MEMBER
+		 WHERE M_ID = ?
+		   AND M_STATUS = 'U'
+	</entry>
+	
+	<entry key="idCheck">
+	SELECT
+		       COUNT(*) "COUNT"
+		  FROM MEMBER
+		 WHERE M_ID = ?
+	</entry>
+	
+	<entry key="idFindSearch">
+	SELECT 
+			M_NO
+	      , M_ID
+	      
+	  FROM  MEMBER
+	 WHERE  M_NAME = ?
+	   AND  M_EMAIL = ?
+	   AND  M_STATUS = 'U' 
+	</entry>
+	
+	<entry key="pwdFindSearch">
+	SELECT 
+	        M_NO
+	      , M_NAME
+	      , M_EMAIL
+	  FROM  MEMBER
+	 WHERE  
+	    	M_EMAIL = ?
+	   AND  M_STATUS = 'U' 
+	</entry>
+	
+	<entry key="checkId">
+	SELECT 
+	       COUNT(*) "COUNT"
+	  FROM MEMBER
+	 WHERE M_ID = ?
+	</entry>
+	
+	
 		 WHERE M_STATUS != 'N'
 		   AND M_NO = ?
 		   

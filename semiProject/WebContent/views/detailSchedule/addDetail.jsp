@@ -1,3 +1,7 @@
+<%@page import="java.sql.Date"%>
+<%@page import="java.text.ParseException"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Calendar"%>
 <%@page import="semi.schedule.model.vo.Schedule"%>
 <%@page import="semi.detailSchedule.model.vo.DetailSchedule"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -5,6 +9,7 @@
 <%
 	ArrayList<DetailSchedule> list = (ArrayList<DetailSchedule>)request.getAttribute("list");
 	ArrayList<Schedule> days = (ArrayList<Schedule>)request.getAttribute("days");
+	int sno = (int)request.getAttribute("sno");
 	int howlong = (int)request.getAttribute("howlong");
 %>
 <!DOCTYPE html>
@@ -17,7 +22,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 
         <!-- jQuery library -->
-        <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
         <!-- Popper JS -->
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
@@ -53,6 +58,7 @@
 
         <script defer src="resouces/js/common.js"></script>
         <script defer src="resouces/js/add_detail.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
         <link rel="stylesheet" href="resouces/css/add_detail.css">
         <link rel="stylesheet" href="resouces/css/common.css">
     </head>
@@ -104,72 +110,240 @@
                 </div>
     
                 <div class="content">  
-                    <% for (int i = 0; i < howlong; i ++) { %>
-                    	<div class="detail">
-	                        <div class="date_div">
-	                            <div class="date"><%= days.get(i).getsSdate() %></div>
-	                            <div class="open_btn material-symbols-outlined">keyboard_arrow_down</div>
-	                            <div class="close_btn material-symbols-outlined">keyboard_arrow_up</div>
-	                        </div>
-	                        <div class="plan">
-	                            <div class="notMap">
-                                    <div class="timeline">
-                                        <div class="circle1 material-symbols-outlined">circle</div>
-                                        <div class="bar" id="bar<%= i %>"></div>
-                                        <div class="circle2 material-symbols-outlined">add_circle</div>
-                                    </div>
-                                    <div class="detail_plan">
-                                        <% for (DetailSchedule dSmall : list) { %>
-                                            <% if (dSmall.getdDate().equals(days.get(i).getsSdate())) { %>
-                                                <div class="plan_content plan_content<%= i %>">
-                                                    <div class="dTime"><%= dSmall.getdStime() %> ~ <%= dSmall.getdEtime() %></div>
-                                                    <div class="dElse"><%= dSmall.getdElse() %></div>
-                                                    <div class="dPlace"><%= dSmall.getdPlace() %></div>
-                                                </div>
+                    <% for (int i = 0; i < howlong; i ++) {
+                    	Calendar cal = Calendar.getInstance();
+            			cal.setTime(days.get(0).getsSdate());
+            			cal.add(Calendar.DAY_OF_MONTH, i);
+            			
+            			String year = cal.get(Calendar.YEAR) + "";
+            			String month = "";
+            			switch(cal.get(Calendar.MONTH) + 1) {
+            				case 1:
+            					month = "01";
+            					break;
+            				case 2:
+            					month = "02";
+            					break;
+            				case 3:
+            					month = "03";
+            					break;
+            				case 4:
+            					month = "04";
+            					break;
+            				case 5:
+            					month = "05";
+            					break;
+            				case 6:
+            					month = "06";
+            					break;
+            				case 7:
+            					month = "07";
+            					break;
+            				case 8:
+            					month = "08";
+            					break;
+            				case 9:
+            					month = "09";
+            					break;
+            				case 10:
+            					month = "10";
+            					break;
+            				case 11:
+            					month = "11";
+            					break;
+            				case 12:
+            					month = "12";
+            					break;
+            			}
+            			String day = cal.get(Calendar.DAY_OF_MONTH) + "";
+            			
+            			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            			Date date = null;
+
+            			try {
+            				date = new Date(dateFormat.parse(year.trim() + "-" + month.trim() + "-" + day.trim()).getTime());
+            			} catch (ParseException e) {
+            			    e.printStackTrace();
+            			}
+            			
+                   		if (list.isEmpty()) { %>
+                    		<div class="detail">
+		                        <div class="date_div">
+		                            <div class="date"><%= date %></div>
+		                            <div class="open_btn material-symbols-outlined">keyboard_arrow_down</div>
+		                            <div class="close_btn material-symbols-outlined">keyboard_arrow_up</div>
+		                        </div>
+		                        <div class="plan">
+		                            <div class="notMap">
+	                                    <div class="timeline">
+	                                        <div class="circle1 material-symbols-outlined">circle</div>
+	                                        <div class="bar" id="bar<%= i %>"></div>
+	                                        <div class="circle2 material-symbols-outlined">add_circle</div>
+	                                    </div>
+	                                    <div class="detail_plan">
+	                                       <div class="plan_content plan_content<%= i %> add_detail_plan">
+                                               계획 추가하기
+                                           </div>
+	                                    </div>
+	                                </div>
+		                        </div>
+		                    </div>
+                    	<% } else { %>
+	                    	<div class="detail">
+		                        <div class="date_div">
+		                            <div class="date"><%= date %></div>
+		                            <div class="open_btn material-symbols-outlined">keyboard_arrow_down</div>
+		                            <div class="close_btn material-symbols-outlined">keyboard_arrow_up</div>
+		                        </div>
+		                        <div class="plan">
+                                    <div class="notMap">
+                                        <div class="timeline">
+                                            <div class="circle1 material-symbols-outlined">circle</div>
+                                            <div class="bar" id="bar<%= i %>"></div>
+                                            <div class="circle2 material-symbols-outlined">add_circle</div>
+                                        </div>
+                                        <div class="detail_plan">
+                                            <!-- DetailSchedule dSmall : list -->
+                                            <% for (int j = 0; j < list.size(); j++) { %>
+                                                <% if (list.get(j).getdDate().equals(date)) { %>
+                                                    <div class="plan_content plan_content<%= j %><%= i %> plan_content_count<%= i %>">
+                                                        <div class="dTime"><%= list.get(j).getdStime() %> ~ <%= list.get(j).getdEtime() %></div>
+                                                        <div class="dPlace"><%= list.get(j).getdPlace() %></div>
+                                                        <div class="dElse"><%= list.get(j).getdElse() %></div>
+                                                        <div class="mini_bar material-symbols-outlined">
+                                                            <div class="material-symbols-outlined fs edit">edit</div>
+                                                            <div class="material-symbols-outlined fs done" id="done<%= list.get(j).getdNo() %>" style="display: none;">check</div>
+                                                            <div class="material-symbols-outlined fs last" id="delete<%= list.get(j).getdNo() %>" onclick="deletePlan(event)">delete</div>
+                                                        </div>
+                                                    </div>
+                                                <% } else { %>
+                                                    <div class="plan_content plan_content<%= j %><%= i %> plan_content_count<%= i %> add_detail_plan">
+                                                        계획 추가하기
+                                                    </div>
+                                                    <!-- 다른 날에 일정이 존재하고, 기준 날에 일정이 없을 때도 생성되는 문제 발생 -->
+                                                <% } %>
                                             <% } %>
-                                        <% } %>
+                                            
+                                            <script>
+						                        $(function() {
+						                            let finalHeight = 0;
+
+						                            for (let j = 0; j < $('.plan_content_count<%= i %>').length; j++) {
+						                                let className = '.plan_content' + j + <%= i %> + '.plan_content_count<%= i %>';
+						                                finalHeight += $(className).height();
+						                            }
+						
+						                            let length = 'calc(' + finalHeight + 'px + (30px * ' + ($('.plan_content').length - 1) + '))';
+						
+                                                    $('#bar<%= i %>').css('height', length);
+                                                    $('#map<%= i %>').css('height', length);
+                    
+                                                    $('#add_detail').on('click', '#cancle', function() {
+                                                        location.reload();
+                                                    });
+						
+						                            $('.add_detail_plan').on('click', function() {
+						                                $('#add_detail').css('width', '40%');
+						                                $('#add_detail table').css('display', 'block');
+						                                $('.map').css({
+						                                    height: '300px',
+						                                    width: '650px',
+						                                    margin: '0 0 0 41px'
+						                                });
+						                                $('.plan').css('flex-direction', 'column');
+						                            });
+						
+						                            $('.circle2').on('click', function() {
+						                                $('#add_detail').css('width', '40%');
+						                                $('#add_detail table').css('display', 'block');
+						                                $('.map').css({
+						                                    height: '300px',
+						                                    width: '650px',
+						                                    margin: '0 0 0 41px'
+						                                });
+						                                $('.plan').css('flex-direction', 'column');
+						                            });
+						                        });
+                                            </script>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="map" id="map<%= i %>">
-                                    <img src="resouces/img/maptest.png" alt="">
-                                </div>
-	                        </div>
-	                    </div>
-
-                        <script>
-                            $(function() {
-                                let length = 'calc(100px * ' + $('.plan_content<%= i %>').length + ' + 31px * ' + ($('.plan_content<%= i %>').length - 1) + ')';
-                                $('#bar<%= i %>').css('height', length);
-                                $('#map<%= i %>').css('height', length);
-
-                                $('#cancle').on('click', function() {
-                                    $('#add_detail').css('width', '');
-                                    $('#add_detail table').css('display', '');
-                                    $('#map<%= i %>').css({
-                                        height: length,
-                                        width: '20vw',
-                                        margin: '30px 0 0 20px'
-                                    });
-                                    $('.plan').css('flex-direction', '');
-                                });
-
-                                $('.circle2').on('click', function() {
-                                    $('#add_detail').css('width', '40%');
-                                    $('#add_detail table').css('display', 'block');
-                                    $('.map').css({
-                                        height: '300px',
-                                        width: '650px',
-                                        margin: '0 0 0 41px'
-                                    });
-                                    $('.plan').css('flex-direction', 'column');
-                                });
-                            });
-                        </script>
+                                    <div class="map" id="map<%= i %>" style="height:auto;">
+                                        <img src="resouces/img/maptest.png" alt="">
+                                    </div>
+		                        </div>
+		                    </div>
+		                <% } %>
                     <% } %>
+
+                    <script>
+                        $(function() {
+                            $('.done').on('click', function() {
+                                let timeInput = $('#editTime').val();
+
+                                let pattern = /^([01]\d|2[0-3]):([0-5]\d):([0-5]\d) ~ ([01]\d|2[0-3]):([0-5]\d):([0-5]\d)$/;
+                                
+                                if (pattern.test(timeInput)) {
+                                    $.ajax({
+                                        url: '<%= contextPath %>/EditDetail.d',
+                                        method: 'post',
+                                        data: {
+                                            dTime: $(this).closest('.plan_content').children('.dTime').children('input').val(),
+                                            dPlace: $(this).closest('.plan_content').children('.dPlace').children('input').val(),
+                                            dElse: $(this).closest('.plan_content').children('.dElse').text(),
+                                            dno: $(this).attr('id').replace('done', '').trim(),
+                                            mno: <%= loginUser.getmNo() %>,
+                                            dDate: $(this).closest('.detail').children('.date_div').children('.date').text(),
+                                        },
+                                        success: function(result) {
+                                            if (result > 0) {
+                                                alert('세부 일정 수정에 성공하였습니다.');
+                                            } else {
+                                                alert('세부 일정 수정에 실패하였습니다.');
+                                            }
+                                            location.reload();
+                                        },
+                                        error: function() {
+                                            alert('세부 일정 수정에 실패하였습니다.');
+                                            location.reload();
+                                        }
+                                    });
+                                } else {
+                                    alert('HH:MM:SS ~ HH:MM:SS와 같은 형식으로 입력 바랍니다.')
+                                }
+                            });
+                        })
+
+                        function deletePlan(event) {
+                            event.stopPropagation();
+                            
+                            if (confirm("세부 일정을 삭제하시겠습니까?")) {
+                                $.ajax({
+                                    url: '<%= contextPath %>/DeleteDetail.d',
+                                    method: 'post',
+                                    data: {
+                                        mno: <%= loginUser.getmNo() %>,
+                                        dno: $(event.target).attr('id').replace('delete', '').trim(),
+                                    },
+                                    success: function(result) {
+                                        if (result > 0) {
+                                            alert('세부 일정 삭제에 성공하였습니다.');
+                                        } else {
+                                            alert('세부 일정 삭제에 실패하였습니다.');
+                                        }
+                                        location.reload();
+                                    },
+                                    error: function() {
+                                        alert('세부 일정 삭제에 실패하였습니다.');
+                                        location.reload();
+                                    }
+                                });
+                            }
+                        }
+                    </script>
                     <br><br>
                 </div>
 
-                <form id="add_detail" method="post" action="">
+                <form id="add_detail" method="post" action="<%= contextPath %>/InsertDetail.d">
                     <span id="cancle" class="material-symbols-outlined" style="position: absolute; right: 10px; cursor: pointer;">close</span>
                     <table>
                         <tr>
@@ -177,24 +351,69 @@
                             <td></td>
                         </tr>
                         <tr>
-                            <td colspan="2">
+                            <td colspan="2" style="width: 600px;">
                                 <div id="search">
-                                    <input type="text">
+                                    <input type="text" id="place_name" name="place_name">
                                     <div class="material-symbols-outlined" id="search-icon">search</div>
                                 </div>
-                                <div class="result"></div>
-                                <div class="result"></div>
-                                <br><br>
-                                <span class="right">장소 추가하기</span>
+                                <div id="search___result"></div>
+                                <script>
+                                    function getResult(value) {
+                                        $.ajax({
+                                            type: "get",
+                                            url: "<%= contextPath %>/SelectLandmark.l",
+                                            dataType: 'json',
+                                            data: {
+                                                value: value,
+                                            },
+                                            success: function(data) {
+                                                $("#search___result").html('');
+
+                                                let str = '';
+
+                                                if (data !== null) {
+                                                    $.each(data, function(i) {
+                                                        str += '<div class="result">' + data[i].landmarkName + ' / ' + data[i].landmarkCity + '</div>'
+                                                    });
+                                                }
+
+                                                str += '<br><br><span class="right" id="add_place">장소 추가하기</span>'
+
+                                                $('#search___result').append(str);
+                                            },
+                                            error: function() {
+                                                console.log('통신 실패')
+                                            }
+                                        });
+                                    }
+
+                                    $(function() {
+                                        $('#place_name').on('keyup', function() {
+                                            if ($(this).val() === '') {
+                                                $('#search___result').html('');
+                                            } else {
+                                                getResult($(this).val());
+                                            }
+                                        });
+                                    });
+                                </script>
                             </td>
                         </tr>
                         <tr>
-                            <td class="detail_title">날짜</td>
-                            <td>+ 클릭한 날로 기본 설정 but 변경 가능</td>
+                            <td id="just" class="detail_title">날짜</td>
+                            <td><input type="text" name="adit_date" id="adit_date" readonly></td>
                         </tr>
                         <tr>
                             <td class="detail_title">시간 설정</td>
-                            <td>시계 넣을 거임</td>
+                            <td id="watch">
+                                <input type="number" name="startHour" class="time hour" id="startHour" max="23" min="0" value="11">
+                                <div class="bb">:</div>
+                                <input type="number" name="startMinute" class="time minute" id="startMinute" max="59" min="0" value="00">
+                                <div class="aa">~</div>
+                                <input type="number" name="endHour" class="time hour" id="endHour" max="23" min="0" value="13">
+                                <div class="bb">:</div>
+                                <input type="number" name="endMinute" class="time minute" id="endMinute" max="59" min="0" value="00">
+                            </td>
                         </tr>
                         <tr>
                             <td class="detail_title">기타 사항</td>
@@ -202,13 +421,17 @@
                         </tr>
                         <tr>
                             <td colspan="2">
-                                <textarea name="" id="" style="resize: none;"></textarea>
+                                <textarea name="else" id="else" style="resize: none;"></textarea>
+                                <div id="count_else">0/1000</div>
                             </td>
                         </tr>
                         <tr>
                             <td colspan="2">
                                 <br><br>
-                                <span class="right">계획 추가 완료하기</span>
+                                <input type="hidden" name="mno" value="<%= loginUser.getmNo() %>">
+                                <input type="hidden" name="sno" value="<%= sno %>">
+                                <input type="hidden" name="howlong" value="<%= howlong %>">
+                                <span class="right" onclick="document.forms[0].submit()">계획 추가 완료하기</span>
                             </td>
                         </tr>
                     </table>

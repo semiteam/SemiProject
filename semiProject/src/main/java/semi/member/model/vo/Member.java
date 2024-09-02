@@ -66,6 +66,19 @@ public class Member {
 		this.mAddress = mAddress;
 		this.mProfile = mProfile;
 	}
+	
+	
+	
+	
+	public Member(String mName, String mId, String mNickname, String mPwd, String mEmail, String mAddress) {
+		super();
+		this.mName = mName;
+		this.mId = mId;
+		this.mNickname = mNickname;
+		this.mPwd = mPwd;
+		this.mEmail = mEmail;
+		this.mAddress = mAddress;
+	}
 
 	public int getmNo() {
 		return mNo;
@@ -186,7 +199,7 @@ public class Member {
 	public void setmProfile(String mProfile) {
 		this.mProfile = mProfile;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Member [mNo=" + mNo + ", mName=" + mName + ", mId=" + mId + ", mNickname=" + mNickname + ", mPwd="

@@ -13,6 +13,8 @@ body * {
     box-sizing: border-box;
 }
 
+textarea {white-space: pre-line;}
+
 body *:not(:hover:not(#place_add):not(.side_menu)) {
     transition: .6s;
 }

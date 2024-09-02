@@ -43,12 +43,24 @@ public class ScheduleService {
 		
 		ArrayList<Schedule> days = new ScheduleDao().selectDays(conn, mno, sno);
 		
-		for (Schedule s : days) {
-			System.out.println(s);
+		close(conn);
+		
+		return days;
+	}
+
+	public int deletSchedule(int mno, int sno) {
+		Connection conn = getConnection();
+		
+		int result = new ScheduleDao().deleteSchedule(conn, mno, sno);
+		
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
 		}
 		
 		close(conn);
 		
-		return days;
+		return result;
 	}
 }

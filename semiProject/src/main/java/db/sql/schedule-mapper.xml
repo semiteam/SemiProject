@@ -56,6 +56,9 @@
 		  LEFT OUTER
 		  JOIN USER_BGI ON (UBGI_NO = BGI_NO)
 		  WHERE M_NO = ?
+		    AND SD_STATUS != 'D'
+	      ORDER
+             BY SD_SDATE
 	</entry>
 	
 	<entry key = "selectDays">
@@ -64,5 +67,13 @@
 		  FROM SCHEDULE
 		 WHERE M_NO = ?
 		   AND SD_NO = ?
+	       AND SD_STATUS != 'D'
+	</entry>
+	
+	<entry key="deleteSchedule">
+		UPDATE SCHEDULE
+		   SET SD_STATUS = 'D'
+		 WHERE SD_NO = ?
+		   AND M_NO = ?
 	</entry>
 </properties>

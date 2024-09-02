@@ -1,4 +1,4 @@
-$('#search_place_add').on('click', function(event) {
+$('#search___result').on('click', '#search_place_add', function(event) {
     event.stopPropagation();
     $('#place_add').css('width', '817px');
     $('#cover').css('display', 'block');
@@ -33,10 +33,12 @@ $('#explanation_p').on('keyup', function() {
 });
 
 $('.img').on('click', function() {
-    $('.img').removeClass('notClicked').removeAttr('id', 'clicked');
+    $('.img').attr('class', 'img');
     $(this).addClass('clicked');
-    $('.clicked img').attr('id', 'clicked');
     $('.img').not(this).addClass('notClicked');
+
+    $('img').attr('id', '');
+    $('.clicked img').attr('id', 'clicked');
 })
 
 $('#basic').on('click', function() {
@@ -58,17 +60,35 @@ $('#computer').on('click', function() {
 
 $('#random').on('click', function() {
     if ($('#random').is(':checked')) {
-        $('#img_choice_tr').css('display', '')
+        $('#img_choice_tr').css('display', '');
     }
 })
 
 $('#choice').on('click', function() {
     if ($('#choice').is(':checked')) {
-        $('#img_choice_tr').css('display', 'contents')
+        $('#img_choice_tr').css('display', 'contents');
     }
 })
 
-$('.search_result').on('click', function() {
+$('#search___').on('click', '.search_result', function() {
     $('#place_name').val($(this).text().trim());
     $('#place_name').attr('name', 'choice');
+    $('#search___result').html('');
+});
+
+$('#computer').on('click', function() {
+    $('#random').val('');
+    $('#choice').val('');
+});
+
+$('#explanation_e').on('keyup', function() {
+    let count = $('#explanation_e').val().length;
+
+    if (count >= 1000) {
+        $('#explanation_e').val($('#explanation_e').val().substring(0,1000));
+        $('#count_else').css('color', 'red').text('1000/1000');
+    } else {
+        $('#count_else').css('color', 'white').text(count + '/1000');
+    }
+    
 });
