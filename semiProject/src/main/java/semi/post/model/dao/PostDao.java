@@ -222,7 +222,7 @@ public class PostDao {
 		return result;
 	}
 	
-<<<<<<< HEAD
+
 	public ArrayList<Post> searchPosts(Connection conn, String keyword) {
 	    ArrayList<Post> list = new ArrayList<>();
 	    PreparedStatement pstmt = null;
@@ -232,9 +232,9 @@ public class PostDao {
 
 	    try {
 	        pstmt = conn.prepareStatement(sql);
-	        String searchKeyword = "%" + keyword + "%";
-	        pstmt.setString(1, searchKeyword);
-	        pstmt.setString(2, searchKeyword);
+	      
+	        pstmt.setString(1, "%" + keyword + "%");
+	        pstmt.setString(2, "%" + keyword + "%");
 
 	        rset = pstmt.executeQuery();
 
@@ -260,7 +260,7 @@ public class PostDao {
 	    }
 
 	    return list;
-=======
+	}
 	public int increaseRecommend(Connection conn, int postNo) {
 	    int result = 0;
 	    PreparedStatement pstmt = null;
@@ -279,7 +279,7 @@ public class PostDao {
 	    }
 	    
 	    return result;
->>>>>>> 88721f24e527e1cf23f344b0a1a5c859ee1b0a9a
+
 	}
 	
 	public boolean hasRecommended(Connection conn, int postNo, String userId) {

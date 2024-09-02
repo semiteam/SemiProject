@@ -105,7 +105,7 @@ public class PostService {
 		return result;
 	}
 	
-<<<<<<< HEAD
+
 	 public ArrayList<Post> searchPosts(String keyword) {
 	        Connection conn = getConnection();
 
@@ -115,8 +115,7 @@ public class PostService {
 
 	        return searchResults;
 	    }
-	
-=======
+
 	public int increaseRecommend(int postNo) {
 	    Connection conn = getConnection();
 	    int result = new PostDao().increaseRecommend(conn, postNo);
@@ -140,5 +139,5 @@ public class PostService {
 	    close(conn);
 	    return result;
 	}
->>>>>>> 88721f24e527e1cf23f344b0a1a5c859ee1b0a9a
+
 }

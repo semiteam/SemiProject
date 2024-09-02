@@ -40,13 +40,15 @@ public class postSearchController extends HttpServlet {
         // 검색 결과를 가져오는 서비스 호출
         ArrayList<Post> searchResults = new PostService().searchPosts(keyword);
 
+        	
         // JSON 형태로 결과 반환
         response.setContentType("application/json;charset=UTF-8");
         PrintWriter out = response.getWriter();
 
         JSONArray jsonArray = new JSONArray();
 
-        for (Post post : searchResults) {
+        JSONObject pageInfo = new JSONObject();
+                for (Post post : searchResults) {
         	JSONObject jsonPost = new JSONObject();
             jsonPost.put("mNo", post.getmNo());
             jsonPost.put("postNo", post.getPostNo());
@@ -62,8 +64,9 @@ public class postSearchController extends HttpServlet {
 
             jsonArray.add(jsonPost);  // JSONArray에 JSONObject 추가
         }
-
+        System.out.println("JSON Array: " + jsonArray.toJSONString());
         out.print(jsonArray.toJSONString()); // JSONArray를 문자열로 변환하여 출력
+        
         out.flush();
     }
 	
