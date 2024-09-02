@@ -40,7 +40,7 @@
             <div class="background"></div>
 
             <div class="top">
-                <div class="logo" onclick="location.href='../관리자페이지/index.html'">우리 여행가조</div>
+                <div class="logo" onclick="location.href='<%= contextPath %>'">우리 여행가조</div>
                 <div class="top_menu">
                     <ul>
                         <li id="top_menu_2" onclick="''">Logout</li>
@@ -50,7 +50,7 @@
 
             <div class="under">
                 <div class="side_menu">
-                    <div id="side_menu_open_1" onclick="location.href='../관리자페이지/index.html'">회원 관리</div>
+                    <div id="side_menu_open_1" onclick="location.href='<%= contextPath %>'">회원 관리</div>
                     <div id="side_menu_open_2" onclick="location.href='../관리자페이지/index2.html' ">사용자 통계</div>
                     <div id="side_menu_open_3" onclick="location.href='../관리자페이지/index3.html'" style="font-weight: 900;">수익 관리</div>
                     <div id="close_btn" onclick="side_close()"><img src="./resources/img/chevron_left_24dp_5F6368.png" alt="왼쪽화살표"></div>
