@@ -38,6 +38,7 @@ public class SelectLandmarkController extends HttpServlet {
 		String str = request.getParameter("value");
 		String value = "%" + str + "%";
 		
+		
 		ArrayList<Landmark> list = new LandmarkService().selectLandmark(value);
 		
 		response.setContentType("application/json; charset=utf-8");

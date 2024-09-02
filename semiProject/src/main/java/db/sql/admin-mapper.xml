@@ -107,9 +107,9 @@ SELECT
          , M_REPORT
          , M_STATUS
       FROM MEMBER
-     WHERE (M_ID LIKE ?
-        OR M_NAME LIKE ?)
-       AND ROWNUM &lt;= 5
+     WHERE (M_ID LIKE '%' || ? || '%'
+    OR M_NAME LIKE '%' || ? || '%')
+       AND ROWNUM <= 5
        ]]>
 	</entry>
 

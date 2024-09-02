@@ -38,9 +38,12 @@ public class FindMemberController extends HttpServlet {
 		String str = request.getParameter("value");
 		String value = "%" + str + "%";
 		
+		
+		
 		ArrayList<Member> list = new AdminService().findMember(value);
 		response.setContentType("application/json; charset=utf-8");
 		new Gson().toJson(list, response.getWriter());
+		
 		
 	}
 

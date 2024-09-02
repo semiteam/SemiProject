@@ -275,6 +275,8 @@ public class AdminDao {
 			pstmt.setString(1, value);
 			pstmt.setString(2, value);
 			
+			rset =pstmt.executeQuery();
+			
 			while(rset.next()) {
 				list.add(new Member(rset.getString("M_ID"),
 						 			rset.getString("M_NAME"),
