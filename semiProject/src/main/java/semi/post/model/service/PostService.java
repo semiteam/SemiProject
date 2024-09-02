@@ -91,10 +91,10 @@ public class PostService {
 		return result;
 	}
 	
-	public int deletePost(int pno) {
+	public int deletePost(int postNo) {
 		Connection conn = getConnection();
 		
-		int result = new PostDao().deletePost(conn,pno);
+		int result = new PostDao().deletePost(conn,postNo);
 		
 		if(result > 0) {
 			commit(conn);
@@ -137,5 +137,15 @@ public class PostService {
 	    
 	    close(conn);
 	    return result;
+	}
+	
+	public ArrayList<Post> selectPostList(PageInfo postPi) {
+		Connection conn = getConnection();
+		
+		ArrayList<Post> list = new PostDao().selectPostList(conn,postPi);
+		
+		close(conn);
+		
+		return list;
 	}
 }

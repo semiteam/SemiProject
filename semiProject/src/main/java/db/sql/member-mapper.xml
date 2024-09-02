@@ -155,12 +155,6 @@
 	 WHERE M_ID = ?
 	</entry>
 	
-	
-		 WHERE M_STATUS != 'N'
-		   AND M_NO = ?
-		   
-	</entry>
-	
 	<entry key ="unblockMember">
 		UPDATE MEMBER
 		   SET M_STATUS = 'U'

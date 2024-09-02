@@ -15,10 +15,6 @@ import semi.post.model.vo.Post;
 
 import static semi.common.JDBCTemplate.*;
 
-import static semi.common.JDBCTemplate.*;
-import semi.common.model.vo.PageInfo;
-import semi.post.model.vo.Post;
-
 public class PostDao {
 	
 	private Properties prop = new Properties();
@@ -50,12 +46,13 @@ public class PostDao {
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-		try {
-			prop.loadFromXML(new FileInputStream(PostDao.class.getResource("/db/sql/post-mapper.xml").getPath()));
-		} catch (IOException e) {
+	
 			
-			e.printStackTrace();
-		}
+	}finally {
+		close(rset);
+		close(pstmt);
+	}
+		return postList;
 	}
 	
 	public ArrayList<Post> PostList(Connection conn, PageInfo pi1){
@@ -122,7 +119,7 @@ public class PostDao {
 			close(rset);
 			close(pstmt);
 		}
-		return postList;
+		return listCount;
 	}
 
 	public ArrayList<Post> selectPostList(Connection conn, PageInfo postPi) {
@@ -182,9 +179,6 @@ public class PostDao {
 		return result;
 	}
 
-		return listCount;
-	
-	}
 	
 	public int increaseCount(Connection conn, int pno) {
 		
@@ -293,25 +287,7 @@ public class PostDao {
 		}
 		return result;
 	}
-	
-	public int deletePost(Connection conn, int pno) {
-		int result = 0;
-		PreparedStatement pstmt = null;
-		String sql = prop.getProperty("deletePost");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, pno);
-			
-			result = pstmt.executeUpdate();
-		} catch (SQLException e) {
-			 
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-		return result;
-	}
+
 	
 	public ArrayList<Post> searchPosts(Connection conn, String keyword) {
 	    ArrayList<Post> list = new ArrayList<>();
@@ -350,6 +326,7 @@ public class PostDao {
 	    }
 
 	    return list;
+	}
 
 	public int increaseRecommend(Connection conn, int postNo) {
 	    int result = 0;

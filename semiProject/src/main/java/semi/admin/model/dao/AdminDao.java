@@ -6,9 +6,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import semi.admin.model.vo.Admin;
+import semi.member.model.vo.Member;
 
 import static semi.common.JDBCTemplate.*;
 
@@ -256,5 +258,36 @@ public class AdminDao {
 			close(pstmt);
 		}
 		return count;
+	}
+
+	public ArrayList<Member> findMember(Connection conn, String value) {
+		ArrayList<Member> list = new ArrayList<Member>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("findMember");
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, value);
+			pstmt.setString(2, value);
+			
+			while(rset.next()) {
+				list.add(new Member(rset.getString("M_ID"),
+						 			rset.getString("M_NAME"),
+						 			rset.getInt("M_REPORT"),
+						 			rset.getString("M_STATUS")));
+			}
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
 	}
 }

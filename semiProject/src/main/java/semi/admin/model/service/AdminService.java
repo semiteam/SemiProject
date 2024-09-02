@@ -3,12 +3,14 @@ package semi.admin.model.service;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import semi.admin.model.dao.AdminDao;
 import semi.admin.model.vo.Admin;
 import static semi.common.JDBCTemplate.*;
 import semi.member.model.dao.MemberDao;
+import semi.member.model.vo.Member;
 
 public class AdminService {
 
@@ -102,6 +104,16 @@ public class AdminService {
 		close(conn);
 		
 		return count;
+	}
+
+	public ArrayList<Member> findMember(String value) {
+		Connection conn = getConnection();
+		
+		ArrayList<Member> list = new AdminDao().findMember(conn, value);
+		
+		close(conn);
+		
+		return list;
 	}
 	
 }

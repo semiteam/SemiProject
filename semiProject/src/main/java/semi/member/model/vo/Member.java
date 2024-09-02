@@ -28,6 +28,18 @@ public class Member {
 		this.mReport = mReport;
 		this.mGrade = mGrade;
 	}
+	
+	
+
+	public Member(String mName, String mId,  int mReport, String mStatus) {
+		super();
+		this.mName = mName;
+		this.mId = mId;
+		this.mReport = mReport;
+		this.mStatus = mStatus;
+	}
+
+
 
 	public Member() {
 	}

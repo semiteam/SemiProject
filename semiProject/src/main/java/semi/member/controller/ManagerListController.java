@@ -79,7 +79,7 @@ public class ManagerListController extends HttpServlet {
 		
 		
 		
-		postListCount = new PostService().selectPostCount();
+		postListCount = new PostService().selectListCount();
 		questionListCount = new QuestionService().selectQuestionCount();
 		
 		int resultCount = Math.max(postListCount, questionListCount);

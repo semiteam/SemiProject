@@ -186,7 +186,7 @@
                 <% } %>
                 <div id="side_menu_open_3" onclick="location.href='<%= contextPath %>/list.po?cpage=1'" class="login">리뷰 볼래?</div>
                 <% if (loginAdmin != null) { %>
-                	<div id="side_menu_open_4" onclick="location.href='<%= contextPath %>/GoAdminMain.ad'">관리자 메뉴</div>
+                	<div id="side_menu_open_4" onclick="location.href='<%= contextPath %>/adminList.ad?cpage=1&pCpage=1'">관리자 메뉴</div>
                 <% } %>
                 <div id="close_btn" onclick="side_close()"><img src="resouces/img/chevron_left_24dp_5F6368.png" alt=""></div>
 

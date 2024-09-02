@@ -100,5 +100,17 @@ SELECT
    AND Q_STATUS = 'Y'
 	</entry>
 	
+	<entry key="findMember">
+	<![CDATA[
+    SELECT M_ID
+         , M_NAME
+         , M_REPORT
+         , M_STATUS
+      FROM MEMBER
+     WHERE (M_ID LIKE ?
+        OR M_NAME LIKE ?)
+       AND ROWNUM &lt;= 5
+       ]]>
+	</entry>
 
 </properties>

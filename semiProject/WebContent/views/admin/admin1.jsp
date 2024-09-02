@@ -104,10 +104,41 @@
                     <div class="main left-main">
                         <div class="inner">
                             <p>회원정보 관리</p>
-                            <form action="" class="search-box" method="get">
+                           
                                 <input type="text" placeholder="회원정보를 입력하세요." class="search-txt">
-                                <button class="btn search-btn" type="submit">검색</button>
-                            </form>
+                               	<div id = "find_result"></div>
+                               	<script>
+                               	function findMember(value) {
+                                    $.ajax({
+                                        type : "get",
+                               		url : "<%=contextPath%>/findMember",
+                               		dataTpye : 'json',
+                               		data : {
+                               			value:value,
+                               		},
+                               		success : function (data) {
+                               			$("#find_result").html('');
+                               			
+                               			let str = '';
+                               			
+                               			if(data !== null){
+                               				$.each(data, function (i) {
+                               					str += '<div class = "result">' + data[i].mId + ' / ' + data[i].mName + ' / '+ data[i].mReport + ' / ' + data[i].mStatus + '<div>'		
+											});
+                               			}
+										
+									},
+									error : function () {
+										console.log('통신실패')
+										
+									}
+
+                                    })
+                               		
+									
+								}
+                               	</script>
+                            
                          
                             
                         <div class="left-inner">
@@ -204,19 +235,19 @@
                                         %>
                                             <div class="post-info"
                                                 data-post-no= "<%=p.getPostNo()%>"
-                                                data-post-title = "<%=p.getPostTitel() %>"
+                                                data-post-title = "<%=p.getPostTitle()%>"
                                                 data-mid = "<%=p.getmId() %>"
                                                 data-mname = "<%=p.getmName() %>"
                                                 data-post-recommend = "<%=p.getPostRecommend() %>"
                                                 data-post-date="<%=p.getPostDate() %>">
                                                 <tr>
                                                     <td><%=p.getPostNo()%></td>
-                                                    <td><%=p.getPostTitel()%></td>
+                                                    <td><%=p.getPostTitle()%></td>
                                                     <td><%=p.getmId()%></td>
                                                     <td><%=p.getPostRecommend()%></td>
                                                     <td><%=p.getPostDate()%></td>
                                                     <td>
-                                                        <button class="btn btn-del" data-pno="<%=p.getPostNo()%>">글삭제</button>
+                                                        <button class="btn btn-del" data-post-no="<%=p.getPostNo()%>">글삭제</button>
                                                     </td>                       
                                                 </tr>
                                             </div>
@@ -494,7 +525,7 @@
                 const postNo = $(this).data('post-no'); 
                 
                 if (confirm('정말로 게시글을 지우시겠습니까?')) {
-                    window.location.href = `<%=contextPath %>/delete.po?postNo=` + postNo;
+                    window.location.href = `<%=contextPath %>/deleteAd.po?postNo=` + postNo;
                 }
 
             })

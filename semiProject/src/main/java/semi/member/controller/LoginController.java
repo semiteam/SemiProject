@@ -96,7 +96,7 @@ public class LoginController extends HttpServlet {
 				int questionListCount;
 				
 				
-				postListCount  = new PostService().selectPostCount();
+				postListCount  = new PostService().selectListCount();
 				questionListCount = new QuestionService().selectQuestionCount();
 				
 				int resultCount = Math.max(postListCount, questionListCount);

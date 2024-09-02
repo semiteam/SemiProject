@@ -157,10 +157,7 @@ JOIN MEMBER USING(M_NO)
   WHERE  POST_NO = ?  
     AND  M_ID = ?
 </entry>
-</properties>
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
-<properties>
+
 <entry key ="selectPostCount">
 SELECT
 	   COUNT(*) COUNT
