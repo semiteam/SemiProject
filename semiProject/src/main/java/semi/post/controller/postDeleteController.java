@@ -31,15 +31,14 @@ public class postDeleteController extends HttpServlet {
 		
 		request.setCharacterEncoding("utf-8");
 		
-		int pno = Integer.parseInt(request.getParameter("pno"));
-		System.out.println(pno + " @#213213213213213213213213213");
-		int result = new PostService().deletePost(pno);
-		
-		if(result > 0) {
-			
-			
-			response.sendRedirect(request.getContextPath() + "/list.po?cpage=1");
-		}
+		 int pno = Integer.parseInt(request.getParameter("pno"));
+	        int result = new PostService().deletePost(pno);
+
+	        if(result > 0) {
+	            response.sendRedirect(request.getContextPath() + "/list.po?cpage=1");
+	        } else {
+	            response.sendRedirect(request.getContextPath() + "/postDetail.po?pno=" + pno);
+	        }
 		
 	}
 

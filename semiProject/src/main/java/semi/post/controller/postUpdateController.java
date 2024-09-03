@@ -31,27 +31,29 @@ public class postUpdateController extends HttpServlet {
 		
 		request.setCharacterEncoding("utf-8");
 		
-		String title = request.getParameter("title");
-		String content = request.getParameter("content");
-		int pno = Integer.parseInt(request.getParameter("pno"));
-		
-		int result = new PostService().updatePost(title,content,pno);
-		
-		if(result > 0) {
-			
-			response.sendRedirect(request.getContextPath() + "/list.po?cpage=1");
-		}else {
-			
-		}
-		
+		request.setCharacterEncoding("utf-8");
 
-		int result1 = new PostService().deletePost(pno);
-		
-		if(result1 > 0) {
-			
-			
-			request.getRequestDispatcher("views/post/postMain.jsp");
-		}
+	    String title = request.getParameter("title");
+	    String content = request.getParameter("content");
+	    String pnoString = request.getParameter("pno");
+
+	    if (pnoString == null || pnoString.isEmpty()) {
+	        // pno가 null이거나 빈 문자열일 경우 에러 처리
+	        response.sendRedirect(request.getContextPath() + "/errorPage.jsp");
+	        return;
+	    }
+
+	    int pno = Integer.parseInt(pnoString);
+
+	    int result = new PostService().updatePost(title, content, pno);
+
+	    if(result > 0) {
+	        // 수정이 성공했을 경우
+	        response.sendRedirect(request.getContextPath() + "/list.po?cpage=1");
+	    } else {
+	        // 수정이 실패했을 경우 (필요 시 에러 처리 추가)
+	        response.sendRedirect(request.getContextPath() + "/postDetail.po?pno=" + pno);
+	    }
 	}
 
 	/**

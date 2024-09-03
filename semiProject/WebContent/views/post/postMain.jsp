@@ -239,11 +239,12 @@
  	document.addEventListener("DOMContentLoaded", function() {
  	    const searchBar = document.querySelector('input[name="search-bar"]');
  	    const postContainer = document.getElementById('post-container');
+ 	    const originalPosts = postContainer.innerHTML; // 초기 게시물 HTML을 저장
 
  	    searchBar.addEventListener('input', function() {
  	        const keyword = searchBar.value.trim();
 
- 	        if (keyword !== "") {  // 검색어가 있을 때만 서버 요청
+ 	        if (keyword !== "") {
  	            const url = '<%= contextPath %>/searchPosts.do?keyword=' + encodeURIComponent(keyword);
  	            
  	            fetch(url)
@@ -309,12 +310,12 @@
  	                        postContainer.appendChild(boardList);
  	                    });
  	                } else {
- 	                    postContainer.innerHTML = "<p>검색 결과가 없습니다.</p>";
+ 	                    
  	                }
  	            })
  	            .catch(error => console.error('Error:', error));
- 	        } else {  // 검색어가 비워지면 원래 페이지로 이동
- 	            location.href = '<%= contextPath %>/list.po?cpage=1';
+ 	        } else {
+ 	            postContainer.innerHTML = originalPosts; // 검색어가 비워지면 초기 게시물 리스트로 되돌림
  	        }
  	    });
  	});
