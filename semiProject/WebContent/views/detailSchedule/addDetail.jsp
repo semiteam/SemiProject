@@ -189,6 +189,37 @@
 	                                </div>
 		                        </div>
 		                    </div>
+                            <script>
+                                $(function() {
+                                    $('#map<%= i %>').css('height', $('#bar<%= i %>').height());
+    
+                                    $('#add_detail').on('click', '#cancle', function() {
+                                        location.reload();
+                                    });
+        
+                                    $(document).on('click', '.add_detail_plan', function() {
+                                        $('#add_detail').css('width', '40%');
+                                        $('#add_detail table').css('display', 'block');
+                                        $('.map').css({
+                                            height: '300px',
+                                            width: '650px',
+                                            margin: '0 0 0 41px'
+                                        });
+                                        $('.plan').css('flex-direction', 'column');
+                                    });
+        
+                                    $(document).on('click', '.circle2', function() {
+                                        $('#add_detail').css('width', '40%');
+                                        $('#add_detail table').css('display', 'block');
+                                        $('.map').css({
+                                            height: '300px',
+                                            width: '650px',
+                                            margin: '0 0 0 41px'
+                                        });
+                                        $('.plan').css('flex-direction', 'column');
+                                    });
+                                });
+                            </script>
                     	<% } else { %>
 	                    	<div class="detail">
 		                        <div class="date_div">
@@ -205,8 +236,10 @@
                                         </div>
                                         <div class="detail_plan">
                                             <!-- DetailSchedule dSmall : list -->
+                                            <% int count = 0; %>
                                             <% for (int j = 0; j < list.size(); j++) { %>
                                                 <% if (list.get(j).getdDate().equals(date)) { %>
+                                                    <% count = 0; %>
                                                     <div class="plan_content plan_content<%= j %><%= i %> plan_content_count<%= i %>">
                                                         <div class="dTime"><%= list.get(j).getdStime() %> ~ <%= list.get(j).getdEtime() %></div>
                                                         <div class="dPlace"><%= list.get(j).getdPlace() %></div>
@@ -218,26 +251,19 @@
                                                         </div>
                                                     </div>
                                                 <% } else { %>
-                                                    <div class="plan_content plan_content<%= j %><%= i %> plan_content_count<%= i %> add_detail_plan">
+                                                    <% count++; %>
+                                                <% } %>
+
+                                                <% if (count == 1) { %>
+                                                    <div class="plan_content add_detail_plan">
                                                         계획 추가하기
                                                     </div>
-                                                    <!-- 다른 날에 일정이 존재하고, 기준 날에 일정이 없을 때도 생성되는 문제 발생 -->
                                                 <% } %>
                                             <% } %>
                                             
                                             <script>
 						                        $(function() {
-						                            let finalHeight = 0;
-
-						                            for (let j = 0; j < $('.plan_content_count<%= i %>').length; j++) {
-						                                let className = '.plan_content' + j + <%= i %> + '.plan_content_count<%= i %>';
-						                                finalHeight += $(className).height();
-						                            }
-						
-						                            let length = 'calc(' + finalHeight + 'px + (30px * ' + ($('.plan_content').length - 1) + '))';
-						
-                                                    $('#bar<%= i %>').css('height', length);
-                                                    $('#map<%= i %>').css('height', length);
+                                                    $('#map<%= i %>').css('height', $('#bar<%= i %>').height());
                     
                                                     $('#add_detail').on('click', '#cancle', function() {
                                                         location.reload();
