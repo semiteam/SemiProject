@@ -22,6 +22,11 @@ PageInfo postPi = (PageInfo)request.getAttribute("postPi"); ArrayList<Member>
                 <!DOCTYPE html>
                 <html lang="en">
                   <head>
+                    <style>
+                      #search___result {
+                        height: auto;
+                    }
+                    </style>
                     <meta charset="UTF-8" />
                     <meta
                       name="viewport"
@@ -182,18 +187,21 @@ PageInfo postPi = (PageInfo)request.getAttribute("postPi"); ArrayList<Member>
                           <div class="main left-main">
                             <div class="inner">
                               <p>회원정보 관리</p>
-
+								
                               <input
                                 type="text"
                                 placeholder="회원정보를 입력하세요."
                                 class="search-txt"
+                                id ="place-member"
+                                name = "place-member"
                               />
+                              
                               <div id="find_result"></div>
                               <script>
                                 function findMember(value) {
                                   $.ajax({
-                                    type: "GET",
-                                    url: "<%=contextPath%>/findMember",
+                                    type: "get",
+                                    url: "<%=contextPath%>/findMember.ad",
                                     dataType: "json",
                                     data: {
                                       value: value,
@@ -221,6 +229,16 @@ PageInfo postPi = (PageInfo)request.getAttribute("postPi"); ArrayList<Member>
                                     },
                                   });
                                 }
+                                $(function () {
+                                    $("#place_member").on("keyup", function () {
+                                      
+                                      if ($(this).val() === "") {
+                                        $("#find_result").html("");
+                                      } else {
+                                        getResult($(this).val());
+                                      }
+                                    });
+                                  });
                               </script>
 
                               <div class="left-inner">

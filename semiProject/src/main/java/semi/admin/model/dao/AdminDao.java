@@ -272,8 +272,8 @@ public class AdminDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setString(1, value);
-			pstmt.setString(2, value);
+			pstmt.setString(1, "%" + value + "%");
+			pstmt.setString(2, "%" + value + "%");
 			
 			rset =pstmt.executeQuery();
 			

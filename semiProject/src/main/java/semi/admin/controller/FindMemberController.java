@@ -17,7 +17,7 @@ import semi.member.model.vo.Member;
 /**
  * Servlet implementation class FindMemberController
  */
-@WebServlet("/findMember")
+@WebServlet("/findMember.ad")
 public class FindMemberController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -41,7 +41,10 @@ public class FindMemberController extends HttpServlet {
 		
 		
 		ArrayList<Member> list = new AdminService().findMember(value);
+
+		
 		response.setContentType("application/json; charset=utf-8");
+		
 		new Gson().toJson(list, response.getWriter());
 		
 		
