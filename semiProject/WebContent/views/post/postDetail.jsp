@@ -94,6 +94,10 @@
 input {
 	background-color: rgba(0, 0, 0, 0);
 }
+
+
+
+
 </style>
 
 </head>
@@ -220,8 +224,14 @@ input {
 									    <% } %>
 									<!--  onclick="location.href='<%= contextPath %>/delete.po'" -->
 								</div>
-
-					
+				
+								
+								<<div class="comment-section">
+    <h4>댓글 작성</h4>
+    <textarea id="commentContent" class="comment-input" rows="4" placeholder="댓글을 입력하세요..." required></textarea>
+    <button type="button" class="btn-comment" onclick="submitComment()">댓글 작성</button>
+</div>
+								
 							</div>
 						</div>
 					</section>
@@ -291,6 +301,71 @@ input {
             document.getElementById('postForm').submit();
         }
     }
+	
+	
+	document.getElementById('submitComment').addEventListener('click', function() {
+	    const commentContent = document.getElementById('commentContent').value;
+
+	    // 댓글 내용이 비어있는지 확인
+	    if (commentContent.trim() === '') {
+	        alert('댓글을 입력하세요.');
+	        return;
+	    }
+
+	    // AJAX 요청
+	    const xhr = new XMLHttpRequest();
+	    xhr.open('POST', '/submitComment', true); // '/submitComment'는 서버의 댓글 처리 경로입니다.
+	    xhr.setRequestHeader('Content-Type', 'application/json');
+
+	    xhr.onreadystatechange = function() {
+	        if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+	            // 서버로부터의 응답을 받으면 처리
+	            const response = JSON.parse(xhr.responseText);
+
+	            // 댓글이 성공적으로 추가되었을 때
+	            if (response.success) {
+	                // 새로운 댓글을 화면에 추가
+	                addCommentToList(response.comment);
+
+	                // 입력 필드 초기화
+	                document.getElementById('commentContent').value = '';
+	            } else {
+	                alert('댓글 작성에 실패했습니다. 다시 시도해주세요.');
+	            }
+	        }
+	    };
+
+	    // 서버로 보낼 데이터 (JSON 형태로 전송)
+	    const data = JSON.stringify({
+	        content: commentContent,
+	        postId: 123 // 게시물 번호 (동적으로 설정 가능)
+	    });
+
+	    xhr.send(data);
+	});
+
+	// 댓글을 리스트에 추가하는 함수
+	function addCommentToList(comment) {
+	    const commentList = document.getElementById('commentList');
+
+	    // 새로운 댓글 HTML 생성
+	    const newComment = document.createElement('div');
+	    newComment.classList.add('comment-item');
+	    newComment.innerHTML = `
+	        <div class="comment-author">${comment.author}</div>
+	        <div class="comment-date">${comment.date}</div>
+	        <div class="comment-content">${comment.content}</div>
+	    `;
+
+	    // 댓글 리스트에 새로운 댓글을 추가
+	    commentList.appendChild(newComment);
+	}
+	
+	
+	
+	
+	
+	
 	</script>
 </body>
 </html>

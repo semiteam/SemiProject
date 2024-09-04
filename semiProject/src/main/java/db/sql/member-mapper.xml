@@ -156,12 +156,13 @@
 	</entry>
 	
 	<entry key="updateMember">
-    UPDATE MEMBER 
-    SET M_NICKNAME = ?, 
-        M_PWD = ?, 
-        M_PHONE = ?, 
-        M_EMAIL = ? 
-    WHERE M_ID = ?
+  UPDATE MEMBER 
+   SET M_NICKNAME = ?, 
+       M_PWD = ?, 
+       M_PHONE = ?, 
+       M_EMAIL = ?, 
+       M_ADDRESS = ?   
+ WHERE M_ID = ?
 </entry>
 	<entry key="selectMember">
     SELECT 
@@ -189,6 +190,15 @@ SELECT COUNT(*)
   FROM MEMBER 
  WHERE M_NICKNAME = ? 
    AND M_STATUS = 'U'
+</entry>
+
+<entry key="updateAddress">
+UPDATE
+        MEMBER 
+   SET  POSTAL_CODE = ?
+      , BASIC_ADDRESS = ?
+      , DETAILED_ADDRESS = ? 
+   WHERE M_ID = ?
 </entry>
 	
 </properties>

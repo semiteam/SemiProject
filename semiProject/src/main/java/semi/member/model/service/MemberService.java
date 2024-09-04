@@ -148,27 +148,36 @@ public class MemberService {
     }
     
     public Member updateMember(Member member) {
-        Connection conn = getConnection();  
+        Connection conn = getConnection();
+        Member updatedMember = new MemberDao().updateMember(conn, member);
 
-        int result = new MemberDao().updateMember(conn, member); 
-
-        Member updatedMember = null; 
-
-        if (result > 0) {  
-            commit(conn);  
-            updatedMember = new MemberDao().selectMember(conn, member.getmId());  
+        if (updatedMember != null) {
+            commit(conn);
         } else {
             rollback(conn);
         }
 
-        close(conn);  
-
-        return updatedMember;  
+        close(conn);
+        return updatedMember;
     }
-    
+
+
     public int checkNickname(String nickname) {
         Connection conn = getConnection();
         int result = new MemberDao().checkNickname(conn, nickname);
+        close(conn);
+        return result;
+    }
+    
+    // 주소 업데이트 메서드
+    public int updateAddress(Member member) {
+        Connection conn = getConnection();
+        int result = new MemberDao().updateAddress(conn, member);
+        if (result > 0) {
+            commit(conn);
+        } else {
+            rollback(conn);
+        }
         close(conn);
         return result;
     }

@@ -181,42 +181,41 @@ public class MemberDao {
 
 	
 	public Member selectMember(Connection conn, String mId) {
-		
-		Member m = null;
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		
-		String sql = prop.getProperty("selectMember");
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, mId);
-			
-			rset = pstmt.executeQuery();
-			if(rset.next()) {
-				m = new Member(rset.getInt("M_NO"),
-						   rset.getString("M_NAME"),
-						   rset.getString("M_ID"),
-						   rset.getString("M_NICKNAME"),
-						   rset.getString("M_PWD"),
-						   rset.getString("M_RRN"),
-						   rset.getString("M_PHONE"),
-						   rset.getString("M_EMAIL"),
-						   rset.getString("M_ADDRESS"),
-						   rset.getDate("M_DATE"),
-						   rset.getDate("M_MODIFY"),
-						   rset.getString("M_STATUS"),
-						   rset.getInt("M_REPORT"),
-						   rset.getString("M_GRADE"),
-						   rset.getString("M_PROFILE"));
-		}
-		} catch (SQLException e) {
-			 
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(pstmt);
-		}
-		return m;
+	    Member m = null;
+	    PreparedStatement pstmt = null;
+	    ResultSet rset = null;
+
+	    String sql = prop.getProperty("selectMember");
+
+	    try {
+	        pstmt = conn.prepareStatement(sql);
+	        pstmt.setString(1, mId);  // 업데이트된 회원의 ID 사용
+
+	        rset = pstmt.executeQuery();
+	        if (rset.next()) {
+	            m = new Member(rset.getInt("M_NO"),
+	                           rset.getString("M_NAME"),
+	                           rset.getString("M_ID"),
+	                           rset.getString("M_NICKNAME"),
+	                           rset.getString("M_PWD"),
+	                           rset.getString("M_PHONE"),
+	                           rset.getString("M_EMAIL"),
+	                           rset.getString("M_ADDRESS"),
+	                           rset.getDate("M_DATE"),
+	                           rset.getDate("M_MODIFY"),
+	                           rset.getString("M_STATUS"),
+	                           rset.getInt("M_REPORT"),
+	                           rset.getString("M_GRADE"),
+	                           rset.getString("M_PROFILE"));
+	        }
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        close(rset);
+	        close(pstmt);
+	    }
+	    return m;
 	}
 
 	public int blockMember(Connection conn, int mNo) {
@@ -412,54 +411,88 @@ public class MemberDao {
 	    
 	}
 	
-	public int updateMember(Connection conn, Member member) {
+	public Member updateMember(Connection conn, Member member) {
+	    Member updatedMember = null;
+	    PreparedStatement pstmt = null;
 	    int result = 0;
-	    PreparedStatement pstmt = null;
-
-	    String sql = prop.getProperty("updateMember"); 
 
 	    try {
+	        // 기존의 업데이트 로직
+	        String sql = prop.getProperty("updateMember");
 	        pstmt = conn.prepareStatement(sql);
-	        pstmt.setString(1, member.getmNickname()); 
-	        pstmt.setString(2, member.getmPwd());      
-	        pstmt.setString(3, member.getmPhone());    
-	        pstmt.setString(4, member.getmEmail());    
-	        pstmt.setString(5, member.getmId());       
+	        pstmt.setString(1, member.getmNickname());
+	        pstmt.setString(2, member.getmPwd());
+	        pstmt.setString(3, member.getmPhone());
+	        pstmt.setString(4, member.getmEmail());
+	        pstmt.setString(5, member.getmAddress());
+	        pstmt.setString(6, member.getmId());
 
-	        result = pstmt.executeUpdate();  
+	        result = pstmt.executeUpdate();
 
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	    } finally {
-	        close(pstmt);  
-	    }
-
-	    return result;  
-	}
-	
-	public int checkNickname(Connection conn, String nickname) {
-	    int count = 0;
-	    PreparedStatement pstmt = null;
-	    ResultSet rset = null;
-
-	    String sql = prop.getProperty("checkNickname"); 
-
-	    try {
-	        pstmt = conn.prepareStatement(sql);
-	        pstmt.setString(1, nickname);
-
-	        rset = pstmt.executeQuery();
-
-	        if (rset.next()) {
-	            count = rset.getInt(1);
+	        // 업데이트가 성공하면 해당 회원을 다시 조회해서 반환
+	        if (result > 0) {
+	            updatedMember = selectMember(conn, member.getmId()); // 업데이트된 정보를 가져오는 메서드
 	        }
+
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	    } finally {
-	        close(rset);
 	        close(pstmt);
 	    }
 
-	    return count;
+	    return updatedMember;
 	}
+
+	
+	  public int checkNickname(Connection conn, String nickname) {
+	        int count = 0;
+	        PreparedStatement pstmt = null;
+	        ResultSet rset = null;
+
+	        String sql = "SELECT COUNT(*) FROM MEMBER WHERE M_NICKNAME = ?";
+
+	        try {
+	            pstmt = conn.prepareStatement(sql);
+	            pstmt.setString(1, nickname);
+	            rset = pstmt.executeQuery();
+
+	            if (rset.next()) {
+	                count = rset.getInt(1);
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        } finally {
+	            close(rset);
+	            close(pstmt);
+	        }
+
+	        return count;
+	    }
+	  
+	  public int updateAddress(Connection conn, Member member) {
+		    int result = 0;
+		    PreparedStatement pstmt = null;
+
+		    String sql = prop.getProperty("updateAddress");
+
+		    try {
+		        pstmt = conn.prepareStatement(sql);
+		        pstmt.setString(1, member.getPostalCode());
+	            pstmt.setString(2, member.getBasicAddress());
+	            pstmt.setString(3, member.getDetailedAddress());
+	            pstmt.setString(4, member.getmId());
+		       
+
+		        result = pstmt.executeUpdate();
+		        
+		        System.out.println("업데이트 결과: " + result);
+
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    } finally {
+		        close(pstmt);
+		    }
+
+		    return result;
+		}
 }

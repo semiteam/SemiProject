@@ -28,19 +28,17 @@ public class ChekNicknameController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String nickname = request.getParameter("nickname");
+		String nickname = request.getParameter("newNickname");
 
-        int result = new MemberService().checkNickname(nickname);
+        MemberService memberService = new MemberService();
+        boolean isDuplicate = memberService.checkNickname(nickname) > 0;
 
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-
-        if (result > 0) { // 중복된 닉네임
-            response.getWriter().write("{\"isDuplicate\": true}");
-        } else { // 사용 가능한 닉네임
-            response.getWriter().write("{\"isDuplicate\": false}");
-        }
+        response.getWriter().write("{\"isDuplicate\": " + isDuplicate + "}");
+      
 	}
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
