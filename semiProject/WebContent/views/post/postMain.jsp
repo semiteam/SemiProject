@@ -179,33 +179,43 @@
                                 <button onclick="location.href='<%= contextPath %>/insertPage.po'"><div class="material-icons edit">edit</div></button>
                               </div>
                               <div class="container" id="post-container">
-                             
-                             
-                              <% for(Post p :list1) { %>
-                                <div class="board-list">
-                                <input type="hidden" value="<%= p.getmNO() %>" name="mno">
-                                <input type="hidden" value="<%= p.getPostNo()%>" name="pno">
-                                  <div class="board">
-                                    <div class="thumbnail"><img src="resouces/img/2.jpg" alt=""></div>
-                                    <div class="title"><%= p.getPostTitle() %></div>
-                                    <div class="info">작성자 : <%= p.getmId() %>| 조회수 :<%=p.getPostCount() %> | 추천수 : <%= p.getPostRecommend() %>| 작성일 : <%= p.getPostDate() %> </div>
-                                    <div class="cover">
-                                    	
-                                      <div class="material-icons arrow"></div>
-                             		        
-                                      <div class="preview" id="preview" onclick="location.href='<%= contextPath %>/postDetail.po?pno=<%= p.getPostNo()%>'">
-                                      <%= p.getPostContent() %>
-                                      </div>
-                               		
-                                    
-                                    
-                                    </div>
-                                  </div>
-                                </div>
-                                        <% } %>
-                               
-                                	
-                                </div>
+
+
+						<% for(Post p : list1) { %>
+						<div class="board-list">
+							<input type="hidden" value="<%=p.getmNO()%>" name="mno">
+							<input type="hidden" value="<%=p.getPostNo()%>" name="pno">
+							<div class="board">
+								<div class="thumbnail">
+									<img src="<%=contextPath + "/" + p.getPostImagePath()%>" alt="이미지" />
+										alt="이미지" />
+								</div>
+								<div class="title"><%=p.getPostTitle()%></div>
+								<div class="info">
+									작성자 :
+									<%=p.getmId()%>
+									| 조회수 :
+									<%=p.getPostCount()%>
+									| 추천수 :
+									<%=p.getPostRecommend()%>
+									| 작성일 :
+									<%=p.getPostDate()%>
+								</div>
+								<div class="cover">
+									<div class="material-icons arrow"></div>
+									<div class="preview" id="preview"
+										onclick="location.href='<%=contextPath%>/postDetail.po?pno=<%=p.getPostNo()%>'">
+										<%=p.getPostContent()%>
+									</div>
+								</div>
+							</div>
+						</div>
+						<%
+						}
+						%>
+
+
+					</div>
                               </div>
                              
                           

@@ -180,28 +180,29 @@ public class PostDao {
 		return result;
 	}
 	
-	public int insertPost(Connection conn, int mno, String title, String content) {
-		
-		int result = 0;
-		PreparedStatement pstmt = null;
-		String sql = prop.getProperty("insertPost");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, mno);
-			pstmt.setString(2, title);
-			pstmt.setString(3, content);
-			
-			result = pstmt.executeUpdate();
-			
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-		return result;
-	}
+	    // 게시글 삽입 메서드 (이미지 경로 포함)
+	    public int insertPost(Connection conn, int mno, String title, String content, String imagePath) {
+	        int result = 0;
+	        PreparedStatement pstmt = null;
+	        String sql = prop.getProperty("insertPost"); // SQL 쿼리 가져오기
+
+	        try {
+	            pstmt = conn.prepareStatement(sql);
+	            pstmt.setInt(1, mno);           // 회원 번호
+	            pstmt.setString(2, title);      // 게시글 제목
+	            pstmt.setString(3, content);    // 게시글 내용
+	            pstmt.setString(4, imagePath);  // 이미지 경로 (추가된 부분)
+
+	            result = pstmt.executeUpdate(); // 쿼리 실행 후 결과 반환
+
+	        } catch (SQLException e) {
+	            e.printStackTrace(); // 오류 출력
+	        } finally {
+	            close(pstmt); // 자원 해제
+	        }
+	        return result;
+	    }
+	
 	
 	public int deletePost(Connection conn, int pno) {
 		int result = 0;
