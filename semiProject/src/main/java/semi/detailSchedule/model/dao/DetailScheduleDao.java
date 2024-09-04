@@ -42,14 +42,25 @@ public class DetailScheduleDao {
 			rset = pstmt.executeQuery();
 			
 			while (rset.next()) {
-				list.add(new DetailSchedule(rset.getInt("D_NO"),
-											rset.getString("D_PLACE"),
-											rset.getString("D_STIME"),
-											rset.getString("D_ETIME"),
-											rset.getString("D_ELSE"),
-											rset.getDate("D_DATE")
-											)
-						);
+				if (rset.getString("D_ELSE") != null) {
+					list.add(new DetailSchedule(rset.getInt("D_NO"),
+												rset.getString("D_PLACE"),
+												rset.getString("D_STIME"),
+												rset.getString("D_ETIME"),
+												rset.getString("D_ELSE"),
+												rset.getDate("D_DATE")
+												)
+							);
+				} else {
+					list.add(new DetailSchedule(rset.getInt("D_NO"),
+												rset.getString("D_PLACE"),
+												rset.getString("D_STIME"),
+												rset.getString("D_ETIME"),
+												"",
+												rset.getDate("D_DATE")
+												)
+							);
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

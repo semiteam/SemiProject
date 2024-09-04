@@ -191,7 +191,7 @@
 		                    </div>
                             <script>
                                 $(function() {
-                                    $('#map<%= i %>').css('height', $('#bar<%= i %>').height());
+                                    $('.bar').css('height', '50%');
     
                                     $('#add_detail').on('click', '#cancle', function() {
                                         location.reload();
@@ -200,22 +200,12 @@
                                     $(document).on('click', '.add_detail_plan', function() {
                                         $('#add_detail').css('width', '40%');
                                         $('#add_detail table').css('display', 'block');
-                                        $('.map').css({
-                                            height: '300px',
-                                            width: '650px',
-                                            margin: '0 0 0 41px'
-                                        });
                                         $('.plan').css('flex-direction', 'column');
                                     });
         
                                     $(document).on('click', '.circle2', function() {
                                         $('#add_detail').css('width', '40%');
                                         $('#add_detail table').css('display', 'block');
-                                        $('.map').css({
-                                            height: '300px',
-                                            width: '650px',
-                                            margin: '0 0 0 41px'
-                                        });
                                         $('.plan').css('flex-direction', 'column');
                                     });
                                 });
@@ -229,17 +219,19 @@
 		                        </div>
 		                        <div class="plan">
                                     <div class="notMap">
-                                        <div class="timeline">
+                                        <div class="timeline" id="timeline<%= i %>">
                                             <div class="circle1 material-symbols-outlined">circle</div>
                                             <div class="bar" id="bar<%= i %>"></div>
                                             <div class="circle2 material-symbols-outlined">add_circle</div>
                                         </div>
-                                        <div class="detail_plan">
+                                        <div class="detail_plan" id="detail_plan<%= i %>">
                                             <!-- DetailSchedule dSmall : list -->
                                             <% int count = 0; %>
+                                            <% int have = 0; %>
                                             <% for (int j = 0; j < list.size(); j++) { %>
                                                 <% if (list.get(j).getdDate().equals(date)) { %>
                                                     <% count = 0; %>
+                                                    <% ++have; %>
                                                     <div class="plan_content plan_content<%= j %><%= i %> plan_content_count<%= i %>">
                                                         <div class="dTime"><%= list.get(j).getdStime() %> ~ <%= list.get(j).getdEtime() %></div>
                                                         <div class="dPlace"><%= list.get(j).getdPlace() %></div>
@@ -251,7 +243,7 @@
                                                         </div>
                                                     </div>
                                                 <% } else { %>
-                                                    <% count++; %>
+                                                    <% ++count; %>
                                                 <% } %>
 
                                                 <% if (count == 1) { %>
@@ -263,6 +255,7 @@
                                             
                                             <script>
 						                        $(function() {
+                                                    $('timeline').css('height', $('#detail_plan<%= i %>').height());
                                                     $('#map<%= i %>').css('height', $('#bar<%= i %>').height());
                     
                                                     $('#add_detail').on('click', '#cancle', function() {
@@ -294,18 +287,25 @@
                                             </script>
                                         </div>
                                     </div>
-                                    <div class="map" id="map<%= i %>" style="height:auto;">
-                                        <!-- <img src="resouces/img/maptest.png" alt=""> -->
-                                        <script>
-                                            var container = document.getElementById('map<%= i %>'); //지도를 담을 영역의 DOM 레퍼런스
-                                            var options = { //지도를 생성할 때 필요한 기본 옵션
-                                                center: new kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
-                                                level: 3 //지도의 레벨(확대, 축소 정도)
-                                            };
+                                    <% if (have != 0) { %>
+                                        <div class="map" id="map<%= i %>" style="height:auto;">
+                                            <script>
+                                                $('#bar<%= i %>').css('height', $('#timeline<%= i %>').height() * 0.94);
 
-                                            var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+                                                var container = document.getElementById('map<%= i %>'); //지도를 담을 영역의 DOM 레퍼런스
+                                                var options = { //지도를 생성할 때 필요한 기본 옵션
+                                                    center: new kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
+                                                    level: 3 //지도의 레벨(확대, 축소 정도)
+                                                };
+    
+                                                var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+                                            </script>
+                                        </div>
+                                    <% } else { %>
+                                        <script>
+                                            $('#bar<%= i %>').addClass('bar50');
                                         </script>
-                                    </div>
+                                    <% } %>
 		                        </div>
 		                    </div>
 		                <% } %>
@@ -474,5 +474,7 @@
                 </form>
             </div>
         </div>
+
+        
     </body>
 </html>

@@ -84,7 +84,8 @@
                                 <div class="swiper-container">
                                     <div class="swiper-wrapper">
                                         <div class="swiper-slide">
-                                            a
+                                            <h4>대한민국</h4>
+                                            <div>동아시아, 한반도 남부에 위치한 국가</div>
                                         </div>
                                         <div class="swiper-slide">
                                             1
@@ -413,10 +414,7 @@
                                     alert("URL 복사에 실패하였습니다.");
                                 }
                             });
-
 						</script>
-
-
 
                         <br><br>
                     </div>

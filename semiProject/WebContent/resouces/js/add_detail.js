@@ -104,6 +104,11 @@ $('#search___result').on('click', '#add_place', function() {
                     <td><input type="text" id="landmarkCity"></td>
                 </tr>
 
+                <tr>
+                    <th>&nbsp;&nbsp;* 주소&nbsp;&nbsp;</th>
+                    <td><input type="text" id="landmarkAddress"></td>
+                </tr>
+
                 <tr id="clock">
                     <th>&nbsp;&nbsp;운영시간&nbsp;&nbsp;</th>
                     <td id="watch">
@@ -146,19 +151,20 @@ $('#search___result').on('click', '#add_place', function() {
                 });
 
                 $('#place_add').on('click', '#add_done_place', function() {
-                    if ($('#landmarkCity').val() === '' || $('#landmarkName').val() === '') {
-                        if ($('#landmarkName').val() === '') {
-                            alert('장소명을 입력해주십시오.');
-                        } else {
-                            alert('도시명을 입력해주십시오.');
-                        }
+                    if ($('#landmarkName').val() === '') {
+                        alert('장소명을 입력해주세요.');
+                    } else if ($('#landmarkCity').val() === '') {
+                        alert('도시명을 입력해주세요.');
+                    } else if ($('#landmarkAddress').val() === '') {
+                        alert('장소의 주소를 입력해주세요.');
                     } else {
                         $.ajax({
-                            url: '<%= contextPath %>/InsertLandmark.l',
+                            url: 'InsertLandmark.l',
                             method: 'post',
                             data: {
                                 landmarkCity: $('#landmarkCity').val(),
                                 landmarkName: $('#landmarkName').val(),
+                                landmarkAddress: $('#landmarkAddress').val(),
                             },
                             success: function(result) {
                                 if (result > 0) {
@@ -171,7 +177,7 @@ $('#search___result').on('click', '#add_place', function() {
                                 }
                             },
                             error: function() {
-                            console.error('AJAX Error: ', status, error);
+                                console.error('AJAX Error: ', status, error);
                                 alert('장소 추가에 실패하였습니다.');
                             }
                         });
