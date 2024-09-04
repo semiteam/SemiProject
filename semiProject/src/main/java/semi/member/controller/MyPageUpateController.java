@@ -46,7 +46,6 @@ public class MyPageUpateController extends HttpServlet {
 		
 		Member updateMem = new MemberService().updateMember(m);
 		
-			System.out.println(updateMem + "ㄴ마은마은마ㅣ의ㅏㄴㅁ아ㅣ늠아ㅣㅡㄴ마이ㅣㅏㅁ능ㄴㅁㅇ");
 		if(updateMem == null) {
 			
 		} else {

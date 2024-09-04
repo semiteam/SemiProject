@@ -80,8 +80,17 @@ public class Member {
 	}
 	
 	
-	
-	
+	public Member(String mId, String mNickname, String mPwd, String mPhone, String mEmail) {
+		super();
+		this.mId = mId;
+		this.mNickname = mNickname;
+		this.mPwd = mPwd;
+		this.mPhone = mPhone;
+		this.mEmail = mEmail;
+	}
+
+
+
 	public Member(String mName, String mId, String mNickname, String mPwd, String mEmail, String mAddress) {
 		super();
 		this.mName = mName;

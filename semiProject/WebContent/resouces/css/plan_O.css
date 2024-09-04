@@ -99,3 +99,12 @@
     width: 98%;
     padding: 15px;
 }
+
+.editInput {
+    background-color: #00000085;
+    border: none;
+    color: white;
+    font-size: 20px;
+}
+
+.editInput:focus {outline: none;}

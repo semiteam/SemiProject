@@ -302,10 +302,8 @@
                             <div class="plan">
                                 <div class="cover" id="cover<%= sd.getsNo() %>" onclick="location.href='<%= contextPath %>/GoAddDetail.d?mno=<%= sd.getMno() %>&sno=<%= sd.getsNo() %>&howlong=<%= sd.getHowlong() %>'" data-url='<%= contextPath %>/GoAddDetail.d?mno=<%= sd.getMno() %>&sno=<%= sd.getsNo() %>&howlong=<%= sd.getHowlong() %>'>
                                     <div class="plan_title"><%= sd.getsTitle() %></div>
-                                    <div class="date">
-                                        <%= sd.getsSdate() %> ~ <%= sd.getsEdate() %>
-                                        <div class="mini_bar material-symbols-outlined">
-                                            <div class="material-symbols-outlined">edit</div>
+                                    <div class="date"><%= sd.getsSdate() %> ~ <%= sd.getsEdate() %><div class="mini_bar material-symbols-outlined">
+                                            <div class="material-symbols-outlined" id="edit<%= sd.getsNo() %>" onclick="editPlan(event)">edit</div>
                                             <div class="material-symbols-outlined share" onclick="sharePlan(event)">share</div>
                                             <div class="material-symbols-outlined" id="delete<%= sd.getsNo() %>" onclick="deletePlan(event)">delete</div>
                                         </div>
@@ -344,6 +342,41 @@
                         </div>
                         
                         <script>
+                            function editPlan(event) {
+						        event.stopPropagation();
+
+                                $('.cover').attr('onclick', '');
+
+                                let originTitle = $(event.target).closest('.cover').children('.plan_title').text();
+                                let originDate = $(event.target).closest('.cover').children('.date').text().substring(0,23);
+                                let originHtml = $(event.target).closest('.cover').children('.date').html().substring(23);
+
+                                $(event.target).closest('.cover').children('.plan_title').html('<input type="text" value="' + originTitle + '" name="editTitle" class="editInput editInputTitle">');
+                                $(event.target).closest('.cover').children('.date').html(`<input type="text" value="` + originDate + `" name="editDate" class="editInput editInputDate">` + originHtml);
+
+                                if ($('.editInputDate').focus()){}
+						        $.ajax({
+                                    url: '<%= contextPath %>/DeleteSchedule.sd',
+                                    method: 'post',
+                                    data: {
+                                        mno: <%= loginUser.getmNo() %>,
+                                        sno: $(event.target).attr('id').replace('delete', '').trim(),
+                                    },
+                                    success: function(result) {
+                                        if (result > 0) {
+                                            alert('일정 삭제에 성공하였습니다.');
+                                        } else {
+                                            alert('일정 삭제에 실패하였습니다.');
+                                        }
+                                        location.reload();
+                                    },
+                                    error: function() {
+                                        alert('일정 삭제에 실패하였습니다.');
+                                        location.reload();
+                                    }
+                                });
+						    }
+
 						    function deletePlan(event) {
 						        event.stopPropagation();
 					            

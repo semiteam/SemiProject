@@ -30,9 +30,7 @@ public class AjaxsIdCheckController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String checkId = request.getParameter("checkId");
-		System.out.println(checkId + "asd");
 		int count = new MemberService().idCheck(checkId);
-		System.out.println(count + "카운트");
 		if(count > 0) { 
 			response.getWriter().print("NNNNN");
 		} else { 

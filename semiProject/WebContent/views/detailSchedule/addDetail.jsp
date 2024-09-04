@@ -255,12 +255,12 @@
                                             
                                             <script>
                                           $(function() {
-                                                    $('timeline').css('height', $('#detail_plan<%= i %>').height());
-                                                    $('#map<%= i %>').css('height', $('#bar<%= i %>').height());
-                    
-                                                    $('#add_detail').on('click', '#cancle', function() {
-                                                        location.reload();
-                                                    });
+                                                $('#timeline<%= i %>').css('height', $('#detail_plan<%= i %>').height());
+                                                $('#map<%= i %>').css('height', $('#bar<%= i %>').height());
+                
+                                                $('#add_detail').on('click', '#cancle', function() {
+                                                    location.reload();
+                                                });
                   
                                               $(document).on('click', '.add_detail_plan', function() {
                                                   $('#add_detail').css('width', '40%');
@@ -325,7 +325,7 @@
                                         data: {
                                             dTime: $(this).closest('.plan_content').children('.dTime').children('input').val(),
                                             dPlace: $(this).closest('.plan_content').children('.dPlace').children('input').val(),
-                                            dElse: $(this).closest('.plan_content').children('.dElse').text(),
+                                            dElse: $('#editElse').val(),
                                             dno: $(this).attr('id').replace('done', '').trim(),
                                             mno: <%= loginUser.getmNo() %>,
                                             dDate: $(this).closest('.detail').children('.date_div').children('.date').text(),
