@@ -21,6 +21,12 @@ body * {
 
 .wrap * {box-sizing: border-box;}
 
+#min_username {
+    height: 30px; /* 원하는 너비로 고정 */
+    max-width: 300px; /* 최대 너비 고정 */
+    box-sizing: border-box; /* 패딩과 보더를 포함한 크기 계산 */
+}
+
 
 
 .top {
@@ -232,3 +238,19 @@ select{
     color : white;
     margin-left: 2px;
 }
+
+button {
+		border-radius:2px;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+}
+
+button:hover {
+	 background-color: #45a049; /* 호버 시 변경될 배경색 */
+        color: white; /* 텍스트 색상 */
+}
+
+.min_check-btn:hover {
+        background-color: #d32f2f; /* 호버 시 변경될 배경색 */
+    }

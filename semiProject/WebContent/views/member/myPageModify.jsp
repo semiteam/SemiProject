@@ -21,7 +21,7 @@
     />
 
         <!-- jQuery library -->
-        <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+       <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
 
         <!-- Popper JS -->
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
@@ -149,15 +149,15 @@
                                     <td class="text">주소</td>
                                 </tr>
 
-                                <tr>
-                                    <td class="height">
-                                        <input type="text" id="min_username" value="<%= userNickname %>" name="newNickName">
-                                        <button type="button" class="min_check-btn">중복확인</button>
-                                    </td>
-                                    <td><input type="text" id="address" value="<%= address %>"></td>
-                                </tr>
+							<tr>
+								<td class="height"><input type="text" id="min_username"
+									value="<%=userNickname%>" name="newNickName">
+									<button type="button" class="min_check-btn">중복확인</button>
+									<div id="nickname-check-message"></div> <!-- 결과 메시지를 표시할 영역 -->
+								</td>
+							</tr>
 
-                                <tr>
+							<tr>
                                     <td class="height"></td>
                                     <td class="text">전화번호</td>
                                 </tr>
@@ -193,8 +193,8 @@
                             <br><br><br>
 
                             <button type="submit" onclick="return pwd();">변경하기</button>
-                            <button type="submit" data-toggle="modal" data-target="#deleteModal">탈퇴하기</button> 
-                            <button type="reset">취소</button>
+                            <button type="submit" data-toggle="modal" data-target="#deleteModal" style="background-color: red;">탈퇴하기</button> 
+                            <button type="reset" style="background-color: darkturquoise;">취소</button>
                         </form>
                         
 
@@ -226,8 +226,38 @@
                         
                         
                         
-                        
-                        
+                       $(document).ready(function() {
+    $(".min_check-btn").click(function() {
+        const nickname = $("#min_username").val();
+        
+        if (nickname === "") {
+            alert("닉네임을 입력하세요.");
+            return;
+        }
+        
+        $.ajax({
+            url: "<%= contextPath %>/checkNickname.me", // 닉네임 중복 확인을 처리하는 서버 경로
+            method: "GET", // 또는 POST 방식
+            data: { nickname: nickname },
+            success: function(response) {
+                // JSON 응답 파싱
+                const isDuplicate = response.isDuplicate;
+
+                if (isDuplicate) {
+                    // 중복일 경우 알림을 띄우고, input 하단에 경고 메시지 표시
+                    alert("중복된 닉네임입니다. 다른 닉네임을 사용해주세요.");
+                    $("#nickname-check-message").html("중복된 닉네임입니다.").css("color", "red");
+                } else {
+                    // 중복이 아닐 경우 초록색 메시지로 변경 가능 알림
+                    $("#nickname-check-message").html("사용 가능한 닉네임입니다.").css("color", "green");
+                }
+            },
+            error: function() {
+                alert("서버와의 통신 중 오류가 발생했습니다.");
+            }
+        });
+    });
+});
                         
                         </script>
                     </div>

@@ -155,5 +155,40 @@
 	 WHERE M_ID = ?
 	</entry>
 	
+	<entry key="updateMember">
+    UPDATE MEMBER 
+    SET M_NICKNAME = ?, 
+        M_PWD = ?, 
+        M_PHONE = ?, 
+        M_EMAIL = ? 
+    WHERE M_ID = ?
+</entry>
+	<entry key="selectMember">
+    SELECT 
+        M_NO
+      , M_NAME
+      , M_ID
+      , M_NICKNAME
+      , M_PWD
+      , M_RRN
+      , M_PHONE
+      , M_EMAIL
+      , M_ADDRESS
+      , M_DATE
+      , M_MODIFY
+      , M_STATUS
+      , M_REPORT
+      , M_GRADE
+      , M_PROFILE  
+  FROM MEMBER 
+    WHERE M_ID = ?
+</entry>
+
+<entry key="checkNickname">
+SELECT COUNT(*) 
+  FROM MEMBER 
+ WHERE M_NICKNAME = ? 
+   AND M_STATUS = 'U'
+</entry>
 	
 </properties>

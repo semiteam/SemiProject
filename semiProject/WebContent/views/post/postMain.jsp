@@ -188,12 +188,12 @@
 							<div class="board">
 								<div class="thumbnail">
 									<img src="<%=contextPath + "/" + p.getPostImagePath()%>" alt="이미지" />
-										alt="이미지" />
+										
 								</div>
 								<div class="title"><%=p.getPostTitle()%></div>
 								<div class="info">
 									작성자 :
-									<%=p.getmId()%>
+									 작성자 : <%= p.getmNickName()  %>
 									| 조회수 :
 									<%=p.getPostCount()%>
 									| 추천수 :

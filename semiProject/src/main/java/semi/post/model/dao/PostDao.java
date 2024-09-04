@@ -28,45 +28,47 @@ public class PostDao {
 	}
 	
 	public ArrayList<Post> PostList(Connection conn, PageInfo pi1){
-		
-		ArrayList<Post> list1 = new ArrayList<Post>();
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		
-		String sql = prop.getProperty("PostList");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			
-			int startRow1 = (pi1.getCurrentPage() - 1) * pi1.getBoardLimit() + 1;
-			int endRow1 = startRow1 + pi1.getBoardLimit() - 1 ;
-			
-			pstmt.setInt(1, startRow1);
-			pstmt.setInt(2, endRow1);
-			
-			rset = pstmt.executeQuery();
-			while(rset.next()) {
-				list1.add(new Post(rset.getInt("post_no"),
-								  rset.getString("m_id"),
-								  rset.getInt("m_no"),
-						          rset.getString("post_title"),
-						          rset.getString("post_content"),
-						          rset.getInt("post_count"),
-						          rset.getInt("post_recommend"),
-						          rset.getDate("post_date"),
-						          rset.getDate("post_modifyed")));
-				
-			}
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(pstmt);
-		}
-		
-	
-		return list1;
+	    
+	    ArrayList<Post> list1 = new ArrayList<Post>();
+	    PreparedStatement pstmt = null;
+	    ResultSet rset = null;
+	    
+	    String sql = prop.getProperty("PostList"); // SQL 쿼리 가져오기
+	    
+	    try {
+	        pstmt = conn.prepareStatement(sql);
+	        
+	        // 페이징 처리를 위한 시작/끝 행 번호 설정
+	        int startRow1 = (pi1.getCurrentPage() - 1) * pi1.getBoardLimit() + 1;
+	        int endRow1 = startRow1 + pi1.getBoardLimit() - 1;
+	        
+	        pstmt.setInt(1, startRow1);
+	        pstmt.setInt(2, endRow1);
+	        
+	        rset = pstmt.executeQuery();
+	        while(rset.next()) {
+	            // ResultSet에서 데이터를 읽어와서 Post 객체에 추가
+	            list1.add(new Post(
+	                rset.getInt("post_no"),
+	                rset.getString("m_id"),
+	                rset.getInt("m_no"),
+	                rset.getString("m_nickname"),  // 닉네임 추가
+	                rset.getString("post_title"),
+	                rset.getString("post_content"),
+	                rset.getInt("post_count"),
+	                rset.getInt("post_recommend"),
+	                rset.getDate("post_date"),
+	                rset.getDate("post_modifyed")
+	            ));
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        close(rset);
+	        close(pstmt);
+	    }
+
+	    return list1;
 	}
 	
 	public int selectListCount(Connection conn) {
@@ -118,43 +120,39 @@ public class PostDao {
 	}
 	
 	public Post selectPost(Connection conn, int pno) {
-		
-		Post p = null;
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		
-		String sql = prop.getProperty("selectPost");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setInt(1, pno);
-			
-			rset = pstmt.executeQuery();
-			if(rset.next()) {
-				p = new Post(rset.getString("m_id"),
-						     rset.getInt("post_no"),
-						     rset.getString("post_title"),
-						     rset.getString("post_content"),
-						     rset.getInt("post_count"),
-						     rset.getInt("post_recommend"),
-						     rset.getDate("post_date"),
-						     rset.getDate("post_modifyed"),
-						     rset.getString("m_nickname"));
-			}
-			
-			
-		} catch (SQLException e) {
-			 
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(pstmt);
-		}
-		
-		
-		
-		return p;	
+	    Post p = null;
+	    PreparedStatement pstmt = null;
+	    ResultSet rset = null;
+
+	    String sql = prop.getProperty("selectPost");
+
+	    try {
+	        pstmt = conn.prepareStatement(sql);
+	        pstmt.setInt(1, pno);
+	        rset = pstmt.executeQuery();
+	        if (rset.next()) {
+	            p = new Post(
+	                rset.getString("m_id"),        // 작성자 ID
+	                rset.getInt("post_no"), 
+	                rset.getString("post_title"), 
+	                rset.getString("post_content"),
+	                rset.getInt("post_count"), 
+	                rset.getInt("post_recommend"), 
+	                rset.getDate("post_date"), 
+	                rset.getDate("post_modifyed"), 
+	                rset.getString("m_nickname")  // 닉네임 가져오기
+	            );
+	            // 디버그 로그 추가
+	            System.out.println("작성자 닉네임: " + rset.getString("m_nickname"));
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        close(rset);
+	        close(pstmt);
+	    }
+
+	    return p;
 	}
 	
 	public int updatePost(Connection conn, String title, String content, int pno) {

@@ -79,6 +79,17 @@ public class Member {
 		this.mEmail = mEmail;
 		this.mAddress = mAddress;
 	}
+	
+	
+
+	public Member(String mId, String mNickname, String mPwd, String mPhone, String mEmail) {
+		super();
+		this.mId = mId;
+		this.mNickname = mNickname;
+		this.mPwd = mPwd;
+		this.mPhone = mPhone;
+		this.mEmail = mEmail;
+	}
 
 	public int getmNo() {
 		return mNo;

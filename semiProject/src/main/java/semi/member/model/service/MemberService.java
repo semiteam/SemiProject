@@ -146,4 +146,30 @@ public class MemberService {
     	
     	return count;
     }
+    
+    public Member updateMember(Member member) {
+        Connection conn = getConnection();  
+
+        int result = new MemberDao().updateMember(conn, member); 
+
+        Member updatedMember = null; 
+
+        if (result > 0) {  
+            commit(conn);  
+            updatedMember = new MemberDao().selectMember(conn, member.getmId());  
+        } else {
+            rollback(conn);
+        }
+
+        close(conn);  
+
+        return updatedMember;  
+    }
+    
+    public int checkNickname(String nickname) {
+        Connection conn = getConnection();
+        int result = new MemberDao().checkNickname(conn, nickname);
+        close(conn);
+        return result;
+    }
 }

@@ -39,8 +39,7 @@ public class MyPageUpateController extends HttpServlet {
 		String mPhone = request.getParameter("newPhone");
 		String mEmail = request.getParameter("newEmail");
 		
-		String naver = request.getParameter("naver");
-		String gmail = request.getParameter("gmail");
+		
 		
 		Member m = new Member(mId,mNickname,mPwd,mPhone,mEmail);  
 		

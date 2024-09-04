@@ -8,6 +8,8 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import semi.common.model.vo.PageInfo;
+import semi.member.model.dao.MemberDao;
+import semi.member.model.vo.Member;
 import semi.post.model.dao.PostDao;
 import semi.post.model.vo.Post;
 
@@ -139,5 +141,7 @@ public class PostService {
 	    close(conn);
 	    return result;
 	}
+	
+	
 
 }
