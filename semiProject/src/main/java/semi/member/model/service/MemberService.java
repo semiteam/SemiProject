@@ -5,11 +5,14 @@ import java.util.ArrayList;
 import static semi.common.JDBCTemplate.*;
 
 import semi.common.model.vo.PageInfo;
+
 import semi.member.model.dao.MemberDao;
 import semi.member.model.vo.Member;
 
 
 public class MemberService {
+	
+	
 
 	public Member loginMember(String mId, String mPwd) {
 		Connection conn = getConnection();
@@ -37,6 +40,9 @@ public class MemberService {
 		
 		return result;
 	}
+
+	
+	
 
 	public int selectMemberCount() {
 		
@@ -72,5 +78,72 @@ public class MemberService {
 			close(conn);
 		return result;
 	}
+	
+    public Member kakaoLoginMember(String userId) {
+    	Connection conn = getConnection();
+    	
+    	Member m = new MemberDao().kakaoLoginMember(conn,userId);
+    	
+    	close(conn);
+    	
+    	return m;
+    }
+    
+    public int insertKakaoMember(Member m) {
+    	Connection conn = getConnection();
+		
+		int result = new MemberDao().insertKakaoMember(conn, m);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+    }
+    
+    public int idCheck(String checkId) {
+    	
+    	Connection conn = getConnection();
+		
+		int count = new MemberDao().idCheck(conn, checkId);
+		
+		close(conn);
+		
+		return count;
+    }
 
+    public Member idFindSearch(String name, String email) {
+    	
+    	Connection conn = getConnection();
+    	
+    	Member m = new MemberDao().idFindSearch(conn,name,email);
+    	
+    	close(conn);
+    	return m;
+    }
+    
+   /*
+    public String pwdFindSearch(String email) {
+    	Connection conn = getConnection();
+    	
+    	String findPwd = new MemberDao().pwdFindSearch(conn,email);
+    	
+    	close(conn);
+    	
+    	return findPwd;
+    }*/
+    
+    public int checkId(String mId) {
+    	Connection conn = getConnection();
+    	
+    	int count = new MemberDao().checkId(conn,mId);
+    	
+    	close(conn);
+    	
+    	return count;
+    }
 }

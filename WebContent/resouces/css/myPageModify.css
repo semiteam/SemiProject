@@ -1,0 +1,233 @@
+@font-face {
+    font-family: 'DungGeunMo';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {background-color: black;}
+
+body * {
+    white-space: nowrap;
+    font-family: 'DungGeunMo';
+}
+
+.wrap {
+    width: 99.1vw;
+    height: 100vh;
+    position: relative;
+}
+
+.wrap * {box-sizing: border-box;}
+
+
+
+.top {
+    position: fixed;
+    width: 100%;
+    height: 5vh;
+    background-color: white;;
+}
+
+.top > * {
+    float: left;
+    position: fixed;
+}
+
+.top * {cursor: pointer;}
+
+.logo {
+    font-size: 135%;
+    letter-spacing: 5px;
+    top: 1.6vh;
+    left: 3.2vw;
+}
+
+.top_menu {
+    top: 1.75vh;
+    left: 89.68vw;
+    width: 13vw;
+    height: 2vh;
+    font-size: 80%;
+}
+
+.top_menu > ul > * {
+    float: left;
+    margin: 0 0 0 1.2vw;
+    height: 2vh;
+}
+
+.top_menu > ul > li:hover {font-weight: 600;}
+
+.under {
+    float: left;
+    width: 100%;
+    height: 95vh;
+    margin: 5vh 0 0 0;
+}
+
+.under > * {height: 100%;}
+
+.side_menu {
+    position: fixed;
+    width: 15%;
+    background-color: white;
+    text-align: center;
+    font-size: 100%;
+    transition: .6s;
+}
+
+.side_menu > div[id^="side_menu_open_"],
+.side_menu > div[id^="side_menu_close_"] {
+    width: 100%;
+    height: 30px;
+    margin: 20px 0;
+}
+
+.side_menu > div[id^="side_menu_open_"]:hover {
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.side_menu > div[id^="side_menu_close_"] {display: none;}
+
+.side_menu > div[id^="side_menu_close_"]:hover {cursor: pointer;}
+
+.under > .side_menu > div[id^="side_menu_close_"] > div {
+    display: none;
+    position: relative;
+    width: 5vw;
+    height: 4vh;
+    padding: 1.1vh 0;
+    left: 3vw;
+    top: -3.5vh;
+    background-color: #ffffffc5;
+    border-radius: 5px;
+}
+
+.under > .side_menu > div[id^="side_menu_close_"]:hover > div {display: block;}
+
+.under > .side_menu > #close_btn,
+.under > .side_menu > #open_btn {
+    position: fixed;
+    top: 97.5%;
+    cursor: pointer;
+}
+
+.under > .side_menu > #close_btn {left: 13.6%;}
+
+.under > .side_menu > #open_btn {
+    left: 0.8%;
+    display: none;
+}
+
+.under > .side_menu img {
+    width: 25px;
+    height: 25px;
+}
+
+.content {
+    width: 85%;
+    margin: 0 0 0 14.8475%;
+    position: relative;
+    background-color: black;
+
+}
+
+table {margin-top: 5%;}
+
+table * {
+    font-size: 20px;
+    vertical-align: middle;
+}
+
+/* td {border: 1px solid red;} */
+
+input {
+    border: none;
+    border-radius: 5px;
+    color: #000;
+    height: 100%;
+}
+
+input:focus {outline: none;}
+
+.text {color: white;
+    
+}
+
+#newPassword, #confirmPassword, #address {width: 100%;}
+
+.phone {width: 31.9%;}
+
+#email_t {
+    padding-left: 4px;
+    width: 4%;
+}
+
+#email * {float: left;}
+
+.email {width: 48%;}
+
+.height {height: 30px;}
+
+#min_username {width: 55%;}
+
+.min_check-btn {width: 34%; font-size: 16px;}
+
+button{
+    
+    background-color: #aacdff;
+    }
+.min_profile-pic-img{
+    width: 180px;
+    height: 180px;
+    border-radius: 70%;
+    overflow: hidden;
+
+}
+
+.min_profile-pic{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+select{
+    width: 200px;
+    height: 25px;
+    /* padding: 5px; */
+    /* border: 1px solid #999; */
+    
+  }
+
+  /*?*/
+
+  .profile-btn-area{
+    width: 230px;
+    margin: 20px 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-btn-area > *{
+    width: 110px;
+    height: 33px;
+    padding: 5px 10px;
+
+    border: 1px solid black;
+    background-color: white;
+    font-size: 14px;
+    cursor: pointer;
+    text-align: center;
+}
+
+#imageInput{ display: none;}
+
+.profile-btn-area > button{
+    background-color: #455ba8;
+    color : white;
+    margin-left: 2px;
+}

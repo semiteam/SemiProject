@@ -1,5 +1,9 @@
+<%@ page import = "semi.member.model.vo.Member" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	Member m = (Member)request.getAttribute("m");
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,28 +21,57 @@
             </div>
             <!-- <hr> -->
             
-            <form action=""  method="" class="popupFind2">
-                <ul class="find2Tab">
-                    <li class="id">
-                        <a href="views/member/idSearch.jsp" class="on">아이디 찾기</a>
-                    </li>
-                    <li class="password">
-                        <a href="views/member/pwdSearch.jsp" class="pwd" finda2sopt="FindPwd">비밀번호 찾기</a>
-                    </li>
-                </ul>
+           <form action="<%= contextPath %>/findId.me" method="post" class="popupFind2">
+    <ul class="find2Tab">
+        <li class="id">
+            <a href="<%= contextPath %>/id.me" class="on">아이디 찾기</a>
+        </li>
+        <li class="password">
+            <a href="<%= contextPath %>/pwd.me" class="pwd" finda2sopt="FindPwd">비밀번호 찾기</a>
+        </li>
+    </ul>
 
-                <div class="searchForm">
-                    <input type="checkbox" class="check_email" id="check_email"  style='zoom:2.0;' > <span id="check_email_text" >가입한 이메일로 찾기</span>  <br>
+    <div class="searchForm">
+        <div>이름</div><br>
+        <input type="text" class="input_email" name="name" required> <br>
 
-                    <input type="email" class="input_email" placeholder="E-mail">  <br>
-
-                    <input type="checkbox" class="check_phone" style='zoom:2.0;'> <span id="check_phone_text">가입한 휴대폰으로 찾기 </span>
-
-                </div>
-            
-                <button id="btn_idSearch">아이디 찾기</button>
-            </form>
-        </div>
+        <div>이메일</div><br>
+        <input type="text" class="input_email" name="email" required> <br>
     </div>
+
+    <button type="submit" id="btn_idSearch">아이디 찾기</button>
+</form>
+
+<div id="myModal" class="modal" style="display: <%= request.getAttribute("foundId") != null ? "block" : "none" %>;">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <p id="modal-text">
+            <% if (m != null) { %>
+                찾으신 아이디는 <span class="highlight-id"><%= m.getmId() %></span> 입니다.
+            <% } else { %>
+                아이디를 찾을 수 없습니다.
+            <% } %>
+        </p>
+    </div>
+</div>
+
+<script>
+    // 모달과 관련된 요소를 가져옴
+    var modal = document.getElementById("myModal");
+    var span = document.getElementsByClassName("close")[0];
+
+    // 모달 닫기 버튼 클릭 시 모달을 닫는 함수
+    span.onclick = function() {
+        modal.style.display = "none";
+    };
+
+    // 모달 외부 클릭 시 모달을 닫는 함수
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    };
+</script>
+    
 </body>
 </html>

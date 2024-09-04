@@ -1,5 +1,28 @@
+<%@page import="semi.post.model.vo.Post"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="semi.common.model.vo.PageInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
+	
+<%
+	ArrayList<Post> list1 = (ArrayList<Post>)request.getAttribute("list");
+	PageInfo pi1 = (PageInfo)request.getAttribute("pi");
+
+	 
+	 
+	int currentPage1 = pi1.getCurrentPage();
+	int startPage1 = pi1.getStartPage();
+	int endPage1 = pi1.getEndPage();
+	int maxPage1 = pi1.getMaxPage();
+
+
+%>	
+	
+	
+	
+
+	
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -10,7 +33,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 
         <!-- jQuery library -->
-        <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
         <!-- Popper JS -->
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
@@ -59,6 +82,10 @@
         <link rel="stylesheet" href="resouces/css/common.css">
     </head>
     <body>
+
+    
+    	
+
       <%@ include file="../common/basic.jsp" %>
         <div class="top">
           <div class="logo" onclick="location.href='<%= contextPath %>'">우리 여행가조</div>
@@ -143,89 +170,167 @@
                             </div>
                             <div class="board">
                               <div class="search">
+                           
                                 <input type="text" name="search-bar">
+						
+							 
+							 
                                 <div class="material-icons search">search</div>
-                                <button onclick="location.href='views/post/postWrite.jsp'"><div class="material-icons edit">edit</div></button>
+                                <button onclick="location.href='<%= contextPath %>/insertPage.po'"><div class="material-icons edit">edit</div></button>
                               </div>
-                              
                               <div class="container" id="post-container">
-                                <div class="board-list">
-                                  <div class="board">
-                                    <div class="thumbnail"><img src="resouces/img/2.jpg" alt=""></div>
-                                    <div class="title">휜님덜~~~~!!~!@...ㅎㅎㅎㅎ 오랜만,,..,에 동네 산책..ㅎㅎ;; 다녀왔읍니다~~~@!!@#@@@!</div>
-                                    <div class="info">작성자 : 김삿갓 | 조회수 : 73 | 추천수 : 14 | 작성일 : 2024-08-02</div>
-                                    <div class="cover">
-                                      <div class="material-icons arrow">arrow_forward</div>
-                                      <div class="preview" onclick="location.href='views/post/postDetail.jsp'">오래간만에 맑은 공기 마시며 집 앞 피사의 사탑 산책을 다니니 젊은 친구들도 많고~~^^@<br>
-                                        저도 덩달아 젊어지는 기분이라 너무 좋았읍....,,,니다...ㅎㅎㅎㅎ;;;;
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="board-list">
-                                  <div class="board">
-                                    <div class="thumbnail"><img src="resouces/img/1.jpg" alt=""></div>
-                                    <div class="title"></div>
-                                    <div class="info">작성자 : 김삿갓 | 조회수 : 73 | 추천수 : 14 | 작성일 : 2024-08-02</div>
-                                    <div class="cover">
-                                      <div class="material-icons arrow">arrow_forward</div>
-                                      <div class="preview" onclick="location.href='views/post/postDetail.jsp'">
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="board-list">
-                                  <div class="board">
-                                    <div class="thumbnail"><img src="resouces/img/2.jpg" alt=""></div>
-                                    <div class="title"></div>
-                                    <div class="info">작성자 : 김삿갓 | 조회수 : 73 | 추천수 : 14 | 작성일 : 2024-08-02</div>
-                                    <div class="cover">
-                                      <div class="material-icons arrow">arrow_forward</div>
-                                      <div class="preview" onclick="location.href='views/post/postDetail.jsp'">
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="board-list">
-                                  <div class="board">
-                                    <div class="thumbnail"><img src="resouces/img/2.jpg" alt=""></div>
-                                    <div class="title"></div>
-                                    <div class="info">작성자 : 김삿갓 | 조회수 : 73 | 추천수 : 14 | 작성일 : 2024-08-02</div>
-                                    <div class="cover">
-                                      <div class="material-icons arrow">arrow_forward</div>
-                                      <div class="preview" onclick="location.href='views/post/postDetail.jsp'">
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="board-list">
-                                  <div class="board">
-                                    <div class="thumbnail"><img src="resouces/img/2.jpg" alt=""></div>
-                                    <div class="title"></div>
-                                    <div class="info">작성자 : 김삿갓 | 조회수 : 73 | 추천수 : 14 | 작성일 : 2024-08-02</div>
-                                    <div class="cover">
-                                      <div class="material-icons arrow">arrow_forward</div>
-                                      <div class="preview" onclick="location.href='views/post/postDetail.jsp'">
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
+
+
+						<% for(Post p : list1) { %>
+						<div class="board-list">
+							<input type="hidden" value="<%=p.getmNO()%>" name="mno">
+							<input type="hidden" value="<%=p.getPostNo()%>" name="pno">
+							<div class="board">
+								<div class="thumbnail">
+									<img src="<%=contextPath + "/" + p.getPostImagePath()%>" alt="이미지" />
+										alt="이미지" />
+								</div>
+								<div class="title"><%=p.getPostTitle()%></div>
+								<div class="info">
+									작성자 :
+									<%=p.getmId()%>
+									| 조회수 :
+									<%=p.getPostCount()%>
+									| 추천수 :
+									<%=p.getPostRecommend()%>
+									| 작성일 :
+									<%=p.getPostDate()%>
+								</div>
+								<div class="cover">
+									<div class="material-icons arrow"></div>
+									<div class="preview" id="preview"
+										onclick="location.href='<%=contextPath%>/postDetail.po?pno=<%=p.getPostNo()%>'">
+										<%=p.getPostContent()%>
+									</div>
+								</div>
+							</div>
+						</div>
+						<%
+						}
+						%>
+
+
+					</div>
                               </div>
+                             
+                          
                         </section>
                         <div align="center" class="paging-area">
-                          <button>&lt;</button>
-                          <button>1</button> 
-                          <button>2</button>
-                          <button>3</button>
-                          <button>4</button>
-                          <button>5</button>
-                          <button>&gt;</button>
-                          <br><br><br><br><br>
-                      </div>
+                       	
+                       	 <% if (currentPage1 != 1) { %>    
+				            <button onclick="location.href='<%= contextPath %>/list.po?cpage=<%= currentPage1 - 1 %>'">&lt;</button>
+				            <% } %>
+				            <% for (int p = startPage1; p <= endPage1; p++) { %>
+				                <% if (p == currentPage1) { %>
+				                    <button disabled><%= p %></button>
+				                <% } else { %>
+				                    <button onclick="location.href='<%= contextPath %>/list.po?cpage=<%= p %>'"><%= p %></button>
+				                <% } %>
+				            <% } %>
+				            
+				            <% if (currentPage1 != maxPage1) { %>
+				            <button onclick="location.href='<%= contextPath %>/list.po?cpage=<%= currentPage1 + 1 %>'">&gt;</button>
+				            <% } %>
+                  	  
+                       <br><br><br><br><br>
+                  </div> 
+              
+              	
+              	
+              
                 </div>
             </div>
-        </div>
+ 	 <script>
+ 	document.addEventListener("DOMContentLoaded", function() {
+ 	    const searchBar = document.querySelector('input[name="search-bar"]');
+ 	    const postContainer = document.getElementById('post-container');
+ 	    const originalPosts = postContainer.innerHTML; // 초기 게시물 HTML을 저장
 
-       
-    </body>
+ 	    searchBar.addEventListener('input', function() {
+ 	        const keyword = searchBar.value.trim();
+
+ 	        if (keyword !== "") {
+ 	            const url = '<%= contextPath %>/searchPosts.do?keyword=' + encodeURIComponent(keyword);
+ 	            
+ 	            fetch(url)
+ 	            .then(response => response.json())
+ 	            .then(data => {
+ 	                postContainer.innerHTML = ""; // 이전 검색 결과 초기화
+ 	                if (data.length > 0) {
+ 	                    data.forEach(post => {
+ 	                        const boardList = document.createElement('div');
+ 	                        boardList.className = 'board-list';
+
+ 	                        const mnoInput = document.createElement('input');
+ 	                        mnoInput.type = 'hidden';
+ 	                        mnoInput.name = 'mno';
+ 	                        mnoInput.value = post.mNo;
+ 	                        
+ 	                        const pnoInput = document.createElement('input');
+ 	                        pnoInput.type = 'hidden';
+ 	                        pnoInput.name = 'pno';
+ 	                        pnoInput.value = post.postNo;
+
+ 	                        const board = document.createElement('div');
+ 	                        board.className = 'board';
+
+ 	                        const thumbnail = document.createElement('div');
+ 	                        thumbnail.className = 'thumbnail';
+ 	                        const img = document.createElement('img');
+ 	                        img.src = 'resouces/img/2.jpg';
+ 	                        img.alt = '';
+ 	                        thumbnail.appendChild(img);
+
+ 	                        const titleDiv = document.createElement('div');
+ 	                        titleDiv.className = 'title';
+ 	                        titleDiv.textContent = post.postTitle || '제목 없음';
+
+ 	                        const infoDiv = document.createElement('div');
+ 	                        infoDiv.className = 'info';
+ 	                        infoDiv.textContent = '작성자: ' + post.mId + ' | 조회수: ' + post.postCount + ' | 추천수: ' + post.postRecommend + ' | 작성일: ' + post.postDate;
+
+ 	                        const coverDiv = document.createElement('div');
+ 	                        coverDiv.className = 'cover';
+
+ 	                        const arrowDiv = document.createElement('div');
+ 	                        arrowDiv.className = 'material-icons arrow';
+
+ 	                        const previewDiv = document.createElement('div');
+ 	                        previewDiv.className = 'preview';
+ 	                        previewDiv.id = 'preview';
+ 	                        previewDiv.textContent = post.postContent;
+ 	                        previewDiv.onclick = function() {
+ 	                            location.href = '/semi/postDetail.po?pno=' + post.postNo;
+ 	                        };
+
+ 	                        coverDiv.appendChild(arrowDiv);
+ 	                        coverDiv.appendChild(previewDiv);
+ 	                        board.appendChild(thumbnail);
+ 	                        board.appendChild(titleDiv);
+ 	                        board.appendChild(infoDiv);
+ 	                        board.appendChild(coverDiv);
+ 	                        boardList.appendChild(mnoInput);
+ 	                        boardList.appendChild(pnoInput);
+ 	                        boardList.appendChild(board);
+ 	                        postContainer.appendChild(boardList);
+ 	                    });
+ 	                } else {
+ 	                    
+ 	                }
+ 	            })
+ 	            .catch(error => console.error('Error:', error));
+ 	        } else {
+ 	            postContainer.innerHTML = originalPosts; // 검색어가 비워지면 초기 게시물 리스트로 되돌림
+ 	        }
+ 	    });
+ 	});
+        </script>
+			
+
+</body>
 </html>

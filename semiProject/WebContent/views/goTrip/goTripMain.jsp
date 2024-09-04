@@ -162,7 +162,7 @@
             <div class="top_menu">
                 <ul>
                     <% if (loginUser != null || loginAdmin != null) { %>
-                   		<li id="top_menu_1" onclick="location.href='<%= contextPath %>/GoMyPage.me'">My page</li>
+                   		<li id="top_menu_1" onclick="location.href='<%= contextPath %>/myPage.me'">My page</li>
 	                    <li id="top_menu_2" onclick="location.href='<%= contextPath %>/GoServiceCenter.sc'">고객센터</li>
 	                    <li id="top_menu_3">로그아웃</li>
                     <% } else { %>
@@ -184,7 +184,7 @@
                 <% } else { %>
                 	<div id="side_menu_open_2" onclick="location.href='<%= contextPath %>/GoScheduleMain.sd'" class="login">계획 짤래?</div>
                 <% } %>
-                <div id="side_menu_open_3" onclick="location.href='<%= contextPath %>/GoPostMain.ps'" class="login">리뷰 볼래?</div>
+                <div id="side_menu_open_3" onclick="location.href='<%= contextPath %>/list.po?cpage=1'" class="login">리뷰 볼래?</div>
                 <% if (loginAdmin != null) { %>
                 	<div id="side_menu_open_4" onclick="location.href='<%= contextPath %>/GoAdminMain.ad'">관리자 메뉴</div>
                 <% } %>
