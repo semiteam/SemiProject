@@ -22,6 +22,17 @@ public class Question {
 	
 	
 	
+	public Question(int qNo, String mName, String qTitle) {
+		super();
+		this.qNo = qNo;
+		this.mName = mName;
+		this.qTitle = qTitle;
+	}
+
+
+
+
+
 	public Question(int qNo, int mNo, String qTitle, String qContent, Date qDate, String qStatus, String qAnswer,
 			int qPwd) {
 		super();

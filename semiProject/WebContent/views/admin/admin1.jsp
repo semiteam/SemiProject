@@ -25,7 +25,7 @@ PageInfo postPi = (PageInfo)request.getAttribute("postPi"); ArrayList<Member>
                     <style>
                       #search___result {
                         height: auto;
-                    }
+                      }
                     </style>
                     <meta charset="UTF-8" />
                     <meta
@@ -187,15 +187,15 @@ PageInfo postPi = (PageInfo)request.getAttribute("postPi"); ArrayList<Member>
                           <div class="main left-main">
                             <div class="inner">
                               <p>회원정보 관리</p>
-								
+
                               <input
                                 type="text"
                                 placeholder="회원정보를 입력하세요."
                                 class="search-txt"
-                                id ="place-member"
-                                name = "place-member"
+                                id="place-member"
+                                name="place-member"
                               />
-                              
+
                               <div id="find_result"></div>
                               <script>
                                 function findMember(value) {
@@ -222,6 +222,7 @@ PageInfo postPi = (PageInfo)request.getAttribute("postPi"); ArrayList<Member>
                                             data[i].mStatus +
                                             "</div>";
                                         });
+                                        $("#find_result").html(str);
                                       }
                                     },
                                     error: function () {
@@ -230,15 +231,14 @@ PageInfo postPi = (PageInfo)request.getAttribute("postPi"); ArrayList<Member>
                                   });
                                 }
                                 $(function () {
-                                    $("#place_member").on("keyup", function () {
-                                      
-                                      if ($(this).val() === "") {
-                                        $("#find_result").html("");
-                                      } else {
-                                        getResult($(this).val());
-                                      }
-                                    });
+                                  $("#place-member").on("keyup", function () {
+                                    if ($(this).val() === "") {
+                                      $("#find_result").html("");
+                                    } else {
+                                      findMember($(this).val());
+                                    }
                                   });
+                                });
                               </script>
 
                               <div class="left-inner">
@@ -335,16 +335,79 @@ PageInfo postPi = (PageInfo)request.getAttribute("postPi"); ArrayList<Member>
                         <div class="main right-main">
                           <div class="inner">
                             <p>최신글 확인</p>
-                            <form action="" class="search-box" method="get">
-                              <input
-                                type="text"
-                                placeholder="찾고싶은 글을 검색하세요."
-                                class="search-txt"
-                              />
-                              <button class="btn search-btn" type="submit">
-                                검색
-                              </button>
-                            </form>
+
+                            <input
+                              type="text"
+                              placeholder="찾고싶은 글을 검색하세요."
+                              class="search-txt"
+                              id="place_wirte"
+                            />
+                            <div id="result-post"></div>
+                            <div id="result-question"></div>
+                            <script>
+                              function findWirte(value) {
+                                $.ajax({
+                                  type: "get",
+                                  url: "<%=contextPath%>/findWrite.ad",
+                                  dataType: "json",
+                                  data: {
+                                    value: value,
+                                  },
+                                  success: function (data) {
+                                    $("#result-post").html("");
+
+                                    let str = "";
+
+                                    if (data !== null) {
+                                      $.each(data, function (i) {
+                                        str +=
+                                          '<div class = "result>' +
+                                          data[i].postNo +
+                                          " / " +
+                                          data[i].mNo +
+                                          " / " +
+                                          data[i].postTitle +
+                                          "</div>";
+                                      });
+                                      $("#result-post").html(str);
+                                    }
+
+                                    $("#result-question").html("");
+
+                                    let str2 = "";
+
+                                    if (data !== null) {
+                                      $.each(data, function (i) {
+                                        str2 +=
+                                          '<div class = "result>' +
+                                          data[i].qNo +
+                                          " / " +
+                                          data[i].mNo +
+                                          " / " +
+                                          data[i].qTitle +
+                                          "</div>";
+                                      });
+                                      $("#result-question").html(str2);
+                                    }
+                                  },
+
+                                  error: function () {
+                                    console.log("통신실패");
+                                  },
+                                });
+                              }
+
+                              $(function () {
+                                $("#place_write").on("keyup", function () {
+                                  if ($(this).val() === "") {
+                                    $("#result-post").html("");
+                                    $("#result-question").html("");
+                                  } else {
+                                    findWirte($(this).val());
+                                  }
+                                });
+                              });
+                            </script>
 
                             <div class="right-inner">
                               <div class="right-inner-left">

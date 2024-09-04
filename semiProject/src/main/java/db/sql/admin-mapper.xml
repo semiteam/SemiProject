@@ -112,5 +112,33 @@ SELECT
 	  AND ROWNUM <= 5
        ]]>
 	</entry>
+	
+	<entry key = "findPost">
+	<![CDATA[
+	 SELECT 
+   		   POST_NO
+   		  ,M_NAME
+   		  ,POST_TITLE
+	 FROM  POST
+     JOIN  MEMBER
+     USING (M_NO)
+	WHERE (POST_TITLE LIKE ? OR M_NAME LIKE ?)
+	  AND ROWNUM <= 5;
+	  ]]>
+	</entry>
+	
+	<entry key = "findQuestion">
+	<![CDATA[
+	SELECT 
+   		   Q_NO
+   		  ,M_NAME
+   		  ,Q_TITLE
+	 FROM  QUESTION
+     JOIN  MEMBER
+    USING (M_NO)
+	WHERE (Q_TITLE LIKE ? OR M_NAME LIKE ?)
+	  AND ROWNUM <= 5;
+	    ]]>
+	</entry>
 
 </properties>

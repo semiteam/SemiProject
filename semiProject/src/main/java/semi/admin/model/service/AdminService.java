@@ -11,6 +11,8 @@ import semi.admin.model.vo.Admin;
 import static semi.common.JDBCTemplate.*;
 import semi.member.model.dao.MemberDao;
 import semi.member.model.vo.Member;
+import semi.post.model.vo.Post;
+import semi.question.model.vo.Question;
 
 public class AdminService {
 
@@ -110,6 +112,26 @@ public class AdminService {
 		Connection conn = getConnection();
 		
 		ArrayList<Member> list = new AdminDao().findMember(conn, value);
+		
+		close(conn);
+		
+		return list;
+	}
+
+	public ArrayList<Post> findPost(String value) {
+		Connection conn = getConnection();
+		
+		ArrayList<Post> list = new AdminDao().findPost(conn, value);
+		
+		close(conn);
+		
+		return list;
+	}
+
+	public ArrayList<Question> findQuestion(String value) {
+	Connection conn = getConnection();
+		
+		ArrayList<Question> list = new AdminDao().findQuestion(conn, value);
 		
 		close(conn);
 		

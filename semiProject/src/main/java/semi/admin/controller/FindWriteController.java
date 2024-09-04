@@ -1,6 +1,7 @@
 package semi.admin.controller;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -12,19 +13,20 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 import semi.admin.model.service.AdminService;
-import semi.member.model.vo.Member;
+import semi.post.model.vo.Post;
+import semi.question.model.vo.Question;
 
 /**
- * Servlet implementation class FindMemberController
+ * Servlet implementation class FindWriteController
  */
-@WebServlet("/findMember.ad")
-public class FindMemberController extends HttpServlet {
+@WebServlet("/findWrite.ad")
+public class FindWriteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FindMemberController() {
+    public FindWriteController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,14 +40,18 @@ public class FindMemberController extends HttpServlet {
 		String str = request.getParameter("value");
 		String value = "%" + str + "%";
 		
-		ArrayList<Member> list = new AdminService().findMember(value);
+		ArrayList<Post> pList = new AdminService().findPost(value);
+		ArrayList<Question> qList = new AdminService().findQuestion(value);
 		
+		ArrayList<Object> combiList = new ArrayList<Object>();
 		
-		response.setContentType("application/json; charset=utf-8");
+		combiList.add(pList);
+		combiList.add(qList);
+
 		
-		new Gson().toJson(list, response.getWriter());
+		response.setContentType("appliction/json; charset=utf-8");
 		
-		
+		new Gson().toJson(combiList,response.getWriter());
 	}
 
 	/**

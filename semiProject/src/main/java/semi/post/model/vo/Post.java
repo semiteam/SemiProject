@@ -21,6 +21,19 @@ public class Post {
 	 
 	 public Post() {}
 
+	 
+	 
+	 
+	public Post(int postNo,  String mName,String postTitle) {
+		super();
+		this.postNo = postNo;
+		this.mName = mName;
+		this.postTitle = postTitle;
+	}
+
+
+
+
 	public Post(int postNo, int mNO, String postTitle, String postContent, int postCount, int postRecommend,
 			Date postDate, Date postModifyed, String status) {
 		super();

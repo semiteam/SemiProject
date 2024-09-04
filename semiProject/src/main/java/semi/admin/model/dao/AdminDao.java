@@ -11,6 +11,8 @@ import java.util.Properties;
 
 import semi.admin.model.vo.Admin;
 import semi.member.model.vo.Member;
+import semi.post.model.vo.Post;
+import semi.question.model.vo.Question;
 
 import static semi.common.JDBCTemplate.*;
 
@@ -290,6 +292,75 @@ public class AdminDao {
 			close(rset);
 			close(pstmt);
 		}
+		return list;
+	}
+
+	public ArrayList<Post> findPost(Connection conn, String value) {
+		ArrayList<Post>list = new ArrayList<Post>();
+		
+		PreparedStatement pstmt = null;
+		
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("findPost");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, "%" + value + "%");
+			pstmt.setString(2, "%" + value + "%");
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Post(rset.getInt("POST_NO"),
+								  rset.getString("M_NAME"),
+								  rset.getString("POST_TITLE")));
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+
+	public ArrayList<Question> findQuestion(Connection conn, String value) {
+		
+		ArrayList<Question> list = new ArrayList<Question>();
+		
+		PreparedStatement pstmt = null;
+		
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("findQuestion");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, "%" + value + "%");
+			pstmt.setString(2, "%" + value + "%");
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Question(rset.getInt("Q_NO"),
+									  rset.getString("M_NAME"),
+									  rset.getString("Q_TITLE")));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		
 		return list;
 	}
 }
