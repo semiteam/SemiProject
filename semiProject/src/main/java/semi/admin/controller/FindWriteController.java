@@ -49,7 +49,7 @@ public class FindWriteController extends HttpServlet {
 		combiList.add(qList);
 
 		
-		response.setContentType("appliction/json; charset=utf-8");
+		response.setContentType("application/json; charset=utf-8");
 		
 		new Gson().toJson(combiList,response.getWriter());
 	}

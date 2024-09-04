@@ -340,7 +340,7 @@ PageInfo postPi = (PageInfo)request.getAttribute("postPi"); ArrayList<Member>
                               type="text"
                               placeholder="찾고싶은 글을 검색하세요."
                               class="search-txt"
-                              id="place_wirte"
+                              id="place_write"
                             />
                             <div id="result-post"></div>
                             <div id="result-question"></div>
@@ -364,7 +364,7 @@ PageInfo postPi = (PageInfo)request.getAttribute("postPi"); ArrayList<Member>
                                           '<div class = "result>' +
                                           data[i].postNo +
                                           " / " +
-                                          data[i].mNo +
+                                          data[i].mName +
                                           " / " +
                                           data[i].postTitle +
                                           "</div>";
@@ -382,7 +382,7 @@ PageInfo postPi = (PageInfo)request.getAttribute("postPi"); ArrayList<Member>
                                           '<div class = "result>' +
                                           data[i].qNo +
                                           " / " +
-                                          data[i].mNo +
+                                          data[i].mName +
                                           " / " +
                                           data[i].qTitle +
                                           "</div>";
