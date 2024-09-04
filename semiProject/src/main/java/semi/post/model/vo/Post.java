@@ -15,6 +15,7 @@ public class Post {
 	 private Date postModifyed;
 	 private String status;
 	 private String postImagePath;
+	 private String mName;
 	 
 	 private String mNickName;
 	 private int mNo;
