@@ -21,6 +21,19 @@ public class Post {
 	 
 	 public Post() {}
 
+	 
+	 
+	 
+	public Post(int postNo,  String mName,String postTitle) {
+		super();
+		this.postNo = postNo;
+		this.mName = mName;
+		this.postTitle = postTitle;
+	}
+
+
+
+
 	public Post(int postNo, int mNO, String postTitle, String postContent, int postCount, int postRecommend,
 			Date postDate, Date postModifyed, String status) {
 		super();
@@ -260,7 +273,28 @@ public class Post {
 	}
 
 	
+	
+
+	public Post(int postNo, String postTitel, String postContent, String mId, String mName, int postRecommend, Date postDate) {
+		super();
+		this.postNo = postNo;
+		this.postTitle = postTitel;
+		this.postContent = postContent;
+		this.postRecommend = postRecommend;
+		this.postDate = postDate;
+		this.mId = mId;
+		this.setmName(mName);
+	}
+
+	public String getmName() {
+		return mName;
+	}
+
+	public void setmName(String mName) {
+		this.mName = mName;
+	}
 
 	
-	 
+
+	
 }

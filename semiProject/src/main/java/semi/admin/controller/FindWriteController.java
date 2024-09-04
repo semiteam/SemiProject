@@ -1,24 +1,32 @@
 package semi.admin.controller;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
+import com.google.gson.Gson;
+
+import semi.admin.model.service.AdminService;
+import semi.post.model.vo.Post;
+import semi.question.model.vo.Question;
 
 /**
- * Servlet implementation class GoCourseBusanController
+ * Servlet implementation class FindWriteController
  */
-@WebServlet(name = "GoAdmin2.ad", urlPatterns = { "/GoAdmin2.ad" })
-public class GoAdmin2Controller extends HttpServlet {
+@WebServlet("/findWrite.ad")
+public class FindWriteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GoAdmin2Controller() {
+    public FindWriteController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,15 +35,23 @@ public class GoAdmin2Controller extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
+		request.setCharacterEncoding("utf-8");
 		
-		if (session.getAttribute("loginAdmin") == null) {
-			session.setAttribute("alertMsg", "관리자만 이용 가능한 페이지입니다.");
-			
-			response.sendRedirect(request.getContextPath());
-		} else {
-			request.getRequestDispatcher("views/admin/admin2.jsp").forward(request, response);
-		}
+		String str = request.getParameter("value");
+		String value = "%" + str + "%";
+		
+		ArrayList<Post> pList = new AdminService().findPost(value);
+		ArrayList<Question> qList = new AdminService().findQuestion(value);
+		
+		ArrayList<Object> combiList = new ArrayList<Object>();
+		
+		combiList.add(pList);
+		combiList.add(qList);
+
+		
+		response.setContentType("appliction/json; charset=utf-8");
+		
+		new Gson().toJson(combiList,response.getWriter());
 	}
 
 	/**

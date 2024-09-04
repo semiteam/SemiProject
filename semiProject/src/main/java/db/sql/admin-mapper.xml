@@ -13,15 +13,132 @@
 		   AND ADMIN_STATUS = 'Y'
 	</entry>
 	
-	<entry key ="">
-		
+	<entry key = "newCount">
+	    SELECT
+		        COUNT(*) COUNT
+		  FROM MEMBER
+		 WHERE M_STATUS != 'N'
+		   AND TRUNC(M_DATE) = TRUNC(SYSDATE)
+	</entry>
+	
+	<entry key = "manCount">
+	  SELECT
+		        COUNT(*) COUNT
+		  FROM MEMBER
+		 WHERE M_STATUS != 'N'
+		   AND SUBSTR(M_RRN,7)IN(1,3)
+	</entry>
+	
+	<entry key = "womanCount">
+	  SELECT
+		        COUNT(*) COUNT
+		  FROM MEMBER
+		 WHERE M_STATUS != 'N'
+		   AND SUBSTR(M_RRN,7)IN(2,4)
+	</entry>
+	
+	<entry key = "under10sCount">
+	SELECT 
+    		COUNT(*) AS COUNT
+	  FROM  MEMBER
+	 WHERE 
+    (EXTRACT(YEAR FROM SYSDATE) - 
+        CASE 
+            WHEN SUBSTR(M_RRN, 7, 1) IN ('1', '2') THEN 1900 + TO_NUMBER(SUBSTR(M_RRN, 1, 2))
+            WHEN SUBSTR(M_RRN, 7, 1) IN ('3', '4') THEN 2000 + TO_NUMBER(SUBSTR(M_RRN, 1, 2))
+        END
+    ) BETWEEN 0 AND 19
+	
+	</entry>
+	
+	<entry key = "age20sCount">
+	SELECT 
+    		COUNT(*) AS COUNT
+	  FROM  MEMBER
+	 WHERE 
+    (EXTRACT(YEAR FROM SYSDATE) - 
+        CASE 
+            WHEN SUBSTR(M_RRN, 7, 1) IN ('1', '2') THEN 1900 + TO_NUMBER(SUBSTR(M_RRN, 1, 2))
+            WHEN SUBSTR(M_RRN, 7, 1) IN ('3', '4') THEN 2000 + TO_NUMBER(SUBSTR(M_RRN, 1, 2))
+        END
+    ) BETWEEN 20 AND 29
+	</entry>
+	
+	<entry key = "age30sCount">
+	SELECT 
+    		COUNT(*) AS COUNT
+	  FROM  MEMBER
+	 WHERE 
+    (EXTRACT(YEAR FROM SYSDATE) - 
+        CASE 
+            WHEN SUBSTR(M_RRN, 7, 1) IN ('1', '2') THEN 1900 + TO_NUMBER(SUBSTR(M_RRN, 1, 2))
+            WHEN SUBSTR(M_RRN, 7, 1) IN ('3', '4') THEN 2000 + TO_NUMBER(SUBSTR(M_RRN, 1, 2))
+        END
+    ) BETWEEN 30 AND 39
+	
+	</entry>
+	
+	<entry key = "over40sCount">
+	SELECT 
+    		COUNT(*) AS COUNT
+	  FROM  MEMBER
+	 WHERE 
+    (EXTRACT(YEAR FROM SYSDATE) - 
+        CASE 
+            WHEN SUBSTR(M_RRN, 7, 1) IN ('1', '2') THEN 1900 + TO_NUMBER(SUBSTR(M_RRN, 1, 2))
+            WHEN SUBSTR(M_RRN, 7, 1) IN ('3', '4') THEN 2000 + TO_NUMBER(SUBSTR(M_RRN, 1, 2))
+        END
+    ) >= 40
+	
+	</entry>
+	
+	<entry key="qusetionCount">
+SELECT 
+       COUNT(*) AS COUNT 
+  FROM QUESTION
+ WHERE Q_ANSWER = 'N'
+   AND Q_STATUS = 'Y'
+	</entry>
+	
+	<entry key="findMember">
+	<![CDATA[
+   SELECT 
+   		   M_ID
+   		  ,M_NAME
+   		  ,M_REPORT
+   		  ,M_STATUS
+	 FROM  MEMBER
+	WHERE (M_ID LIKE ? OR M_NAME LIKE ?)
+	  AND ROWNUM <= 5
+       ]]>
+	</entry>
+	
+	<entry key = "findPost">
+	<![CDATA[
+	 SELECT 
+   		   POST_NO
+   		  ,M_NAME
+   		  ,POST_TITLE
+	 FROM  POST
+     JOIN  MEMBER
+     USING (M_NO)
+	WHERE (POST_TITLE LIKE ? OR M_NAME LIKE ?)
+	  AND ROWNUM <= 5;
+	  ]]>
+	</entry>
+	
+	<entry key = "findQuestion">
+	<![CDATA[
+	SELECT 
+   		   Q_NO
+   		  ,M_NAME
+   		  ,Q_TITLE
+	 FROM  QUESTION
+     JOIN  MEMBER
+    USING (M_NO)
+	WHERE (Q_TITLE LIKE ? OR M_NAME LIKE ?)
+	  AND ROWNUM <= 5;
+	    ]]>
 	</entry>
 
-	<entry key = "">
-		
-	</entry>
-
-	<entry key = "">
-		
-	</entry>
 </properties>

@@ -1,4 +1,4 @@
-package semi.landmark.controller;
+package semi.admin.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,20 +11,20 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
-import semi.landmark.model.service.LandmarkService;
-import semi.landmark.model.vo.Landmark;
+import semi.admin.model.service.AdminService;
+import semi.member.model.vo.Member;
 
 /**
- * Servlet implementation class SelectLandmarkController
+ * Servlet implementation class FindMemberController
  */
-@WebServlet("/SelectLandmark.l")
-public class SelectLandmarkController extends HttpServlet {
+@WebServlet("/findMember.ad")
+public class FindMemberController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SelectLandmarkController() {
+    public FindMemberController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,11 +38,14 @@ public class SelectLandmarkController extends HttpServlet {
 		String str = request.getParameter("value");
 		String value = "%" + str + "%";
 		
+		ArrayList<Member> list = new AdminService().findMember(value);
 		
-		ArrayList<Landmark> list = new LandmarkService().selectLandmark(value);
 		
 		response.setContentType("application/json; charset=utf-8");
+		
 		new Gson().toJson(list, response.getWriter());
+		
+		
 	}
 
 	/**

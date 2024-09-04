@@ -14,7 +14,12 @@ import semi.admin.model.service.AdminService;
 import semi.admin.model.vo.Admin;
 import semi.common.model.vo.PageInfo;
 import semi.member.model.service.MemberService;
+import semi.member.model.vo.Commentery;
 import semi.member.model.vo.Member;
+import semi.post.model.service.PostService;
+import semi.post.model.vo.Post;
+import semi.question.model.service.QuestionService;
+import semi.question.model.vo.Question;
 
 /**
  * Servlet implementation class LoginController
@@ -37,16 +42,18 @@ public class LoginController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String mId = request.getParameter("mId");
 		String mPwd = request.getParameter("mPwd");
-		
+
 		Member loginUser = new MemberService().loginMember(mId, mPwd);
 		
 		HttpSession session = request.getSession();
-		
+			
 		if(loginUser == null) {
 			Admin loginAdmin = new AdminService().loginAdmin(mId, mPwd);
+		
 			
 			if (loginAdmin == null) {
 				session.setAttribute("alertMsg", "로그인에 실패하였습니다.");
+				
 				
 				response.sendRedirect(request.getContextPath() + "/GoLogin.me");
 			} else {
@@ -77,22 +84,70 @@ public class LoginController extends HttpServlet {
 				}
 				
 				PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
-				
 				ArrayList<Member> list = new MemberService().selectList(pi);
+
+				int postListCount;
+				int postCurrentPage;
+				int postPageLimit;
+				int postBoardLimit;
+				int postMaxPage;
+				int postStartPage;
+				int postEndPage;
+				int questionListCount;
 				
+				
+				postListCount  = new PostService().selectListCount();
+				questionListCount = new QuestionService().selectQuestionCount();
+				
+				int resultCount = Math.max(postListCount, questionListCount);
+				
+				postCurrentPage = 1;
+				
+				postPageLimit = 10;
+				
+				postBoardLimit = 3;
+				
+				
+				postMaxPage = (int) Math.ceil((double) resultCount / postBoardLimit);
+				
+				postStartPage = (postCurrentPage - 1) / postPageLimit * postPageLimit + 1;
+				
+				postEndPage = postStartPage + postPageLimit - 1;
+				if (postEndPage > postMaxPage) {
+					postEndPage = postMaxPage;
+				}
+				
+				
+				PageInfo postPi = new PageInfo(resultCount, postCurrentPage, postPageLimit, postBoardLimit, postMaxPage, postStartPage, postEndPage);
+				ArrayList<Post> postList = new PostService().selectPostList(postPi);
+				
+				ArrayList<Question> qList = new QuestionService().selectQuestion(postPi);
+				
+				ArrayList<Commentery> cList  = new MemberService().selectCommentery();
+				
+				
+				request.setAttribute("cList", cList);
+				
+
 				request.setAttribute("pi", pi);
 				request.setAttribute("list", list);
+				request.setAttribute("postPi", postPi);
+				request.setAttribute("postList", postList);
+				request.setAttribute("qList", qList);
 				
 				session.setAttribute("loginAdmin", loginAdmin);
 	            session.setAttribute("alertMsg", loginAdmin.getaNickname() + "님의 방문을 환영합니다");
-				
-				request.getRequestDispatcher("views/admin/admin1.jsp").forward(request, response);
+	            
+	         
+	          request.getRequestDispatcher("views/admin/admin1.jsp").forward(request, response);
 			}
 		} else {
 			session.setAttribute("loginUser", loginUser);
             session.setAttribute("alertMsg", loginUser.getmNickname() + "님의 방문을 환영합니다");
             
-            response.sendRedirect(request.getContextPath());
+            	response.sendRedirect(request.getContextPath());
+            
+           
 		}
 	}
 

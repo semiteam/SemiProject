@@ -1,4 +1,4 @@
-package semi.landmark.controller;
+package semi.question.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,20 +11,20 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
-import semi.landmark.model.service.LandmarkService;
-import semi.landmark.model.vo.Landmark;
+import semi.question.model.service.QuestionService;
+import semi.question.model.vo.Reply;
 
 /**
- * Servlet implementation class SelectLandmarkController
+ * Servlet implementation class AjaxReplyListController
  */
-@WebServlet("/SelectLandmark.l")
-public class SelectLandmarkController extends HttpServlet {
+@WebServlet("/rlist.sc")
+public class AjaxReplyListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SelectLandmarkController() {
+    public AjaxReplyListController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,16 +33,13 @@ public class SelectLandmarkController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
+		int qNo = Integer.parseInt(request.getParameter("qNo"));
 		
-		String str = request.getParameter("value");
-		String value = "%" + str + "%";
+		ArrayList<Reply> list = new QuestionService().selectReplyList(qNo);
 		
-		
-		ArrayList<Landmark> list = new LandmarkService().selectLandmark(value);
 		
 		response.setContentType("application/json; charset=utf-8");
-		new Gson().toJson(list, response.getWriter());
+		new Gson().toJson(list,response.getWriter());
 	}
 
 	/**

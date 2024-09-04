@@ -1,30 +1,26 @@
-package semi.landmark.controller;
+package semi.question.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.google.gson.Gson;
-
-import semi.landmark.model.service.LandmarkService;
-import semi.landmark.model.vo.Landmark;
+import semi.question.model.service.QuestionService;
 
 /**
- * Servlet implementation class SelectLandmarkController
+ * Servlet implementation class QuestionDeleteController
  */
-@WebServlet("/SelectLandmark.l")
-public class SelectLandmarkController extends HttpServlet {
+@WebServlet("/delete.sc")
+public class QuestionDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SelectLandmarkController() {
+    public QuestionDeleteController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,16 +29,20 @@ public class SelectLandmarkController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
+		HttpSession session = request.getSession();
 		
-		String str = request.getParameter("value");
-		String value = "%" + str + "%";
+		int qNo = Integer.parseInt(request.getParameter("qNo"));
 		
+		int result = new QuestionService().deleteQuestion(qNo);
 		
-		ArrayList<Landmark> list = new LandmarkService().selectLandmark(value);
-		
-		response.setContentType("application/json; charset=utf-8");
-		new Gson().toJson(list, response.getWriter());
+		if(result > 0) {
+			session.setAttribute("alertMsg", "문의 삭제 성공");
+			response.sendRedirect(request.getContextPath()+"/GoServiceCenter.sc");
+			
+		}else {
+			session.setAttribute("alertMsg", "문의 삭제 실패");
+			response.sendRedirect(request.getContextPath()+"/enrollForm.sc");
+		}
 	}
 
 	/**

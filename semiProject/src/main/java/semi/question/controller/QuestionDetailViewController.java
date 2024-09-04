@@ -1,4 +1,4 @@
-package semi.landmark.controller;
+package semi.question.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,22 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
-
-import semi.landmark.model.service.LandmarkService;
-import semi.landmark.model.vo.Landmark;
+import semi.question.model.service.QuestionService;
+import semi.question.model.vo.Question;
+import semi.question.model.vo.Reply;
 
 /**
- * Servlet implementation class SelectLandmarkController
+ * Servlet implementation class QuestionDetailViewController
  */
-@WebServlet("/SelectLandmark.l")
-public class SelectLandmarkController extends HttpServlet {
+@WebServlet("/detail.sc")
+public class QuestionDetailViewController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SelectLandmarkController() {
+    public QuestionDetailViewController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,16 +32,30 @@ public class SelectLandmarkController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		request.setCharacterEncoding("utf-8");
 		
-		String str = request.getParameter("value");
-		String value = "%" + str + "%";
+		int qNo = Integer.parseInt(request.getParameter("qNo")) ;
+		
+		Question q = new QuestionService().selectQuestion(qNo);
+		
+		ArrayList<Reply> rlist = new QuestionService().selectReplyList(qNo);
 		
 		
-		ArrayList<Landmark> list = new LandmarkService().selectLandmark(value);
 		
-		response.setContentType("application/json; charset=utf-8");
-		new Gson().toJson(list, response.getWriter());
+		if(q != null) {
+			request.setAttribute("rlist", rlist);
+			request.setAttribute("q", q);
+			request.getRequestDispatcher("views/question/questionDetailView.jsp").forward(request, response);
+			
+		}else {
+			request.getSession().setAttribute("alertMsg", "글 불러오기가 실패했습니다");
+			response.sendRedirect(request.getContextPath()+"/questionListView.jsp");
+			
+			
+		}
+		
+		
 	}
 
 	/**

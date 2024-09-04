@@ -31,12 +31,12 @@
 
 .left-inner-left{
     background-color: white;
-    width: 700px;
+    width: 800px;
     border-radius: 5px;
 }
 
 .user-info{
-    width: 700px;
+    width: 850px;
     padding: 30px;
     cursor: pointer;
     
@@ -222,7 +222,7 @@ p{
     justify-content: space-evenly;
 }
 
-.modal-text-contetn{
+.modal-text-content{
     height: 10%;
 }
 

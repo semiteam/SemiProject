@@ -7,6 +7,7 @@ import static semi.common.JDBCTemplate.*;
 import semi.common.model.vo.PageInfo;
 
 import semi.member.model.dao.MemberDao;
+import semi.member.model.vo.Commentery;
 import semi.member.model.vo.Member;
 
 
@@ -76,6 +77,23 @@ public class MemberService {
 			rollback(conn);
 		}
 			close(conn);
+			
+			return result;
+	}
+	
+	public int unblockMember(int mNo) {
+		Connection conn = getConnection();
+		
+		int result = new MemberDao().unblockMember(conn,mNo);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+			close(conn);
+			
 		return result;
 	}
 	
@@ -146,4 +164,27 @@ public class MemberService {
     	
     	return count;
     }
+	// member의 m_status를 확인하는 메소드 B면1 아니면0
+	public boolean memberStatus(int mNo) {
+		Connection conn = getConnection();
+		
+		boolean mStatus = new MemberDao().memberStatus(conn, mNo);
+		
+		close(conn);
+		
+		return mStatus; 
+		
+	}
+
+	public ArrayList<Commentery> selectCommentery() {
+		Connection conn = getConnection();
+		
+		ArrayList<Commentery> cList = new MemberDao().selectCommnetery(conn);
+		
+		close(conn);
+		
+		return cList;
+	}
+
+
 }

@@ -10,21 +10,49 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
-import static semi.common.JDBCTemplate.*;
 import semi.common.model.vo.PageInfo;
 import semi.post.model.vo.Post;
+
+import static semi.common.JDBCTemplate.*;
 
 public class PostDao {
 	
 	private Properties prop = new Properties();
 	
 	public PostDao() {
+		String filePath = PostDao.class.getResource("/db/sql/post-mapper.xml").getPath();
+		
 		try {
-			prop.loadFromXML(new FileInputStream(PostDao.class.getResource("/db/sql/post-mapper.xml").getPath()));
+			prop.loadFromXML(new FileInputStream(filePath));
 		} catch (IOException e) {
-			
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	public int selectPostCount(Connection conn) {
+		int postList = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectPostCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				postList = rset.getInt("count");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+	
+			
+	}finally {
+		close(rset);
+		close(pstmt);
+	}
+		return postList;
 	}
 	
 	public ArrayList<Post> PostList(Connection conn, PageInfo pi1){
@@ -92,8 +120,65 @@ public class PostDao {
 			close(pstmt);
 		}
 		return listCount;
-	
 	}
+
+	public ArrayList<Post> selectPostList(Connection conn, PageInfo postPi) {
+		ArrayList<Post> list = new ArrayList<Post>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectPostList");
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			int startRow = (postPi.getCurrentPage()-1) * postPi.getBoardLimit() +1;
+			int endRow = startRow + postPi.getBoardLimit() -1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Post(rset.getInt("POST_NO"),
+								  rset.getString("POST_TITLE"),
+								  rset.getString("POST_CONTENT"),
+								  rset.getString("M_ID"),
+								  rset.getString("M_NAME"),
+								  rset.getInt("POST_RECOMMEND"),
+								  rset.getDate("POST_DATE")));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+	
+		return list;
+	}
+
+	public int deletePost(Connection conn, int postNo) {
+			int result = 0;
+			PreparedStatement pstmt = null;
+			String sql  =prop.getProperty("deletePost");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, postNo);
+				result = pstmt.executeUpdate();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally {
+				close(pstmt);
+			}
+			
+			
+		return result;
+	}
+
 	
 	public int increaseCount(Connection conn, int pno) {
 		
@@ -180,29 +265,28 @@ public class PostDao {
 		return result;
 	}
 	
-	    // 게시글 삽입 메서드 (이미지 경로 포함)
-	    public int insertPost(Connection conn, int mno, String title, String content, String imagePath) {
-	        int result = 0;
-	        PreparedStatement pstmt = null;
-	        String sql = prop.getProperty("insertPost"); // SQL 쿼리 가져오기
-
-	        try {
-	            pstmt = conn.prepareStatement(sql);
-	            pstmt.setInt(1, mno);           // 회원 번호
-	            pstmt.setString(2, title);      // 게시글 제목
-	            pstmt.setString(3, content);    // 게시글 내용
-	            pstmt.setString(4, imagePath);  // 이미지 경로 (추가된 부분)
-
-	            result = pstmt.executeUpdate(); // 쿼리 실행 후 결과 반환
-
-	        } catch (SQLException e) {
-	            e.printStackTrace(); // 오류 출력
-	        } finally {
-	            close(pstmt); // 자원 해제
-	        }
-	        return result;
-	    }
-	
+	public int insertPost(Connection conn, int mno, String title, String content) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertPost");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, mno);
+			pstmt.setString(2, title);
+			pstmt.setString(3, content);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
 	
 	public int deletePost(Connection conn, int pno) {
 		int result = 0;
@@ -223,7 +307,7 @@ public class PostDao {
 		return result;
 	}
 	
-
+<<<<<<< HEAD
 	public ArrayList<Post> searchPosts(Connection conn, String keyword) {
 	    ArrayList<Post> list = new ArrayList<>();
 	    PreparedStatement pstmt = null;
@@ -261,7 +345,7 @@ public class PostDao {
 	    }
 
 	    return list;
-	}
+=======
 	public int increaseRecommend(Connection conn, int postNo) {
 	    int result = 0;
 	    PreparedStatement pstmt = null;
