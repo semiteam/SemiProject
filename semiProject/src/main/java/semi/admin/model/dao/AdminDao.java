@@ -309,13 +309,16 @@ public class AdminDao {
 			
 			pstmt.setString(1,value);
 			pstmt.setString(2,value);
+			pstmt.setString(3,value);
+			pstmt.setString(4,value);
+			
 			
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
-				list.add(new Post(rset.getInt("POST_NO"),
-								  rset.getString("M_NAME"),
-								  rset.getString("POST_TITLE")));
+				list.add(new Post(rset.getInt("NO"),
+								  rset.getString("M_ID"),
+								  rset.getString("TITLE")));
 			}
 			
 		} catch (SQLException e) {
@@ -349,7 +352,7 @@ public class AdminDao {
 			
 			while(rset.next()) {
 				list.add(new Question(rset.getInt("Q_NO"),
-									  rset.getString("M_NAME"),
+									  rset.getString("M_ID"),
 									  rset.getString("Q_TITLE")));
 			}
 		} catch (SQLException e) {

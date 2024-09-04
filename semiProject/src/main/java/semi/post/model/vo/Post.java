@@ -15,6 +15,7 @@ public class Post {
 	 private Date postModifyed;
 	 private String status;
 	 private String mName;
+	 private int qNo;
 	 
 	 private String mNickName;
 	 private int mNo;
@@ -22,12 +23,29 @@ public class Post {
 	 public Post() {}
 
 	 
-	 
-	 
-	public Post(int postNo,  String mName,String postTitle) {
+	
+
+
+
+
+	public Post(int postNo, int qNo, String mId, String postTitle) {
 		super();
 		this.postNo = postNo;
-		this.mName = mName;
+		this.mId = mId;
+		this.postTitle = postTitle;
+		this.qNo = qNo;
+	}
+
+
+
+
+
+
+
+	public Post(int postNo, String mId,String postTitle) {
+		super();
+		this.postNo = postNo;
+		this.mId = mId;
 		this.postTitle = postTitle;
 	}
 
@@ -262,6 +280,20 @@ public class Post {
 
 	public void setmName(String mName) {
 		this.mName = mName;
+	}
+
+
+
+
+	public int getqNo() {
+		return qNo;
+	}
+
+
+
+
+	public void setqNo(int qNo) {
+		this.qNo = qNo;
 	}
 
 	

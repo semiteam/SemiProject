@@ -13,6 +13,7 @@ public class Question {
 	private String qAnswer;
 	private int qPwd;
 	private String mName;
+	private String mId;
 	
 	
 	
@@ -22,10 +23,10 @@ public class Question {
 	
 	
 	
-	public Question(int qNo, String mName, String qTitle) {
+	public Question(int qNo, String mId, String qTitle) {
 		super();
 		this.qNo = qNo;
-		this.mName = mName;
+		this.setmId(mId);
 		this.qTitle = qTitle;
 	}
 
@@ -160,6 +161,22 @@ public class Question {
 	public String toString() {
 		return "Question [qNo=" + qNo + ", mNo=" + mNo + ", qTitle=" + qTitle + ", qContent=" + qContent + ", qDate="
 				+ qDate + ", qStatus=" + qStatus + ", qAnswer=" + qAnswer + ", qPwd=" + qPwd + "]";
+	}
+
+
+
+
+
+	public String getmId() {
+		return mId;
+	}
+
+
+
+
+
+	public void setmId(String mId) {
+		this.mId = mId;
 	}
 	
 	

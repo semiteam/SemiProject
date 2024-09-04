@@ -115,15 +115,28 @@ SELECT
 	
 	<entry key = "findPost">
 	<![CDATA[
-	 SELECT 
-   		   POST_NO
-   		  ,M_NAME
-   		  ,POST_TITLE
-	 FROM  POST
-     JOIN  MEMBER
-     USING (M_NO)
-	WHERE (POST_TITLE LIKE ? OR M_NAME LIKE ?)
-	  AND ROWNUM <= 5;
+SELECT * 
+FROM (
+    SELECT 
+           POST_NO AS NO,
+           M_ID,
+           POST_TITLE AS TITLE
+      FROM POST
+      JOIN MEMBER USING (M_NO)
+     WHERE (POST_TITLE LIKE ? OR M_NO LIKE ?)
+
+    UNION ALL
+
+    SELECT 
+           Q_NO AS NO,
+           M_ID,
+           Q_TITLE AS TITLE
+      FROM QUESTION
+      JOIN MEMBER USING (M_NO)
+     WHERE (Q_TITLE LIKE ? OR M_NO LIKE ?)
+     ORDER BY NO
+) 
+WHERE ROWNUM <= 5
 	  ]]>
 	</entry>
 	
@@ -131,13 +144,13 @@ SELECT
 	<![CDATA[
 	SELECT 
    		   Q_NO
-   		  ,M_NAME
+   		  ,M_ID
    		  ,Q_TITLE
 	 FROM  QUESTION
      JOIN  MEMBER
     USING (M_NO)
-	WHERE (Q_TITLE LIKE ? OR M_NAME LIKE ?)
-	  AND ROWNUM <= 5;
+	WHERE (Q_TITLE LIKE ? OR M_ID LIKE ?)
+	  AND ROWNUM <= 5
 	    ]]>
 	</entry>
 

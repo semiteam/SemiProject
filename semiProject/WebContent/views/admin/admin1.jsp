@@ -354,6 +354,7 @@ PageInfo postPi = (PageInfo)request.getAttribute("postPi"); ArrayList<Member>
                                     value: value,
                                   },
                                   success: function (data) {
+                                    console.log(data);
                                     $("#result-post").html("");
 
                                     let str = "";
@@ -361,33 +362,16 @@ PageInfo postPi = (PageInfo)request.getAttribute("postPi"); ArrayList<Member>
                                     if (data !== null) {
                                       $.each(data, function (i) {
                                         str +=
-                                          '<div class = "result>' +
-                                          data[i].postNo +
+                                          '<div class = "result">' +
+                                          "번호:" + data[i].postNo +
                                           " / " +
-                                          data[i].mName +
+                                          "작성자:"+ data[i].mId +
                                           " / " +
-                                          data[i].postTitle +
+                                          "제목:"+data[i].postTitle +
                                           "</div>";
+                                       
                                       });
                                       $("#result-post").html(str);
-                                    }
-
-                                    $("#result-question").html("");
-
-                                    let str2 = "";
-
-                                    if (data !== null) {
-                                      $.each(data, function (i) {
-                                        str2 +=
-                                          '<div class = "result>' +
-                                          data[i].qNo +
-                                          " / " +
-                                          data[i].mName +
-                                          " / " +
-                                          data[i].qTitle +
-                                          "</div>";
-                                      });
-                                      $("#result-question").html(str2);
                                     }
                                   },
 
@@ -401,7 +385,6 @@ PageInfo postPi = (PageInfo)request.getAttribute("postPi"); ArrayList<Member>
                                 $("#place_write").on("keyup", function () {
                                   if ($(this).val() === "") {
                                     $("#result-post").html("");
-                                    $("#result-question").html("");
                                   } else {
                                     findWirte($(this).val());
                                   }
