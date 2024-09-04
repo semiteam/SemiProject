@@ -1,5 +1,11 @@
+<%@page import="semi.post.model.vo.Post"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+<%
+	Post p = (Post)request.getAttribute("p");
+	
+%>	
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -57,6 +63,16 @@
         <script defer src="resouces/js/common.js"></script>
         <link rel="stylesheet" href="resouces/css/board-Detail.css">
         <link rel="stylesheet" href="resouces/css/common.css">
+    
+    <style>
+    input{
+    	background-color: rgba(0, 0, 0, 0);
+    }
+    
+ 	
+
+    </style>
+    
     </head>
     <body>
         <%@ include file="../common/basic.jsp" %>
@@ -104,43 +120,60 @@
                         <img src="resouces/img/chevron_right_24dp_5F6368.png" alt="">
                     </div>
                 </div>
-                
+    	       <form action="<%= contextPath %>/update.po" method="post"> 
                 <div class="content">
                     <section>
                         <div class="board-area">
                             <div class="post">
-                                <form action="">
+                                
+                                 <input type="hidden" name="pno" value="<%= p.getPostNo() %>">
                                     <div class="title">
-                                        <div class="post-title">제목입니다.</div>
+                                    <% if(loginUser.getmId().equals(loginUser.getmId())) { %>
+                                    	<input type="text" class="post-title" value="<%= p.getPostTitle() %>" id="post-title" name="title">
+                                    	<% }else{ %>
+                                        <div class="post-title"><%= p.getPostTitle() %></div>
+                                        <% } %>
                                     </div>
                                     <hr>
                                     <div class="info">
-                                        작성자 조회수 추천수 작성일
+                                        작성자 <%= p.getmId() %> 조회수 <%= p.getPostCount() %> 추천수 <%= p.getPostRecommend() %> 작성일 <%= p.getPostDate() %> 
                                     </div>
                                     <hr>
                                     <div class="content">
-                                        <div class="post-content">내용입니다.</div>
+                                    <% if(loginUser.getmId().equals(loginUser.getmId())) { %>
+                                    	<input type="text" class="post-content" value="<%= p.getPostContent() %>" id="post-content" name="content">
+                                    <% }else{ %>
+                                        <div class="post-content"><%= p.getPostContent() %></div>
+                                        <% } %>
                                     </div>
                                     <hr>
                                     <div class="recommend">
-                                        <span align="center">xxx님의 여행기가 마음에 드셨다면?</span>
+                                        <span aligin="center"><%= p.getmNickName() %>님의 여행기가 마음에 드셨다면?</span>
+                                        
                                         <button>추천하기</button>
                                     </div>
                                     <div class="button-box" align="center"><br><br>
-                                        <button type="reset" id="cancel-btn" onclick="location.href='views/post/postMain.jsp'">목록가기</button>
-                                        <button id="view-btn">수정하기</button>
+                                        <button type="reset" id="cancel-btn" onclick="location.href='<%= contextPath%>/list.po?cpage=1'">목록가기</button>
+                                       <% if(loginUser.getmId().equals(loginUser.getmId())) { %>
+                                        <button type="submit" id="view-btn">수정하기</button>
                                         <button type="submit" id="submit-btn">삭제하기</button>
+                                        <% } %>
+                                        <!--  onclick="location.href='<%= contextPath %>/delete.po'" -->
                                     </div>
-                                </form>
+                        
+                        
+				            </div>
+                        	</div>
+                        		</section>
                             </div>
-                        </div>
+                                </form>
                         <br><br>
-                        </section>
                         <section>
                             <div class="footer"></div>
                         </section>
+                        </div>
+                        
                 </div>
-            </div>
-        </div>
+        
     </body>
 </html>

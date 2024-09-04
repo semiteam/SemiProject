@@ -1,6 +1,7 @@
 package semi.common.model.vo;
 
 public class PageInfo {
+
 	private int listCount;
 	private int currentPage;
 	private int pageLimit;
@@ -11,6 +12,7 @@ public class PageInfo {
 	
 	public PageInfo() {}
 	
+
 	public PageInfo(int listCount, int currentPage, int pageLimit, int boardLimit, int maxPage, int startPage,
 			int endPage) {
 		super();
@@ -22,6 +24,11 @@ public class PageInfo {
 		this.startPage = startPage;
 		this.endPage = endPage;
 	}
+
+	
+	
+
+
 
 	public int getListCount() {
 		return listCount;
@@ -87,6 +94,8 @@ public class PageInfo {
 	}
 	
 	
-	
+
+
+
 
 }

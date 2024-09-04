@@ -22,21 +22,18 @@ public class MemberService {
 		return m;
 	}
 
-	public int insertMember(Member m) {
+	public ArrayList<Member> selectMemberList() {
 		Connection conn = getConnection();
 		
-		int result = new MemberDao().insertMember(conn, m);
-		
-		if (result > 0) {
-			commit(conn);
-		} else {
-			rollback(conn);
-		}
+		ArrayList<Member> list = new MemberDao().selectMemberList(conn);
 		
 		close(conn);
 		
-		return result;
+		return list;
 	}
+
+	
+	
 
 	public int selectMemberCount() {
 		

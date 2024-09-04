@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>	
 <!DOCTYPE html>
 <html lang="en">
 
@@ -212,7 +212,7 @@
                 <% } %>
                 <div id="side_menu_close_3" onclick="location.href='<%= contextPath %>/GoPostMain.ps'" class="login">
                     <img src="resouces/img/dynamic_feed_24dp_5F6368.png" alt="">
-                    <div class="explanation">리뷰 볼래?</div>
+                    <div class="explanation"><button onclick="location.href='views/post/postMain.jsp'">리뷰 볼래?</button></div>
                 </div>
                 <% if (loginAdmin != null) { %>
 	                <div id="side_menu_close_4" onclick="location.href='<%= contextPath %>/GoAdminMain.ad'">
