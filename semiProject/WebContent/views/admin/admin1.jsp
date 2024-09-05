@@ -93,9 +93,7 @@ PageInfo postPi = (PageInfo)request.getAttribute("postPi"); ArrayList<Member>
                             <li
                               id="top_menu_1"
                               onclick="location.href='<%= contextPath %>/GoMyPage.me'"
-                            >
-                              My page
-                            </li>
+                            ></li>
                             <li
                               id="top_menu_2"
                               onclick="location.href='<%= contextPath %>/GoServiceCenter.sc'"
@@ -213,12 +211,16 @@ PageInfo postPi = (PageInfo)request.getAttribute("postPi"); ArrayList<Member>
                                         $.each(data, function (i) {
                                           str +=
                                             '<div class="result">' +
+                                            "아이디 : " +
                                             data[i].mId +
                                             " / " +
+                                            "이름 : " +
                                             data[i].mName +
                                             " / " +
+                                            "신고횟수 : " +
                                             data[i].mReport +
                                             " / " +
+                                            "상태 : " +
                                             data[i].mStatus +
                                             "</div>";
                                         });
@@ -363,13 +365,15 @@ PageInfo postPi = (PageInfo)request.getAttribute("postPi"); ArrayList<Member>
                                       $.each(data, function (i) {
                                         str +=
                                           '<div class = "result">' +
-                                          "번호:" + data[i].postNo +
+                                          "번호:" +
+                                          data[i].postNo +
                                           " / " +
-                                          "작성자:"+ data[i].mId +
+                                          "제목:" +
+                                          data[i].postTitle +
                                           " / " +
-                                          "제목:"+data[i].postTitle +
+                                          "작성자:" +
+                                          data[i].mId +
                                           "</div>";
-                                       
                                       });
                                       $("#result-post").html(str);
                                     }

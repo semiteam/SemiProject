@@ -92,14 +92,13 @@
                                     <td class="input-cell"><textarea name="content" class="input-content" required placeholder="문의내용을 입력하세요"></textarea></td>
                                 </tr>
                                 <tr>
-                                    <td class="input-cell"><input type="number" name="pwd" class="input-pwd" placeholder="비밀번호 숫자 4자리" maxlength="4" oninput="numberMaxLength(this)"></td>
+                                    <td class="input-cell"><input type="number" name="pwd" class="input-pwd" placeholder="비밀번호 입력" maxlength="4" oninput="numberMaxLength(this)" required>
+                                        <span class="error-msg" style="color: red; display: none;">4자리 숫자로 입력해주세요.</span></td>
                                 </tr>
                             </table>
                         </div>
                         <button onclick="location.href='<%=contextPath%>/GoServiceCenter.sc'" class="btn btn-secondary">목록이동</button>
                         <button type="submit" class="btn btn-secondary">등록하기</button>
-                        
-                        
                     </form>    
                 </div>
             </div>
@@ -108,11 +107,27 @@
 
 
     <script>
-         function numberMaxLength(e){
-        if(e.value.length > e.maxLength){
-            e.value = e.value.slice(0, e.maxLength);
-        }
+        function numberMaxLength(e){
+    if(e.value.length > e.maxLength){
+        e.value = e.value.slice(0, e.maxLength);
     }
+
+    let errorMsg = document.querySelector('.error-msg');
+    if (e.value.length === 4) {
+        errorMsg.style.display = 'none';
+    } else {
+        errorMsg.style.display = 'block'; 
+    }
+}
+document.querySelector('form').addEventListener('submit', function(e) {
+    let inputField = document.querySelector('.input-pwd');
+    
+    
+    if (inputField.value.length !== 4) {
+        e.preventDefault();
+        inputField.focus();
+    }
+});
 
 
             const side_menu = document.getElementsByClassName('side_menu');

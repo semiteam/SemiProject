@@ -54,7 +54,7 @@
                 <div class="logo" onclick="location.href='<%= contextPath %>'">우리 여행가조</div>
                 <div class="top_menu">
                     <ul>
-                        <li id="top_menu_1" onclick="location.href='<%= contextPath %>/GoMyPage.me'">My page</li>
+                        <li id="top_menu_1" onclick="location.href='<%= contextPath %>/GoMyPage.me'"></li>
                         <li id="top_menu_2" onclick="location.href='<%= contextPath %>/GoServiceCenter.sc'">고객센터</li>
                         <li id="top_menu_3">로그아웃</li>
                     </ul>
