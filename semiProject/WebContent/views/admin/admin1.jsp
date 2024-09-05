@@ -208,7 +208,11 @@ PageInfo postPi = (PageInfo)request.getAttribute("postPi"); ArrayList<Member>
                                       if (data !== null) {
                                         $.each(data, function (i) {
                                           str +=
-                                            '<div class="user-info">' +
+                                          '<div class="user-info" data-mno="' + data[i].mNo + '"data-mname="' + data[i].mName
+                                                             + '" data-mreport="' + data[i].mReport + '"data-mstatus="' + data[i].mStatus 
+                                                             + '"data-maddress="' + data[i].mAddress + '"data-mid="' + data[i].mId 
+                                                             + '"data-mphone="' + data[i].mPhone + '"data-memail="' + data[i].mEmail 
+                                                             + '"data-mgrade="' + data[i].mGrade  + '" >' +
                                             data[i].mId +
                                             " / " +
                                             data[i].mName +
@@ -236,8 +240,10 @@ PageInfo postPi = (PageInfo)request.getAttribute("postPi"); ArrayList<Member>
                                   $("#place-member").on("keyup", function () {
                                     if ($(this).val() === "") {
                                       $("#find_result").html("");
+                                      $(".user-info").show()
                                     } else {
                                       findMember($(this).val());
+                                      $(".user-info").hide()
                                     }
                                   });
                                 });
@@ -364,7 +370,7 @@ PageInfo postPi = (PageInfo)request.getAttribute("postPi"); ArrayList<Member>
                                     if (data !== null) {
                                       $.each(data, function (i) {
                                         str +=
-                                          '<div class = "result">' +
+                                          '<div class = "post-info">' +
                                           "번호:" + data[i].postNo +
                                           " / " +
                                           "작성자:"+ data[i].mId +
@@ -387,8 +393,10 @@ PageInfo postPi = (PageInfo)request.getAttribute("postPi"); ArrayList<Member>
                                 $("#place_write").on("keyup", function () {
                                   if ($(this).val() === "") {
                                     $("#result-post").html("");
+                                    $('.post-info').show()
                                   } else {
                                     findWirte($(this).val());
+                                    $('.post-info').hide()
                                   }
                                 });
                               });
@@ -516,11 +524,11 @@ PageInfo postPi = (PageInfo)request.getAttribute("postPi"); ArrayList<Member>
                               ></div>
                               <div
                                 class="modal-text-content"
-                                id="user_name"
+                                id="user_id"
                               ></div>
                               <div
                                 class="modal-text-content"
-                                id="user_id"
+                                id="user_name"
                               ></div>
                               <div
                                 class="modal-text-content"
@@ -672,7 +680,7 @@ PageInfo postPi = (PageInfo)request.getAttribute("postPi"); ArrayList<Member>
 
                            $(function() {
 
-                               $('.user-info').on('click', function() {
+                               $(document).on('click','.user-info', function() {
                                    const mNo = $(this).data('mno');
                                    const mId = $(this).data('mid');
                                    const mName = $(this).data('mname');
@@ -684,8 +692,8 @@ PageInfo postPi = (PageInfo)request.getAttribute("postPi"); ArrayList<Member>
                                    const mStatus = $(this).data('mstatus');
 
                                    $('#user_no').text(`회원 : ` + mNo);
-                                   $('#user_name').text(`아이디 : ` + mId);
-                                   $('#user_id').text(`이름 : ` + mName);
+                                   $('#user_id').text(`아이디 : ` + mId);
+                                   $('#user_name').text(`이름 : ` + mName);
                                    $('#user_phone').text(`전화번호 : ` + mPhone);
                                    $('#user_email').text(`이메일 : ` + mEmail);
                                    $('#user_address').text(`주소 : ` + mAddress);
