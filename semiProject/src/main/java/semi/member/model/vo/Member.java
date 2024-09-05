@@ -35,6 +35,80 @@ public class Member {
 		this.mGrade = mGrade;
 	}
 	
+	
+	
+	
+	public Member(String mName, String mId, String mNickname, String mPwd, String mRrn, String mPhone, String mEmail,
+			String mAddress, String mProfile, String postalCode, String basicAddress, String detailedAddress) {
+		super();
+		this.mName = mName;
+		this.mId = mId;
+		this.mNickname = mNickname;
+		this.mPwd = mPwd;
+		this.mRrn = mRrn;
+		this.mPhone = mPhone;
+		this.mEmail = mEmail;
+		this.mAddress = mAddress;
+		this.mProfile = mProfile;
+		this.postalCode = postalCode;
+		this.basicAddress = basicAddress;
+		this.detailedAddress = detailedAddress;
+	}
+
+
+
+
+	public Member(int mNo, String mName, String mId, String mNickname, String mPwd, String mPhone, String mEmail,
+			String mAddress, Date mDate, Date mModify, String mStatus, int mReport, String mGrade, String mProfile,
+			String postalCode, String basicAddress, String detailedAddress) {
+		super();
+		this.mNo = mNo;
+		this.mName = mName;
+		this.mId = mId;
+		this.mNickname = mNickname;
+		this.mPwd = mPwd;
+		this.mPhone = mPhone;
+		this.mEmail = mEmail;
+		this.mAddress = mAddress;
+		this.mDate = mDate;
+		this.mModify = mModify;
+		this.mStatus = mStatus;
+		this.mReport = mReport;
+		this.mGrade = mGrade;
+		this.mProfile = mProfile;
+		this.postalCode = postalCode;
+		this.basicAddress = basicAddress;
+		this.detailedAddress = detailedAddress;
+	}
+
+
+
+	public Member(int mNo, String mName, String mId, String mNickname, String mPwd, String mRrn, String mPhone,
+			String mEmail, String mAddress, Date mDate, Date mModify, String mStatus, int mReport, String mGrade,
+			String mProfile, String postalCode, String basicAddress, String detailedAddress) {
+		super();
+		this.mNo = mNo;
+		this.mName = mName;
+		this.mId = mId;
+		this.mNickname = mNickname;
+		this.mPwd = mPwd;
+		this.mRrn = mRrn;
+		this.mPhone = mPhone;
+		this.mEmail = mEmail;
+		this.mAddress = mAddress;
+		this.mDate = mDate;
+		this.mModify = mModify;
+		this.mStatus = mStatus;
+		this.mReport = mReport;
+		this.mGrade = mGrade;
+		this.mProfile = mProfile;
+		this.postalCode = postalCode;
+		this.basicAddress = basicAddress;
+		this.detailedAddress = detailedAddress;
+	}
+
+
+
 	public Member(String mId, String mNickname, String mPwd, String mPhone, String mEmail, String mAddress) {
 	    this.mId = mId;
 	    this.mNickname = mNickname;

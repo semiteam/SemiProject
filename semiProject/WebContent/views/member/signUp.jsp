@@ -8,6 +8,7 @@
 	<link rel="stylesheet" href="resouces/css/sign up.css" />
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	
 	<style>
         .error-message {
@@ -90,13 +91,28 @@
 							<div id="pwd_text" class="bold">* 비밀번호</div>
 							<input type="password" placeholder="영어 소문자 및 숫자, 특수문자 조합으로 8~16자리" id="input_pwd" class="big" name="mPwd" required/>
 							<div id="password-error" class="error-message"></div>
+							 <div id="caps-lock-warning" class="error-message" style="display:none; color:orange;">Caps Lock이 켜져 있습니다.</div>
 						</div>
 	
 						<div class="user-info-pw-check">
 							<div id="pwd_text2" class="bold">* 비밀번호 확인</div>
 							<input type="password" placeholder="위 비밀번호와 일치하게 입력" id="input_pwd2" class="big" required />
 							 <div id="password-confirm-error" class="error-message"></div>
+							 <div id="caps-lock-confirm-warning" class="error-message" style="display:none; color:orange;">Caps Lock이 켜져 있습니다.</div>
 						</div>
+						
+						
+                     <div class="user-info-address">
+                        <div id="address_title" class="bold">* 우편번호</div>
+                        <div id="address_div">
+                           <input type="text" style="width: 300px;"  id="zipcode" class="zip_code_text" name="mAddress1" required>
+                               <input type="button" style="width: 145px; margin: 0 0 5px 5px;" value="우편번호 검색" id="zip_code" class="big" onclick="execDaumPostcode();">
+                               <input type="text"  readonly id="add" class="big" name="mAddress2" required>
+                               <div id="address_text" style="margin: 5px 0;">상세주소</div>
+                               <input type="text" id="address_text2" class="big" name="mAddress3" required>
+                        </div>
+                     </div>
+                  
 
 	          			<button type="submit" class="min_user_join" id="min_sign">가입하기</button>
 					</div>
@@ -119,6 +135,9 @@
 				    document.getElementById('min_phone').addEventListener('input', validatePhone);
 				    document.getElementById('input_email').addEventListener('input', validateEmail);	
 
+				    
+				    
+				    
 				    function clearErrorMessage(inputId, errorId) {
 				        const input = document.getElementById(inputId);
 				        const error = document.getElementById(errorId);
@@ -165,8 +184,8 @@
 				    function validateNickname() {
 				        const nnInput = document.getElementById('input_nn').value;
 				        const nnError = document.getElementById('nickname-error');
-				        const engNumPattern = /^(?=.*[a-z])(?=.*\d)[a-z\d]{4,16}$/;
-				        const korPattern = /^[가-힣]{2,10}$/;
+				        const engNumPattern = /^[a-z0-9]{4,16}$/;
+				        const korPattern = /^[가-힣0-9]{2,10}$/;  
 
 				        nnError.textContent = ''; // 기존 오류 메시지 초기화
 
@@ -298,6 +317,8 @@
 		    const idInput = document.getElementById('input_id');
 		    const idError = document.getElementById('id-error');
 		    
+		    
+		    
 		    // 아이디 입력 필드에 입력이 발생할 때마다 호출
 		    idInput.addEventListener('input', function() {
 		        const mId = idInput.value.trim();
@@ -357,9 +378,62 @@
 		        });
 		    });
 		});
-
+	
+		function execDaumPostcode() {
+	        new daum.Postcode({
+	            oncomplete: function(data) {
+	                // 팝업에서 검색결과 항목을 클릭했을 때 실행할 코드를 작성하는 부분입니다.
+	                // 예: 우편번호와 주소 정보를 해당 필드에 넣습니다.
+	                document.getElementById('zipcode').value = data.zonecode; // 우편번호
+	                document.getElementById('add').value = data.roadAddress; // 도로명 주소
+	                document.getElementById('address_text2').focus(); // 상세 주소로 포커스 이동
+	            }
+	        }).open();
+	    }
 		
 		</script>
+		
+		<script>
+document.addEventListener("DOMContentLoaded", function () {
+    // Caps Lock 경고 메시지 요소
+    const capsLockWarning = document.getElementById("caps-lock-warning");
+    const capsLockConfirmWarning = document.getElementById("caps-lock-confirm-warning"); // 비밀번호 확인 필드용 Caps Lock 경고
+    const pwdInput = document.getElementById("input_pwd");
+    const pwdConfirmInput = document.getElementById("input_pwd2");
+
+    // 비밀번호 입력 필드에서 키를 누를 때 Caps Lock 상태 감지
+    pwdInput.addEventListener("keydown", function (event) {
+        if (event.getModifierState("CapsLock")) {
+            capsLockWarning.style.display = "block"; // Caps Lock 켜졌을 때 경고 메시지 표시
+        } else {
+            capsLockWarning.style.display = "none"; // Caps Lock 꺼졌을 때 경고 메시지 숨김
+        }
+    });
+
+    // 비밀번호 입력 필드에서 키를 뗄 때도 Caps Lock 상태를 확인하여 경고 메시지 숨기기
+    pwdInput.addEventListener("keyup", function (event) {
+        if (!event.getModifierState("CapsLock")) {
+            capsLockWarning.style.display = "none"; // Caps Lock 꺼졌을 때 경고 메시지 숨김
+        }
+    });
+
+    // 비밀번호 확인 입력 필드에서 Caps Lock 상태 감지
+    pwdConfirmInput.addEventListener("keydown", function (event) {
+        if (event.getModifierState("CapsLock")) {
+            capsLockConfirmWarning.style.display = "block"; // Caps Lock 켜졌을 때 경고 메시지 표시
+        } else {
+            capsLockConfirmWarning.style.display = "none"; // Caps Lock 꺼졌을 때 경고 메시지 숨김
+        }
+    });
+
+    // 비밀번호 확인 입력 필드에서 키를 뗄 때도 Caps Lock 상태를 확인하여 경고 메시지 숨기기
+    pwdConfirmInput.addEventListener("keyup", function (event) {
+        if (!event.getModifierState("CapsLock")) {
+            capsLockConfirmWarning.style.display = "none"; // Caps Lock 꺼졌을 때 경고 메시지 숨김
+        }
+    });
+});
+</script>
 		
 	</body>
 </html>

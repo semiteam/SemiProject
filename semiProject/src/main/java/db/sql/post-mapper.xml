@@ -111,6 +111,7 @@ SELECT
         POST_MODIFYED,
         POST_STATUS,
         POST_IMAGE_PATH
+        
     )
     VALUES
     (
@@ -123,7 +124,8 @@ SELECT
         SYSDATE,
         SYSDATE,
         'Y',
-        ?
+        null
+       
     )
 </entry>
 <entry key="deletePost">

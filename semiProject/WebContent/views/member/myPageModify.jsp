@@ -129,7 +129,8 @@
 								<td><input type="password" id="input_pwd" class="height"
 									name="newPwd">
 									<div id="password-error" class="text-danger"
-										style="color: red; font-size: 12px;"></div> <!-- 비밀번호 오류 메시지 -->
+										style="color: red; font-size: 12px;"></div> 
+									<div id="caps-lock-warning" class="text-danger" style="color: orange; font-size: 12px; display: none;">Caps Lock이 켜져 있습니다.</div> <!-- Caps Lock 경고 메시지 -->		
 								</td>
 							</tr>
 
@@ -142,6 +143,7 @@
 									class="height" name="newPwd2">
 									<div id="password-confirm-error" class="text-danger"
 										style="color: red; font-size: 12px;"></div></td>
+										<div id="caps-lock-confirm-warning" class="text-danger" style="color: orange; font-size: 12px; display: none;">Caps Lock이 켜져 있습니다.</div> <!-- Caps Lock 경고 메시지 -->
 							</tr>
 
 							<tr>
@@ -222,122 +224,94 @@
 						<br> <br> <br>
 
 						<button type="submit" onclick="return validateForm();">변경하기</button>
-						<button type="submit" data-toggle="modal"
-							data-target="#deleteModal" style="background-color: red;">탈퇴하기</button>
-						<button type="reset" style="background-color: darkturquoise;">취소</button>
+						<button type="button" data-toggle="modal"
+							data-target="#deleteModal" style="background-color: red;" onclick="confirmDelete();">탈퇴하기</button>
+						<button type="button" style="background-color: darkturquoise;" onclick="location.href='<%=contextPath%>';">취소</button>
+
 					</form>
 
 					<script>
-    function validateForm() {
-        // 비밀번호, 전화번호 등의 필드가 비어 있어도 통과하도록 변경
-        return true;
-    }
-</script>
-
-
-					<script>
 					function validateForm() {
-				        const pwdInput = document.getElementById('input_pwd').value;
-				        const pwdConfirmInput = document.getElementById('confirmPassword').value;
-				        const pwdError = document.getElementById('password-error');
-				        const pwdConfirmError = document.getElementById('password-confirm-error');
+					    const pwdInput = document.getElementById('input_pwd').value;
+					    const pwdConfirmInput = document.getElementById('confirmPassword').value;
+					    const pwdError = document.getElementById('password-error');
+					    const pwdConfirmError = document.getElementById('password-confirm-error');
 
-				        pwdError.textContent = ''; // 기존 오류 메시지 초기화
-				        pwdConfirmError.textContent = ''; // 기존 오류 메시지 초기화
+					    pwdError.textContent = ''; // 기존 오류 메시지 초기화
+					    pwdConfirmError.textContent = ''; // 기존 오류 메시지 초기화
 
-				        // 비밀번호 입력이 있을 경우에만 검증을 진행
-				        if (pwdInput !== '' || pwdConfirmInput !== '') {
-				            const pwdPattern = /^(?=.*[a-z])(?=.*\d)(?=.*[\W_])[a-z\d\W_]{8,16}$/i; // 비밀번호 패턴
+					    // 비밀번호 입력이 있을 경우에만 검증 진행
+					    if (pwdInput !== '' || pwdConfirmInput !== '') {
+					        // 비밀번호 정규식 패턴
+					        const pwdPattern = /^(?=.*[a-z])(?=.*\d)(?=.*[\W_])[a-z\d\W_]{8,16}$/i;
 
-				            if (!pwdPattern.test(pwdInput)) {
-				                pwdError.textContent = '비밀번호는 소문자, 숫자, 특수문자를 포함한 8~16자리여야 합니다.';
-				                return false;
-				            }
+					        // 정규식 검증 실패 시 오류 메시지 표시
+					        if (!pwdPattern.test(pwdInput)) {
+					            pwdError.textContent = '비밀번호는 소문자, 숫자, 특수문자를 포함한 8~16자리여야 합니다.';
+					            pwdError.style.color = 'red'; // 오류 메시지 스타일 설정
+					            return false;
+					        }
 
-				            if (pwdInput !== pwdConfirmInput) {
-				                pwdConfirmError.textContent = '비밀번호가 일치하지 않습니다.';
-				                return false;
-				            }
-				        }
+					        // 비밀번호와 비밀번호 확인 값이 일치하지 않을 경우
+					        if (pwdInput !== pwdConfirmInput) {
+					            pwdConfirmError.textContent = '비밀번호가 일치하지 않습니다.';
+					            pwdConfirmError.style.color = 'red'; // 오류 메시지 스타일 설정
+					            return false;
+					        }
+					    }
 
-				        return true; // 모든 검증을 통과하면 폼 제출
-				    }
+					    return true; // 모든 검증을 통과하면 폼을 제출
+					}
 
-                    $(document).ready(function() {
-                        // Check if the phone number input is null or empty
-                        const phoneInput = $("input[name='newPhone']");
-                        const phoneValue = phoneInput.val();
+					    function validateNickname(nickname) {
+					        const engPattern = /^[a-z0-9]{4,16}$/;
+					        const korPattern = /^[가-힣0-9]{2,10}$/;
+					        return engPattern.test(nickname) || korPattern.test(nickname);
+					    }
 
-                        if (phoneValue === "null" || phoneValue === null) {
-                            phoneInput.val(""); // Set it to an empty string
-                        }
-                    });
+					    $(document).ready(function() {
+					        $(".min_check-btn").click(function() {
+					            const nickname = $("#min_username").val();
+					            if (!validateNickname(nickname)) {
+					                alert("닉네임은 영문 소문자와 숫자의 조합으로 4~16자, 또는 한글과 숫자의 조합으로 2~10자여야 합니다.");
+					                return;
+					            }
 
-                    $(function(){
-                        $("#select").change(function(){
-                            if($("#select").val() == 'directly') {
-                                $("#textEmail").attr("disabled", false);
-                                $("#textEmail").val("");
-                                $("#textEmail").focus();
-                            } else {
-                                $("#textEmail").val($("#select").val());
-                            }
-                        });
-                    });
+					            $.ajax({
+					                url: "<%=contextPath%>/checkNickname.me",
+					                method: "GET",
+					                data: { nickname: nickname },
+					                success: function(response) {
+					                    if (response.isDuplicate) {
+					                        alert("중복된 닉네임입니다.");
+					                    } else {
+					                        alert("사용 가능한 닉네임입니다.");
+					                    }
+					                },
+					                error: function() {
+					                    alert("서버 오류가 발생했습니다.");
+					                }
+					            });
+					        });
+					    });
 
-                 // 닉네임 중복 확인 함수
-                    let isNicknameValid = false;
-                    $(".min_check-btn").click(function() {
-                        const nickname = $("#min_username").val();
-                        if (nickname === "") {
-                            alert("닉네임을 입력하세요.");
-                            return;
-                        }
-                        $.ajax({
-                            url: "<%=contextPath%>
-						/checkNickname.me",
-						method : "GET",
-						data : {
-							nickname : nickname
-						},
-						success : function(
-								response) {
-							const isDuplicate = response.isDuplicate;
-							if (isDuplicate) {
-								$(
-										"#nickname-check-message")
-										.html(
-												"중복된 닉네임입니다.")
-										.css(
-												"color",
-												"red");
-								isNicknameValid = false;
-							} else {
-								$(
-										"#nickname-check-message")
-										.html(
-												"사용 가능한 닉네임입니다.")
-										.css(
-												"color",
-												"green");
-								isNicknameValid = true;
-							}
-						},
-						error : function() {
-							alert("서버와의 통신 중 오류가 발생했습니다.");
-						}
-					});
-		});
-
-						// 폼 제출 시 닉네임 중복 확인
-						$("#myPage-form").submit(function(event) {
-							if (!isNicknameValid) {
-								alert("닉네임 중복 확인을 먼저 해주세요.");
-								event.preventDefault();
-							}
-						});
-
-						
+					    function execDaumPostcode() {
+					        new daum.Postcode({
+					            oncomplete: function(data) {
+					                document.getElementById('postcode').value = data.zonecode;
+					                document.getElementById('address').value = data.roadAddress;
+					                document.getElementById('detailAddress').focus();
+					            }
+					        }).open();
+					    }
+					    
+					    function confirmDelete() {
+					        // 탈퇴 여부를 확인하는 확인 창 표시
+					        if (confirm('정말로 탈퇴하시겠습니까?')) {
+					            // 탈퇴를 확인하면 탈퇴 요청을 서버로 보냄
+					            document.location.href = "<%=contextPath%>/deleteMember.me";
+					        }
+					    }
 					</script>
 				</div>
 			</div>
@@ -398,6 +372,29 @@
 	        }).open();
 	    }
 	</script>
+	
+	<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const capsLockWarning = document.getElementById("caps-lock-warning");
+    const pwdInput = document.getElementById("input_pwd");
+
+    // 비밀번호 입력 필드에서 키를 누를 때 Caps Lock 상태 감지
+    pwdInput.addEventListener("keydown", function(event) {
+        if (event.getModifierState("CapsLock")) {
+            capsLockWarning.style.display = "block"; // Caps Lock이 켜져 있을 때 경고 메시지 표시
+        } else {
+            capsLockWarning.style.display = "none"; // Caps Lock이 꺼져 있을 때 경고 메시지 숨김
+        }
+    });
+
+    // 키를 뗄 때도 Caps Lock 상태를 확인하여 경고 메시지 숨기기
+    pwdInput.addEventListener("keyup", function(event) {
+        if (!event.getModifierState("CapsLock")) {
+            capsLockWarning.style.display = "none"; // Caps Lock이 꺼지면 경고 메시지 숨김
+        }
+    });
+});
+</script>
 
 </body>
 </html>

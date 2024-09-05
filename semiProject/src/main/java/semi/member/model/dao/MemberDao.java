@@ -61,7 +61,10 @@ public class MemberDao {
 							   rset.getString("M_STATUS"),
 							   rset.getInt("M_REPORT"),
 							   rset.getString("M_GRADE"),
-							   rset.getString("M_PROFILE"));
+							   rset.getString("M_PROFILE"),
+							   rset.getString("postal_code"),
+							   rset.getString("basic_address"),
+							   rset.getString("detailed_address"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -92,6 +95,9 @@ public class MemberDao {
 			pstmt.setString(7, m.getmEmail());
 			pstmt.setString(8, m.getmAddress());
 			pstmt.setString(9, m.getmProfile());
+			pstmt.setString(10, m.getPostalCode());
+			pstmt.setString(11, m.getBasicAddress());
+			pstmt.setString(12, m.getDetailedAddress());
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -163,7 +169,10 @@ public class MemberDao {
 								   rset.getString("M_STATUS"),
 								   rset.getInt("M_REPORT"),
 								   rset.getString("M_GRADE"),
-								   rset.getString("M_PROFILE"))
+								   rset.getString("M_PROFILE"),
+								   rset.getString("postal_code"),
+								   rset.getString("basic_address"),
+								   rset.getString("detailed_address"))
 						);
 			}
 
@@ -206,7 +215,11 @@ public class MemberDao {
 	                           rset.getString("M_STATUS"),
 	                           rset.getInt("M_REPORT"),
 	                           rset.getString("M_GRADE"),
-	                           rset.getString("M_PROFILE"));
+	                           rset.getString("M_PROFILE"),
+	                           rset.getString("postal_code"),
+							   rset.getString("basic_address"),
+							   rset.getString("detailed_address")
+	                           );
 	        }
 
 	    } catch (SQLException e) {
@@ -269,7 +282,10 @@ public class MemberDao {
 						   rset.getString("M_STATUS"),
 						   rset.getInt("M_REPORT"),
 						   rset.getString("M_GRADE"),
-						   rset.getString("M_PROFILE"));
+						   rset.getString("M_PROFILE"),
+						   rset.getString("postal_code"),
+						   rset.getString("basic_address"),
+						   rset.getString("detailed_address"));
 			}
 			
 		} catch (SQLException e) {
@@ -376,13 +392,7 @@ public class MemberDao {
 		return m;
 	}
 	
-	/*public String pwdFindSearch(Connection conn, String email) {
-		String findPwd = null;
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		
-		String sql = prop.getProperty("pwdFindSearch");
-	}*/
+	
 	
 	public int checkId(Connection conn, String mId) {
 	    int count = 0;
@@ -411,13 +421,12 @@ public class MemberDao {
 	    
 	}
 	
-	public Member updateMember(Connection conn, Member member) {
-	    Member updatedMember = null;
-	    PreparedStatement pstmt = null;
+	public int updateMember(Connection conn, Member member) {
 	    int result = 0;
+	    PreparedStatement pstmt = null;
 
 	    try {
-	        // 기존의 업데이트 로직
+	        // 기존의 업데이트 SQL 쿼리
 	        String sql = prop.getProperty("updateMember");
 	        pstmt = conn.prepareStatement(sql);
 	        pstmt.setString(1, member.getmNickname());
@@ -427,12 +436,7 @@ public class MemberDao {
 	        pstmt.setString(5, member.getmAddress());
 	        pstmt.setString(6, member.getmId());
 
-	        result = pstmt.executeUpdate();
-
-	        // 업데이트가 성공하면 해당 회원을 다시 조회해서 반환
-	        if (result > 0) {
-	            updatedMember = selectMember(conn, member.getmId()); // 업데이트된 정보를 가져오는 메서드
-	        }
+	        result = pstmt.executeUpdate();  // 업데이트 수행
 
 	    } catch (SQLException e) {
 	        e.printStackTrace();
@@ -440,7 +444,7 @@ public class MemberDao {
 	        close(pstmt);
 	    }
 
-	    return updatedMember;
+	    return result;  // 결과값을 반환
 	}
 
 	
@@ -485,7 +489,7 @@ public class MemberDao {
 
 		        result = pstmt.executeUpdate();
 		        
-		        System.out.println("업데이트 결과: " + result);
+		        
 
 		    } catch (SQLException e) {
 		        e.printStackTrace();
@@ -495,4 +499,285 @@ public class MemberDao {
 
 		    return result;
 		}
+	  
+	  public int deleteMember(Connection conn, String userId) {
+	        int result = 0;
+	        PreparedStatement pstmt = null;
+	        
+	        
+	        String sql = prop.getProperty("deleteMember");
+	        
+	        try {
+	            pstmt = conn.prepareStatement(sql);
+	            pstmt.setString(1, userId);
+	            result = pstmt.executeUpdate();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        } finally {
+	            close(pstmt);
+	        }
+	        
+	        return result;
+	    }
+	  
+	  public Member findMemberByDetails(Connection conn, String userId, String name, String birth) {
+	        Member member = null;
+	        PreparedStatement pstmt = null;
+	        ResultSet rset = null;
+
+	        String sql = prop.getProperty("findMemberByDetails");
+
+	        try {
+	            pstmt = conn.prepareStatement(sql);
+	            pstmt.setString(1, userId);
+	            pstmt.setString(2, name);
+	            pstmt.setString(3, birth);
+
+	            rset = pstmt.executeQuery();
+
+	            if (rset.next()) {
+	                member = new Member(
+	                        rset.getInt("M_NO"),
+	                        rset.getString("M_NAME"),
+	                        rset.getString("M_ID"),
+	                        rset.getString("M_NICKNAME"),
+	                        rset.getString("M_PWD"), // 비밀번호 정보 가져옴
+	                        rset.getString("M_RRN"),
+	                        rset.getString("M_PHONE"),
+	                        rset.getString("M_EMAIL"),
+	                        rset.getString("M_ADDRESS"),
+	                        rset.getDate("M_DATE"),
+	                        rset.getDate("M_MODIFY"),
+	                        rset.getString("M_STATUS"),
+	                        rset.getInt("M_REPORT"),
+	                        rset.getString("M_GRADE"),
+	                        rset.getString("M_PROFILE")
+	                         
+	                );
+	            }
+
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        } finally {
+	            close(rset);
+	            close(pstmt);
+	        }
+
+	        return member;
+	    }
+	  
+	  public Member findMemberById(Connection conn, String userId) {
+	        Member member = null;
+	        PreparedStatement pstmt = null;
+	        ResultSet rset = null;
+	        String sql = "SELECT * FROM MEMBER WHERE M_ID = ?";
+
+	        try {
+	            pstmt = conn.prepareStatement(sql);
+	            pstmt.setString(1, userId);
+	            rset = pstmt.executeQuery();
+
+	            if (rset.next()) {
+	                member = new Member(rset.getInt("M_NO"),
+	                        rset.getString("M_NAME"),
+	                        rset.getString("M_ID"),
+	                        rset.getString("M_NICKNAME"),
+	                        rset.getString("M_PWD"), 
+	                        rset.getString("M_RRN"),
+	                        rset.getString("M_PHONE"),
+	                        rset.getString("M_EMAIL"),
+	                        rset.getString("M_ADDRESS"),
+	                        rset.getDate("M_DATE"),
+	                        rset.getDate("M_MODIFY"),
+	                        rset.getString("M_STATUS"),
+	                        rset.getInt("M_REPORT"),
+	                        rset.getString("M_GRADE"),
+	                        rset.getString("M_PROFILE"));
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        } finally {
+	            close(rset);
+	            close(pstmt);
+	        }
+
+	        return member;
+	    }
+
+	    public Member findMemberByName(Connection conn, String userId, String name) {
+	        Member member = null;
+	        PreparedStatement pstmt = null;
+	        ResultSet rset = null;
+	        String sql = "SELECT * FROM MEMBER WHERE M_ID = ? AND M_NAME = ?";
+
+	        try {
+	            pstmt = conn.prepareStatement(sql);
+	            pstmt.setString(1, userId);
+	            pstmt.setString(2, name);
+	            rset = pstmt.executeQuery();
+
+	            if (rset.next()) {
+	                member = new Member(rset.getInt("M_NO"),
+	                        rset.getString("M_NAME"),
+	                        rset.getString("M_ID"),
+	                        rset.getString("M_NICKNAME"),
+	                        rset.getString("M_PWD"), 
+	                        rset.getString("M_RRN"),
+	                        rset.getString("M_PHONE"),
+	                        rset.getString("M_EMAIL"),
+	                        rset.getString("M_ADDRESS"),
+	                        rset.getDate("M_DATE"),
+	                        rset.getDate("M_MODIFY"),
+	                        rset.getString("M_STATUS"),
+	                        rset.getInt("M_REPORT"),
+	                        rset.getString("M_GRADE"),
+	                        rset.getString("M_PROFILE"));
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        } finally {
+	            close(rset);
+	            close(pstmt);
+	        }
+
+	        return member;
+	    }
+
+	    public Member findMemberByBirth(Connection conn, String userId, String birth) {
+	        Member member = null;
+	        PreparedStatement pstmt = null;
+	        ResultSet rset = null;
+	        String sql = "SELECT * FROM MEMBER WHERE M_ID = ? AND SUBSTR(M_RRN, 1, 6) = ?";
+
+	        try {
+	            pstmt = conn.prepareStatement(sql);
+	            pstmt.setString(1, userId);
+	            pstmt.setString(2, birth);
+	            rset = pstmt.executeQuery();
+
+	            if (rset.next()) {
+	                member = new Member(rset.getInt("M_NO"),
+	                        rset.getString("M_NAME"),
+	                        rset.getString("M_ID"),
+	                        rset.getString("M_NICKNAME"),
+	                        rset.getString("M_PWD"), 
+	                        rset.getString("M_RRN"),
+	                        rset.getString("M_PHONE"),
+	                        rset.getString("M_EMAIL"),
+	                        rset.getString("M_ADDRESS"),
+	                        rset.getDate("M_DATE"),
+	                        rset.getDate("M_MODIFY"),
+	                        rset.getString("M_STATUS"),
+	                        rset.getInt("M_REPORT"),
+	                        rset.getString("M_GRADE"),
+	                        rset.getString("M_PROFILE"));  
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        } finally {
+	            close(rset);
+	            close(pstmt);
+	        }
+
+	        return member;
+	    }
+	    
+	 // ID 유효성 검사
+	    public boolean isUserIdValid(Connection conn, String userId) {
+	        PreparedStatement pstmt = null;
+	        ResultSet rset = null;
+	        boolean isValid = false;
+	        String sql = prop.getProperty("checkUserId");
+
+	        try {
+	            pstmt = conn.prepareStatement(sql);
+	            pstmt.setString(1, userId);
+	            rset = pstmt.executeQuery();
+	            if (rset.next()) {
+	                isValid = rset.getInt(1) > 0; // ID가 존재하면 true
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        } finally {
+	            close(rset);
+	            close(pstmt);
+	        }
+
+	        return isValid;
+	    }
+
+	    // 이름 유효성 검사 (아이디와 이름이 매칭되는지 확인)
+	    public boolean isNameValid(Connection conn, String userId, String name) {
+	        PreparedStatement pstmt = null;
+	        ResultSet rset = null;
+	        boolean isValid = false;
+	        String sql = prop.getProperty("checkName");
+
+	        try {
+	            pstmt = conn.prepareStatement(sql);
+	            pstmt.setString(1, userId);
+	            pstmt.setString(2, name);
+	            rset = pstmt.executeQuery();
+	            if (rset.next()) {
+	                isValid = rset.getInt(1) > 0; // 이름이 일치하면 true
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        } finally {
+	            close(rset);
+	            close(pstmt);
+	        }
+
+	        return isValid;
+	    }
+
+	    // 생년월일 유효성 검사 (아이디와 생년월일이 매칭되는지 확인)
+	    public boolean isBirthValid(Connection conn, String userId, String birth) {
+	        PreparedStatement pstmt = null;
+	        ResultSet rset = null;
+	        boolean isValid = false;
+	        String sql = prop.getProperty("checkBirth");
+
+	        try {
+	            pstmt = conn.prepareStatement(sql);
+	            pstmt.setString(1, userId);
+	            pstmt.setString(2, birth);
+	            rset = pstmt.executeQuery();
+	            if (rset.next()) {
+	                isValid = rset.getInt(1) > 0; // 생년월일이 일치하면 true
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        } finally {
+	            close(rset);
+	            close(pstmt);
+	        }
+
+	        return isValid;
+	    }
+	    
+	    public int updatePassword(Connection conn, String userId, String newPwd) {
+	        int result = 0;
+	        PreparedStatement pstmt = null;
+
+	        String sql = "UPDATE MEMBER SET M_PWD = ? WHERE M_ID = ?";
+	        
+	        
+
+	        try {
+	            pstmt = conn.prepareStatement(sql);
+	            pstmt.setString(1, newPwd);
+	            pstmt.setString(2, userId);
+
+	            result = pstmt.executeUpdate();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        } finally {
+	            close(pstmt);
+	        }
+	        
+	        
+
+	        return result;
+	    }
 }

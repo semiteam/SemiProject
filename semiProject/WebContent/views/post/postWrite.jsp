@@ -103,13 +103,11 @@
 						<form action="<%=contextPath%>/insert.po" method="post" enctype="multipart/form-data">
 							<input type="hidden" name="mno" value="<%=loginUser.getmNo()%>">
 							<div class="title">
-								<input type="text" class="post-title" placeholder="제목을 입력해 주세요."
-									name="title">
+								<input type="text" class="post-title" placeholder="제목을 입력해 주세요." name="title">
 							</div>
 							<hr>
 							<div class="content_text">
-								<textarea class="post-content" placeholder="내용을 입력해 주세요."
-									name="content"></textarea>
+								<textarea class="post-content" placeholder="내용을 입력해 주세요." name="content"></textarea>
 							</div>
 							<hr>
 							<div class="image-upload-wrapper"
@@ -135,7 +133,7 @@
 							<div class="button-box">
 								<button type="reset" id="cancel-btn"
 									onclick="location.href='.views/post/postMain.jsp'">취소하기</button>
-								<button type="button" id="submit-btn">미리보기</button>	
+								
 								<button type="submit" id="submit-btn">글등록</button>
 							</div>
 						</form>
@@ -145,65 +143,6 @@
     </div>
 </div>
 
-	<script>
-document.getElementById('imageButton').addEventListener('click', function() {
-    document.getElementById('imageInput').click();
-});
-
-document.getElementById('imageInput').addEventListener('change', function(event) {
-    const file = event.target.files[0];
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            const imgElement = document.getElementById('previewImage');
-            imgElement.src = e.target.result;
-            imgElement.style.display = 'block';
-        };
-        reader.readAsDataURL(file);
-    }
-});
-
-    // 글 등록 후 이미지를 다른 섹션에 표시하는 함수
-    document.getElementById('submit-btn').addEventListener('click', function(event) {
-        event.preventDefault();  // 폼의 기본 제출 동작을 막음
-
-        // 서버로 폼 데이터 전송
-        const formData = new FormData(document.querySelector('form'));
-
-        fetch('<%= contextPath %>/uploadImage', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => {
-            // 응답이 JSON인지 아닌지 확인
-            const contentType = response.headers.get('content-type');
-            if (contentType && contentType.indexOf('application/json') !== -1) {
-                return response.json(); // JSON 응답일 때
-            } else {
-                return response.text(); // 다른 형식일 때
-            }
-        })
-        .then(data => {
-            if (typeof data === 'object') {
-                // 응답이 JSON 형식일 때 처리
-                if (data.success) {
-                    // 이미지가 성공적으로 업로드되었을 때, 서버에서 반환한 이미지 URL을 표시
-                    document.querySelector('.thumbnail img').src = data.imageUrl;  // 서버로부터 받은 이미지 URL 사용
-                } else {
-                    alert('이미지 업로드에 실패했습니다.');
-                }
-            } else {
-                // 응답이 HTML이나 다른 형식일 때
-                console.error('Unexpected response format:', data);
-                alert('서버에서 예상치 못한 응답을 받았습니다.');
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('서버와 통신 중 오류가 발생했습니다.');
-        });
-    });
-</script>
-
+	
 </body>
 </html>

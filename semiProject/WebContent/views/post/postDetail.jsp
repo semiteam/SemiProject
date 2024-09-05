@@ -226,12 +226,26 @@ input {
 								</div>
 				
 								
-								<<div class="comment-section">
-    <h4>댓글 작성</h4>
-    <textarea id="commentContent" class="comment-input" rows="4" placeholder="댓글을 입력하세요..." required></textarea>
-    <button type="button" class="btn-comment" onclick="submitComment()">댓글 작성</button>
-</div>
+								<!-- 
+								<div class="comment-section">
+									<h4>댓글 작성</h4>
+									<textarea id="commentContent" class="comment-input" rows="4"
+										placeholder="댓글을 입력하세요..." required></textarea>
+									<button type="button" class="btn-comment"
+										onclick="submitComment()">댓글 작성</button> 
+								</div>-->
 								
+								<!-- 
+								<div id="commentList">
+									<c:forEach var="comment" items="${comments}">
+										<div class="comment-item">
+											<div class="comment-author">${comment.memberId}</div>
+											<div class="comment-date">${comment.createDate}</div>
+											<div class="comment-content">${comment.content}</div>
+										</div>
+									</c:forEach>
+								</div>
+								 -->
 							</div>
 						</div>
 					</section>
@@ -303,37 +317,34 @@ input {
     }
 	
 	
-	document.getElementById('submitComment').addEventListener('click', function() {
+	function submitComment() {
 	    const commentContent = document.getElementById('commentContent').value;
 
-	    // 댓글 내용이 비어있는지 확인
 	    if (commentContent.trim() === '') {
 	        alert('댓글을 입력하세요.');
 	        return;
 	    }
 
-	    // AJAX 요청
-	    const xhr = new XMLHttpRequest();
-	    xhr.open('POST', '/submitComment', true); // '/submitComment'는 서버의 댓글 처리 경로입니다.
-	    xhr.setRequestHeader('Content-Type', 'application/json');
-
-	    xhr.onreadystatechange = function() {
-	        if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-	            // 서버로부터의 응답을 받으면 처리
-	            const response = JSON.parse(xhr.responseText);
-
-	            // 댓글이 성공적으로 추가되었을 때
+	    $.ajax({
+	        url: '<%= contextPath %>/submitComment',
+	        type: 'POST',
+	        data: {
+	            postId: '<%= p.getPostNo() %>',
+	            userId: '<%= loginUser.getmId() %>',
+	            content: commentContent
+	        },
+	        success: function(response) {
 	            if (response.success) {
-	                // 새로운 댓글을 화면에 추가
-	                addCommentToList(response.comment);
-
-	                // 입력 필드 초기화
-	                document.getElementById('commentContent').value = '';
+	                location.reload(); // 페이지 새로고침
 	            } else {
-	                alert('댓글 작성에 실패했습니다. 다시 시도해주세요.');
+	                alert(response.message);
 	            }
+	        },
+	        error: function() {
+	            alert('서버 요청 중 오류가 발생했습니다.');
 	        }
-	    };
+	    });
+	}
 
 	    // 서버로 보낼 데이터 (JSON 형태로 전송)
 	    const data = JSON.stringify({
