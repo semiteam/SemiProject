@@ -67,7 +67,11 @@
         <div class="under">
             <div class="side_menu">
                 <div id="side_menu_open_1" onclick="location.href='<%= contextPath %>'">여행 갈래?</div>
-                <div id="side_menu_open_2" onclick="location.href='<%= contextPath %>/GoScheduleMain.sd?mno=<%= loginUser.getmNo() %>'" class="login">계획 짤래?</div>
+                <% if (loginAdmin != null) { %>
+                    <div id="side_menu_open_2" onclick="location.href='<%= contextPath %>/GoShowPlanMain.ad %>'" class="login">계획 짤래?</div>
+                <% } else { %>
+                    <div id="side_menu_open_2" onclick="location.href='<%= contextPath %>/GoScheduleMain.sd?mno=<%= loginUser.getmNo() %>'" class="login">계획 짤래?</div>
+                <% } %>
                 <div id="side_menu_open_3" onclick="location.href='<%= contextPath %>/GoPostMain.ps'" class="login">리뷰 볼래?</div>
                 <% if (loginAdmin != null) { %>
                 	<div id="side_menu_open_4" onclick="location.href='<%= contextPath %>/GoAdminMain.ad'">관리자 메뉴</div>
@@ -104,48 +108,48 @@
                 </div>
             </div>
 
-                <div class="content" align = 'center'> 
-                    <form action="<%=contextPath%>/insert.sc" method="post">
-                     <%if(loginUser != null) {%> 
-                        <input type="hidden" name="mNo" value="<%=loginUser.getmNo()%>">
-                       <% }  %>
-                        <div class="content-back">
-                            <table class="question-table">
-                                <tr>
-                                    <td class="input-cell"><p name="title" class="input-title"><%=q.getQtitle() %></p></td> 
-                                </tr>
-                                <tr>
-                                    <td class="input-cell"><p name="content" class="input-content"><%=q.getqContent() %></p></td>
-                                </tr>    
-                            </table>
+            <div class="content" align = 'center'> 
+                <form action="<%=contextPath%>/insert.sc" method="post">
+                    <%if(loginUser != null) {%> 
+                    <input type="hidden" name="mNo" value="<%=loginUser.getmNo()%>">
+                    <% }  %>
+                    <div class="content-back">
+                        <table class="question-table">
+                            <tr>
+                                <td class="input-cell"><p name="title" class="input-title"><%=q.getQtitle() %></p></td> 
+                            </tr>
+                            <tr>
+                                <td class="input-cell"><p name="content" class="input-content"><%=q.getqContent() %></p></td>
+                            </tr>    
+                        </table>
+                    </div>
+                    <button type="button" onclick="location.href='<%=request.getContextPath() %>/GoServiceCenter.sc'" class="btn btn-secondary">목록이동</button>
+                    <%if(loginUser != null && loginUser.getmNo() == q.getmNo() || loginAdmin != null){ %>
+                        <button type="button" onclick ="location.href ='<%=request.getContextPath() %>/delete.sc?qNo=<%=q.getqNo()%>'" class="btn btn-secondary" style="background-color: red;">삭제하기</button>
+                    <%}%>
+                </form>    
+                <% if(q.getqAnswer().equals("Y") ||loginAdmin != null ){ %>
+                    <div class="content-reply" id="reply-area">
+                        <table class="reply-table">
+                    <% if(loginAdmin != null) {%>
+                        <thead>
+                            <tr>
+                                    <td><p name="aName" class="reply-top">답변자 :<%=loginAdmin.getaId()%></p></td>
+                            </tr>
+                            <tr>
+                                <td><textarea name="reply" id="replyContent" class="input-reply" required placeholder="문의답변작성"></textarea></td>
+                            </tr>
+                                <td><button onclick="insertReply()" class="btn btn-secondary" style="margin-bottom: 20px; margin-top: 0;">답변등록</button></td>
+                            </thead>
+                    <% } %>
+                    <% } %>
+                            <tbody>
+                            </tbody>
+                        </table>
                         </div>
-                        <button type="button" onclick="location.href='<%=request.getContextPath() %>/GoServiceCenter.sc'" class="btn btn-secondary">목록이동</button>
-                        <%if(loginUser != null && loginUser.getmNo() == q.getmNo() || loginAdmin != null){ %>
-                            <button type="button" onclick ="location.href ='<%=request.getContextPath() %>/delete.sc?qNo=<%=q.getqNo()%>'" class="btn btn-secondary" style="background-color: red;">삭제하기</button>
-                        <%}%>
-                    </form>    
-					<% if(q.getqAnswer().equals("Y") ||loginAdmin != null ){ %>
-                        <div class="content-reply" id="reply-area">
-                            <table class="reply-table">
-                        <% if(loginAdmin != null) {%>
-                            <thead>
-                                <tr>
-                                     <td><p name="aName" class="reply-top">답변자 :<%=loginAdmin.getaId()%></p></td>
-                                </tr>
-                                <tr>
-                                    <td><textarea name="reply" id="replyContent" class="input-reply" required placeholder="문의답변작성"></textarea></td>
-                                </tr>
-                                    <td><button onclick="insertReply()" class="btn btn-secondary" style="margin-bottom: 20px; margin-top: 0;">답변등록</button></td>
- 				             </thead>
-                       <% } %>
-                     <% } %>
-		                       <tbody>
-                               </tbody>
-                           </table>
-                         </div>
-                       
-                </div>
-            </div>    
+                    
+            </div>
+        </div>    
 
 
 

@@ -210,7 +210,7 @@
 	                    <div class="explanation">계획 짤래?</div>
 	                </div>
                 <% } %>
-                <div id="side_menu_close_3" onclick="location.href='<%= contextPath %>/GoPostMain.ps'" class="login">
+                <div id="side_menu_close_3" onclick="location.href='<%= contextPath %>/list.po?cpage=1'" class="login">
                     <img src="resouces/img/dynamic_feed_24dp_5F6368.png" alt="">
                     <div class="explanation">리뷰 볼래?</div>
                 </div>

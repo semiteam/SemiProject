@@ -36,6 +36,23 @@ public class Schedule {
 		this.howlong = howlong;
 	}
 
+	public Schedule(int sNo, String sTitle, String sPlace, Date sSdate, Date sEdate, String sDescription, int rangeNo,
+			int bgiNo, Date sCdate, String sStatus, int mno, int howlong) {
+		super();
+		this.sNo = sNo;
+		this.sTitle = sTitle;
+		this.sPlace = sPlace;
+		this.sSdate = sSdate;
+		this.sEdate = sEdate;
+		this.sDescription = sDescription;
+		this.rangeNo = rangeNo;
+		this.bgiNo = bgiNo;
+		this.sCdate = sCdate;
+		this.sStatus = sStatus;
+		this.mno = mno;
+		this.howlong = howlong;
+	}
+
 	public Schedule(String sTitle, String sPlace, Date sSdate, Date sEdate, String sDescription, int rangeNo, int bgiNo,
 			int mno, int howlong) {
 		super();

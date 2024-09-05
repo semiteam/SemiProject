@@ -203,4 +203,43 @@ public class ScheduleDao {
 		
 		return result;
 	}
+
+	public ArrayList<Schedule> selectAllSchedule(Connection conn) {
+		ArrayList<Schedule> list = new ArrayList<Schedule>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectAllSchedule");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Schedule(rset.getInt("SD_NO"),
+									  rset.getString("SD_TITLE"),
+									  rset.getString("SD_PLACE"),
+									  rset.getDate("SD_SDATE"),
+									  rset.getDate("SD_EDATE"),
+									  rset.getString("SD_DESCRIPTION"),
+									  rset.getInt("RANGE_NO"),
+									  rset.getInt("BGI_NO"),
+									  rset.getDate("SD_CDATE"),
+									  rset.getString("SD_STATUS"),
+									  rset.getInt("SD_HOWLONG"),
+									  rset.getInt("M_NO")
+									 )
+						);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
 }

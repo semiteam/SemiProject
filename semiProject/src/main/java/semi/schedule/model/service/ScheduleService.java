@@ -95,4 +95,14 @@ public class ScheduleService {
 		
 		return result;
 	}
+
+	public ArrayList<Schedule> selectAllSchedule() {
+		Connection conn = getConnection();
+		
+		ArrayList<Schedule> list = new ScheduleDao().selectAllSchedule(conn);
+		
+		close(conn);
+		
+		return list;
+	}
 }

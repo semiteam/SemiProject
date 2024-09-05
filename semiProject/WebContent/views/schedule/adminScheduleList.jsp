@@ -4,7 +4,6 @@
 	pageEncoding="UTF-8"%>
 <%
 	ArrayList<Schedule> list = (ArrayList<Schedule>)request.getAttribute("list");
-	int no = (int)request.getAttribute("no");
 %>
 <!DOCTYPE html>
 <html lang="en">
