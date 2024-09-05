@@ -50,8 +50,20 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
         
         <script defer src="resouces/js/common.js"></script>
-        <link rel="stylesheet" href="resouces/css/plan_O.css">
         <link rel="stylesheet" href="resouces/css/common.css">
+        <style>
+            thead tr,
+            tbody tr:not(:last-child) {
+                height: 40px;
+                border-bottom: 1px solid #ffffff;
+            }
+
+            tbody tr:last-child {height: 40px;}
+
+            tbody tr {cursor: pointer;}
+
+            th, td {padding-top: 10px;}
+        </style>
     </head>
     <body>
         <%@ include file="../common/basic.jsp" %>
@@ -99,250 +111,43 @@
                 </div>
     
                 <div class="content">
-                    <% for (Schedule sd : list) { %>
-                        <div class="plan">
-                            <div class="cover" id="cover<%= sd.getsNo() %>" onclick="location.href='<%= contextPath %>/GoAddDetail.d?mno=<%= sd.getMno() %>&sno=<%= sd.getsNo() %>&howlong=<%= sd.getHowlong() %>'" data-url='<%= contextPath %>/GoAddDetail.d?mno=<%= sd.getMno() %>&sno=<%= sd.getsNo() %>&howlong=<%= sd.getHowlong() %>'>
-                                <div class="plan_title"><%= sd.getsTitle() %></div>
-                                <div class="date"><%= sd.getsSdate() %> ~ <%= sd.getsEdate() %><div class="mini_bar material-symbols-outlined">
-                                        <div class="material-symbols-outlined" id="edit<%= sd.getsNo() %>" onclick="editPlan(event)">edit</div>
-                                        <div class="material-symbols-outlined share" onclick="sharePlan(event)">share</div>
-                                        <div class="material-symbols-outlined" id="delete<%= sd.getsNo() %>" onclick="deletePlan(event)">delete</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <script>
-                            $(function() {
-                                var bbgiPath = '<%= sd.getBbgiPath() %>';
-                                var ubgiPath = '<%= sd.getUbgiPath() %>';
-                                var sNo = '<%= sd.getsNo() %>';
-                                
-                                if (bbgiPath == null) {
-                                    $('#cover' + sNo).css('background-image', "url('" + ubgiPath + "')");
-                                } else {
-                                    $('#cover' + sNo).css('background-image', "url('" + bbgiPath + "')");
-                                }
-                                
-                                var isStartDateToday = <%= LocalDate.now().equals(((java.sql.Date)sd.getsSdate()).toLocalDate()) %>;
-                                var isEndDatePast = <%= LocalDate.now().isAfter(((java.sql.Date)sd.getsEdate()).toLocalDate()) %>;
-
-                                if (isStartDateToday) {
-                                    $.ajax({
-                                        url: '<%= contextPath %>/AutoUpdateStatus.sd',
-                                        method: 'post',
-                                        data: {
-                                            status: 'T',
-                                            sno: <%= sd.getsNo() %>,
-                                            mno: <%= loginUser.getmNo() %>,
-                                        },
-                                        success: function(result) {
-                                            if (result > 0) {
-                                                console.log('업데이트 완료');
-                                            } else {
-                                                console.log('업데이트 실패');
-                                            }
-                                        },
-                                        error: function() {
-                                            console.log('업데이트 실패');
-                                        }
-                                    });
-                                } else if (isEndDatePast) {
-                                    $.ajax({
-                                        url: '<%= contextPath %>/AutoUpdateStatus.sd',
-                                        method: 'post',
-                                        data: {
-                                            status: 'P',
-                                            sno: <%= sd.getsNo() %>,
-                                            mno: <%= loginUser.getmNo() %>,
-                                        },
-                                        success: function(result) {
-                                            if (result > 0) {
-                                                console.log('업데이트 완료');
-                                            } else {
-                                                console.log('업데이트 실패');
-                                            }
-                                        },
-                                        error: function() {
-                                            console.log('업데이트 실패');
-                                        }
-                                    });
-                                } else {
-                                    $.ajax({
-                                        url: '<%= contextPath %>/AutoUpdateStatus.sd',
-                                        method: 'post',
-                                        data: {
-                                            status: 'N',
-                                            sno: <%= sd.getsNo() %>,
-                                            mno: <%= loginUser.getmNo() %>,
-                                        },
-                                        success: function(result) {
-                                            if (result > 0) {
-                                                console.log('업데이트 완료');
-                                            } else {
-                                                console.log('업데이트 실패');
-                                            }
-                                        },
-                                        error: function() {
-                                            console.log('업데이트 실패');
-                                        }
-                                    });
-                                }
-                            });
-                        </script>
-                            
-                    <% } %>
-
-                    <div class="add_plan" onclick="location.href='<%= contextPath %>/GoAddPlan.sd'">
-                        <div class="material-symbols-outlined">add_circle</div>
-                    </div>
-
-                    <div id="share">
-                        <div id="share_title">공&nbsp;유</div>
-                        <div id="circles">
-                            <div class="circle" id="member">회원</div>
-                            <div class="circle" id="twitter">트위터</div>
-                            <div class="circle" id="facebook">페이스북</div>
-                            <div class="circle" id="instagram">인스타</div>
-                            <div class="circle" id="whatsapp">왓츠앱</div>
-                            <div class="circle" id="kakaotalk">카카오톡</div>
-                            <div class="circle" id="email">이메일</div>
-                        </div>
-                        <div id="link"></div>
-                    </div>
-                    
-                    <script>
-                        function editPlan(event) {
-                            event.stopPropagation();
-
-                            $(document).off('click', handleDocumentClick);
-
-                            $('.cover').attr('onclick', '');
-
-                            let sno = $(event.target).attr('id').replace('edit', '').trim();
-
-                            let originTitle = $(event.target).closest('.cover').children('.plan_title').text();
-                            let originDate = $(event.target).closest('.cover').children('.date').text().substring(0, 23);
-                            let originHtml = $(event.target).closest('.cover').children('.date').html().substring(23);
-
-                            $(event.target).closest('.cover').children('.plan_title').html('<input type="text" value="' + originTitle + '" name="editTitle" class="editInput editInputTitle" id="editInputTitle">');
-                            $(event.target).closest('.cover').children('.date').html(`<input type="text" value="` + originDate + `" name="editDate" class="editInput editInputDate" id="editInputDate">` + originHtml);
-
-                            $('#editInputTitle').focus();
-
-                            $(document).on('click', handleDocumentClick);
-
-                            function handleDocumentClick(event) {
-                                var regex = /^\d{4}-\d{2}-\d{2} ~ \d{4}-\d{2}-\d{2}$/;
-
-                                if (!regex.test($('#editInputDate').val())) {
-                                    alert('yyyy-mm-dd ~ yyyy-mm-dd 형식으로 입력해주세요');
-                                    $('#editInputDate').focus();
-                                    return;
-                                }
-
-                                if (!$(event.target).closest('.editInput').length) {
-                                    $.ajax({
-                                        url: '<%= contextPath %>/UpdateSchedule.sd',
-                                        method: 'post',
-                                        data: {
-                                            mno: <%= loginUser.getmNo() %>,
-                                            sno: sno,
-                                            title: $('#editInputTitle').val(),
-                                            date: $('#editInputDate').val(),
-                                        },
-                                        success: function(result) {
-                                            if (result === 0) {
-                                                alert('일정 수정에 실패하였습니다.');
-                                            }
-
-                                            location.reload();
-                                        },
-                                        error: function() {
-                                            alert('일정 수정에 실패하였습니다.');
-                                            location.reload();
-                                        }
-                                    });
-
-                                    $(document).off('click', handleDocumentClick);
-                                }
-                            }
-                        }
-
-
-                        function deletePlan(event) {
-                            event.stopPropagation();
-                            
-                            if (confirm("일정을 삭제하시겠습니까?")) {
-                                $.ajax({
-                                    url: '<%= contextPath %>/DeleteSchedule.sd',
-                                    method: 'post',
-                                    data: {
-                                        mno: <%= loginUser.getmNo() %>,
-                                        sno: $(event.target).attr('id').replace('delete', '').trim(),
-                                    },
-                                    success: function(result) {
-                                        if (result > 0) {
-                                            alert('일정 삭제에 성공하였습니다.');
-                                        } else {
-                                            alert('일정 삭제에 실패하였습니다.');
-                                        }
-                                        location.reload();
-                                    },
-                                    error: function() {
-                                        alert('일정 삭제에 실패하였습니다.');
-                                        location.reload();
-                                    }
-                                });
-                            }
-                        }
-
-                        function sharePlan(event) {
-                            event.stopPropagation();
-
-                            $('#share').css('display', 'block');
-                            $('#full_cover').css('display', 'block');
-
-                            // Attach a single event listener to the document to handle clicks outside #share
-                            $(document).on('click', function(event) {
-                                if (!$(event.target).closest('#share').length && !$(event.target).is('#share')) {
-                                    $('#share').css('display', 'none');
-                                    $('#full_cover').css('display', 'none');
-                                }
-                            });
-
-                            // Update #link content
-                            $('#link').html(event.target.closest('.cover').getAttribute('data-url')
-                                            + `&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <button type="button" id="data-copy" style="background-color: black; border: none; color: white; height: 20px; border-radius: 10px;">복사</button>
-                                            <input type="hidden" id="data-area" value="` + event.target.closest('.cover').getAttribute('data-url') + `">`);
-                        }
-
-                        // Ensure the click handler for copy remains functional
-                        $('#link').on('click', '#data-copy', function() {
-                            const $dataArea = $('#data-area');
-
-                            $dataArea.attr('type', 'text').select();
-
-                            try {
-                                const copySuccessful = document.execCommand('copy');
-                                $dataArea.attr('type', 'hidden');
-
-                                if (copySuccessful) {
-                                    alert("클립보드에 URL이 복사되었습니다.");
-                                } else {
-                                    alert("URL 복사에 실패하였습니다.");
-                                }
-                            } catch (err) {
-                                console.error("Error:", err);
-                                alert("URL 복사에 실패하였습니다.");
-                            }
-                        });
-                    </script>
-
-                    <br><br>
+                    <table style="width: 70%; color: white; border: 1px solid white; height: auto; margin: 50px auto; text-align: center;">
+                        <thead>
+                            <tr>
+                                <th>일정 번호</th>
+                                <th>회원 번호</th>
+                                <th>회원 아이디</th>
+                                <th>일정 제목</th>
+                                <th>여행지</th>
+                                <th>일정</th>
+                                <th>일정 상태</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% for (Schedule sd : list) { %>
+                            	<tr onclick="location.href=''">
+                                    <td><%= sd.getsNo() %></td>
+                                    <td><%= sd.getMno() %></td>
+                                    <td><%= sd.getmId() %></td>
+                                    <td><%= sd.getsTitle() %></td>
+                                    <td><%= sd.getsPlace() %></td>
+                                    <td><%= sd.getsSdate() %> ~ <%= sd.getsEdate() %></td>
+                                    <td>
+                                    	<%
+                                    		String status = "";
+                                    		switch (sd.getsStatus()) {
+                                    			case "D" : status = "삭제"; break;
+                                    			case "P" : status = "지난 일정"; break;
+                                    			case "T" : status = "TODAY"; break;
+                                    			case "N" : status = "예정된 일정"; break;
+                                    		}
+                                    	%>
+                                    	<%= status %>
+                                    </td>
+                                </tr>
+                            <% } %>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

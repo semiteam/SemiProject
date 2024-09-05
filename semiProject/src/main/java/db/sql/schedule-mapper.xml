@@ -107,6 +107,8 @@
 		     , SD_STATUS
 		     , SD_HOWLONG
 		     , M_NO
+		     , M_ID
 		  FROM SCHEDULE
+		  JOIN MEMBER USING (M_NO)
 	</entry>
 </properties>

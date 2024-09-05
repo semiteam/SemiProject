@@ -17,6 +17,15 @@ public class Schedule {
 	private int howlong;
 	private String bbgiPath;
 	private String ubgiPath;
+	private String mId;
+
+	public String getmId() {
+		return mId;
+	}
+
+	public void setmId(String mId) {
+		this.mId = mId;
+	}
 
 	public Schedule() {
 	}
@@ -37,7 +46,7 @@ public class Schedule {
 	}
 
 	public Schedule(int sNo, String sTitle, String sPlace, Date sSdate, Date sEdate, String sDescription, int rangeNo,
-			int bgiNo, Date sCdate, String sStatus, int mno, int howlong) {
+			int bgiNo, Date sCdate, String sStatus, int mno, int howlong, String mId) {
 		super();
 		this.sNo = sNo;
 		this.sTitle = sTitle;
@@ -51,6 +60,7 @@ public class Schedule {
 		this.sStatus = sStatus;
 		this.mno = mno;
 		this.howlong = howlong;
+		this.mId = mId;
 	}
 
 	public Schedule(String sTitle, String sPlace, Date sSdate, Date sEdate, String sDescription, int rangeNo, int bgiNo,
@@ -216,9 +226,38 @@ public class Schedule {
 
 	@Override
 	public String toString() {
-		return "Schedule [sNo=" + sNo + ", sTitle=" + sTitle + ", sPlace=" + sPlace + ", sSdate=" + sSdate + ", sEdate="
-				+ sEdate + ", sDescription=" + sDescription + ", rangeNo=" + rangeNo + ", bgiNo=" + bgiNo + ", sCdate="
-				+ sCdate + ", sStatus=" + sStatus + ", mno=" + mno + ", howlong=" + howlong + ", bbgiPath=" + bbgiPath
-				+ ", ubgiPath=" + ubgiPath + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("Schedule [sNo=");
+		builder.append(sNo);
+		builder.append(", sTitle=");
+		builder.append(sTitle);
+		builder.append(", sPlace=");
+		builder.append(sPlace);
+		builder.append(", sSdate=");
+		builder.append(sSdate);
+		builder.append(", sEdate=");
+		builder.append(sEdate);
+		builder.append(", sDescription=");
+		builder.append(sDescription);
+		builder.append(", rangeNo=");
+		builder.append(rangeNo);
+		builder.append(", bgiNo=");
+		builder.append(bgiNo);
+		builder.append(", sCdate=");
+		builder.append(sCdate);
+		builder.append(", sStatus=");
+		builder.append(sStatus);
+		builder.append(", mno=");
+		builder.append(mno);
+		builder.append(", howlong=");
+		builder.append(howlong);
+		builder.append(", bbgiPath=");
+		builder.append(bbgiPath);
+		builder.append(", ubgiPath=");
+		builder.append(ubgiPath);
+		builder.append(", mId=");
+		builder.append(mId);
+		builder.append("]");
+		return builder.toString();
 	}
 }

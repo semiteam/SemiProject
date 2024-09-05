@@ -228,8 +228,9 @@ public class ScheduleDao {
 									  rset.getInt("BGI_NO"),
 									  rset.getDate("SD_CDATE"),
 									  rset.getString("SD_STATUS"),
+									  rset.getInt("M_NO"),
 									  rset.getInt("SD_HOWLONG"),
-									  rset.getInt("M_NO")
+									  rset.getString("M_ID")
 									 )
 						);
 			}
