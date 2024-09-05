@@ -39,6 +39,7 @@ public class EditDetailScheduleController extends HttpServlet {
 		String dTime = request.getParameter("dTime");
 		String dPlace = request.getParameter("dPlace");
 		String dElse = request.getParameter("dElse");
+		
 		int dno = Integer.parseInt(request.getParameter("dno"));
 		int mno = Integer.parseInt(request.getParameter("mno"));
 		String dDate = request.getParameter("dDate");

@@ -1,3 +1,4 @@
+<%@page import="java.time.LocalDate"%>
 <%@page import="semi.schedule.model.vo.Schedule"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -267,8 +268,8 @@
                 <div class="under">
                     <div class="side_menu">
                         <div id="side_menu_open_1" onclick="location.href='<%= contextPath %>'">여행 갈래?</div>
-                        <div id="side_menu_open_2" onclick="location.href='<%= contextPath %>/GoScheduleMain.sd'" class="login">계획 짤래?</div>
-                        <div id="side_menu_open_3" onclick="location.href='<%= contextPath %>/GoPostMain.ps'" class="login">리뷰 볼래?</div>
+                        <div id="side_menu_open_2" onclick="location.href='<%= contextPath %>/GoScheduleMain.sd?mno=<%= loginUser.getmNo() %>'" class="login">계획 짤래?</div>
+                        <div id="side_menu_open_3" onclick="location.href='<%= contextPath %>/list.po?cpage=1'" class="login">리뷰 볼래?</div>
                         <% if (loginAdmin != null) { %>
                             <div id="side_menu_open_4" onclick="location.href='<%= contextPath %>/GoAdminMain.ad'">관리자 메뉴</div>
                         <% } %>
@@ -278,11 +279,11 @@
                             <img src="resouces/img/airplane_ticket_24dp_5F6368.png" alt="">
                             <div class="explanation">여행 갈래?</div>
                         </div>
-                        <div id="side_menu_close_2" onclick="location.href='<%= contextPath %>/GoScheduleMain.sd'" class="login">
+                        <div id="side_menu_close_2" onclick="location.href='<%= contextPath %>/GoScheduleMain.sd?mno=<%= loginUser.getmNo() %>'" class="login">
                             <img src="resouces/img/edit_calendar_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png" alt="">
                             <div class="explanation">계획 짤래?</div>
                         </div>
-                        <div id="side_menu_close_3" onclick="location.href='<%= contextPath %>/GoPostMain.ps'" class="login">
+                        <div id="side_menu_close_3" onclick="location.href='<%= contextPath %>/list.po?cpage=1'" class="login">
                             <img src="resouces/img/dynamic_feed_24dp_5F6368.png" alt="">
                             <div class="explanation">리뷰 볼래?</div>
                         </div>
@@ -301,11 +302,17 @@
                         <% for (Schedule sd : list) { %>
                             <div class="plan">
                                 <div class="cover" id="cover<%= sd.getsNo() %>" onclick="location.href='<%= contextPath %>/GoAddDetail.d?mno=<%= sd.getMno() %>&sno=<%= sd.getsNo() %>&howlong=<%= sd.getHowlong() %>'" data-url='<%= contextPath %>/GoAddDetail.d?mno=<%= sd.getMno() %>&sno=<%= sd.getsNo() %>&howlong=<%= sd.getHowlong() %>'>
-                                    <div class="plan_title"><%= sd.getsTitle() %></div>
-                                    <div class="date">
-                                        <%= sd.getsSdate() %> ~ <%= sd.getsEdate() %>
-                                        <div class="mini_bar material-symbols-outlined">
-                                            <div class="material-symbols-outlined">edit</div>
+                                    <% if (sd.getsStatus().equals("T")) { %>
+                                        <div class="plan_title"><%= sd.getsTitle() %></div>
+                                        <div class="tp">⋆TODAY⋆</div>
+                                    <% } else if (sd.getsStatus().equals("P")) { %>
+                                        <div class="plan_title"><%= sd.getsTitle() %></div>
+                                        <div class="tp">(지난 여행)</div>
+                                    <% } else { %>
+                                        <div class="plan_title"><%= sd.getsTitle() %></div>
+                                    <% } %>
+                                    <div class="date"><%= sd.getsSdate() %> ~ <%= sd.getsEdate() %><div class="mini_bar material-symbols-outlined">
+                                            <div class="material-symbols-outlined" id="edit<%= sd.getsNo() %>" onclick="editPlan(event)">edit</div>
                                             <div class="material-symbols-outlined share" onclick="sharePlan(event)">share</div>
                                             <div class="material-symbols-outlined" id="delete<%= sd.getsNo() %>" onclick="deletePlan(event)">delete</div>
                                         </div>
@@ -314,15 +321,84 @@
                             </div>
                             
                             <script>
-                            	$(function() {
-                                    // background-image: url('../img/random/1.jpg');
-                            		if (<%= sd.getBbgiPath() == null %>) {
-                                    	$('#cover<%= sd.getsNo() %>').css('background-image', "url('<%= sd.getUbgiPath() %>')");
-                            		} else {                            			
-                                    	$('#cover<%= sd.getsNo() %>').css('background-image', "url('<%= sd.getBbgiPath() %>')");
-                            		}
-                                });
+	                            $(function() {
+	                                var bbgiPath = '<%= sd.getBbgiPath() %>';
+	                                var ubgiPath = '<%= sd.getUbgiPath() %>';
+	                                var sNo = '<%= sd.getsNo() %>';
+	                                
+	                                if (bbgiPath == null) {
+	                                    $('#cover' + sNo).css('background-image', "url('" + ubgiPath + "')");
+	                                } else {
+	                                    $('#cover' + sNo).css('background-image', "url('" + bbgiPath + "')");
+	                                }
+	                                
+	                                var isStartDateToday = <%= LocalDate.now().equals(((java.sql.Date)sd.getsSdate()).toLocalDate()) %>;
+	                                var isEndDatePast = <%= LocalDate.now().isAfter(((java.sql.Date)sd.getsEdate()).toLocalDate()) %>;
+	
+	                                if (isStartDateToday) {
+	                                    $.ajax({
+	                                        url: '<%= contextPath %>/AutoUpdateStatus.sd',
+	                                        method: 'post',
+	                                        data: {
+	                                            status: 'T',
+	                                            sno: <%= sd.getsNo() %>,
+	                                            mno: <%= loginUser.getmNo() %>,
+	                                        },
+	                                        success: function(result) {
+	                                            if (result > 0) {
+	                                                console.log('업데이트 완료');
+	                                            } else {
+	                                                console.log('업데이트 실패');
+	                                            }
+	                                        },
+	                                        error: function() {
+	                                            console.log('업데이트 실패');
+	                                        }
+	                                    });
+	                                } else if (isEndDatePast) {
+	                                    $.ajax({
+	                                        url: '<%= contextPath %>/AutoUpdateStatus.sd',
+	                                        method: 'post',
+	                                        data: {
+	                                            status: 'P',
+	                                            sno: <%= sd.getsNo() %>,
+	                                            mno: <%= loginUser.getmNo() %>,
+	                                        },
+	                                        success: function(result) {
+	                                            if (result > 0) {
+	                                                console.log('업데이트 완료');
+	                                            } else {
+	                                                console.log('업데이트 실패');
+	                                            }
+	                                        },
+	                                        error: function() {
+	                                            console.log('업데이트 실패');
+	                                        }
+	                                    });
+	                                } else {
+	                                	$.ajax({
+	                                        url: '<%= contextPath %>/AutoUpdateStatus.sd',
+	                                        method: 'post',
+	                                        data: {
+	                                            status: 'N',
+	                                            sno: <%= sd.getsNo() %>,
+	                                            mno: <%= loginUser.getmNo() %>,
+	                                        },
+	                                        success: function(result) {
+	                                            if (result > 0) {
+	                                                console.log('업데이트 완료');
+	                                            } else {
+	                                                console.log('업데이트 실패');
+	                                            }
+	                                        },
+	                                        error: function() {
+	                                            console.log('업데이트 실패');
+	                                        }
+	                                    });
+	                                }
+	                            });
                             </script>
+                                
                         <% } %>
     
                         <div class="add_plan" onclick="location.href='<%= contextPath %>/GoAddPlan.sd'">
@@ -344,6 +420,64 @@
                         </div>
                         
                         <script>
+                            function editPlan(event) {
+                                event.stopPropagation();
+
+                                $(document).off('click', handleDocumentClick);
+
+                                $('.cover').attr('onclick', '');
+
+                                let sno = $(event.target).attr('id').replace('edit', '').trim();
+
+                                let originTitle = $(event.target).closest('.cover').children('.plan_title').text();
+                                let originDate = $(event.target).closest('.cover').children('.date').text().substring(0, 23);
+                                let originHtml = $(event.target).closest('.cover').children('.date').html().substring(23);
+
+                                $(event.target).closest('.cover').children('.plan_title').html('<input type="text" value="' + originTitle + '" name="editTitle" class="editInput editInputTitle" id="editInputTitle">');
+                                $(event.target).closest('.cover').children('.date').html(`<input type="text" value="` + originDate + `" name="editDate" class="editInput editInputDate" id="editInputDate">` + originHtml);
+
+                                $('#editInputTitle').focus();
+
+                                $(document).on('click', handleDocumentClick);
+
+                                function handleDocumentClick(event) {
+                                    var regex = /^\d{4}-\d{2}-\d{2} ~ \d{4}-\d{2}-\d{2}$/;
+
+                                    if (!regex.test($('#editInputDate').val())) {
+                                        alert('yyyy-mm-dd ~ yyyy-mm-dd 형식으로 입력해주세요');
+                                        $('#editInputDate').focus();
+                                        return;
+                                    }
+
+                                    if (!$(event.target).closest('.editInput').length) {
+                                        $.ajax({
+                                            url: '<%= contextPath %>/UpdateSchedule.sd',
+                                            method: 'post',
+                                            data: {
+                                                mno: <%= loginUser.getmNo() %>,
+                                                sno: sno,
+                                                title: $('#editInputTitle').val(),
+                                                date: $('#editInputDate').val(),
+                                            },
+                                            success: function(result) {
+                                                if (result === 0) {
+                                                    alert('일정 수정에 실패하였습니다.');
+                                                }
+
+                                                location.reload();
+                                            },
+                                            error: function() {
+                                                alert('일정 수정에 실패하였습니다.');
+                                                location.reload();
+                                            }
+                                        });
+
+                                        $(document).off('click', handleDocumentClick);
+                                    }
+                                }
+                            }
+
+
 						    function deletePlan(event) {
 						        event.stopPropagation();
 					            

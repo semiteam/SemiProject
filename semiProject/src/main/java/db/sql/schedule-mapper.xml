@@ -29,7 +29,7 @@
 		     , ?
 		     , ?
 		     , SYSDATE
-		     , 'N'
+		     , ?
 		     , ?
 		     , ?
 		     )
@@ -75,5 +75,38 @@
 		   SET SD_STATUS = 'D'
 		 WHERE SD_NO = ?
 		   AND M_NO = ?
+	</entry>
+	
+	<entry key="updateSchedule">
+		UPDATE SCHEDULE
+		   SET SD_TITLE = ?
+		     , SD_SDATE = ?
+		     , SD_EDATE = ?
+		     , SD_HOWLONG = ?
+		 WHERE M_NO = ?
+		   AND SD_NO = ?
+	</entry>
+	
+	<entry key="autoUpdateStatus">
+		UPDATE SCHEDULE
+		   SET SD_STATUS = ?
+		 WHERE M_NO = ?
+		   AND SD_NO = ?
+	</entry>
+	
+	<entry key="selectAllSchedule">
+		SELECT SD_NO
+		     , SD_TITLE
+		     , SD_PLACE
+		     , SD_SDATE
+		     , SD_EDATE
+		     , SD_DESCRIPTION
+		     , RANGE_NO
+		     , BGI_NO
+		     , SD_CDATE
+		     , SD_STATUS
+		     , SD_HOWLONG
+		     , M_NO
+		  FROM SCHEDULE
 	</entry>
 </properties>

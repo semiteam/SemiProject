@@ -33,7 +33,6 @@ public class GoMyPageController extends HttpServlet {
 			request.getRequestDispatcher("views/member/myPageModify.jsp").forward(request, response);
 		} else {
 			session.setAttribute("alertMsg", "로그인 후 이용 가능한 서비스입니다.");
-			
 			response.sendRedirect(request.getContextPath());
 		}
 	}

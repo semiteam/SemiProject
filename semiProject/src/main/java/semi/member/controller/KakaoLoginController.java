@@ -31,11 +31,9 @@ public class KakaoLoginController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String userId = (String)request.getParameter("userId");
-		System.out.println(userId + "유저아이디");
 		
 		Member loginUser = new MemberService().kakaoLoginMember(userId);
 		
-		System.out.println(loginUser);
 		if(loginUser == null) {
 			request.getSession().setAttribute("alertMsg", "실패");
 			response.sendRedirect(request.getContextPath() );

@@ -80,8 +80,9 @@
             <div class="under">
                 <div class="side_menu">
                     <div id="side_menu_open_1" onclick="location.href='<%= contextPath %>'">여행 갈래?</div>
-                    <div id="side_menu_open_2" onclick="location.href='<%= contextPath %>/GoScheduleMain.sd'" class="login">계획 짤래?</div>
-                    <div id="side_menu_open_3" onclick="location.href='<%= contextPath %>/GoPostMain.ps'" class="login">리뷰 볼래?</div>
+                    <div id="side_menu_open_2" onclick="location.href='<%= contextPath %>/GoScheduleMain.sd?mno=<%= loginUser.getmNo() %>'" class="login">계획 짤래?</div>
+                    <div id="side_menu_open_2" onclick="location.href='<%= contextPath %>/GoScheduleMain.sd?mno=<%= loginUser.getmNo() %>'" class="login">계획 짤래?</div>
+                    <div id="side_menu_open_3" onclick="location.href='<%= contextPath %>/list.po?cpage=1'" class="login">리뷰 볼래?</div>
                     <% if (loginAdmin != null) { %>
                         <div id="side_menu_open_4" onclick="location.href='<%= contextPath %>/GoAdminMain.ad'">관리자 메뉴</div>
                     <% } %>
@@ -91,11 +92,11 @@
                         <img src="resouces/img/airplane_ticket_24dp_5F6368.png" alt="">
                         <div class="explanation">여행 갈래?</div>
                     </div>
-                    <div id="side_menu_close_2" onclick="location.href='<%= contextPath %>/GoScheduleMain.sd'" class="login">
+                    <div id="side_menu_close_2" onclick="location.href='<%= contextPath %>/GoScheduleMain.sd?mno=<%= loginUser.getmNo() %>'" class="login">
                         <img src="resouces/img/edit_calendar_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png" alt="">
                         <div class="explanation">계획 짤래?</div>
                     </div>
-                    <div id="side_menu_close_3" onclick="location.href='<%= contextPath %>/GoPostMain.ps'" class="login">
+                    <div id="side_menu_close_3" onclick="location.href='<%= contextPath %>/list.po?cpage=1'" class="login">
                         <img src="resouces/img/dynamic_feed_24dp_5F6368.png" alt="">
                         <div class="explanation">리뷰 볼래?</div>
                     </div>
@@ -255,12 +256,12 @@
                                             
                                             <script>
                                           $(function() {
-                                                    $('timeline').css('height', $('#detail_plan<%= i %>').height());
-                                                    $('#map<%= i %>').css('height', $('#bar<%= i %>').height());
-                    
-                                                    $('#add_detail').on('click', '#cancle', function() {
-                                                        location.reload();
-                                                    });
+                                                $('#timeline<%= i %>').css('height', $('#detail_plan<%= i %>').height());
+                                                $('#map<%= i %>').css('height', $('#bar<%= i %>').height());
+                
+                                                $('#add_detail').on('click', '#cancle', function() {
+                                                    location.reload();
+                                                });
                   
                                               $(document).on('click', '.add_detail_plan', function() {
                                                   $('#add_detail').css('width', '40%');
@@ -325,7 +326,7 @@
                                         data: {
                                             dTime: $(this).closest('.plan_content').children('.dTime').children('input').val(),
                                             dPlace: $(this).closest('.plan_content').children('.dPlace').children('input').val(),
-                                            dElse: $(this).closest('.plan_content').children('.dElse').text(),
+                                            dElse: $('#editElse').val(),
                                             dno: $(this).attr('id').replace('done', '').trim(),
                                             mno: <%= loginUser.getmNo() %>,
                                             dDate: $(this).closest('.detail').children('.date_div').children('.date').text(),

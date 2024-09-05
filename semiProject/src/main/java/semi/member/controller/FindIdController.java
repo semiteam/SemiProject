@@ -35,7 +35,6 @@ public class FindIdController extends HttpServlet {
 	    String name = request.getParameter("name");
 	    String email = request.getParameter("email");
 	    Member m = new MemberService().idFindSearch(name, email);
-	    System.out.println(m);
 
 	    if (m != null) {
 	        request.setAttribute("m", m);

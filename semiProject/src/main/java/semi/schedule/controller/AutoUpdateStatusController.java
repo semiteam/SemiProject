@@ -1,4 +1,4 @@
-package semi.member.controller;
+package semi.schedule.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,19 +7,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import semi.member.model.service.MemberService;
+import semi.schedule.model.service.ScheduleService;
 
 /**
- * Servlet implementation class AjaxsIdCheckController
+ * Servlet implementation class AutoUpdateStatusController
  */
-@WebServlet("/idCheck.me")
-public class AjaxsIdCheckController extends HttpServlet {
+@WebServlet("/AutoUpdateStatus.sd")
+public class AutoUpdateStatusController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AjaxsIdCheckController() {
+    public AutoUpdateStatusController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,14 +28,13 @@ public class AjaxsIdCheckController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String status = request.getParameter("status");
+		int sno = Integer.parseInt(request.getParameter("sno"));
+		int mno = Integer.parseInt(request.getParameter("mno"));
 		
-		String checkId = request.getParameter("checkId");
-		int count = new MemberService().idCheck(checkId);
-		if(count > 0) { 
-			response.getWriter().print("NNNNN");
-		} else { 
-			response.getWriter().print("NNNNY");
-		}
+		int result = new ScheduleService().autoUpdateStatus(status, sno, mno);
+		
+		response.getWriter().print(result);
 	}
 
 	/**
