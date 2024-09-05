@@ -166,7 +166,7 @@ input {
 					<img src="resouces/img/chevron_right_24dp_5F6368.png" alt="">
 				</div>
 			</div>
-			<form action="<%= contextPath %>/update.po" method="post">
+			<form id="postForm" action="<%= contextPath %>/update.po" method="post">
 				<div class="content">
 					<section>
 						<div class="board-area">
@@ -214,19 +214,19 @@ input {
 									<br>
 									<button type="reset" id="cancel-btn"
 										onclick="location.href='<%= contextPath%>/list.po?cpage=1'">목록가기</button>
-									<% if(loginUser.getmId().equals(loginUser.getmId())) { %>
-									<button type="submit" id="view-btn">수정하기</button>
-									<button type="submit" id="submit-btn">삭제하기</button>
-									<% } %>
+									<% if (loginUser != null && loginUser.getmId().equals(p.getmId())) { %>
+									        <button type="submit" id="view-btn">수정하기</button>
+									        <button type="button" id="submit-btn" onclick="submitDelete()">삭제하기</button>
+									    <% } %>
 									<!--  onclick="location.href='<%= contextPath %>/delete.po'" -->
 								</div>
 
-
+					
 							</div>
 						</div>
 					</section>
 				</div>
-			</form>
+				</form>
 			<br>
 			<br>
 			<section>
@@ -280,6 +280,17 @@ input {
 	        });
 	    });
 	});
+	
+	function submitDelete() {
+        if (confirm("정말 삭제하시겠습니까?")) {
+            // 폼의 action을 삭제 서블릿으로 변경
+            document.getElementById('postForm').action = '<%= contextPath %>/delete.po';
+            // 폼을 POST 방식으로 제출
+            document.getElementById('postForm').method = 'post';
+            // 폼 제출
+            document.getElementById('postForm').submit();
+        }
+    }
 	</script>
 </body>
 </html>

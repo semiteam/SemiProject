@@ -59,7 +59,7 @@ public class LandmarkDao {
 		return list;
 	}
 
-	public int insertLandmark(Connection conn, String landmarkName, String landmarkCity) {
+	public int insertLandmark(Connection conn, String landmarkName, String landmarkCity, String landmarkAddress) {
 		int result = 0;
 		
 		PreparedStatement pstmt = null;
@@ -71,6 +71,7 @@ public class LandmarkDao {
 			
 			pstmt.setString(1, landmarkName);
 			pstmt.setString(2, landmarkCity);
+			pstmt.setString(3, landmarkAddress);
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {

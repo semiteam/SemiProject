@@ -7,7 +7,8 @@
 
 .under > .content {
     color: white;
-    font-size: 20px; 
+    font-size: 20px;
+    height: auto;
 }
 
 .under > .content > .detail {margin: 2vw 0 0 3vw;}
@@ -31,6 +32,8 @@
     border-right: 1px solid white;
     margin: 3px 0 3px 11px;
 }
+
+.bar50 {height: 50%;}
 
 .plan .detail_plan .plan_content {
     width: 650px;
@@ -63,11 +66,12 @@
 #add_detail {
     background-color: white;
     right: 0;
-    position: absolute;
+    position: fixed;
     width: 0;
     color: #000;
     top: 5vh;
-    height: auto !important;
+    height: 100% !important;
+    z-index: 9999;
 }
 
 #add_detail table:not(#place_add_table) {
@@ -232,13 +236,17 @@ textarea:focus {outline: none;}
 #place_add tr,
 #place_add td {width: 100%;}
 
-#place_add_table tr:not(:nth-child(n+4)) {height: 80px;}
+#place_add_table tr:not(:nth-child(n+3)) {height: 80px;}
+
+#place_add_table tr:nth-child(4) {height: 120px;}
+
+#place_add_table tr:nth-child(4) td {padding-top: 20px;}
 
 #place_add_table tr th:first-child {text-align: center;}
 
-#place_add_table tr:nth-child(4) {height: 25px;}
+#place_add_table tr:nth-child(5) {height: 25px;}
 
-#place_add_table tr:nth-child(5) td {padding-left: 12px;}
+#place_add_table tr:nth-child(6) td {padding-left: 12px;}
 
 #count {padding: 20px 0 0 510px;}
 

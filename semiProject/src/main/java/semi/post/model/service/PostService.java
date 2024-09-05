@@ -76,19 +76,19 @@ public class PostService {
 		return result;
 	}
 	
-	public int insertPost(int mno, String title, String content ) {
-		Connection conn = getConnection();
-		
-		int result = new PostDao().insertPost(conn,mno,title,content);
-		
-		if(result > 0) {
-			commit(conn);
-		}else {
-			rollback(conn);
-		}
-		
-		close(conn);
-		return result;
+	public int insertPost(int mno, String title, String content, String imagePath) {
+	    Connection conn = getConnection();
+
+	    int result = new PostDao().insertPost(conn, mno, title, content, imagePath);
+
+	    if (result > 0) {
+	        commit(conn);
+	    } else {
+	        rollback(conn);
+	    }
+
+	    close(conn);
+	    return result;
 	}
 	
 	public int deletePost(int postNo) {
@@ -114,7 +114,6 @@ public class PostService {
 
 	        return searchResults;
 	    }
-	
 	public int increaseRecommend(int postNo) {
 	    Connection conn = getConnection();
 	    int result = new PostDao().increaseRecommend(conn, postNo);

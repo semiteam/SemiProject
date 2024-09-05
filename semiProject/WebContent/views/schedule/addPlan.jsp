@@ -103,13 +103,13 @@
                     	<input type="hidden" name="mno" value="<%= loginUser.getmNo() %>">
                         <table>
                             <tr>
-                                <td id="plan_name_t" class="white"><div>여행명</div></td>
+                                <td id="plan_name_t" class="white"><div>* 여행명</div></td>
                                 <td colspan="2"><input type="text" name="plan_title" id="plan_title"></td>
                             </tr>
 
                             <tr>
                                 <td id="search___" colspan="3">
-                                    <div id="search_place_t" class="white">도시 검색</div>
+                                    <div id="search_place_t" class="white">* 여행지</div>
                                     <div id="search_place_b">
                                         <input type="text" name="place_name" id="place_name" placeholder="도시 또는 나라 검색">
                                         <button type="button" class="material-symbols-outlined" id="search_btn">search</button>
@@ -161,7 +161,7 @@
 
                             <tr>
                                 <td colspan="3">
-                                    <div id="trip_date_t" class="white">여행 일정</div>
+                                    <div id="trip_date_t" class="white">* 여행 일정</div>
                                     <div id="making_plan">
                                         <div id="calendar-container">
                                             <div id="calendar">
@@ -218,7 +218,7 @@
 
                             <tr id="img_choice_tr">
                                 <td colspan="3">
-                                    <div id="img_choice_cover">
+                                    <div id="img_choice_cover" style="overflow: hidden;">
                                         <div id="img_header">
                                             <div id="basic">기본 이미지</div>
                                             <div id="computer">컴퓨터에서 가져오기</div>

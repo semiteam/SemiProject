@@ -90,5 +90,83 @@ $('#explanation_e').on('keyup', function() {
     } else {
         $('#count_else').css('color', 'white').text(count + '/1000');
     }
-    
 });
+
+$('#img_content2').on("dragover", dragOver)
+                  .on("dragleave", dragOver)
+                  .on("drop", uploadFiles);
+
+function dragOver(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    if (e.type == "dragover") {
+        $("#img_content2").css({
+            "background-color": "#bebebe",
+        });
+    } else {
+        $('#img_content2').css({
+            "background-color": "white",
+        });
+    }
+}
+
+function uploadFiles(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    dragOver(e);
+
+    var files = e.originalEvent.dataTransfer.files;
+
+    if (files.length > 1) {
+        alert('파일은 하나만 업로드해주세요.');
+        return;
+    }
+
+    if (!files[0].type.match(/image.*/)) {
+        alert('이미지가 아닙니다.');
+        return;
+    }
+
+    var formData = new FormData();
+    formData.append("userImg", files[0]);
+
+    $.ajax({
+        url: 'InsertUserBgi.ub', // 이미지 업로드를 처리할 서버 측 엔드포인트
+        type: 'POST',
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function(response) {
+            if (response > 0) {
+                $('#image_section_div').html('<img id="image_section" src="" alt="your image">');
+                $('#image_section').attr('src', window.URL.createObjectURL(files[0]));
+                $('#choice').val(response);
+    
+                $('#img_content2').css({
+                    height: 'auto',
+                    padding: '10px 0' 
+                });
+            } else {
+                alert('이미지 업로드에 실패하였습니다.');
+            }
+            
+        },
+        error: function() {
+            alert('이미지 업로드에 실패하였습니다.');
+        }
+    });
+}
+
+$('#add_done_plan').on('click', function() {
+    if ($('#plan_title').val() === '') {
+        event.preventDefault();
+        alert('여행명을 입력해주세요.')
+    } else if ($('#place_name').val() === '') {
+        event.preventDefault();
+        alert('여행지를 입력해주세요.')
+    } else if ($('#sDate').val() === '' || $('#eDate').val() === '') {
+        event.preventDefault();
+        alert('여행 일정을 입력해주세요.');
+    }
+});
+

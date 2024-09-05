@@ -19,10 +19,10 @@ public class LandmarkService {
 		return list;
 	}
 
-	public int insertLandmark(String landmarkCity, String landmarkName) {
+	public int insertLandmark(String landmarkCity, String landmarkName, String landmarkAddress) {
 		Connection conn = getConnection();
 		
-		int result = new LandmarkDao().insertLandmark(conn, landmarkName, landmarkCity);
+		int result = new LandmarkDao().insertLandmark(conn, landmarkName, landmarkCity, landmarkAddress);
 		
 		if (result > 0) {
 			commit(conn);
@@ -32,7 +32,7 @@ public class LandmarkService {
 		
 		close(conn);
 		
-		return 0;
+		return result;
 	}
 
 }

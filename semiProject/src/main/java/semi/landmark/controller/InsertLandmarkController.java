@@ -32,8 +32,9 @@ public class InsertLandmarkController extends HttpServlet {
 		
 		String landmarkName = request.getParameter("landmarkName");
 		String landmarkCity = request.getParameter("landmarkCity");
+		String landmarkAddress = request.getParameter("landmarkAddress");
 		
-		int result = new LandmarkService().insertLandmark(landmarkCity, landmarkName);
+		int result = new LandmarkService().insertLandmark(landmarkCity, landmarkName, landmarkAddress);
 		
 		response.getWriter().print(result);
 	}

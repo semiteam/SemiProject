@@ -101,35 +101,33 @@ SELECT
 </entry>
 
 <entry key="insertPost">
-INSERT
-  INTO POST
-     (
-       POST_NO
-     , M_NO
-     , POST_TITLE
-     , POST_CONTENT
-     , POST_COUNT
-     , POST_RECOMMEND
-     , POST_DATE
-     , POST_MODIFYED
-     , POST_STATUS
-     )
-VALUES
-     (
-       SEQ_POST.NEXTVAL
-     , ?  
-     , ?
-     , ?
-     , 0
-     , 0
-     , SYSDATE
-     , SYSDATE
-     , 'Y'
-     )
-     
-
+   INSERT INTO POST
+    (
+        POST_NO,
+        M_NO,
+        POST_TITLE,
+        POST_CONTENT,
+        POST_COUNT,
+        POST_RECOMMEND,
+        POST_DATE,
+        POST_MODIFYED,
+        POST_STATUS,
+        POST_IMAGE_PATH
+    )
+    VALUES
+    (
+        SEQ_POST.NEXTVAL,
+        ?,
+        ?,
+        ?,
+        0,
+        0,
+        SYSDATE,
+        SYSDATE,
+        'Y',
+        ?
+    );
 </entry>
-
 <entry key="deletePost">
 	UPDATE POST
 	   SET POST_STATUS = 'N'
@@ -140,7 +138,8 @@ VALUES
 	SELECT *
 	  FROM POST  
 	JOIN MEMBER ON POST.M_NO = MEMBER.M_NO
-	WHERE POST.POST_TITLE LIKE ? OR MEMBER.M_ID = ?
+	WHERE (POST.POST_TITLE LIKE ? OR MEMBER.M_ID LIKE ?)
+	AND POST_STATUS = 'Y'
 </entry>
 <entry key="increaseRecommend">
 	UPDATE POST 

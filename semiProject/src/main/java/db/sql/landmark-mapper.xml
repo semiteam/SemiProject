@@ -22,10 +22,12 @@
 		       LANDMARK_NO
 		     , LANDMARK_NAME
 		     , LANDMARK_CITY
+		     , LANDMARK_ADDRESS
 		     )
 		VALUES
 		     (
 		       SEQ_LANDMARK.NEXTVAL
+		     , ?
 		     , ?
 		     , ?
 		     )

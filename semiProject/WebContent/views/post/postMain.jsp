@@ -179,33 +179,43 @@
                                 <button onclick="location.href='<%= contextPath %>/insertPage.po'"><div class="material-icons edit">edit</div></button>
                               </div>
                               <div class="container" id="post-container">
-                             
-                             
-                              <% for(Post p :list1) { %>
-                                <div class="board-list">
-                                <input type="hidden" value="<%= p.getmNO() %>" name="mno">
-                                <input type="hidden" value="<%= p.getPostNo()%>" name="pno">
-                                  <div class="board">
-                                    <div class="thumbnail"><img src="resouces/img/2.jpg" alt=""></div>
-                                    <div class="title"><%= p.getPostTitle() %></div>
-                                    <div class="info">작성자 : <%= p.getmId() %>| 조회수 :<%=p.getPostCount() %> | 추천수 : <%= p.getPostRecommend() %>| 작성일 : <%= p.getPostDate() %> </div>
-                                    <div class="cover">
-                                    	
-                                      <div class="material-icons arrow"></div>
-                             		        
-                                      <div class="preview" id="preview" onclick="location.href='<%= contextPath %>/postDetail.po?pno=<%= p.getPostNo()%>'">
-                                      <%= p.getPostContent() %>
-                                      </div>
-                               		
-                                    
-                                    
-                                    </div>
-                                  </div>
-                                </div>
-                                        <% } %>
-                               
-                                	
-                                </div>
+
+
+						<% for(Post p : list1) { %>
+						<div class="board-list">
+							<input type="hidden" value="<%=p.getmNO()%>" name="mno">
+							<input type="hidden" value="<%=p.getPostNo()%>" name="pno">
+							<div class="board">
+								<div class="thumbnail">
+									<img src="<%=contextPath + "/" + p.getPostImagePath()%>" alt="이미지" />
+										alt="이미지" />
+								</div>
+								<div class="title"><%=p.getPostTitle()%></div>
+								<div class="info">
+									작성자 :
+									<%=p.getmId()%>
+									| 조회수 :
+									<%=p.getPostCount()%>
+									| 추천수 :
+									<%=p.getPostRecommend()%>
+									| 작성일 :
+									<%=p.getPostDate()%>
+								</div>
+								<div class="cover">
+									<div class="material-icons arrow"></div>
+									<div class="preview" id="preview"
+										onclick="location.href='<%=contextPath%>/postDetail.po?pno=<%=p.getPostNo()%>'">
+										<%=p.getPostContent()%>
+									</div>
+								</div>
+							</div>
+						</div>
+						<%
+						}
+						%>
+
+
+					</div>
                               </div>
                              
                           
@@ -235,58 +245,91 @@
               
                 </div>
             </div>
- 	<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const searchBar = document.querySelector('input[name="search-bar"]');
-    const postContainer = document.getElementById('post-container');
+ 	 <script>
+ 	document.addEventListener("DOMContentLoaded", function() {
+ 	    const searchBar = document.querySelector('input[name="search-bar"]');
+ 	    const postContainer = document.getElementById('post-container');
+ 	    const originalPosts = postContainer.innerHTML; // 초기 게시물 HTML을 저장
 
-    searchBar.addEventListener('input', function() {
-      const keyword = searchBar.value;
+ 	    searchBar.addEventListener('input', function() {
+ 	        const keyword = searchBar.value.trim();
 
-      if (keyword.trim() !== "") {  // 검색어가 있을 때만 서버 요청
-        const url = '<%= contextPath %>/searchPosts.do?keyword=' + encodeURIComponent(keyword);
+ 	        if (keyword !== "") {
+ 	            const url = '<%= contextPath %>/searchPosts.do?keyword=' + encodeURIComponent(keyword);
+ 	            
+ 	            fetch(url)
+ 	            .then(response => response.json())
+ 	            .then(data => {
+ 	                postContainer.innerHTML = ""; // 이전 검색 결과 초기화
+ 	                if (data.length > 0) {
+ 	                    data.forEach(post => {
+ 	                        const boardList = document.createElement('div');
+ 	                        boardList.className = 'board-list';
 
-        // AJAX 요청 보내기
-        fetch(url)
-        .then(response => response.json())  // JSON 형식으로 응답을 받음
-        .then(data => {
-          console.log(data);  // 전체 데이터 출력
+ 	                        const mnoInput = document.createElement('input');
+ 	                        mnoInput.type = 'hidden';
+ 	                        mnoInput.name = 'mno';
+ 	                        mnoInput.value = post.mNo;
+ 	                        
+ 	                        const pnoInput = document.createElement('input');
+ 	                        pnoInput.type = 'hidden';
+ 	                        pnoInput.name = 'pno';
+ 	                        pnoInput.value = post.postNo;
 
-          // 기존 게시물 목록을 비우고 새로운 검색 결과로 교체
-          postContainer.innerHTML = "";
-          if (data.length > 0) {
-              data.forEach(post => {
-                  
-                  postContainer.innerHTML += `
-                  	
-                      <div class="board-list">
-                          <input type="hidden" value="${post.mNo}" name="mno">
-                          <input type="hidden" value="${post.postNo}" name="pno">
-                          <div class="board">
-                              <div class="thumbnail"><img src="resouces/img/2.jpg" alt=""></div>
-                              <div class="title">${post.postTitle ? post.postTitle : '제목 없음'}</div>
-                              <div class="info">작성자 : ${post.mId ? post.mId : '작성자 없음'} | 조회수 : ${post.postCount} | 추천수 : ${post.postRecommend} | 작성일 : ${post.postDate}</div>
-                              <div class="cover">
-                                  <div class="material-icons arrow"></div>
-                                  <div class="preview" id="preview" onclick="location.href='<%= contextPath %>/postDetail.po?pno=${post.postNo}'">
-                                      ${post.postContent}
-                                  </div>
-                              </div>
-                          </div>
-                      </div>`;
-              });
-          } else {
-              postContainer.innerHTML = "<p>검색 결과가 없습니다.</p>";
-          }
-        })
-        .catch(error => console.error('Error:', error));
-      } else {
-        // 검색어가 비어 있을 경우 원래 게시물 목록을 다시 로드하거나 그대로 유지
-        postContainer.innerHTML = "<p>검색어를 입력하세요.</p>";
-      }
-    });
-  });
-</script>
+ 	                        const board = document.createElement('div');
+ 	                        board.className = 'board';
+
+ 	                        const thumbnail = document.createElement('div');
+ 	                        thumbnail.className = 'thumbnail';
+ 	                        const img = document.createElement('img');
+ 	                        img.src = 'resouces/img/2.jpg';
+ 	                        img.alt = '';
+ 	                        thumbnail.appendChild(img);
+
+ 	                        const titleDiv = document.createElement('div');
+ 	                        titleDiv.className = 'title';
+ 	                        titleDiv.textContent = post.postTitle || '제목 없음';
+
+ 	                        const infoDiv = document.createElement('div');
+ 	                        infoDiv.className = 'info';
+ 	                        infoDiv.textContent = '작성자: ' + post.mId + ' | 조회수: ' + post.postCount + ' | 추천수: ' + post.postRecommend + ' | 작성일: ' + post.postDate;
+
+ 	                        const coverDiv = document.createElement('div');
+ 	                        coverDiv.className = 'cover';
+
+ 	                        const arrowDiv = document.createElement('div');
+ 	                        arrowDiv.className = 'material-icons arrow';
+
+ 	                        const previewDiv = document.createElement('div');
+ 	                        previewDiv.className = 'preview';
+ 	                        previewDiv.id = 'preview';
+ 	                        previewDiv.textContent = post.postContent;
+ 	                        previewDiv.onclick = function() {
+ 	                            location.href = '/semi/postDetail.po?pno=' + post.postNo;
+ 	                        };
+
+ 	                        coverDiv.appendChild(arrowDiv);
+ 	                        coverDiv.appendChild(previewDiv);
+ 	                        board.appendChild(thumbnail);
+ 	                        board.appendChild(titleDiv);
+ 	                        board.appendChild(infoDiv);
+ 	                        board.appendChild(coverDiv);
+ 	                        boardList.appendChild(mnoInput);
+ 	                        boardList.appendChild(pnoInput);
+ 	                        boardList.appendChild(board);
+ 	                        postContainer.appendChild(boardList);
+ 	                    });
+ 	                } else {
+ 	                    
+ 	                }
+ 	            })
+ 	            .catch(error => console.error('Error:', error));
+ 	        } else {
+ 	            postContainer.innerHTML = originalPosts; // 검색어가 비워지면 초기 게시물 리스트로 되돌림
+ 	        }
+ 	    });
+ 	});
+        </script>
 			
 
 </body>

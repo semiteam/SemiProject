@@ -14,6 +14,7 @@ public class Post {
 	 private Date postDate; 
 	 private Date postModifyed;
 	 private String status;
+	 private String postImagePath;
 	 private String mName;
 	 private int qNo;
 	 
@@ -151,6 +152,26 @@ public class Post {
 		this.postDate = postDate;
 		this.postModifyed = postModifyed;
 	}
+	
+	
+
+	public Post(int postNo, String mId, int mNO, String postTitle, String postContent, int postCount, int postRecommend,
+			Date postDate, Date postModifyed, String status, String postImagePath, String mNickName, int mNo2) {
+		super();
+		this.postNo = postNo;
+		this.mId = mId;
+		this.mNO = mNO;
+		this.postTitle = postTitle;
+		this.postContent = postContent;
+		this.postCount = postCount;
+		this.postRecommend = postRecommend;
+		this.postDate = postDate;
+		this.postModifyed = postModifyed;
+		this.status = status;
+		this.postImagePath = postImagePath;
+		this.mNickName = mNickName;
+		mNo = mNo2;
+	}
 
 	public String getmId() {
 		return mId;
@@ -251,13 +272,23 @@ public class Post {
 	public void setmNo(int mNo) {
 		this.mNo = mNo;
 	}
+	
+	
+
+	public String getPostImagePath() {
+		return postImagePath;
+	}
+
+	public void setPostImagePath(String postImagePath) {
+		this.postImagePath = postImagePath;
+	}
 
 	@Override
 	public String toString() {
-		return "Post [mId=" + mId + ", postNo=" + postNo + ", mNO=" + mNO + ", postTitle=" + postTitle
+		return "Post [postNo=" + postNo + ", mId=" + mId + ", mNO=" + mNO + ", postTitle=" + postTitle
 				+ ", postContent=" + postContent + ", postCount=" + postCount + ", postRecommend=" + postRecommend
-				+ ", postDate=" + postDate + ", postModifyed=" + postModifyed + ", status=" + status + ", mNickName="
-				+ mNickName + "]";
+				+ ", postDate=" + postDate + ", postModifyed=" + postModifyed + ", status=" + status
+				+ ", postImagePath=" + postImagePath + ", mNickName=" + mNickName + ", mNo=" + mNo + "]";
 	}
 
 	
