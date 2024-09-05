@@ -450,7 +450,7 @@ PageInfo postPi = (PageInfo)request.getAttribute("postPi"); ArrayList<Member>
                                     <td><%=q.getQtitle()%></td>
                                     <td><%=q.getmId()%></td>
                                     <td><%=q.getqDate()%></td>
-                                    <td>답변여부 :<%=q.getqStatus()%></td>
+                                    <td>답변여부 :<%=q.getqAnswer()%></td>
                                     <td>
                                       <button
                                         onclick="location.href='<%=contextPath%>/detail.sc?qNo=<%=q.getqNo()%>'"
