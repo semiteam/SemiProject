@@ -34,7 +34,7 @@ public class GoMyPageController extends HttpServlet {
 			
 			response.sendRedirect(request.getContextPath());
 		} else {
-			// request.getRequestDispatcher("views/member/myPage.jsp").forward(request, response);
+			request.getRequestDispatcher("views/member/myPageModify.jsp").forward(request, response);
 		}
 	}
 

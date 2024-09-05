@@ -52,7 +52,7 @@ public class MyPageUpateController extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("loginUser", updateMem);
 			
-			response.sendRedirect(request.getContextPath() + "/myPage.me");
+			response.sendRedirect(request.getContextPath() + "/GoMyPage.me");
 		}
 		
 		
