@@ -29,12 +29,12 @@ public class GoMyPageController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		
-		if (session.getAttribute("loginUser") == null && session.getAttribute("loginAdmin") == null) {
+		if (session.getAttribute("loginUser") != null || session.getAttribute("loginAdmin") != null) {
+			request.getRequestDispatcher("views/member/myPageModify.jsp").forward(request, response);
+		} else {
 			session.setAttribute("alertMsg", "로그인 후 이용 가능한 서비스입니다.");
 			
 			response.sendRedirect(request.getContextPath());
-		} else {
-			// request.getRequestDispatcher("views/member/myPage.jsp").forward(request, response);
 		}
 	}
 
