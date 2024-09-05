@@ -45,8 +45,9 @@ public class ScheduleDao {
 			pstmt.setString(5, sd.getsDescription());
 			pstmt.setInt(6, sd.getRangeNo());
 			pstmt.setInt(7, sd.getBgiNo());
-			pstmt.setInt(8, sd.getMno());
-			pstmt.setInt(9, sd.getHowlong());
+			pstmt.setString(8, sd.getsStatus());
+			pstmt.setInt(9, sd.getMno());
+			pstmt.setInt(10, sd.getHowlong());
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -150,5 +151,56 @@ public class ScheduleDao {
 		}
 		
 		return reulst;
+	}
+
+	public int updateSchedule(Connection conn, Schedule sd) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("updateSchedule");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, sd.getsTitle());
+			pstmt.setDate(2, sd.getsSdate());
+			pstmt.setDate(3, sd.getsEdate());
+			pstmt.setInt(4, sd.getHowlong());
+			pstmt.setInt(5, sd.getMno());
+			pstmt.setInt(6, sd.getsNo());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int autoUpdateStatus(Connection conn, String status, int sno, int mno) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("autoUpdateStatus");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, status);
+			pstmt.setInt(2, mno);
+			pstmt.setInt(3, sno);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 }

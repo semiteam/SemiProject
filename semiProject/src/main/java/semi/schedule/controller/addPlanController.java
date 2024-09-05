@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -165,7 +167,15 @@ public class addPlanController extends HttpServlet {
 			int mno = Integer.parseInt(multiRequest.getParameter("mno"));
 			int howlong = Integer.parseInt(multiRequest.getParameter("howlong"));
 			
-			Schedule sd = new Schedule(sTitle, sPlace, sSdate, sEdate, sDescription, rangeNo, bgiNo, mno, howlong);
+			LocalDate today = LocalDate.now();
+			LocalDate startLocalDate = ((java.sql.Date)sSdate).toLocalDate();
+			String sStatus = "N";
+			
+			if (today.equals(startLocalDate)) {
+				sStatus = "T";
+			}
+			
+			Schedule sd = new Schedule(sTitle, sPlace, sSdate, sEdate, sDescription, rangeNo, bgiNo, sStatus, mno, howlong);
 			
 			int result = new ScheduleService().insertSchedule(sd);
 			

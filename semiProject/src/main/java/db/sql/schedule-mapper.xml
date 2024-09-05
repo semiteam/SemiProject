@@ -29,7 +29,7 @@
 		     , ?
 		     , ?
 		     , SYSDATE
-		     , 'N'
+		     , ?
 		     , ?
 		     , ?
 		     )
@@ -75,5 +75,22 @@
 		   SET SD_STATUS = 'D'
 		 WHERE SD_NO = ?
 		   AND M_NO = ?
+	</entry>
+	
+	<entry key="updateSchedule">
+		UPDATE SCHEDULE
+		   SET SD_TITLE = ?
+		     , SD_SDATE = ?
+		     , SD_EDATE = ?
+		     , SD_HOWLONG = ?
+		 WHERE M_NO = ?
+		   AND SD_NO = ?
+	</entry>
+	
+	<entry key="autoUpdateStatus">
+		UPDATE SCHEDULE
+		   SET SD_STATUS = ?
+		 WHERE M_NO = ?
+		   AND SD_NO = ?
 	</entry>
 </properties>

@@ -52,46 +52,57 @@
     </head>
     <body>
     <%@ include file="../common/basic.jsp" %>
-        <div class="wrap">
-            <div class="background"></div>
-
-            <div class="top">
-                <div class="logo" onclick="location.href='<%= contextPath %>'">우리 여행가조</div>
-                <div class="top_menu">
-                    <ul>
-                        <% if (loginUser != null || loginAdmin != null) { %>
-                               <li id="top_menu_1" onclick="location.href='<%= contextPath %>/myPage.me'">My page</li>
-                            <li id="top_menu_2" onclick="location.href='<%= contextPath %>/GoServiceCenter.sc'">고객센터</li>
-                            <li id="top_menu_3">로그아웃</li>
-                        <% } else { %>
-                            <li id="top_menu_4" onclick="location.href='<%= contextPath %>/GoTermsOfUse.me'">회원가입</li>
-                            <li id="top_menu_5" onclick="location.href='<%= contextPath %>/GoLogin.me'">로그인</li>
-                            <li id="top_menu_6" onclick="location.href='<%= contextPath %>/GoServiceCenter.sc'">고객센터</li>
-                        <% } %>
-                    </ul>
-                </div>
+    <div class="wrap">
+        <div class="top">
+            <div class="logo" onclick="location.href='<%= contextPath %>'">우리 여행가조</div>
+            <div class="top_menu">
+                <ul>
+                    <li id="top_menu_1" onclick="location.href='<%= contextPath %>/GoMyPage.me'">My page</li>
+                    <li id="top_menu_2" onclick="location.href='<%= contextPath %>/GoServiceCenter.sc'">고객센터</li>
+                    <li id="top_menu_3">로그아웃</li>
+                </ul>
             </div>
+        </div>
 
-            <div class="under">
-                <div class="side_menu">
-                    <div id="side_menu_open_1" onclick="location.href='<%= contextPath %>'">여행 갈래?</div>
-                    <div id="side_menu_open_2" onclick="location.href='../관리자페이지/index2.html' ">계획 짤래?</div>
-                    <div id="side_menu_open_3" onclick="location.href='../관리자페이지/index3.html'" style="font-weight: 900;">리뷰 볼래?</div>
-                    <div id="close_btn" onclick="side_close()"><img src="./resources/img/chevron_left_24dp_5F6368.png" alt="왼쪽화살표"></div>
-                    
-                    <div id="side_menu_close_1" onclick="location.href='../여행_갈래/여행_갈래.html'">
-                        <div class="explanation">여행 갈래?</div>
-                    </div>
-                    <div id="side_menu_close_2" onclick="location.href='../내_여행/내_여행_일정_O.html'">
+        <div class="under">
+            <div class="side_menu">
+                <div id="side_menu_open_1" onclick="location.href='<%= contextPath %>'">여행 갈래?</div>
+                <div id="side_menu_open_2" onclick="location.href='<%= contextPath %>/GoScheduleMain.sd?mno=<%= loginUser.getmNo() %>'" class="login">계획 짤래?</div>
+                <div id="side_menu_open_3" onclick="location.href='<%= contextPath %>/GoPostMain.ps'" class="login">리뷰 볼래?</div>
+                <% if (loginAdmin != null) { %>
+                	<div id="side_menu_open_4" onclick="location.href='<%= contextPath %>/GoAdminMain.ad'">관리자 메뉴</div>
+                <% } %>
+                <div id="close_btn" onclick="side_close()"><img src="resouces/img/chevron_left_24dp_5F6368.png" alt=""></div>
+
+                <div id="side_menu_close_1" onclick="location.href='<%= contextPath %>'" class="login">
+                    <img src="resouces/img/airplane_ticket_24dp_5F6368.png" alt="">
+                    <div class="explanation">여행 갈래?</div>
+                </div>
+                <% if (loginAdmin != null) { %>
+                    <div id="side_menu_close_2" onclick="location.href='<%= contextPath %>/GoShowPlanMain.ad'" class="login">
+                        <img src="resouces/img/edit_calendar_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png" alt="">
                         <div class="explanation">계획 짤래?</div>
                     </div>
-                    <div id="side_menu_close_3" onclick="location.href='../리뷰/리뷰_로그인_O.html'">
-                        <div class="explanation">리뷰 볼래?</div>
+                <% } else { %>
+                    <div id="side_menu_close_2" onclick="location.href='<%= contextPath %>/GoScheduleMain.sd?mno=<%= loginUser.getmNo() %>'" class="login">
+                        <img src="resouces/img/edit_calendar_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png" alt="">
+                        <div class="explanation">계획 짤래?</div>
                     </div>
-                    <div id="open_btn" onclick="side_open()">
-                        <img src="./resources/img/chevron_right_24dp_5F6368.png" alt="오른쪽화살표">
-                    </div>
+                <% } %>
+                <div id="side_menu_close_3" onclick="location.href='<%= contextPath %>/GoPostMain.ps'" class="login">
+                    <img src="resouces/img/dynamic_feed_24dp_5F6368.png" alt="">
+                    <div class="explanation">리뷰 볼래?</div>
                 </div>
+                <% if (loginAdmin != null) { %>
+	                <div id="side_menu_close_4" onclick="location.href='<%= contextPath %>/GoAdminMain.ad'">
+	                    <img src="resouces/img/manage_accounts_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png" alt="">
+	                    <div class="explanation">관리자 메뉴</div>
+	                </div>
+	            <% } %>
+                <div id="open_btn" onclick="side_open()">
+                    <img src="resouces/img/chevron_right_24dp_5F6368.png" alt="">
+                </div>
+            </div>
 
                 <div class="content" align = 'center'> 
                     <form action="<%=contextPath%>/insert.sc" method="post">

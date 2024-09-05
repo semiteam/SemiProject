@@ -180,7 +180,7 @@
                 <% if (loginAdmin == null && loginUser != null) { %>
                 	<div id="side_menu_open_2" onclick="location.href='<%= contextPath %>/GoScheduleMain.sd?mno=<%= loginUser.getmNo() %>'" class="login">계획 짤래?</div>
                 <% } else if (loginAdmin != null && loginUser == null) { %>
-                	<div id="side_menu_open_2" onclick="location.href='<%= contextPath %>/GoShowPlanMain'" class="login">계획 짤래?</div>
+                	<div id="side_menu_open_2" onclick="location.href='<%= contextPath %>/GoShowPlanMain.ad'" class="login">계획 짤래?</div>
                 <% } else { %>
                 	<div id="side_menu_open_2" onclick="location.href='<%= contextPath %>/GoScheduleMain.sd'" class="login">계획 짤래?</div>
                 <% } %>
@@ -200,7 +200,7 @@
 	                    <div class="explanation">계획 짤래?</div>
 	                </div>
                 <% } else if (loginAdmin != null && loginUser == null) { %>
-               		<div id="side_menu_close_2" onclick="location.href='<%= contextPath %>/GoShowPlanMain'" class="login">
+               		<div id="side_menu_close_2" onclick="location.href='<%= contextPath %>/GoShowPlanMain.ad'" class="login">
 	                    <img src="resouces/img/edit_calendar_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png" alt="">
 	                    <div class="explanation">계획 짤래?</div>
 	                </div>

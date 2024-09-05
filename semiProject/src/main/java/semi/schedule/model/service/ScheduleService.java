@@ -63,4 +63,36 @@ public class ScheduleService {
 		
 		return result;
 	}
+
+	public int updateSchedule(Schedule sd) {
+		Connection conn = getConnection();
+		
+		int result = new ScheduleDao().updateSchedule(conn, sd);
+		
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+
+	public int autoUpdateStatus(String status, int sno, int mno) {
+		Connection conn = getConnection();
+		
+		int result = new ScheduleDao().autoUpdateStatus(conn, status, sno, mno);
+		
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
 }
