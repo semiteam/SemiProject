@@ -283,7 +283,8 @@ public class AdminDao {
 				list.add(new Member(rset.getString("M_ID"),
 						 			rset.getString("M_NAME"),
 						 			rset.getInt("M_REPORT"),
-						 			rset.getString("M_STATUS")));
+						 			rset.getString("M_STATUS"),
+						 			rset.getInt("M_NO")));
 			}
 		} catch (SQLException e) {
 			

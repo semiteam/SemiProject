@@ -22,11 +22,6 @@ PageInfo postPi = (PageInfo)request.getAttribute("postPi"); ArrayList<Member>
                 <!DOCTYPE html>
                 <html lang="en">
                   <head>
-                    <style>
-                      #search___result {
-                        height: auto;
-                      }
-                    </style>
                     <meta charset="UTF-8" />
                     <meta
                       name="viewport"
@@ -77,6 +72,7 @@ PageInfo postPi = (PageInfo)request.getAttribute("postPi"); ArrayList<Member>
                     <script defer src="resouces/js/common.js"></script>
                     <link rel="stylesheet" href="resouces/css/manager1.css" />
                     <link rel="stylesheet" href="resouces/css/common.css" />
+                    
                   </head>
                   <body>
                     <%@ include file="../common/basic.jsp" %>
@@ -93,7 +89,9 @@ PageInfo postPi = (PageInfo)request.getAttribute("postPi"); ArrayList<Member>
                             <li
                               id="top_menu_1"
                               onclick="location.href='<%= contextPath %>/GoMyPage.me'"
-                            ></li>
+                            >
+                              My page
+                            </li>
                             <li
                               id="top_menu_2"
                               onclick="location.href='<%= contextPath %>/GoServiceCenter.sc'"
@@ -210,18 +208,20 @@ PageInfo postPi = (PageInfo)request.getAttribute("postPi"); ArrayList<Member>
                                       if (data !== null) {
                                         $.each(data, function (i) {
                                           str +=
-                                            '<div class="result">' +
-                                            "아이디 : " +
+                                            '<div class="user-info">' +
                                             data[i].mId +
                                             " / " +
-                                            "이름 : " +
                                             data[i].mName +
                                             " / " +
-                                            "신고횟수 : " +
                                             data[i].mReport +
                                             " / " +
-                                            "상태 : " +
                                             data[i].mStatus +
+                                            " / " +
+                                            '<button class="btn btn-danger block-btn" data-mno="' + data[i].mNo + '">차단</button>' +
+                                            "  " +
+                                            '<button class="btn btn-secondary unblock-btn" data-mno="' + data[i].mNo + '">차단해제</button>' +
+                                            "  " +
+                                        
                                             "</div>";
                                         });
                                         $("#find_result").html(str);
@@ -365,15 +365,13 @@ PageInfo postPi = (PageInfo)request.getAttribute("postPi"); ArrayList<Member>
                                       $.each(data, function (i) {
                                         str +=
                                           '<div class = "result">' +
-                                          "번호:" +
-                                          data[i].postNo +
+                                          "번호:" + data[i].postNo +
                                           " / " +
-                                          "제목:" +
-                                          data[i].postTitle +
+                                          "작성자:"+ data[i].mId +
                                           " / " +
-                                          "작성자:" +
-                                          data[i].mId +
+                                          "제목:"+data[i].postTitle +
                                           "</div>";
+                                       
                                       });
                                       $("#result-post").html(str);
                                     }
@@ -445,12 +443,14 @@ PageInfo postPi = (PageInfo)request.getAttribute("postPi"); ArrayList<Member>
                                   data-mno="<%=q.getmNo() %>"
                                   data-mname="<%=q.getmName() %>"
                                   data-question-date="<%=q.getqDate()%>"
+                                  data-question-status="<%=q.getqStatus()%> %>"
                                 >
                                   <tr>
                                     <td><%=q.getqNo()%></td>
                                     <td><%=q.getQtitle()%></td>
-                                    <td><%=q.getmNo()%></td>
+                                    <td><%=q.getmId()%></td>
                                     <td><%=q.getqDate()%></td>
+                                    <td>답변여부 :<%=q.getqStatus()%></td>
                                     <td>
                                       <button
                                         onclick="location.href='<%=contextPath%>/detail.sc?qNo=<%=q.getqNo()%>'"
@@ -709,17 +709,16 @@ PageInfo postPi = (PageInfo)request.getAttribute("postPi"); ArrayList<Member>
                                });
 
 
-                       $('.block-btn').on('click', function() {
-                                   event.stopPropagation(); //  이벤트 전파를 멈추게 해주는 메소드
-                          const mNo = $(this).data('mno');
+                               $(document).on('click', '.block-btn', function() {
+                            	    const mNo = $(this).data('mno'); // Get data attribute
 
-                          if (confirm('정말로 차단하시겠습니까?')) {
-                              window.location.href = `<%= contextPath %>/block.ad?mNo=` + mNo;
-                          }
-                      });
+                            	    if (confirm('정말로 차단하시겠습니까?')) {
+                            	        window.location.href = `<%= contextPath %>/block.ad?mNo=` + mNo;
+                            	    }
+                            	});
 
 
-                               $('.unblock-btn').on('click', function() {
+                               $(document).on('click','.unblock-btn', function() {
                                    event.stopPropagation(); //  이벤트 전파를 멈추게 해주는 메소드
                                    const mNo = $(this).data("mno");
 

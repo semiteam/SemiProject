@@ -74,7 +74,7 @@ public class QuestionDao {
 			
 			while(rset.next()) {
 				list.add(new Question(rset.getInt("Q_NO"),
-									  rset.getString("M_NAME"),
+									  rset.getString("M_ID"),
 									  rset.getString("Q_TITLE"),
 									  rset.getString("Q_CONTENT"),
 									  rset.getDate("Q_DATE"),

@@ -31,12 +31,13 @@ public class Member {
 	
 	
 
-	public Member(String mName, String mId,  int mReport, String mStatus) {
+	public Member(String mName, String mId,  int mReport, String mStatus, int mNo) {
 		super();
 		this.mName = mName;
 		this.mId = mId;
 		this.mReport = mReport;
 		this.mStatus = mStatus;
+		this.mNo = mNo;
 	}
 
 

@@ -15,7 +15,7 @@ SELECT *
 	      FROM (
 				SELECT 
 	                   Q_NO
-				     , M_NAME
+				     , M_ID
 				     , Q_TITLE
 				     , Q_CONTENT
 				     , Q_DATE

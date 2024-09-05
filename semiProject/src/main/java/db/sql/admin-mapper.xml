@@ -107,6 +107,7 @@ SELECT
    		  ,M_NAME
    		  ,M_REPORT
    		  ,M_STATUS
+   		  ,M_NO
 	 FROM  MEMBER
 	WHERE (M_ID LIKE ? OR M_NAME LIKE ?)
 	  AND ROWNUM <= 5

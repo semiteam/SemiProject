@@ -68,7 +68,7 @@ public class Question {
 
 
 
-	public Question(int qNo, String mName,String qTitle, String qContent, Date qDate, String qStatus, String qAnswer, int qPwd
+	public Question(int qNo, String mId,String qTitle, String qContent, Date qDate, String qStatus, String qAnswer, int qPwd
 			) {
 		super();
 		this.qNo = qNo;
@@ -78,7 +78,7 @@ public class Question {
 		this.qStatus = qStatus;
 		this.qAnswer = qAnswer;
 		this.qPwd = qPwd;
-		this.mName = mName;
+		this.mId = mId;
 	}
 
 
