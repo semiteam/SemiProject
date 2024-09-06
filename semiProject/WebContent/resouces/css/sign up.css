@@ -1,217 +1,125 @@
-* {
-    box-sizing: border-box;
-    font-family: "";
-    font-style: normal;
-  
-  }
+@font-face {
+  font-family: 'DungGeunMo';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
 
-  @font-face {
-    font-family: 'DungGeunMo';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-  }
+body *{
+  font-family: 'DungGeunMo';
+  box-sizing: border-box;
+}
 
-  body *{
-    font-family: 'DungGeunMo';
-  }
+body input:not(#gender_number):not(#zip_code) {padding: 0 15px;}
 
-  body {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    
-  }
-  
-  .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 670px;
-    height: 1800px;
-    margin-top: 60px;
-    margin-bottom: 60px;
-    background: #ffffff;
-    border: 1px solid #aacdff;
-    box-shadow: 7px 7px 39px rgba(0, 104, 255, 0.25);
-    border-radius: 20px;
-  }
-  
-  .member-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 470px;
-    height: 818px;
-    margin-top: 72px;
-    margin-bottom: 70px;
-  }
+body {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
 
-  #name_input{
-    margin-top: 9px;
-  }
+#id_check {cursor: pointer;}
 
-  #birthday_text{
-    margin-top: 15px;
-   
-  }
+#id_check:hover {background-color: #6CAFD9;}
 
-  #birthday{
-    margin-bottom: 20px;
-  }
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 670px;
+  height: auto;
+  background: #ffffff;
+  border: 1px solid #aacdff;
+  box-shadow: 7px 7px 39px rgba(0, 104, 255, 0.25);
+  border-radius: 20px;
+  margin: 30px 0;
+}
 
-  #birthdayGender{
-    margin-top: -10px;
-  }
-  
-  #phone{
-    margin-top: 10px;
-  }
-  
-  select{
-    width: 200px;
-    padding: 5px;
-    /* border: 1px solid #999; */
-    
-  }
-  
-  .zip_code_text{
-    color: black;
-  }
-  
-  .user-info {
-    
-  }
-  
-  .user-info div {
-    margin-top: 21px;
-  }
-  
-  .user-info input {
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 24px;
-    /* color: #797979; */
-    border-radius: 5px;
-    width: 400px;
-    height: 35px;
-    margin-top: 21px;
-  }
+.member-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 470px;
+}
 
-  /* .user-info-phone_1{
-    margin-top: -15px;
-    
-  }
+select{
+  width: 195px;
+  padding: 5px;
+}
 
-  #email_text{
-    margin-top: 10px;
-  }
- 
-  #input_email{
-    margin-top: 6px;
-  }
+.big {width: 100%;}
 
-  .user-info-name input{
-    width: 200px;
-    
-  } */
+.zip_code_text{
+  color: black;
+}
 
-  /* #id_text{
-    margin-top: 10px;
-  }
+.user-info {width: 450px;}
 
-  #input_id{
-    margin-top: 5px;
-  }
+.user-info input:not(#gender_firstnumber):not(#gender_number) {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+  border-radius: 5px;
+  height: 35px;
+  border: 1px solid #000;
+}
 
-  #pwd_text{
-    margin-top: 10px;
-  }
+#gender_firstnumber, #gender_number {
+  border-color: #000;
+  border-style: solid;
+}
 
-  #input_pwd{
-    margin-top: 5px;
-  }
-  
- #pwd_text2{
-    margin-top: 10px;
- }
+#gender_firstnumber {
+  border-width: 1px 0 1px 1px;
+  border-radius: 5px 0 0 5px;
+}
 
- #input_pwd2{
-  margin-top: 5px;
- } */
+#gender_number {
+  border-width: 1px 1px 1px 0;
+  border-radius: 0 5px 5px 0;
+}
 
+input:focus {outline: none;}
 
- 
-  .user-info-day input{
-    width: 150px;
-  }
-  
-  #zip_code{
-    width: 120px;
-  }
-  
-  #address_title{
-    margin-top: 10px;
-  }
+.gender {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 140px;
+  height: 23.94px;
+}
 
-  #address_div{
-    margin-top: -10px;
-  }
+.bold {font-weight: bold !important;}
 
-  #add{
-    margin-top: 1px;
-  }
+.gender input {
+  width: 20px;
+  height: 19.95px;
+  background: #ebebeb;
+  border: 1px solid #d2d2d2;
+}
 
-  #address_text{
-   margin-top: 10px;
-  }
+.gender label {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+}
 
-  
-  
-  .gender {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 140px;
-    height: 23.94px;
-    margin-top: 50px;
-  }
-  
-  .gender input {
-    width: 20px;
-    height: 19.95px;
-    background: #ebebeb;
-    border: 1px solid #d2d2d2;
-  }
-  
-  .gender label {
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 24px;
-  }
-  
-  .agree-check {
-    width: 454px;
-    height: 21.06px;
-    margin-top: 52.05px;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 21px;
-    color: #000000;
-  }
-
+.agree-check {
+  width: 454px;
+  height: 21.06px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  color: #000000;
+}
   
 .min_user_join{
-  margin-top: 200px;
   background-color: #aacdff;
-  width: 400px;
- 
+  width: 450px;
   font-size: 16px;
   border-radius: 5px;
   background-color: #aacdff;
   padding: 10px ;
-  
-  
 }
 
 .agree_check_text{
@@ -244,3 +152,47 @@
 }
 
 .hide{display: none;}
+
+.user-info > div {margin-bottom: 20px;}
+
+.user-info > div > div:first-child {margin-bottom: 10px;}
+
+#birthdayGender {
+  display: flex;
+  flex-direction: row;
+}
+
+#birthdayGender input:not(:nth-child(2)) {width: 205px;}
+
+#min_phone {width: 278px;}
+
+#address_div, #id_div {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+
+#error-message {
+    margin-top: 5px; /* 오류 메시지 위치 조정 */
+}
+
+#id_div {
+    display: flex; /* 아이디 입력 필드와 버튼을 같은 줄에 배치 */
+    align-items: center; /* 버튼과 입력 필드가 수평으로 정렬 */
+}
+
+#input_id {
+    width: 300px; /* 입력 필드의 고정된 너비 설정 */
+}
+
+#id_check {
+    width: 145px; /* 중복 확인 버튼의 고정된 너비 설정 */
+    margin-left: 5px; /* 입력 필드와 버튼 사이의 간격 설정 */
+}
+
+.error-message {
+    color: red;
+    font-size: 0.9em;
+    margin-top: 5px;
+}

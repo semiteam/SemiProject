@@ -1,0 +1,117 @@
+.under > .side_menu > #side_menu_open_2 {font-weight: 600;}
+
+.under > .side_menu > div[id^="side_menu_close_"] {
+    display: none;
+    position: relative;
+}
+
+.under > .content {
+    padding: 2vw 0 0 3vw;
+    color: white;
+    font-size: 20px; 
+    display: flex;
+    flex-direction: column;
+}
+
+.under > .content > .detail > * {display: flex;}
+
+.under > .content > .detail > .date_div {
+    border-bottom: 1px solid white;
+    margin-bottom: 20px;
+    width: 175px;
+    position: relative;
+}
+.under > .content > .detail .date {margin: auto;}
+
+.under > .content > .detail .close_btn,
+.under > .content > .detail .open_btn {cursor: pointer;}
+
+.under > .content > .detail .close_btn {display: none;}
+
+.plan .timeline .bar {
+    width: 1px;
+    height: 500px;
+    border-right: 1px solid white;
+    margin: 3px 0 3px 11px;
+}
+
+.plan .detail_plan .plan_content {
+    width: 650px;
+    height: 100px;
+    margin-left: 20px;
+    margin-top: 31px;
+    background-color: rgba(148, 148, 148, 0.4);
+    padding: 15px;
+    font-size: 17px;
+}
+
+.map {
+    margin: -532px 0 0 750px;
+    height: calc(131px * 3 + 100px);
+}
+
+img {width: 650px;}
+
+.circle2 {cursor: pointer;}
+
+#add_detail {
+    background-color: white;
+    right: 0;
+    top: 5vh;
+    height: 100%;
+    width: 0;
+    position: fixed;
+    color: #000;
+}
+
+#add_detail table {
+    width: 70%;
+    margin: 35px auto;
+    opacity: 0;
+}
+
+#add_detail table tr .detail_title {
+    width: 25%;
+    height: 40px;
+    padding: 20px 0;
+    font-size: 18px;
+}
+
+#add_detail tr:nth-child(2) td > div:not(:first-child),
+#add_detail textarea {
+    width: 100%;
+    border-radius: 10px;
+    border: 1px solid #000;
+}
+
+#add_detail tr:nth-child(2) input {
+    width: 93%;
+    border: none;
+    height: 35px;
+    padding-left: 15px;
+}
+
+#search {position: relative;}
+
+#search-icon {
+    position: absolute;
+    top: 3px;
+    cursor: pointer;
+}
+
+#add_detail tr:nth-child(2) input:focus {outline: none;}
+
+#add_detail tr:nth-child(2) td > div:not(:first-child) {
+    height: 100px;
+    margin-top: 10px;
+}
+
+#add_detail tr:nth-child(2) td > div:first-child {
+    overflow: hidden;
+    border: 1px solid #000;
+    border-radius: 20px;
+    width: 100%;
+    height: 35px;
+}
+
+#add_detail textarea {height: 300px;}

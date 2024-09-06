@@ -1,0 +1,47 @@
+.content {
+    height: 100%;
+    font-size: 18px;
+}
+
+.question-table{
+    width: 800px;
+    margin-top: 100px;
+    
+}
+
+.content-back{
+    border-radius: 5px;
+    width: 1000px;
+    height: 700px;
+    background-color: #e5e5e5;
+    margin-top: 100px;
+}
+.btn-secondary{
+    margin-top: 20px;
+}
+
+.input-title{
+    margin-top: 50px;
+    height: 50px;
+}
+
+.input-title, .input-content {
+    width: 100%;
+    border: none;
+    padding: 5px;
+    box-sizing: border-box;
+    background-color: #e5e5e5;
+}
+.input-pwd{
+    border: none;
+    padding: 5px;
+    box-sizing: border-box;
+    height: 50px;
+    background-color: #e5e5e5;
+}
+
+.input-content {
+    height: 500px;
+    resize: none;
+}
+

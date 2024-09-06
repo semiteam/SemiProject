@@ -1,0 +1,115 @@
+.under > .side_menu > #side_menu_open_2 {font-weight: 600;}
+
+.under .content .plan {
+    width: 50%;
+    height: 25%;
+    border-bottom: 1px solid white;
+    margin: 3%;
+}
+
+.under .content .cover {
+    width: 100%;
+    height: 90%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 0;
+    border-radius: 20px;
+    overflow: hidden;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.under .content .plan_title {float: left; margin-right: 10px;}
+
+.under .content .plan_title,
+.under .content .date,
+.under .content .mini_bar {
+    color: white;
+    font-size: 24px;
+    -webkit-text-stroke: .2px rgb(0, 0, 0);
+}
+.under .content .plan .cover > * {display: flex;}
+
+.under .content .mini_bar {margin-left: 50%;}
+
+.under .content .mini_bar div {cursor: pointer;}
+
+.under .content .add_plan {
+    color: white;
+    font-size: 26px;
+    cursor: pointer;
+    margin: -10px 0 0 27%;
+}
+
+.date {
+    margin-top: 16vh;
+}
+
+#full_cover {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.521);
+    z-index: 10000;
+    display: none;
+}
+
+#share {
+    position: fixed;
+    width: 750px;
+    height: 350px;
+    background-color: #fff;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    z-index: 10001;
+    padding: 40px;
+    border-radius: 35px;
+    display: none;
+}
+
+#share_title {
+    font-size: 25px;
+    margin-bottom: 40px;
+}
+
+#circles {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 40px;
+    
+}
+
+.circle {
+    border: 1px solid #000;
+    width: 80px;
+    height: 80px;
+    border-radius: 100%;
+    margin: auto;
+    text-align: center;
+    padding-top: 30px;
+}
+
+#link {
+    border: 1px solid #000;
+    border-radius: 15px;
+    height: 50px;
+    margin: auto;
+    width: 98%;
+    padding: 15px;
+}
+
+.editInput {
+    background-color: #00000085;
+    border: none;
+    color: white;
+    font-size: 20px;
+}
+
+.tp {
+    color: #ffffff;
+    font-size: 20px;
+}

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<entry key = "selectQuestionCount">
+SELECT
+		        COUNT(*) COUNT
+		  FROM QUESTION
+		 WHERE Q_STATUS != 'N'
+</entry>
+
+<entry key = "selectQuestionList">
+SELECT *
+		FROM (
+		SELECT ROWNUM RNUM, A.* 
+	      FROM (
+				SELECT 
+	                   Q_NO
+				     , M_ID
+				     , Q_TITLE
+				     , Q_CONTENT
+				     , Q_DATE
+				     , Q_STATUS
+				     , Q_ANSWER
+				     , Q_PWD
+	             FROM  QUESTION
+                 JOIN  MEMBER USING(M_NO)
+	            WHERE Q_STATUS != 'N'
+                
+	            ORDER
+	               BY Q_NO DESC
+	           ) A
+		    )
+		    WHERE RNUM BETWEEN ? AND ?
+
+
+</entry>
+
+
+<entry key = "insertQuestion">
+INSERT
+  INTO QUESTION
+(   Q_NO 
+  , M_NO 
+  , Q_TITLE
+  , Q_CONTENT 
+  , Q_DATE 
+  , Q_STATUS
+  , Q_ANSWER 
+  , Q_PWD
+)
+VALUES
+(
+   SEQ_QUESTION.NEXTVAL
+ , ?
+ , ? 
+ , ?
+ , DEFAULT
+ , DEFAULT
+ , DEFAULT
+ , ?
+)
+</entry>
+
+<entry key = "selectQuestion">
+SELECT 
+        Q_NO
+       ,M_NO
+       ,Q_TITLE
+       ,Q_CONTENT
+       ,Q_DATE
+       ,Q_STATUS
+       ,Q_ANSWER
+       ,Q_PWD
+  FROM QUESTION
+ WHERE Q_NO = ?
+   AND Q_STATUS = 'Y'
+</entry>
+
+<entry key = "deleteQuestion">
+UPDATE 
+	   QUESTION
+   SET Q_STATUS = 'N'
+ WHERE Q_NO = ?
+</entry>
+
+
+<entry key = "insertReply">
+INSERT 
+	  INTO REPLY
+	  (
+	    R_NO
+	  , A_NO
+	  , Q_NO
+	  , R_CONTENT
+	  )
+	  VALUES
+	  (
+	   SEQ_REPLY.NEXTVAL
+	  , 1
+	  , ?
+	  , ?
+	  )
+</entry>
+
+<entry key = "selectReplyList">
+SELECT
+        R_NO
+       ,R_CONTENT
+       ,ADMIN_ID
+  FROM REPLY 
+  JOIN ADMIN ON (A_NO= ADMIN_NO)
+ WHERE R_STATUS = 'Y'
+   AND Q_NO = ?
+</entry>
+
+<entry key = "updateQuestion">
+UPDATE QUESTION
+   SET Q_ANSWER = 'Y'
+ WHERE Q_NO = ?
+</entry>
+</properties>

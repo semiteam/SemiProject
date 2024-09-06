@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key ="insertUserBgi">
+		INSERT
+		  INTO USER_BGI
+		     (
+		       UBGI_NO
+		     , UBGI_ONAME
+		     , UBGI_RNAME
+		     , UBGI_PATH
+		     )
+		VALUES
+		     (
+		       SEQ_UBGI.NEXTVAL
+		     , ?
+		     , ?
+		     , ?
+		     )
+	</entry>
+	
+	<entry key ="selectUserBgiNo">
+		SELECT UBGI_NO
+		  FROM USER_BGI
+		 WHERE UBGI_ONAME = ?
+		   AND UBGI_RNAME = ?
+		   AND UBGI_PATH = ?
+	</entry>
+</properties>
