@@ -76,10 +76,10 @@ public class PostService {
 		return result;
 	}
 	
-	public int insertPost(int mno, String title, String content, String imagePath) {
+	public int insertPost(int mno, String title, String content) {
 	    Connection conn = getConnection();
 
-	    int result = new PostDao().insertPost(conn, mno, title, content, imagePath);
+	    int result = new PostDao().insertPost(conn, mno, title, content);
 
 	    if (result > 0) {
 	        commit(conn);

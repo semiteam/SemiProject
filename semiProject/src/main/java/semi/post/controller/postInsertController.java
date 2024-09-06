@@ -9,11 +9,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
+import semi.member.model.vo.Member;
 import semi.post.model.service.PostService;
 
 /**
@@ -24,11 +26,7 @@ import semi.post.model.service.PostService;
 public class postInsertController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	// 업로드 설정
-    private static final String UPLOAD_DIRECTORY = "uploadedImages";  // 파일 저장 폴더
-    private static final int MEMORY_THRESHOLD = 1024 * 1024 * 3;      // 3MB
-    private static final int MAX_FILE_SIZE = 1024 * 1024 * 10;        // 10MB
-    private static final int MAX_REQUEST_SIZE = 1024 * 1024 * 50;     // 50MB
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -49,68 +47,40 @@ public class postInsertController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if (!ServletFileUpload.isMultipartContent(request)) {
-            request.setAttribute("message", "Error: Form must have enctype=multipart/form-data.");
-            getServletContext().getRequestDispatcher("/error.jsp").forward(request, response);
-            return;
-        }
+		request.setCharacterEncoding("UTF-8");
+System.out.println("dd");
+        // 세션에서 로그인된 사용자 정보 가져오기
+        HttpSession session = request.getSession();
+        Member loginUser = (Member) session.getAttribute("loginUser");
 
-        DiskFileItemFactory factory = new DiskFileItemFactory();
-        factory.setSizeThreshold(MEMORY_THRESHOLD);
-        factory.setRepository(new File(System.getProperty("java.io.tmpdir")));
-
-        ServletFileUpload upload = new ServletFileUpload(factory);
-        upload.setFileSizeMax(MAX_FILE_SIZE);
-        upload.setSizeMax(MAX_REQUEST_SIZE);
-
-        String uploadPath = getServletContext().getRealPath("") + File.separator + UPLOAD_DIRECTORY;
-        File uploadDir = new File(uploadPath);
-        if (!uploadDir.exists()) {
-            uploadDir.mkdir();
-        }
-
-        String title = null;
-        String content = null;
-        String imagePath = null;
-        int mno = 0;
-
-        try {
-            List<FileItem> formItems = upload.parseRequest(request);
-
-            if (formItems != null && formItems.size() > 0) {
-                for (FileItem item : formItems) {
-                    if (!item.isFormField()) {
-                        String fileName = new File(item.getName()).getName();
-                        imagePath = UPLOAD_DIRECTORY + File.separator + fileName;
-                        String filePath = uploadPath + File.separator + fileName;
-                        File storeFile = new File(filePath);
-                        item.write(storeFile);
-                    } else {
-                        String fieldName = item.getFieldName();
-                        if (fieldName.equals("mno")) {
-                            mno = Integer.parseInt(item.getString());
-                        } else if (fieldName.equals("title")) {
-                            title = item.getString("UTF-8");
-                        } else if (fieldName.equals("content")) {
-                            content = item.getString("UTF-8");
-                        }
-                    }
-                }
-            }
-        } catch (Exception ex) {
-            request.setAttribute("message", "There was an error: " + ex.getMessage());
-            getServletContext().getRequestDispatcher("/error.jsp").forward(request, response);
-        }
-
-        int result = new PostService().insertPost(mno, title, content, imagePath);
-
-        if (result > 0) {
-            response.sendRedirect(request.getContextPath() + "/list.po?cpage=1");
+        if (session.getAttribute("loginUser") == null && session.getAttribute("loginAdmin") == null) {
+			session.setAttribute("alertMsg", "로그인 후 이용 가능한 서비스입니다.");
+			
+			response.sendRedirect(request.getContextPath());
         } else {
-            response.sendRedirect(request.getContextPath() + "/error.jsp");
+        	// 로그인된 사용자의 회원 번호 가져오기
+            int mno = loginUser.getmNo();
+
+            
+            String title = request.getParameter("title");
+            String content = request.getParameter("content");
+            
+
+            // 게시글 등록 서비스 호출
+            int result = new PostService().insertPost(mno, title, content);
+
+            if (result > 0) {
+                // 게시글 등록 성공 시 게시글 목록 페이지로 이동
+                response.sendRedirect(request.getContextPath() + "/list.po?cpage=1");
+                request.setAttribute(title, "title");
+                request.setAttribute(content, "content");
+            } else {
+                // 게시글 등록 실패 시 에러 페이지로 이동
+                response.sendRedirect(request.getContextPath() + "/error.jsp");
+            }
         }
+
+        
     }
 }
-	
-
 
