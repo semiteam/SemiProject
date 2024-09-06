@@ -2,6 +2,7 @@ package semi.admin.model.dao;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.lang.annotation.Retention;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -274,16 +275,27 @@ public class AdminDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setString(1, "%" + value + "%");
-			pstmt.setString(2, "%" + value + "%");
+			pstmt.setString(1,value);
+			pstmt.setString(2,value);
 			
 			rset =pstmt.executeQuery();
 			
 			while(rset.next()) {
-				list.add(new Member(rset.getString("M_ID"),
-						 			rset.getString("M_NAME"),
-						 			rset.getInt("M_REPORT"),
-						 			rset.getString("M_STATUS")));
+				list.add(new Member(rset.getInt("M_NO"),
+									rset.getString("M_NAME"),
+									rset.getString("M_ID"),
+									rset.getString("M_NICKNAME"),
+									rset.getString("M_PWD"),
+									rset.getString("M_RRN"),
+									rset.getString("M_PHONE"),
+									rset.getString("M_EMAIL"),
+									rset.getString("M_ADDRESS"),
+									rset.getDate("M_DATE"),
+									rset.getDate("M_MODIFY"),
+									rset.getString("M_STATUS"),
+									rset.getInt("M_REPORT"),
+									rset.getString("M_GRADE"),
+									rset.getString("M_PROFILE")));
 			}
 		} catch (SQLException e) {
 			
@@ -307,15 +319,18 @@ public class AdminDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setString(1, "%" + value + "%");
-			pstmt.setString(2, "%" + value + "%");
+			pstmt.setString(1,value);
+			pstmt.setString(2,value);
+			pstmt.setString(3,value);
+			pstmt.setString(4,value);
+			
 			
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
-				list.add(new Post(rset.getInt("POST_NO"),
-								  rset.getString("M_NAME"),
-								  rset.getString("POST_TITLE")));
+				list.add(new Post(rset.getInt("NO"),
+								  rset.getString("M_ID"),
+								  rset.getString("TITLE")));
 			}
 			
 		} catch (SQLException e) {
@@ -342,15 +357,20 @@ public class AdminDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setString(1, "%" + value + "%");
-			pstmt.setString(2, "%" + value + "%");
+			pstmt.setString(1,value);
+			pstmt.setString(2,value);
 			
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
 				list.add(new Question(rset.getInt("Q_NO"),
-									  rset.getString("M_NAME"),
-									  rset.getString("Q_TITLE")));
+									  rset.getString("M_ID"),
+									  rset.getString("Q_TITLE"),
+									  rset.getString("Q_CONTENT"),
+									  rset.getDate("Q_DATE"),
+									  rset.getString("Q_STATUS"),
+									  rset.getString("Q_ANSWER"),
+									  rset.getInt("Q_PWD")));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

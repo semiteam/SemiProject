@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import semi.common.model.vo.PageInfo;
+import semi.member.model.vo.Member;
 import semi.question.model.vo.Question;
 import semi.question.model.vo.Reply;
 
@@ -74,7 +75,7 @@ public class QuestionDao {
 			
 			while(rset.next()) {
 				list.add(new Question(rset.getInt("Q_NO"),
-									  rset.getString("M_NAME"),
+									  rset.getString("M_ID"),
 									  rset.getString("Q_TITLE"),
 									  rset.getString("Q_CONTENT"),
 									  rset.getDate("Q_DATE"),

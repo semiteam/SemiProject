@@ -205,7 +205,7 @@
 								<div class="title"><%=p.getPostTitle()%></div>
 								<div class="info">
 									작성자 :
-									<%=p.getmId()%>
+									 작성자 : <%= p.getmNickName()  %>
 									| 조회수 :
 									<%=p.getPostCount()%>
 									| 추천수 :

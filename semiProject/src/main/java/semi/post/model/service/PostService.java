@@ -8,6 +8,8 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import semi.common.model.vo.PageInfo;
+import semi.member.model.dao.MemberDao;
+import semi.member.model.vo.Member;
 import semi.post.model.dao.PostDao;
 import semi.post.model.vo.Post;
 
@@ -81,15 +83,15 @@ public class PostService {
 
 	    int result = new PostDao().insertPost(conn, mno, title, content);
 
-	    if (result > 0) {
-	        commit(conn);
-	    } else {
-	        rollback(conn);
-	    }
+        if (result > 0) {
+            commit(conn);
+        } else {
+            rollback(conn);
+        }
 
-	    close(conn);
-	    return result;
-	}
+        close(conn);
+        return result;
+    }
 	
 	public int deletePost(int postNo) {
 		Connection conn = getConnection();

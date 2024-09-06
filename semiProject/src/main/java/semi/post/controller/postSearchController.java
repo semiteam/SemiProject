@@ -57,7 +57,7 @@ public class postSearchController extends HttpServlet {
             jsonPost.put("postCount", post.getPostCount());
             jsonPost.put("postRecommend", post.getPostRecommend());
             jsonPost.put("postDate", post.getPostDate() != null ? post.getPostDate().toString() : "");
-            jsonPost.put("mId", post.getmId() != null ? post.getmId() : "작성자 없음");
+            jsonPost.put("mNickName", post.getmNickName() != null ? post.getmNickName() : "작성자 없음");
 
             
 

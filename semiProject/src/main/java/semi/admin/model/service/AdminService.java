@@ -123,6 +123,7 @@ public class AdminService {
 		
 		ArrayList<Post> list = new AdminDao().findPost(conn, value);
 		
+		
 		close(conn);
 		
 		return list;
@@ -132,6 +133,7 @@ public class AdminService {
 	Connection conn = getConnection();
 		
 		ArrayList<Question> list = new AdminDao().findQuestion(conn, value);
+		
 		
 		close(conn);
 		

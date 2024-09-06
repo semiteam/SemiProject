@@ -171,3 +171,28 @@ input:focus {outline: none;}
   flex-direction: row;
   flex-wrap: wrap;
 }
+
+
+#error-message {
+    margin-top: 5px; /* 오류 메시지 위치 조정 */
+}
+
+#id_div {
+    display: flex; /* 아이디 입력 필드와 버튼을 같은 줄에 배치 */
+    align-items: center; /* 버튼과 입력 필드가 수평으로 정렬 */
+}
+
+#input_id {
+    width: 300px; /* 입력 필드의 고정된 너비 설정 */
+}
+
+#id_check {
+    width: 145px; /* 중복 확인 버튼의 고정된 너비 설정 */
+    margin-left: 5px; /* 입력 필드와 버튼 사이의 간격 설정 */
+}
+
+.error-message {
+    color: red;
+    font-size: 0.9em;
+    margin-top: 5px;
+}

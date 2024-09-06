@@ -94,6 +94,10 @@
 input {
 	background-color: rgba(0, 0, 0, 0);
 }
+
+
+
+
 </style>
 
 </head>
@@ -208,8 +212,28 @@ input {
 									    <% } %>
 									<!--  onclick="location.href='<%= contextPath %>/delete.po'" -->
 								</div>
-
-					
+				
+								
+								<!-- 
+								<div class="comment-section">
+									<h4>댓글 작성</h4>
+									<textarea id="commentContent" class="comment-input" rows="4"
+										placeholder="댓글을 입력하세요..." required></textarea>
+									<button type="button" class="btn-comment"
+										onclick="submitComment()">댓글 작성</button> 
+								</div>-->
+								
+								<!-- 
+								<div id="commentList">
+									<c:forEach var="comment" items="${comments}">
+										<div class="comment-item">
+											<div class="comment-author">${comment.memberId}</div>
+											<div class="comment-date">${comment.createDate}</div>
+											<div class="comment-content">${comment.content}</div>
+										</div>
+									</c:forEach>
+								</div>
+								 -->
 							</div>
 						</div>
 					</section>
@@ -279,6 +303,68 @@ input {
             document.getElementById('postForm').submit();
         }
     }
+	
+	
+	function submitComment() {
+	    const commentContent = document.getElementById('commentContent').value;
+
+	    if (commentContent.trim() === '') {
+	        alert('댓글을 입력하세요.');
+	        return;
+	    }
+
+	    $.ajax({
+	        url: '<%= contextPath %>/submitComment',
+	        type: 'POST',
+	        data: {
+	            postId: '<%= p.getPostNo() %>',
+	            userId: '<%= loginUser.getmId() %>',
+	            content: commentContent
+	        },
+	        success: function(response) {
+	            if (response.success) {
+	                location.reload(); // 페이지 새로고침
+	            } else {
+	                alert(response.message);
+	            }
+	        },
+	        error: function() {
+	            alert('서버 요청 중 오류가 발생했습니다.');
+	        }
+	    });
+	}
+
+	    // 서버로 보낼 데이터 (JSON 형태로 전송)
+	    const data = JSON.stringify({
+	        content: commentContent,
+	        postId: 123 // 게시물 번호 (동적으로 설정 가능)
+	    });
+
+	    xhr.send(data);
+	});
+
+	// 댓글을 리스트에 추가하는 함수
+	function addCommentToList(comment) {
+	    const commentList = document.getElementById('commentList');
+
+	    // 새로운 댓글 HTML 생성
+	    const newComment = document.createElement('div');
+	    newComment.classList.add('comment-item');
+	    newComment.innerHTML = `
+	        <div class="comment-author">${comment.author}</div>
+	        <div class="comment-date">${comment.date}</div>
+	        <div class="comment-content">${comment.content}</div>
+	    `;
+
+	    // 댓글 리스트에 새로운 댓글을 추가
+	    commentList.appendChild(newComment);
+	}
+	
+	
+	
+	
+	
+	
 	</script>
 </body>
 </html>

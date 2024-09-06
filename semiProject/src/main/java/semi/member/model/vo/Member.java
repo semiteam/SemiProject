@@ -18,6 +18,12 @@ public class Member {
 	private int mReport;
 	private String mGrade;
 	private String mProfile;
+	
+	private String postalCode;
+	private String basicAddress;
+	private String detailedAddress;
+	
+	private String loginUser;
 
 	public Member(int mNo, String mName, String mId, String mStatus, int mReport, String mGrade) {
 		super();
@@ -30,19 +36,92 @@ public class Member {
 	}
 	
 	
-
-	public Member(String mName, String mId,  int mReport, String mStatus) {
+	
+	
+	public Member(String mName, String mId, String mNickname, String mPwd, String mRrn, String mPhone, String mEmail,
+			String mAddress, String mProfile, String postalCode, String basicAddress, String detailedAddress) {
 		super();
 		this.mName = mName;
 		this.mId = mId;
-		this.mReport = mReport;
-		this.mStatus = mStatus;
+		this.mNickname = mNickname;
+		this.mPwd = mPwd;
+		this.mRrn = mRrn;
+		this.mPhone = mPhone;
+		this.mEmail = mEmail;
+		this.mAddress = mAddress;
+		this.mProfile = mProfile;
+		this.postalCode = postalCode;
+		this.basicAddress = basicAddress;
+		this.detailedAddress = detailedAddress;
 	}
 
 
+
+
+	public Member(int mNo, String mName, String mId, String mNickname, String mPwd, String mPhone, String mEmail,
+			String mAddress, Date mDate, Date mModify, String mStatus, int mReport, String mGrade, String mProfile,
+			String postalCode, String basicAddress, String detailedAddress) {
+		super();
+		this.mNo = mNo;
+		this.mName = mName;
+		this.mId = mId;
+		this.mNickname = mNickname;
+		this.mPwd = mPwd;
+		this.mPhone = mPhone;
+		this.mEmail = mEmail;
+		this.mAddress = mAddress;
+		this.mDate = mDate;
+		this.mModify = mModify;
+		this.mStatus = mStatus;
+		this.mReport = mReport;
+		this.mGrade = mGrade;
+		this.mProfile = mProfile;
+		this.postalCode = postalCode;
+		this.basicAddress = basicAddress;
+		this.detailedAddress = detailedAddress;
+	}
+
+
+
+	public Member(int mNo, String mName, String mId, String mNickname, String mPwd, String mRrn, String mPhone,
+			String mEmail, String mAddress, Date mDate, Date mModify, String mStatus, int mReport, String mGrade,
+			String mProfile, String postalCode, String basicAddress, String detailedAddress) {
+		super();
+		this.mNo = mNo;
+		this.mName = mName;
+		this.mId = mId;
+		this.mNickname = mNickname;
+		this.mPwd = mPwd;
+		this.mRrn = mRrn;
+		this.mPhone = mPhone;
+		this.mEmail = mEmail;
+		this.mAddress = mAddress;
+		this.mDate = mDate;
+		this.mModify = mModify;
+		this.mStatus = mStatus;
+		this.mReport = mReport;
+		this.mGrade = mGrade;
+		this.mProfile = mProfile;
+		this.postalCode = postalCode;
+		this.basicAddress = basicAddress;
+		this.detailedAddress = detailedAddress;
+	}
+
+
+
+	public Member(String mId, String mNickname, String mPwd, String mPhone, String mEmail, String mAddress) {
+	    this.mId = mId;
+	    this.mNickname = mNickname;
+	    this.mPwd = mPwd;
+	    this.mPhone = mPhone;
+	    this.mEmail = mEmail;
+	    this.mAddress = mAddress;
+	}
 
 	public Member() {
 	}
+	
+	
 
 	public Member(int mNo, String mName, String mId, String mNickname, String mPwd, String mRrn, String mPhone,
 			String mEmail, String mAddress, Date mDate, Date mModify, String mStatus, int mReport, String mGrade,
@@ -54,6 +133,27 @@ public class Member {
 		this.mNickname = mNickname;
 		this.mPwd = mPwd;
 		this.mRrn = mRrn;
+		this.mPhone = mPhone;
+		this.mEmail = mEmail;
+		this.mAddress = mAddress;
+		this.mDate = mDate;
+		this.mModify = mModify;
+		this.mStatus = mStatus;
+		this.mReport = mReport;
+		this.mGrade = mGrade;
+		this.mProfile = mProfile;
+	}
+	
+	
+
+	public Member(int mNo, String mName, String mId, String mNickname, String mPwd, String mPhone, String mEmail,
+			String mAddress, Date mDate, Date mModify, String mStatus, int mReport, String mGrade, String mProfile) {
+		super();
+		this.mNo = mNo;
+		this.mName = mName;
+		this.mId = mId;
+		this.mNickname = mNickname;
+		this.mPwd = mPwd;
 		this.mPhone = mPhone;
 		this.mEmail = mEmail;
 		this.mAddress = mAddress;
@@ -91,15 +191,7 @@ public class Member {
 
 
 
-	public Member(String mName, String mId, String mNickname, String mPwd, String mEmail, String mAddress) {
-		super();
-		this.mName = mName;
-		this.mId = mId;
-		this.mNickname = mNickname;
-		this.mPwd = mPwd;
-		this.mEmail = mEmail;
-		this.mAddress = mAddress;
-	}
+
 
 	public int getmNo() {
 		return mNo;
@@ -219,6 +311,42 @@ public class Member {
 
 	public void setmProfile(String mProfile) {
 		this.mProfile = mProfile;
+	}
+	
+	
+
+	public String getLoginUser() {
+		return loginUser;
+	}
+
+	public void setLoginUser(String loginUser) {
+		this.loginUser = loginUser;
+	}
+	
+	
+
+	public String getPostalCode() {
+		return postalCode;
+	}
+
+	public void setPostalCode(String postalCode) {
+		this.postalCode = postalCode;
+	}
+
+	public String getBasicAddress() {
+		return basicAddress;
+	}
+
+	public void setBasicAddress(String basicAddress) {
+		this.basicAddress = basicAddress;
+	}
+
+	public String getDetailedAddress() {
+		return detailedAddress;
+	}
+
+	public void setDetailedAddress(String detailedAddress) {
+		this.detailedAddress = detailedAddress;
 	}
 
 	@Override

@@ -16,6 +16,7 @@ public class Post {
 	 private String status;
 	 private String postImagePath;
 	 private String mName;
+	 private int qNo;
 	 
 	 private String mNickName;
 	 private int mNo;
@@ -23,12 +24,29 @@ public class Post {
 	 public Post() {}
 
 	 
-	 
-	 
-	public Post(int postNo,  String mName,String postTitle) {
+	
+
+
+
+
+	public Post(int postNo, int qNo, String mId, String postTitle) {
 		super();
 		this.postNo = postNo;
-		this.mName = mName;
+		this.mId = mId;
+		this.postTitle = postTitle;
+		this.qNo = qNo;
+	}
+
+
+
+
+
+
+
+	public Post(int postNo, String mId,String postTitle) {
+		super();
+		this.postNo = postNo;
+		this.mId = mId;
 		this.postTitle = postTitle;
 	}
 
@@ -153,6 +171,25 @@ public class Post {
 		this.postImagePath = postImagePath;
 		this.mNickName = mNickName;
 		mNo = mNo2;
+	}
+	
+	
+	
+	
+
+	public Post(int postNo, String mId, int mNO, String mNickName, String postTitle, String postContent, int postCount, int postRecommend,
+			Date postDate, Date postModifyed) {
+		super();
+		this.postNo = postNo;
+		this.mId = mId;
+		this.mNO = mNO;
+		this.postTitle = postTitle;
+		this.postContent = postContent;
+		this.postCount = postCount;
+		this.postRecommend = postRecommend;
+		this.postDate = postDate;
+		this.postModifyed = postModifyed;
+		this.mNickName = mNickName;
 	}
 
 	public String getmId() {
@@ -293,6 +330,20 @@ public class Post {
 
 	public void setmName(String mName) {
 		this.mName = mName;
+	}
+
+
+
+
+	public int getqNo() {
+		return qNo;
+	}
+
+
+
+
+	public void setqNo(int qNo) {
+		this.qNo = qNo;
 	}
 
 	

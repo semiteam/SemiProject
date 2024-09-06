@@ -1,4 +1,4 @@
-package semi.post.controller;
+package semi.admin.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -8,24 +8,23 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.stream.events.Comment;
 
-import semi.member.model.vo.Member;
+import com.google.gson.Gson;
 
-import semi.post.model.service.PostService;
-import semi.post.model.vo.Post;
+import semi.admin.model.service.AdminService;
+import semi.question.model.vo.Question;
 
 /**
- * Servlet implementation class postDetailController
+ * Servlet implementation class FIndQuestionController
  */
-@WebServlet("/postDetail.po")
-public class postDetailController extends HttpServlet {
+@WebServlet("/findQuestion.ad")
+public class FIndQuestionController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public postDetailController() {
+    public FIndQuestionController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,27 +33,17 @@ public class postDetailController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		request.setCharacterEncoding("utf-8");
 		
-		int pno = Integer.parseInt(request.getParameter("pno"));
-		String userId = ((Member)request.getSession().getAttribute("loginUser")).getmId();
+		String str = request.getParameter("value");
+		String value = "%" + str + "%";
+		
+		ArrayList<Question> list = new AdminService().findQuestion(value);
 		
 		
+		response.setContentType("application/json; charset=utf-8");
 		
-		int result = new PostService().increaseCount(pno);
-		
-		if(result > 0) {
-			
-			Post p = new PostService().selectPost(pno);
-		   boolean hasRecommended = new PostService().hasRecommended(pno, userId);
-			
-			request.setAttribute("p", p);
-			request.setAttribute("hasRecommended", hasRecommended);
-			request.getRequestDispatcher("views/post/postDetail.jsp").forward(request, response);
-		}
-		
-		
+		new Gson().toJson(list, response.getWriter());
 	}
 
 	/**
