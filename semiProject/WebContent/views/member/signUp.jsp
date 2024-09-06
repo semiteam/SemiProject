@@ -8,10 +8,7 @@
 	<link rel="stylesheet" href="resouces/css/sign up.css" />
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-	
-	
-	<!-- 우편번호 Script-->
-	<!-- <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> -->
+	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	
 	<style>
         .error-message {
@@ -23,8 +20,6 @@
             border-color: red;
         }
     </style>
-	
-	
 	
 	</head>
 	<body>
@@ -49,7 +44,7 @@
 							<div id="birthdayGender">
 								<input type="text" id="birthday" maxlength="6" name="mBirthday1" required>
 		                        <div> _ </div>
-		                        <input type="text" id="gender_firstnumber" style="width: 30px;" maxlength="1" name="mBirthday2" required>
+		                        <input type="text" id="gender_firstnumber" style="width: 38px;" maxlength="1" name="mBirthday2" >
 								<input type="password" placeholder="* * * * * *" readonly id="gender_number">
 							</div>
 							 <div id="birthday-error" class="error-message"></div>
@@ -72,23 +67,18 @@
 
 					<div class="user-info-email">
 						<div id="email_text" class="bold">* 이메일</div>
-						<input type="text" style="width: 225px;" id="input_email"
-							name="mMail1" required /> @ <select name="mMail2">
-							<option value="gmail.com">gmail.com</option>
-							<option value="naver.com">naver.com</option>
-							<option value="daum.net">daum.net</option>
-						</select>
+						<input type="text" style="width: 400px;" id="input_email"
+							name="mMail1" required />
 						<div id="email-error" class="error-message"></div>
-						<!-- 오류 메시지 표시용 -->
 					</div>
 
 					<div class="user-info-id">
 							<div id="id_text" class="bold">* 아이디</div>
-							<div id="id_div">
+							<div id="id_div" style="display: flex; align-items: center;">
 								<input type="text" style="width: 300px;" placeholder="영어 소문자 및 숫자 조합으로 4~16자리" id="input_id" name="mId" required>
-								<div id="id-error" class="error-message"></div>
-								<input type="button" style="width: 145px; margin: 0 0 5px 5px;" value="중복 확인" id="id_check">
+								<input type="button" style="width: 145px; margin-left: 5px;" value="중복 확인" id="id_check">
 							</div>
+							<div id="id-error" class="error-message"></div>
 						</div>
 
 						<div class="user-info-nn">
@@ -99,29 +89,31 @@
 	
 						<div class="user-info-pw">
 							<div id="pwd_text" class="bold">* 비밀번호</div>
-							<input type="password" placeholder="영어 대소문자 및 숫자, 특수문자 조합으로 8~16자리" id="input_pwd" class="big" name="mPwd" required/>
+							<input type="password" placeholder="영어 소문자 및 숫자, 특수문자 조합으로 8~16자리" id="input_pwd" class="big" name="mPwd" required/>
 							<div id="password-error" class="error-message"></div>
+							 <div id="caps-lock-warning" class="error-message" style="display:none; color:orange;">Caps Lock이 켜져 있습니다.</div>
 						</div>
 	
 						<div class="user-info-pw-check">
 							<div id="pwd_text2" class="bold">* 비밀번호 확인</div>
 							<input type="password" placeholder="위 비밀번호와 일치하게 입력" id="input_pwd2" class="big" required />
 							 <div id="password-confirm-error" class="error-message"></div>
+							 <div id="caps-lock-confirm-warning" class="error-message" style="display:none; color:orange;">Caps Lock이 켜져 있습니다.</div>
 						</div>
-	
-						<form action="" name="form1">
-							<div class="user-info-address">
-								<div id="address_title" class="bold">* 우편번호</div>
-								<div id="address_div">
-									<input type="text" style="width: 300px;" name="zipcode" class="zip_code_text" name="mAddress1" required>
-					                <input type="button" style="width: 145px; margin: 0 0 5px 5px;" value="우편번호 검색" id="zip_code" class="big">
-					                <input type="text" name="addr1" readonly id="add" class="big" name="mAddress2" required>
-					                <div id="address_text" style="margin: 5px 0;">상세주소</div>
-					                <input type="text" id="address_text2" class="big" name="mAddress3" required>
-								</div>
-							</div>
-						</form>
-	
+						
+						
+                     <div class="user-info-address">
+                        <div id="address_title" class="bold">* 우편번호</div>
+                        <div id="address_div">
+                           <input type="text" style="width: 300px;"  id="zipcode" class="zip_code_text" name="mAddress1" required>
+                               <input type="button" style="width: 145px; margin: 0 0 5px 5px;" value="우편번호 검색" id="zip_code" class="big" onclick="execDaumPostcode();">
+                               <input type="text"  readonly id="add" class="big" name="mAddress2" required>
+                               <div id="address_text" style="margin: 5px 0;">상세주소</div>
+                               <input type="text" id="address_text2" class="big" name="mAddress3" required>
+                        </div>
+                     </div>
+                  
+
 	          			<button type="submit" class="min_user_join" id="min_sign">가입하기</button>
 					</div>
 				</form>
@@ -129,30 +121,10 @@
 	            <br><br><br>
 			</div>
 		</div>
-		<!-- 우편번호 api -->
-		
-		 <script>
-		 <!--
-		 		const btn = document.querySelector("#zip_code");
-				btn.addEventListener("click",() => {
-				new daum.Postcode({
-					oncomplete: function(data) {
-						let fullAddr = '';
-						let extraAddr = '';
 
-						if(data.userSelectedType === 'R'){
-						fullAddr = data.roadAddress;
-						}else{
-						fullAddr = data.jibunAddress;
-						}
-						document.form1.addr1.value = fullAddr;
-						document.form1.zipcode.value = data.zonecode;
-					}
-				}).open();
-			})
-			-->
+		 <script>
 				document.addEventListener("DOMContentLoaded", function() {
-				    // 각 입력 필드에 실시간 유효성 검사 추가
+				    // 각 입력 필드에 실시간 유효성 검사 추가 및 빈 값일 때 오류 메시지 삭제
 				    document.getElementById('name').addEventListener('input', validateName);
 				    document.getElementById('input_id').addEventListener('input', validateId);
 				    document.getElementById('input_nn').addEventListener('input', validateNickname);
@@ -162,223 +134,306 @@
 				    document.getElementById('gender_firstnumber').addEventListener('input', validateBirthDateAndGender);
 				    document.getElementById('min_phone').addEventListener('input', validatePhone);
 				    document.getElementById('input_email').addEventListener('input', validateEmail);	
-		
 
+				    
+				    
+				    
+				    function clearErrorMessage(inputId, errorId) {
+				        const input = document.getElementById(inputId);
+				        const error = document.getElementById(errorId);
+
+				        if (input.value.trim() === '') {
+				            error.textContent = '';
+				        }
+				    }
 
 				    function validateName() {
-				        const nameInput = document.getElementById('name').value.trim();
+				    	const nameInput = document.getElementById('name').value.trim();
 				        const nameError = document.getElementById('name-error');
-				        const koreanPattern = /^[가-힣]+$/;
-				        const englishPattern = /^[a-zA-Z\s]+$/;
+				        const koreanPattern = /^[가-힣]+$/; // 한글만 허용
 
 				        nameError.textContent = ''; // 기존 오류 메시지 초기화
 
-				        // 길이 제한 (한글: 최대 33자, 영어: 최대 100자)
-				        if (koreanPattern.test(nameInput)) {
-				            if (nameInput.length > 33) {
-				                nameError.textContent = '이름은 한글로 최대 33자까지 입력 가능합니다.';
-				                return false;
-				            }
-				        } else if (englishPattern.test(nameInput)) {
-				            if (nameInput.length > 100) {
-				                nameError.textContent = '이름은 영어로 최대 100자까지 입력 가능합니다.';
-				                return false;
-				            }
-				        } else {
-				            nameError.textContent = '이름은 한글 또는 영어로만 입력 가능합니다.';
+				        if (!koreanPattern.test(nameInput)) {
+				            nameError.textContent = '이름은 한글만 입력 가능합니다.';
+				        }
+
+				        if (nameInput === "") {
+				            nameError.textContent = ''; // 입력이 사라지면 오류 메시지 삭제
+				        }
+				    }
+
+				    function validateId() {
+				        const idInput = document.getElementById('input_id').value;
+				        const idError = document.getElementById('id-error');
+				        const idPattern = /^(?=.*[a-z])(?=.*\d)[a-z\d]{4,16}$/;
+
+				        idError.textContent = ''; // 기존 오류 메시지 초기화
+
+				        if (idInput === '') {
+				            return true;  // 입력이 비어 있으면 오류 메시지를 표시하지 않음
+				        }
+
+				        if (!idPattern.test(idInput) || /^\d+$/.test(idInput)) {
+				            idError.textContent = '아이디는 영어 소문자 및 숫자 조합으로 4~16자리, 숫자만으로는 불가합니다.';
+				        }
+
+				        return idError.textContent === '';
+				    }
+
+				    function validateNickname() {
+				        const nnInput = document.getElementById('input_nn').value;
+				        const nnError = document.getElementById('nickname-error');
+				        const engNumPattern = /^[a-z0-9]{4,16}$/;
+				        const korPattern = /^[가-힣0-9]{2,10}$/;  
+
+				        nnError.textContent = ''; // 기존 오류 메시지 초기화
+
+				        if (nnInput === '') {
+				            return true;
+				        }
+
+				        if (nnInput !== '' && !engNumPattern.test(nnInput) && !korPattern.test(nnInput)) {
+				            nnError.textContent = '닉네임은 영어 소문자 및 숫자 조합으로 4~16자리 또는 한글로 2~10자여야 합니다.';
+				        }
+
+				        return nnError.textContent === '';
+				    }
+
+				    function validatePassword() {
+				        const pwdInput = document.getElementById('input_pwd').value;
+				        const pwdError = document.getElementById('password-error');
+				        const pwdPattern = /^(?=.*[a-z])(?=.*\d)[a-z\d\W_]{8,16}$/; // 수정된 정규식, 대문자 제거
+
+				        pwdError.textContent = ''; // 기존 오류 메시지 초기화
+
+				        if (pwdInput === '') {
+				            return true;
+				        }
+
+				        if (!pwdPattern.test(pwdInput)) {
+				            pwdError.textContent = '비밀번호는 영어 소문자, 숫자, 특수문자를 포함한 8~16자리여야 합니다.';
+				        }
+
+				        return pwdError.textContent === '';
+				    }
+
+				    function validatePasswordConfirmation() {
+				        const pwdInput = document.getElementById('input_pwd').value;
+				        const pwdConfirmInput = document.getElementById('input_pwd2').value;
+				        const pwdConfirmError = document.getElementById('password-confirm-error');
+
+				        pwdConfirmError.textContent = ''; // 기존 오류 메시지 초기화
+
+				        if (pwdConfirmInput === '') {
+				            return true;
+				        }
+
+				        if (pwdInput !== pwdConfirmInput) {
+				            pwdConfirmError.textContent = '비밀번호 확인이 비밀번호와 일치하지 않습니다.';
+				        }
+
+				        return pwdConfirmError.textContent === '';
+				    }
+
+				    function validateBirthDateAndGender() {
+				        const birthDate = document.getElementById('birthday').value;
+				        const genderFirstNumber = document.getElementById('gender_firstnumber').value;
+				        const birthError = document.getElementById('birthday-error');
+				        const birthPattern = /^(0[1-9]|[1-9]\d)(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])$/;
+
+				        birthError.textContent = ''; // 기존 오류 메시지 초기화
+
+				        if (birthDate === '') {
+				            return true;
+				        }
+
+				        if (!birthPattern.test(birthDate)) {
+				            birthError.textContent = '생년월일이 올바르지 않습니다.';
 				            return false;
 				        }
 
 				        return true;
 				    }
 
+				    function validatePhone() {
+				        const phoneInput = document.getElementById('min_phone').value;
+				        const phoneError = document.getElementById('phone-error');
+				        const phonePattern = /^(010)\d{8}$/;
 
-			 function validateId() {
-			        const idInput = document.getElementById('input_id').value;
-			        const idError = document.getElementById('id-error');
-			        const idPattern = /^(?=.*[a-z])(?=.*\d)[a-z\d]{4,16}$/;
+				        phoneError.textContent = ''; // 기존 오류 메시지 초기화
 
-			        idError.textContent = ''; // 기존 오류 메시지 초기화
-
-			        if (!idPattern.test(idInput) || /^\d+$/.test(idInput)) {
-			            idError.textContent = '아이디는 영어 소문자 및 숫자 조합으로 4~16자리, 숫자만으로는 불가합니다.';
-			        }
-
-			        return idError.textContent === '';
-			    }
-
-			 function validateNickname() {
-			        const nnInput = document.getElementById('input_nn').value;
-			        const nnError = document.getElementById('nickname-error');
-			        const engNumPattern = /^(?=.*[a-z])(?=.*\d)[a-z\d]{4,16}$/;
-			        const korPattern = /^[가-힣]{2,10}$/;
-
-			        nnError.textContent = ''; // 기존 오류 메시지 초기화
-
-			        if (nnInput !== '' && !engNumPattern.test(nnInput) && !korPattern.test(nnInput)) {
-			            nnError.textContent = '닉네임은 영어 소문자 및 숫자 조합으로 4~16자리 또는 한글로 2~10자여야 합니다.';
-			        }
-
-			        return nnError.textContent === '';
-			    }
-
-			 function validatePassword() {
-			        const pwdInput = document.getElementById('input_pwd').value;
-			        const pwdError = document.getElementById('password-error');
-			        const pwdPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[A-Za-z\d\W_]{8,16}$/;
-
-			        pwdError.textContent = ''; // 기존 오류 메시지 초기화
-
-			        if (!pwdPattern.test(pwdInput)) {
-			            pwdError.textContent = '비밀번호는 영어 대소문자, 숫자, 특수문자를 포함한 8~16자리여야 합니다.';
-			        }
-
-			        return pwdError.textContent === '';
-			    }
-
-			 function validatePasswordConfirmation() {
-			        const pwdInput = document.getElementById('input_pwd').value;
-			        const pwdConfirmInput = document.getElementById('input_pwd2').value;
-			        const pwdConfirmError = document.getElementById('password-confirm-error');
-
-			        pwdConfirmError.textContent = ''; // 기존 오류 메시지 초기화
-
-			        if (pwdInput !== pwdConfirmInput) {
-			            pwdConfirmError.textContent = '비밀번호 확인이 비밀번호와 일치하지 않습니다.';
-			        }
-
-			        return pwdConfirmError.textContent === '';
-			    }
-
-			 function validateBirthDateAndGender() {
-			        const birthDate = document.getElementById('birthday').value;
-			        const genderFirstNumber = document.getElementById('gender_firstnumber').value;
-			        const birthError = document.getElementById('birthday-error');
-			        const birthPattern = /^(0[1-9]|[1-9]\d)(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])$/;
-
-			        birthError.textContent = ''; // 기존 오류 메시지 초기화
-
-			        if (!birthPattern.test(birthDate)) {
-			            birthError.textContent = '생년월일이 올바르지 않습니다.';
-			            return false;
-			        }
-
-			        const year = parseInt(birthDate.substring(0, 2), 10) + (parseInt(genderFirstNumber, 10) <= 2 ? 1900 : 2000);
-
-			        if (!isValidDate(year, parseInt(birthDate.substring(2, 4), 10), parseInt(birthDate.substring(4, 6), 10))) {
-			            birthError.textContent = '생년월일이 올바르지 않습니다.';
-			            return false;
-			        }
-
-			        if (!validateGender(year, genderFirstNumber)) {
-			            birthError.textContent = '성별 코드가 올바르지 않습니다.';
-			            return false;
-			        }
-
-			        return true;
-			    }
-
-
-
-			 function validatePhone() {
-			        const phoneInput = document.getElementById('min_phone').value;
-			        const phoneError = document.getElementById('phone-error');
-			        const phonePattern = /^(010)\d{8}$/;
-
-			        phoneError.textContent = ''; // 기존 오류 메시지 초기화
-
-			        if (!phonePattern.test(phoneInput)) {
-			            phoneError.textContent = '휴대폰 번호가 올바르지 않습니다.';
-			        }
-
-			        return phoneError.textContent === '';
-			    }
-			 
-			 function isValidDate(year, month, day) {
-			        const date = new Date(year, month - 1, day);
-			        return date.getFullYear() === year && date.getMonth() + 1 === month && date.getDate() === day;
-			    }
-			 
-			 function validateGender(year, genderCode) {
-			        const isBefore2000 = year < 2000;
-			        const genderPattern = isBefore2000 ? /^[1256]$/ : /^[3478]$/;
-
-			        return genderPattern.test(genderCode);
-			    }
-			 
-			 function validateForm() {
-			        return validateName() && validateId() && validateNickname() &&
-			            validatePassword() && validatePasswordConfirmation() &&
-			            validateBirthDateAndGender() && validatePhone();
-			    }
-			});
-				function validateEmail() {
-			        const emailUserInput = document.getElementById('input_email').value.trim();
-			        const emailError = document.getElementById('email-error');
-			        const domainInput = document.querySelector('[name="mMail2"]').value;
-			        const email = `${emailUserInput}@${domainInput}`;
-			        const koreanPattern = /[가-힣]/; // 한글이 포함되어 있는지 확인하는 정규식
-
-			        emailError.textContent = ''; // 기존 오류 메시지 초기화
-
-			        // 이메일에 한글이 포함되어 있는지 확인
-			        if (koreanPattern.test(emailUserInput)) {
-			            emailError.textContent = '이메일에 한글을 포함할 수 없습니다.';
-			            return false;
-			        }
-
-			        // 이메일 주소의 유효성 검사
-			        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // 기본 이메일 패턴
-			        if (!emailPattern.test(email)) {
-			            emailError.textContent = '유효한 이메일 주소를 입력하세요.';
-			            return false;
-			        }
-
-			        // 이메일 주소의 길이 검사
-			        if (new TextEncoder().encode(email).length > 300) {
-			            emailError.textContent = '이메일은 최대 300바이트까지 입력 가능합니다.';
-			            return false;
-			        }
-
-			        return true;
-			    }
-				
-				document.addEventListener("DOMContentLoaded", function() {
-				    const idCheckButton = document.getElementById('id_check');
-				    const idInput = document.getElementById('input_id');
-				    const idError = document.getElementById('id-error');
-
-				    idCheckButton.addEventListener('click', function() {
-				        const mId = idInput.value.trim();
-
-				        if (mId === "") {
-				            idError.textContent = "아이디를 입력하세요.";
-				            return;
+				        if (phoneInput === '') {
+				            return true;
 				        }
 
-				        $.ajax({
-				            url: '<%=contextPath%>/checkId.me', // 서블릿 경로
-				            type: 'GET',
-				            data: { mId: mId },
-				            success: function(response) {
-				                if (response === "NNNNN") {
-				                    idError.textContent = "이미 존재하는 아이디입니다.";
-				                    idError.style.color = "red";
-				                } else if (response === "NNNNY") {
-				                    idError.textContent = "사용 가능한 아이디입니다.";
-				                    idError.style.color = "green";
-				                }
-				            },
-				            error: function() {
-				                idError.textContent = "서버 요청 중 오류가 발생했습니다.";
-				                idError.style.color = "red";
-				            }
-				        });
-				    });
+				        if (!phonePattern.test(phoneInput)) {
+				            phoneError.textContent = '휴대폰 번호가 올바르지 않습니다.';
+				        }
+
+				        return phoneError.textContent === '';
+				    }
+
+				    function validateEmail() {
+				        const emailUserInput = document.getElementById('input_email').value.trim();
+				        const emailError = document.getElementById('email-error');
+				        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+				        emailError.textContent = ''; // 기존 오류 메시지 초기화
+
+				        if (emailUserInput === '') {
+				            return true;
+				        }
+
+				        if (!emailPattern.test(emailUserInput)) {
+				            emailError.textContent = '유효한 이메일 주소를 입력하세요.';
+				        }
+
+				        return emailError.textContent === '';
+				    }
+
+				    // 모든 입력 필드에 대해 오류 메시지 초기화
+				    document.getElementById('name').addEventListener('input', () => clearErrorMessage('name', 'name-error'));
+				    document.getElementById('input_id').addEventListener('input', () => clearErrorMessage('input_id', 'id-error'));
+				    document.getElementById('input_nn').addEventListener('input', () => clearErrorMessage('input_nn', 'nickname-error'));
+				    document.getElementById('input_pwd').addEventListener('input', () => clearErrorMessage('input_pwd', 'password-error'));
+				    document.getElementById('input_pwd2').addEventListener('input', () => clearErrorMessage('input_pwd2', 'password-confirm-error'));
+				    document.getElementById('birthday').addEventListener('input', () => clearErrorMessage('birthday', 'birthday-error'));
+				    document.getElementById('min_phone').addEventListener('input', () => clearErrorMessage('min_phone', 'phone-error'));
+				    document.getElementById('input_email').addEventListener('input', () => clearErrorMessage('input_email', 'email-error'));
+
+				    // 최종 폼 검증
+				    function validateForm() {
+				        return validateName() && validateId() && validateNickname() &&
+				            validatePassword() && validatePasswordConfirmation() &&
+				            validateBirthDateAndGender() && validatePhone() && validateEmail();
+				    }
 				});
-				
 		</script> 
 		
+		<script>
+		document.addEventListener("DOMContentLoaded", function() {
+		    const idCheckButton = document.getElementById('id_check');
+		    const idInput = document.getElementById('input_id');
+		    const idError = document.getElementById('id-error');
+		    
+		    
+		    
+		    // 아이디 입력 필드에 입력이 발생할 때마다 호출
+		    idInput.addEventListener('input', function() {
+		        const mId = idInput.value.trim();
+		        const idPattern = /^(?=.*[a-z])(?=.*\d)[a-z\d]{4,16}$/; // 소문자 + 숫자 조합 4~16자, 숫자만은 불가
+
+		        // 입력값이 없으면 오류 메시지 초기화
+		        if (mId === "") {
+		            idError.textContent = "";
+		            idError.style.color = "";
+		        } else if (!idPattern.test(mId)) {
+		            // 형식이 맞지 않을 경우 빨간색 오류 메시지 표시
+		            idError.textContent = "아이디는 소문자 영문자와 숫자의 조합으로 4~16자여야 하며, 숫자만으로는 사용할 수 없습니다.";
+		            idError.style.color = "red";
+		        } else {
+		            // 형식이 맞으면 오류 메시지 초기화
+		            idError.textContent = "";
+		        }
+		    });
+
+		    // 중복 확인 버튼 클릭 시
+		    idCheckButton.addEventListener('click', function() {
+		        const mId = idInput.value.trim();
+		        const idPattern = /^(?=.*[a-z])(?=.*\d)[a-z\d]{4,16}$/;
+
+		        // 아이디가 비어 있을 때 처리
+		        if (mId === "") {
+		            idError.textContent = "아이디를 입력하세요.";
+		            idError.style.color = "red";
+		            return;
+		        }
+
+		        // 형식이 맞지 않을 경우 중복 체크 실행하지 않음
+		        if (!idPattern.test(mId)) {
+		            idError.textContent = "아이디는 소문자 영문자와 숫자의 조합으로 4~16자여야 하며, 숫자만으로는 사용할 수 없습니다.";
+		            idError.style.color = "red";
+		            return;
+		        }
+
+		        // Ajax를 이용한 중복 확인
+		        $.ajax({
+		            url: '<%=contextPath%>/checkId.me', // 서블릿 경로
+		            type: 'GET',
+		            data: { mId: mId },
+		            success: function(response) {
+		                if (response === "NNNNN") {
+		                    idError.textContent = "이미 존재하는 아이디입니다.";
+		                    idError.style.color = "red";
+		                } else if (response === "NNNNY") {
+		                    idError.textContent = "사용 가능한 아이디입니다.";
+		                    idError.style.color = "green";
+		                }
+		            },
+		            error: function() {
+		                idError.textContent = "서버 요청 중 오류가 발생했습니다.";
+		                idError.style.color = "red";
+		            }
+		        });
+		    });
+		});
+	
+		function execDaumPostcode() {
+	        new daum.Postcode({
+	            oncomplete: function(data) {
+	                // 팝업에서 검색결과 항목을 클릭했을 때 실행할 코드를 작성하는 부분입니다.
+	                // 예: 우편번호와 주소 정보를 해당 필드에 넣습니다.
+	                document.getElementById('zipcode').value = data.zonecode; // 우편번호
+	                document.getElementById('add').value = data.roadAddress; // 도로명 주소
+	                document.getElementById('address_text2').focus(); // 상세 주소로 포커스 이동
+	            }
+	        }).open();
+	    }
+		
+		</script>
+		
+		<script>
+document.addEventListener("DOMContentLoaded", function () {
+    // Caps Lock 경고 메시지 요소
+    const capsLockWarning = document.getElementById("caps-lock-warning");
+    const capsLockConfirmWarning = document.getElementById("caps-lock-confirm-warning"); // 비밀번호 확인 필드용 Caps Lock 경고
+    const pwdInput = document.getElementById("input_pwd");
+    const pwdConfirmInput = document.getElementById("input_pwd2");
+
+    // 비밀번호 입력 필드에서 키를 누를 때 Caps Lock 상태 감지
+    pwdInput.addEventListener("keydown", function (event) {
+        if (event.getModifierState("CapsLock")) {
+            capsLockWarning.style.display = "block"; // Caps Lock 켜졌을 때 경고 메시지 표시
+        } else {
+            capsLockWarning.style.display = "none"; // Caps Lock 꺼졌을 때 경고 메시지 숨김
+        }
+    });
+
+    // 비밀번호 입력 필드에서 키를 뗄 때도 Caps Lock 상태를 확인하여 경고 메시지 숨기기
+    pwdInput.addEventListener("keyup", function (event) {
+        if (!event.getModifierState("CapsLock")) {
+            capsLockWarning.style.display = "none"; // Caps Lock 꺼졌을 때 경고 메시지 숨김
+        }
+    });
+
+    // 비밀번호 확인 입력 필드에서 Caps Lock 상태 감지
+    pwdConfirmInput.addEventListener("keydown", function (event) {
+        if (event.getModifierState("CapsLock")) {
+            capsLockConfirmWarning.style.display = "block"; // Caps Lock 켜졌을 때 경고 메시지 표시
+        } else {
+            capsLockConfirmWarning.style.display = "none"; // Caps Lock 꺼졌을 때 경고 메시지 숨김
+        }
+    });
+
+    // 비밀번호 확인 입력 필드에서 키를 뗄 때도 Caps Lock 상태를 확인하여 경고 메시지 숨기기
+    pwdConfirmInput.addEventListener("keyup", function (event) {
+        if (!event.getModifierState("CapsLock")) {
+            capsLockConfirmWarning.style.display = "none"; // Caps Lock 꺼졌을 때 경고 메시지 숨김
+        }
+    });
+});
+</script>
 		
 	</body>
 </html>

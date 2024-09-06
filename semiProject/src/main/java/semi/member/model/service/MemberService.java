@@ -144,16 +144,7 @@ public class MemberService {
     	return m;
     }
     
-   /*
-    public String pwdFindSearch(String email) {
-    	Connection conn = getConnection();
-    	
-    	String findPwd = new MemberDao().pwdFindSearch(conn,email);
-    	
-    	close(conn);
-    	
-    	return findPwd;
-    }*/
+   
     
     public int checkId(String mId) {
     	Connection conn = getConnection();
@@ -187,4 +178,124 @@ public class MemberService {
 	}
 
 
+    
+    public int updateMember(Member member) {
+        Connection conn = getConnection();
+        int result = new MemberDao().updateMember(conn, member);
+
+        if (result > 0) {
+            commit(conn);
+        } else {
+            rollback(conn);
+        }
+
+        close(conn);
+        return result;
+    }
+
+
+    public int checkNickname(String nickname) {
+        Connection conn = getConnection();
+        int result = new MemberDao().checkNickname(conn, nickname);
+        close(conn);
+        return result;
+    }
+    
+    // 주소 업데이트 메서드
+    public int updateAddress(Member member) {
+        Connection conn = getConnection();
+        int result = new MemberDao().updateAddress(conn, member);
+        if (result > 0) {
+            commit(conn);
+        } else {
+            rollback(conn);
+        }
+        close(conn);
+        return result;
+    }
+    
+    public int deleteMember(String userId) {
+        Connection conn = getConnection();
+        int result = new MemberDao().deleteMember(conn, userId);
+        
+        if (result > 0) {
+            commit(conn);
+        } else {
+            rollback(conn);
+        }
+        
+        close(conn);
+        return result;
+    }
+    
+    public Member findMemberByDetails(String userId, String name, String birth) {
+        Connection conn = getConnection();
+
+        Member member = new MemberDao().findMemberByDetails(conn, userId, name, birth);
+
+        close(conn);
+
+        return member;
+    }
+    
+    public Member findMemberById(String userId) {
+        Connection conn = getConnection();
+        Member member = new MemberDao().findMemberById(conn, userId);
+        close(conn);
+        return member;
+    }
+
+    public Member findMemberByName(String userId, String name) {
+        Connection conn = getConnection();
+        Member member = new MemberDao().findMemberByName(conn, userId, name);
+        close(conn);
+        return member;
+    }
+
+    public Member findMemberByBirth(String userId, String birth) {
+        Connection conn = getConnection();
+        Member member = new MemberDao().findMemberByBirth(conn, userId, birth);
+        close(conn);
+        return member;
+    }
+    
+    public boolean isUserIdValid(String userId) {
+        Connection conn = getConnection();
+        boolean isValid = new MemberDao().isUserIdValid(conn, userId);
+        close(conn);
+        return isValid;
+    }
+
+    // 이름 유효성 검사 (아이디와 이름이 매칭되는지 확인)
+    public boolean isNameValid(String userId, String name) {
+        Connection conn = getConnection();
+        boolean isValid = new MemberDao().isNameValid(conn, userId, name);
+        close(conn);
+        return isValid;
+    }
+
+    // 생년월일 유효성 검사 (아이디와 생년월일이 매칭되는지 확인)
+    public boolean isBirthValid(String userId, String birth) {
+        Connection conn = getConnection();
+        boolean isValid = new MemberDao().isBirthValid(conn, userId, birth);
+        close(conn);
+        return isValid;
+    }
+    
+    public int updatePassword(String userId, String newPwd) {
+        Connection conn = getConnection();
+        int result = new MemberDao().updatePassword(conn, userId, newPwd);
+        
+      
+        if (result > 0) {
+            commit(conn);
+        } else {
+            rollback(conn);
+        }
+        
+        
+        
+        close(conn);
+        return result;
+    }
 }

@@ -154,6 +154,25 @@ public class Post {
 		this.mNickName = mNickName;
 		mNo = mNo2;
 	}
+	
+	
+	
+	
+
+	public Post(int postNo, String mId, int mNO, String mNickName, String postTitle, String postContent, int postCount, int postRecommend,
+			Date postDate, Date postModifyed) {
+		super();
+		this.postNo = postNo;
+		this.mId = mId;
+		this.mNO = mNO;
+		this.postTitle = postTitle;
+		this.postContent = postContent;
+		this.postCount = postCount;
+		this.postRecommend = postRecommend;
+		this.postDate = postDate;
+		this.postModifyed = postModifyed;
+		this.mNickName = mNickName;
+	}
 
 	public String getmId() {
 		return mId;
