@@ -8,19 +8,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import semi.member.model.service.MemberService;
-import semi.member.model.vo.Member;
 
 /**
- * Servlet implementation class KakaoLoginController
+ * Servlet implementation class ChekNicknameController
  */
-@WebServlet("/kakaoLogin.me")
-public class KakaoLoginController extends HttpServlet {
+@WebServlet("/checkNickname.me")
+public class ChekNicknameController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public KakaoLoginController() {
+    public ChekNicknameController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,30 +28,23 @@ public class KakaoLoginController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String userId = (String)request.getParameter("userId");
-		
-		
-		Member loginUser = new MemberService().kakaoLoginMember(userId);
-		
-		
-		if(loginUser == null) {
-			request.getSession().setAttribute("alertMsg", "실패");
-			response.sendRedirect(request.getContextPath() );
-			
-		} else {
-			request.getSession().setAttribute("loginUser", loginUser);
-			response.sendRedirect(request.getContextPath() + "/login.ad");
-		}
-		
+		String nickname = request.getParameter("newNickname");
+
+        MemberService memberService = new MemberService();
+        boolean isDuplicate = memberService.checkNickname(nickname) > 0;
+
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write("{\"isDuplicate\": " + isDuplicate + "}");
+      
 	}
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		    }
 	}
 
-}
+

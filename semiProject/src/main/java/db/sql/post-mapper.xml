@@ -38,28 +38,27 @@
 <entry key="PostList">
 
 	SELECT * 
-  	  FROM (
-            SELECT ROWNUM AS RNUM,A.*
-                FROM (
-                  SELECT
-                        POST_NO 
-                      , M_ID
-                      , M_NO
-                      , POST_TITLE
-                      , POST_CONTENT
-                      , POST_COUNT
-                      , POST_RECOMMEND
-                      , POST_DATE
-                 	  , POST_MODIFYED	
-                  FROM POST P
-                  JOIN MEMBER USING(M_NO)
-                  WHERE POST_STATUS = 'Y'
-                  ORDER
-                     BY POST_NO DESC
-             ) A
-
-        )
-        WHERE RNUM BETWEEN ? AND ?
+FROM (
+    SELECT ROWNUM AS RNUM, A.*
+    FROM (
+        SELECT
+            POST_NO,
+            M_ID,
+            M_NO,
+            M_NICKNAME,  -- 여기서 닉네임을 추가
+            POST_TITLE,
+            POST_CONTENT,
+            POST_COUNT,
+            POST_RECOMMEND,
+            POST_DATE,
+            POST_MODIFYED
+        FROM POST P
+        JOIN MEMBER M USING(M_NO)
+        WHERE POST_STATUS = 'Y'
+        ORDER BY POST_NO DESC
+    ) A
+)
+WHERE RNUM BETWEEN ? AND ?
 
 </entry>
 
@@ -74,20 +73,19 @@ UPDATE POST
 
 <entry key="selectPost">
 SELECT
-        POST_NO
-      , M_NICKNAME
-      , POST_TITLE
-      , POST_CONTENT
-      , M_ID
-      , POST_COUNT
-      , POST_RECOMMEND
-      , POST_DATE
-      , POST_MODIFYED
+        POST_NO,
+        M_NICKNAME,  -- 닉네임 필드 추가
+        POST_TITLE,
+        POST_CONTENT,
+        M_ID,
+        POST_COUNT,
+        POST_RECOMMEND,
+        POST_DATE,
+        POST_MODIFYED
   FROM POST
   JOIN MEMBER USING(M_NO)
  WHERE POST_NO = ?
    AND POST_STATUS = 'Y'
-
 </entry>
 
 <entry key="updatePost">
@@ -113,6 +111,7 @@ SELECT
         POST_MODIFYED,
         POST_STATUS,
         POST_IMAGE_PATH
+        
     )
     VALUES
     (
@@ -125,8 +124,9 @@ SELECT
         SYSDATE,
         SYSDATE,
         'Y',
-        ?
-    );
+        null
+       
+    )
 </entry>
 <entry key="deletePost">
 	UPDATE POST

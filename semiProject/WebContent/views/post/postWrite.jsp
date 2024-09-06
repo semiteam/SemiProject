@@ -131,13 +131,11 @@
 							enctype="multipart/form-data">
 							<input type="hidden" name="mno" value="<%=loginUser.getmNo()%>">
 							<div class="title">
-								<input type="text" class="post-title" placeholder="제목을 입력해 주세요."
-									name="title">
+								<input type="text" class="post-title" placeholder="제목을 입력해 주세요." name="title">
 							</div>
 							<hr>
 							<div class="content_text">
-								<textarea class="post-content" placeholder="내용을 입력해 주세요."
-									name="content"></textarea>
+								<textarea class="post-content" placeholder="내용을 입력해 주세요." name="content"></textarea>
 							</div>
 							<hr>
 							<div class="image-upload-wrapper"
@@ -163,64 +161,16 @@
 							<div class="button-box">
 								<button type="reset" id="cancel-btn"
 									onclick="location.href='.views/post/postMain.jsp'">취소하기</button>
+								
 								<button type="submit" id="submit-btn">글등록</button>
 							</div>
 						</form>
 					</div>
-                        </section>
-                        <section>
-                            <div class="footer"></div>
-                        </section>
-                </div>
-            </div>
+            </section>
         </div>
-    
-     <script>
-    document.getElementById('imageButton').addEventListener('click', function() {
-        document.getElementById('imageInput').click();
-    });
+    </div>
+</div>
 
-    document.getElementById('imageInput').addEventListener('change', function(event) {
-        const file = event.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-
-            reader.onload = function(e) {
-                const imgElement = document.getElementById('previewImage');
-                imgElement.src = e.target.result; // 파일 데이터를 이미지 소스로 설정
-                imgElement.style.display = 'block'; // 이미지를 표시
-            };
-
-            reader.readAsDataURL(file); // 파일을 읽어서 데이터 URL로 변환
-        }
-    });
-
-    // 글 등록 후 이미지를 다른 섹션에 표시하는 함수
-    document.getElementById('submit-btn').addEventListener('click', function(event) {
-        event.preventDefault();  // 폼의 기본 제출 동작을 막음
-
-        // 서버로 폼 데이터 전송
-        const formData = new FormData(document.querySelector('form'));
-
-        fetch('<%= contextPath %>/uploadImage', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                // 이미지가 성공적으로 업로드되었을 때, 서버에서 반환한 이미지 URL을 표시
-                document.querySelector('.thumbnail img').src = data.imageUrl;  // 서버로부터 받은 이미지 URL 사용
-            } else {
-                alert('이미지 업로드에 실패했습니다.');
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('서버와 통신 중 오류가 발생했습니다.');
-        });
-    });
-</script>
-       
-    </body>
+	
+</body>
 </html>

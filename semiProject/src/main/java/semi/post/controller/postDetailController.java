@@ -1,13 +1,17 @@
 package semi.post.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.stream.events.Comment;
 
 import semi.member.model.vo.Member;
+
 import semi.post.model.service.PostService;
 import semi.post.model.vo.Post;
 
@@ -35,6 +39,8 @@ public class postDetailController extends HttpServlet {
 		
 		int pno = Integer.parseInt(request.getParameter("pno"));
 		String userId = ((Member)request.getSession().getAttribute("loginUser")).getmId();
+		
+		
 		
 		int result = new PostService().increaseCount(pno);
 		
