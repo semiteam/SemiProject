@@ -271,4 +271,31 @@ WHERE M_ID = ?
     SELECT COUNT(*) FROM MEMBER WHERE M_ID = ? AND SUBSTR(M_RRN, 1, 6) = ?
 </entry>
 
+	<entry key ="unblockMember">
+		UPDATE MEMBER
+		   SET M_STATUS = 'U'
+		 WHERE M_STATUS != 'N'
+		   AND M_NO = ?
+	</entry>
+	
+	
+	<entry key = "memberStatus">
+	SELECT M_STATUS
+  	  FROM MEMBER
+     WHERE M_NO = ?
+	</entry>
+	
+	<entry key = "selectCommnetery">
+SELECT 
+          C_NO
+        , M_NO
+        , C_CONTENT
+        , C_DATE
+        , C_TYPE
+        , C_STATUS
+  FROM COMMENTERY
+  JOIN MEMBER 
+  USING (M_NO)
+ WHERE C_STATUS = 'Y'
+</entry>
 </properties>

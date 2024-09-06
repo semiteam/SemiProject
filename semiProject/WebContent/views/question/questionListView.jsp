@@ -145,7 +145,7 @@
                                     <tr data-pwd="<%=q.getqPwd()%>">
                                         <td><%=q.getqNo()%></td>
                                         <td><%=q.getQtitle()%></td>
-                                        <td><%=q.getmName()%></td>
+                                        <td><%=q.getmId()%></td>
                                         <td><%=q.getqDate()%></td>
                                         <td><%=q.getqAnswer()%></td>
                                          <%if(loginAdmin != null) { %>

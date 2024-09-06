@@ -102,28 +102,57 @@ SELECT
 	
 	<entry key="findMember">
 	<![CDATA[
-   SELECT 
-   		   M_ID
-   		  ,M_NAME
-   		  ,M_REPORT
-   		  ,M_STATUS
-	 FROM  MEMBER
-	WHERE (M_ID LIKE ? OR M_NAME LIKE ?)
-	  AND ROWNUM <= 5
+  SELECT 
+           M_NO
+		 , M_NAME
+		 , M_ID
+		 , M_NICKNAME
+	 	 , M_PWD
+		 , M_RRN
+		 , M_PHONE
+		 , M_EMAIL
+		 , M_ADDRESS
+		 , M_DATE
+		 , M_MODIFY
+		 , M_STATUS
+		 , M_REPORT
+		 , M_GRADE
+		 , M_PROFILE 
+	FROM   MEMBER
+   WHERE  (M_ID LIKE ? OR M_NAME LIKE ?)
+	 AND ROWNUM <= 5
        ]]>
 	</entry>
 	
 	<entry key = "findPost">
 	<![CDATA[
-	 SELECT 
-   		   POST_NO
-   		  ,M_NAME
-   		  ,POST_TITLE
-	 FROM  POST
-     JOIN  MEMBER
-     USING (M_NO)
-	WHERE (POST_TITLE LIKE ? OR M_NAME LIKE ?)
-	  AND ROWNUM <= 5;
+SELECT *
+FROM (
+    SELECT NO, M_ID, TITLE
+    FROM (
+        SELECT 
+               POST_NO AS NO,
+               M_ID,
+               POST_TITLE AS TITLE
+          FROM POST
+          JOIN MEMBER USING (M_NO)
+         WHERE POST_STATUS = 'Y' 
+           AND (POST_TITLE LIKE ? OR M_ID LIKE ?)
+
+        UNION
+
+        SELECT 
+               Q_NO AS NO,
+               M_ID,
+               Q_TITLE AS TITLE
+          FROM QUESTION
+          JOIN MEMBER USING (M_NO)
+         WHERE Q_STATUS = 'Y'
+           AND (Q_TITLE LIKE ? OR M_ID LIKE ?)
+    )
+    ORDER BY NO
+)
+WHERE ROWNUM <= 9
 	  ]]>
 	</entry>
 	
@@ -131,13 +160,13 @@ SELECT
 	<![CDATA[
 	SELECT 
    		   Q_NO
-   		  ,M_NAME
+   		  ,M_ID
    		  ,Q_TITLE
 	 FROM  QUESTION
      JOIN  MEMBER
     USING (M_NO)
-	WHERE (Q_TITLE LIKE ? OR M_NAME LIKE ?)
-	  AND ROWNUM <= 5;
+	WHERE (Q_TITLE LIKE ? OR M_ID LIKE ?)
+	  AND ROWNUM <= 5
 	    ]]>
 	</entry>
 

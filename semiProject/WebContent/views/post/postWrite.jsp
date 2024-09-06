@@ -125,10 +125,18 @@
                     <div class="textLine">하나뿐인 여행기를 만들어 보세요📝</div>
                     <div class="whiteBox"></div>
                 </div>
-            </section>
-            <section>
-                <div class="post">
-						<form action="<%=contextPath%>/insert.po" method="post" enctype="multipart/form-data">
+    
+                <div class="content">
+                    <section>
+                        <div class="headLine">
+                            <div class="textLine">하나뿐인 여행기를 만들어 보세요📝</div>
+                            <div class="whiteBox"></div>
+                        </div>
+                        </section>
+                        <section>
+                        <div class="post">
+						<form action="<%=contextPath%>/insert.po" method="post"
+							enctype="multipart/form-data">
 							<input type="hidden" name="mno" value="<%=loginUser.getmNo()%>">
 							<div class="title">
 								<input type="text" class="post-title" placeholder="제목을 입력해 주세요." name="title">

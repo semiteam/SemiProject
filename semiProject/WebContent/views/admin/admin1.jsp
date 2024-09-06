@@ -22,11 +22,6 @@ PageInfo postPi = (PageInfo)request.getAttribute("postPi"); ArrayList<Member>
                 <!DOCTYPE html>
                 <html lang="en">
                   <head>
-                    <style>
-                      #search___result {
-                        height: auto;
-                      }
-                    </style>
                     <meta charset="UTF-8" />
                     <meta
                       name="viewport"
@@ -77,6 +72,7 @@ PageInfo postPi = (PageInfo)request.getAttribute("postPi"); ArrayList<Member>
                     <script defer src="resouces/js/common.js"></script>
                     <link rel="stylesheet" href="resouces/css/manager1.css" />
                     <link rel="stylesheet" href="resouces/css/common.css" />
+                    
                   </head>
                   <body>
                     <%@ include file="../common/basic.jsp" %>
@@ -212,7 +208,11 @@ PageInfo postPi = (PageInfo)request.getAttribute("postPi"); ArrayList<Member>
                                       if (data !== null) {
                                         $.each(data, function (i) {
                                           str +=
-                                            '<div class="result">' +
+                                          '<div class="user-info" data-mno="' + data[i].mNo + '"data-mname="' + data[i].mName
+                                                             + '" data-mreport="' + data[i].mReport + '"data-mstatus="' + data[i].mStatus 
+                                                             + '"data-maddress="' + data[i].mAddress + '"data-mid="' + data[i].mId 
+                                                             + '"data-mphone="' + data[i].mPhone + '"data-memail="' + data[i].mEmail 
+                                                             + '"data-mgrade="' + data[i].mGrade  + '" >' +
                                             data[i].mId +
                                             " / " +
                                             data[i].mName +
@@ -220,6 +220,12 @@ PageInfo postPi = (PageInfo)request.getAttribute("postPi"); ArrayList<Member>
                                             data[i].mReport +
                                             " / " +
                                             data[i].mStatus +
+                                            " / " +
+                                            '<button class="btn btn-danger block-btn" data-mno="' + data[i].mNo + '">차단</button>' +
+                                            "  " +
+                                            '<button class="btn btn-secondary unblock-btn" data-mno="' + data[i].mNo + '">차단해제</button>' +
+                                            "  " +
+                                        
                                             "</div>";
                                         });
                                         $("#find_result").html(str);
@@ -234,8 +240,10 @@ PageInfo postPi = (PageInfo)request.getAttribute("postPi"); ArrayList<Member>
                                   $("#place-member").on("keyup", function () {
                                     if ($(this).val() === "") {
                                       $("#find_result").html("");
+                                      $(".user-info").show()
                                     } else {
                                       findMember($(this).val());
+                                      $(".user-info").hide()
                                     }
                                   });
                                 });
@@ -340,7 +348,7 @@ PageInfo postPi = (PageInfo)request.getAttribute("postPi"); ArrayList<Member>
                               type="text"
                               placeholder="찾고싶은 글을 검색하세요."
                               class="search-txt"
-                              id="place_wirte"
+                              id="place_write"
                             />
                             <div id="result-post"></div>
                             <div id="result-question"></div>
@@ -354,6 +362,7 @@ PageInfo postPi = (PageInfo)request.getAttribute("postPi"); ArrayList<Member>
                                     value: value,
                                   },
                                   success: function (data) {
+                                    console.log(data);
                                     $("#result-post").html("");
 
                                     let str = "";
@@ -361,33 +370,16 @@ PageInfo postPi = (PageInfo)request.getAttribute("postPi"); ArrayList<Member>
                                     if (data !== null) {
                                       $.each(data, function (i) {
                                         str +=
-                                          '<div class = "result>' +
-                                          data[i].postNo +
+                                          '<div class = "post-info">' +
+                                          "번호:" + data[i].postNo +
                                           " / " +
-                                          data[i].mNo +
+                                          "작성자:"+ data[i].mId +
                                           " / " +
-                                          data[i].postTitle +
+                                          "제목:"+data[i].postTitle +
                                           "</div>";
+                                       
                                       });
                                       $("#result-post").html(str);
-                                    }
-
-                                    $("#result-question").html("");
-
-                                    let str2 = "";
-
-                                    if (data !== null) {
-                                      $.each(data, function (i) {
-                                        str2 +=
-                                          '<div class = "result>' +
-                                          data[i].qNo +
-                                          " / " +
-                                          data[i].mNo +
-                                          " / " +
-                                          data[i].qTitle +
-                                          "</div>";
-                                      });
-                                      $("#result-question").html(str2);
                                     }
                                   },
 
@@ -401,9 +393,10 @@ PageInfo postPi = (PageInfo)request.getAttribute("postPi"); ArrayList<Member>
                                 $("#place_write").on("keyup", function () {
                                   if ($(this).val() === "") {
                                     $("#result-post").html("");
-                                    $("#result-question").html("");
+                                    $('.post-info').show()
                                   } else {
                                     findWirte($(this).val());
+                                    $('.post-info').hide()
                                   }
                                 });
                               });
@@ -458,12 +451,14 @@ PageInfo postPi = (PageInfo)request.getAttribute("postPi"); ArrayList<Member>
                                   data-mno="<%=q.getmNo() %>"
                                   data-mname="<%=q.getmName() %>"
                                   data-question-date="<%=q.getqDate()%>"
+                                  data-question-status="<%=q.getqStatus()%> %>"
                                 >
                                   <tr>
                                     <td><%=q.getqNo()%></td>
                                     <td><%=q.getQtitle()%></td>
-                                    <td><%=q.getmNo()%></td>
+                                    <td><%=q.getmId()%></td>
                                     <td><%=q.getqDate()%></td>
+                                    <td>답변여부 :<%=q.getqAnswer()%></td>
                                     <td>
                                       <button
                                         onclick="location.href='<%=contextPath%>/detail.sc?qNo=<%=q.getqNo()%>'"
@@ -529,11 +524,11 @@ PageInfo postPi = (PageInfo)request.getAttribute("postPi"); ArrayList<Member>
                               ></div>
                               <div
                                 class="modal-text-content"
-                                id="user_name"
+                                id="user_id"
                               ></div>
                               <div
                                 class="modal-text-content"
-                                id="user_id"
+                                id="user_name"
                               ></div>
                               <div
                                 class="modal-text-content"
@@ -685,7 +680,7 @@ PageInfo postPi = (PageInfo)request.getAttribute("postPi"); ArrayList<Member>
 
                            $(function() {
 
-                               $('.user-info').on('click', function() {
+                               $(document).on('click','.user-info', function() {
                                    const mNo = $(this).data('mno');
                                    const mId = $(this).data('mid');
                                    const mName = $(this).data('mname');
@@ -697,8 +692,8 @@ PageInfo postPi = (PageInfo)request.getAttribute("postPi"); ArrayList<Member>
                                    const mStatus = $(this).data('mstatus');
 
                                    $('#user_no').text(`회원 : ` + mNo);
-                                   $('#user_name').text(`아이디 : ` + mId);
-                                   $('#user_id').text(`이름 : ` + mName);
+                                   $('#user_id').text(`아이디 : ` + mId);
+                                   $('#user_name').text(`이름 : ` + mName);
                                    $('#user_phone').text(`전화번호 : ` + mPhone);
                                    $('#user_email').text(`이메일 : ` + mEmail);
                                    $('#user_address').text(`주소 : ` + mAddress);
@@ -722,17 +717,16 @@ PageInfo postPi = (PageInfo)request.getAttribute("postPi"); ArrayList<Member>
                                });
 
 
-                       $('.block-btn').on('click', function() {
-                                   event.stopPropagation(); //  이벤트 전파를 멈추게 해주는 메소드
-                          const mNo = $(this).data('mno');
+                               $(document).on('click', '.block-btn', function() {
+                            	    const mNo = $(this).data('mno'); // Get data attribute
 
-                          if (confirm('정말로 차단하시겠습니까?')) {
-                              window.location.href = `<%= contextPath %>/block.ad?mNo=` + mNo;
-                          }
-                      });
+                            	    if (confirm('정말로 차단하시겠습니까?')) {
+                            	        window.location.href = `<%= contextPath %>/block.ad?mNo=` + mNo;
+                            	    }
+                            	});
 
 
-                               $('.unblock-btn').on('click', function() {
+                               $(document).on('click','.unblock-btn', function() {
                                    event.stopPropagation(); //  이벤트 전파를 멈추게 해주는 메소드
                                    const mNo = $(this).data("mno");
 

@@ -40,18 +40,18 @@ public class FindWriteController extends HttpServlet {
 		String str = request.getParameter("value");
 		String value = "%" + str + "%";
 		
-		ArrayList<Post> pList = new AdminService().findPost(value);
-		ArrayList<Question> qList = new AdminService().findQuestion(value);
+		ArrayList<Post> list = new AdminService().findPost(value);
+		//ArrayList<Question> qList = new AdminService().findQuestion(value);
 		
-		ArrayList<Object> combiList = new ArrayList<Object>();
+		//ArrayList<Object> combiList = new ArrayList<Object>();
 		
-		combiList.add(pList);
-		combiList.add(qList);
+		//combiList.add(pList);
+		//combiList.add(qList);
+		
+		response.setContentType("application/json; charset=utf-8");
+		
+		new Gson().toJson(list,response.getWriter());
 
-		
-		response.setContentType("appliction/json; charset=utf-8");
-		
-		new Gson().toJson(combiList,response.getWriter());
 	}
 
 	/**

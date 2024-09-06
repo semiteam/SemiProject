@@ -48,13 +48,35 @@
 	<%@ include file="../common/basic.jsp"%>
 
 	<%
-	// 로그인된 사용자의 정보를 가져옴
-    String userNickname = loginUser.getmNickname();
-    String phone = loginUser.getmPhone();
-    String email = loginUser.getmEmail();
-    String postalCode = loginUser.getPostalCode(); // 새로 추가한 우편번호
-    String basicAddress = loginUser.getBasicAddress(); // 새로 추가한 기본 주소
-    String detailedAddress = loginUser.getDetailedAddress(); // 새로 추가한 상세 주소
+	// 로그인된 사용자의 정보를 가져옴s
+    	String postalCode ="";  // 새로 추가한 우편번호
+    	String basicAddress = "";// 새로 추가한 기본 주소
+    	String detailedAddress = ""; // 새로 추가한 상세 주소
+		String userNickname = "";
+		String phone = "";
+		String email = "";
+		String address = "";
+		
+		if(loginUser != null){
+			userNickname = loginUser.getmNickname();
+			phone = loginUser.getmPhone();
+			email = loginUser.getmEmail();
+			address = loginUser.getmAddress();
+			postalCode = loginUser.getPostalCode();
+			basicAddress = loginUser.getBasicAddress();
+			detailedAddress = loginUser.getDetailedAddress();
+			
+		}else{
+			userNickname = loginAdmin.getaNickname();
+			phone = loginAdmin.getaNickname();
+			email = loginAdmin.getaNickname();
+			address = loginAdmin.getaNickname();
+			postalCode = "우편번호";
+			basicAddress = "우리집";
+			detailedAddress = "2층 ㅎ";
+			
+		}
+		
 	%>
 		
 	
