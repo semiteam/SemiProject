@@ -6,7 +6,9 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import semi.admin.model.dao.AdminDao;
 import semi.common.model.vo.PageInfo;
+import semi.member.model.vo.Member;
 import semi.question.model.dao.QuestionDao;
 import semi.question.model.vo.Question;
 import semi.question.model.vo.Reply;
@@ -93,5 +95,6 @@ public class QuestionService {
 		
 		return result;
 	}
+
 
 }

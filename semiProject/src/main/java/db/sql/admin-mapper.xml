@@ -162,11 +162,16 @@ WHERE ROWNUM <= 9
    		   Q_NO
    		  ,M_ID
    		  ,Q_TITLE
+          ,Q_CONTENT
+          ,Q_DATE
+          ,Q_STATUS
+          ,Q_ANSWER
+          ,Q_PWD
 	 FROM  QUESTION
      JOIN  MEMBER
     USING (M_NO)
 	WHERE (Q_TITLE LIKE ? OR M_ID LIKE ?)
-	  AND ROWNUM <= 5
+	  AND ROWNUM <= 10
 	    ]]>
 	</entry>
 

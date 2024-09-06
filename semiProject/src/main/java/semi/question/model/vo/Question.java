@@ -18,11 +18,8 @@ public class Question {
 	
 	
 	public Question() {}
-	
-	
-	
-	
-	
+
+
 	public Question(int qNo, String mId, String qTitle) {
 		super();
 		this.qNo = qNo;

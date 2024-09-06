@@ -2,6 +2,7 @@ package semi.admin.model.dao;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.lang.annotation.Retention;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -364,7 +365,12 @@ public class AdminDao {
 			while(rset.next()) {
 				list.add(new Question(rset.getInt("Q_NO"),
 									  rset.getString("M_ID"),
-									  rset.getString("Q_TITLE")));
+									  rset.getString("Q_TITLE"),
+									  rset.getString("Q_CONTENT"),
+									  rset.getDate("Q_DATE"),
+									  rset.getString("Q_STATUS"),
+									  rset.getString("Q_ANSWER"),
+									  rset.getInt("Q_PWD")));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
