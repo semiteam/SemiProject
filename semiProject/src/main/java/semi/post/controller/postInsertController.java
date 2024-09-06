@@ -52,6 +52,7 @@ public class postInsertController extends HttpServlet {
         // 세션에서 로그인된 사용자 정보 가져오기
         HttpSession session = request.getSession();
         Member loginUser = (Member) session.getAttribute("loginUser");
+        System.out.println("gd");
 
         if (loginUser == null) {
             // 로그인되지 않은 경우, 로그인 페이지로 리다이렉트
@@ -66,16 +67,15 @@ public class postInsertController extends HttpServlet {
         String title = request.getParameter("title");
         String content = request.getParameter("content");
         
-        System.out.println(mno);
-        System.out.println(title);
-        System.out.println(content);
-        
+
         // 게시글 등록 서비스 호출
         int result = new PostService().insertPost(mno, title, content);
 
         if (result > 0) {
             // 게시글 등록 성공 시 게시글 목록 페이지로 이동
             response.sendRedirect(request.getContextPath() + "/list.po?cpage=1");
+            request.setAttribute(title, "title");
+            request.setAttribute(content, "content");
         } else {
             // 게시글 등록 실패 시 에러 페이지로 이동
             response.sendRedirect(request.getContextPath() + "/error.jsp");

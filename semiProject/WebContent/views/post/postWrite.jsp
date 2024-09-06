@@ -100,10 +100,11 @@
             </section>
             <section>
                 <div class="post">
-						<form action="<%=contextPath%>/insert.po" method="post" enctype="multipart/form-data">
+						<form action="<%=contextPath%>/insert.po" method="post">
 							<input type="hidden" name="mno" value="<%=loginUser.getmNo()%>">
 							<div class="title">
 								<input type="text" class="post-title" placeholder="제목을 입력해 주세요." name="title">
+								
 							</div>
 							<hr>
 							<div class="content_text">

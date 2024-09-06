@@ -109,8 +109,7 @@ SELECT
         POST_RECOMMEND,
         POST_DATE,
         POST_MODIFYED,
-        POST_STATUS,
-        POST_IMAGE_PATH
+        POST_STATUS
         
     )
     VALUES
@@ -123,8 +122,7 @@ SELECT
         0,
         SYSDATE,
         SYSDATE,
-        'Y',
-        null
+        'Y'
        
     )
 </entry>
