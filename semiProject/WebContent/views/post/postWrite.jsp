@@ -108,7 +108,7 @@
                     <div class="explanation">리뷰 볼래?</div>
                 </div>
                 <% if (loginAdmin != null) { %>
-                    <div id="side_menu_close_4" onclick="location.href='<%= contextPath %>/GoAdminMain.ad'">
+                    <div id="side_menu_close_4" onclick="location.href='<%= contextPath %>/adminList.ad?cpage=1&pCpage=1'">
                         <img src="resouces/img/manage_accounts_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.png" alt="">
                         <div class="explanation">관리자 메뉴</div>
                     </div>
@@ -120,7 +120,7 @@
         </div>
 
         <div class="content">
-            <section>
+            <section style="height: 250px;">
                 <div class="headLine">
                     <div class="textLine">하나뿐인 여행기를 만들어 보세요📝</div>
                     <div class="whiteBox"></div>

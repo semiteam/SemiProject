@@ -4,8 +4,10 @@
     width: 890px;
     height: 250px;
     margin: auto;
-    position: relative;
+    position: absolute;
     display: flex;
+    top: 0;
+    left: 385px;
 }
 
 .headLine .textLine {

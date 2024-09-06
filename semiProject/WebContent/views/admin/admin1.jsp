@@ -137,7 +137,7 @@ PageInfo postPi = (PageInfo)request.getAttribute("postPi"); ArrayList<Member>
 
                           <div
                             id="side_menu_close_1"
-                            onclick="location.href='<%= contextPath %>/GoAdminMain.ad'"
+                            onclick="location.href='<%= contextPath %>/adminList.ad?cpage=1&pCpage=1'"
                           >
                             <img
                               src="resouces/img/airplane_ticket_24dp_5F6368.png"

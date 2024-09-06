@@ -51,13 +51,13 @@
 
             <div class="under">
                 <div class="side_menu">
-                    <div id="side_menu_open_1" onclick="location.href='<%= contextPath %>/GoAdminMain.ad'">회원 관리</div>
+                    <div id="side_menu_open_1" onclick="location.href='<%= contextPath %>/adminList.ad?cpage=1&pCpage=1'">회원 관리</div>
                     <div id="side_menu_open_2" onclick="location.href='<%= contextPath %>/GoAdmin2.ad'">사용자 통계</div>
                   
                     <div id="side_menu_open_4" onclick="location.href='<%= contextPath %>'">메인 메뉴</div>
                     <div id="close_btn" onclick="side_close()"><img src="resouces/img/chevron_left_24dp_5F6368.png" alt=""></div>
     
-                    <div id="side_menu_close_1" onclick="location.href='<%= contextPath %>/GoAdminMain.ad'">
+                    <div id="side_menu_close_1" onclick="location.href='<%= contextPath %>/adminList.ad?cpage=1&pCpage=1'">
                         <img src="resouces/img/airplane_ticket_24dp_5F6368.png" alt="">
                         <div class="explanation">회원 관리</div>
                     </div>
