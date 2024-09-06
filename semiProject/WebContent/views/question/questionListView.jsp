@@ -27,8 +27,8 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 
         <!-- jQuery library -->
-        <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
-
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
         <!-- Popper JS -->
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 
@@ -110,7 +110,67 @@
             </div>
 
                 <div class="content" > 
-                    <div class="title" align="center">문의사항</div><br><br>
+                    <div class="title" align="center">문의사항 <br>
+                        <input style="width: 700px; height: 30px; font-size: 16px;" type="text" placeholder="글 제목또는 작성자를 입력하세요." class="search-txt" id="place-question" name="place-question"/> 
+                    </div><br>
+                       
+                
+                    <div id="find_result"></div>
+
+                    <script>
+                        function findQuestion(value){
+                            $.ajax({
+                                type: "get",
+                                    url: "<%=contextPath%>/findQuestion.ad",
+                                    dataType: "json",
+                                    data: {
+                                      value: value,
+                                    },
+                                    success:function(data){
+                                        $(".find-result").html("");
+                                        let str = "";
+                                        if(data !== null){
+                                            $.each(data,function(i){
+                                                str +=
+                                                '<table class="table-list question" data-qno="' + data[i].qNo + '"data-mno="' + data[i].mNo
+                                                             + '" data-qtitle="' + data[i].qTitle + '"data-qcontent="' + data[i].qContent
+                                                             + '"data-qdate="' + data[i].qDate + '"data-qstatus="' + data[i].qStatus
+                                                             + '"data-qanwer="' + data[i].qAnswer + '"data-qpwd="' + data[i].qPwd 
+                                                             + '"data-mid="' + data[i].mId +'" >' +
+                                                             "<tr>" +
+                                                             '<th width="120px">' + data[i].qNo +'</th>' +
+                                                             "<th>"+ data[i].qTitle +"</th>" +
+                                                             '<th width="120px">' + data[i].mId +'</th>' +
+                                                             '<th width="120px">' + data[i].qDate +'</th>' +
+                                                             '<th width="100px">' + data[i].qAnswer +'</th>'+
+                                                             <%if(loginAdmin != null){%>
+                                                             '<th width ="120px">' + data[i].qPwd + '</th>'
+                                                             <%}%>
+                                           				 	"</tr>" + 
+
+                                            "</table>";
+                                            });
+                                            $("#find_result").html(str);
+                                        }
+                                    },
+                                    error: function () {
+                                      console.log("통신 실패");
+                                    },
+                                 });
+                                }
+                                $(function () {
+                                  $("#place-question").on("keyup", function () {
+                                    if ($(this).val() === "") {
+                                      $("#find_result").html("");
+                                      $(".question").show()
+                                    } else {
+                                      findQuestion($(this).val());
+                                      $(".question").hide()
+                                    }
+                                  });
+                                });
+
+                             </script>
 					
 					
 					<%if(loginUser != null){ %>

@@ -191,14 +191,7 @@ public class Member {
 
 
 
-	public Member(String mName, String mId, String mNickname, String mPwd, String mEmail, String mAddress) {
-		super();
-		this.mId = mId;
-		this.mNickname = mNickname;
-		this.mPwd = mPwd;
-		this.mPhone = mPhone;
-		this.mEmail = mEmail;
-	}
+
 
 	public int getmNo() {
 		return mNo;

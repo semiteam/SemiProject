@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import semi.common.model.vo.PageInfo;
+import semi.member.model.vo.Member;
 import semi.question.model.vo.Question;
 import semi.question.model.vo.Reply;
 
