@@ -52,13 +52,19 @@
         <script defer src="resouces/js/common.js"></script>
         <link rel="stylesheet" href="resouces/css/common.css">
         <style>
-            thead tr,
-            tbody tr:not(:last-child) {
+            thead tr:not(:first-child),
+            tbody tr {
                 height: 40px;
-                border-bottom: 1px solid #ffffff;
+                border-right: 1px solid #ffffff;
+                border-top: 1px solid #ffffff;
+                border-left: 1px solid #ffffff;
             }
 
-            tbody tr:last-child {height: 40px;}
+            tbody tr:last-child {border-bottom: 1px solid white;}
+
+            thead tr:first-child {height: 70px;}
+
+            input:focus {outline: none;}
 
             tbody tr {cursor: pointer;}
 
@@ -111,8 +117,88 @@
                 </div>
     
                 <div class="content">
-                    <table style="width: 70%; color: white; border: 1px solid white; height: auto; margin: 50px auto; text-align: center;">
+                    <br><br>
+                    <table style="width: 70%; color: white; height: auto; margin: auto; text-align: center;">
                         <thead>
+                            <tr>
+                                <td colspan="7">
+                                    <input name="search" id="search" type="text" placeholder="회원 번호 또는 회원 아이디로 검색" style=" width: 40%; padding: 5px; color: white; background-color: black; border: none; border-bottom: 1px solid white; font-size: 22px;">
+                                    <script>
+                                        $(function() {
+                                            $('#search').on('keyup', function() {
+                                                $.ajax({
+                                                    url: 'SelectMemberPlan.sd',
+                                                    method: 'post',
+                                                    data: {
+                                                        search: $('#search').val(),
+                                                    },
+                                                    success: function(result) {
+                                                        console.log(result);
+                                                    	if ($('#search').val() === '') {
+                                                            $('tbody').html(
+                                                                `<% for (Schedule sd : list) { %>
+                                                                    <tr onclick="location.href='<%= contextPath %>/GoAdminDetail.ad?mno=<%= sd.getMno() %>&sno=<%= sd.getsNo() %>&howlong=<%= sd.getHowlong() %>'">
+                                                                        <td><%= sd.getsNo() %></td>
+                                                                        <td><%= sd.getMno() %></td>
+                                                                        <td><%= sd.getmId() %></td>
+                                                                        <td><%= sd.getsTitle() %></td>
+                                                                        <td><%= sd.getsPlace() %></td>
+                                                                        <td><%= sd.getsSdate() %> ~ <%= sd.getsEdate() %></td>
+                                                                        <td>
+                                                                            <%
+                                                                                String status = "";
+                                                                                switch (sd.getsStatus()) {
+                                                                                    case "D" : status = "삭제"; break;
+                                                                                    case "P" : status = "지난 일정"; break;
+                                                                                    case "T" : status = "TODAY"; break;
+                                                                                    case "N" : status = "예정된 일정"; break;
+                                                                                }
+                                                                            %>
+                                                                            <%= status %>
+                                                                        </td>
+                                                                    </tr>
+                                                                <% } %>`
+                                                            );
+                                                        } else if (Object.keys(result).length === 0) {
+                                                            $('tbody').html(
+                                                                `<tr>
+                                                                    <td colspan="7">결과 없음</td>
+                                                                </tr>`
+                                                            );
+                                                            console.log($('tbody').html());
+                                                        } else if (Object.keys(result).length !== 0) {
+                                                            let str = '';
+
+                                                            for (let i = 0; i < Object.keys(result).length; i++) {
+                                                                switch (result[i].sStatus) {
+                                                                    case "D" : status = "삭제"; break;
+                                                                    case "P" : status = "지난 일정"; break;
+                                                                    case "T" : status = "TODAY"; break;
+                                                                    case "N" : status = "예정된 일정"; break;
+                                                                }
+                                                                str += `<tr>
+                                                                            <td>` + result[i].sNo + `</td>
+                                                                            <td>` + result[i].mno + `</td>
+                                                                            <td>` + result[i].mId + `</td>
+                                                                            <td>` + result[i].sTitle + `</td>
+                                                                            <td>` + result[i].sPlace + `</td>
+                                                                            <td>` + result[i].sSdateStr.substring(0, 10) + ' ~ ' + result[i].sEdateStr.substring(0, 10) + `</td>
+                                                                            <td>` + status+ `</td>
+                                                                        </tr>`;
+                                                            }
+
+                                                            $('tbody').html(str);
+                                                        };
+                                                    },
+                                                    error: function() {
+                                                        console.error('AJAX Error: ', status, error);
+                                                    }
+                                                });
+                                            })
+                                        });
+                                    </script>
+                                </td>
+                            </tr>
                             <tr>
                                 <th>일정 번호</th>
                                 <th>회원 번호</th>
@@ -125,7 +211,7 @@
                         </thead>
                         <tbody>
                             <% for (Schedule sd : list) { %>
-                            	<tr onclick="location.href=''">
+                                <tr onclick="location.href='<%= contextPath %>/GoAdminDetail.ad?mno=<%= sd.getMno() %>&sno=<%= sd.getsNo() %>&howlong=<%= sd.getHowlong() %>'">
                                     <td><%= sd.getsNo() %></td>
                                     <td><%= sd.getMno() %></td>
                                     <td><%= sd.getmId() %></td>
@@ -133,21 +219,22 @@
                                     <td><%= sd.getsPlace() %></td>
                                     <td><%= sd.getsSdate() %> ~ <%= sd.getsEdate() %></td>
                                     <td>
-                                    	<%
-                                    		String status = "";
-                                    		switch (sd.getsStatus()) {
-                                    			case "D" : status = "삭제"; break;
-                                    			case "P" : status = "지난 일정"; break;
-                                    			case "T" : status = "TODAY"; break;
-                                    			case "N" : status = "예정된 일정"; break;
-                                    		}
-                                    	%>
-                                    	<%= status %>
+                                        <%
+                                            String status = "";
+                                            switch (sd.getsStatus()) {
+                                                case "D" : status = "삭제"; break;
+                                                case "P" : status = "지난 일정"; break;
+                                                case "T" : status = "TODAY"; break;
+                                                case "N" : status = "예정된 일정"; break;
+                                            }
+                                        %>
+                                        <%= status %>
                                     </td>
                                 </tr>
                             <% } %>
                         </tbody>
                     </table>
+                    <br><br>
                 </div>
             </div>
         </div>

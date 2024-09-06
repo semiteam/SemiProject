@@ -7,7 +7,9 @@ public class Schedule {
 	private String sTitle;
 	private String sPlace;
 	private Date sSdate;
+	private String sSdateStr;
 	private Date sEdate;
+	private String sEdateStr;
 	private String sDescription;
 	private int rangeNo;
 	private int bgiNo;
@@ -17,6 +19,23 @@ public class Schedule {
 	private int howlong;
 	private String bbgiPath;
 	private String ubgiPath;
+
+	public String getsSdateStr() {
+		return sSdateStr;
+	}
+
+	public void setsSdateStr(String sSdateStr) {
+		this.sSdateStr = sSdateStr;
+	}
+
+	public String getsEdateStr() {
+		return sEdateStr;
+	}
+
+	public void setsEdateStr(String sEdateStr) {
+		this.sEdateStr = sEdateStr;
+	}
+
 	private String mId;
 
 	public String getmId() {
@@ -29,7 +48,25 @@ public class Schedule {
 
 	public Schedule() {
 	}
-	
+
+	public Schedule(int sNo, String sTitle, String sPlace, String sSdateStr, String sEdateStr, String sDescription,
+			int rangeNo, int bgiNo, Date sCdate, String sStatus, int mno, int howlong, String mId) {
+		super();
+		this.sNo = sNo;
+		this.sTitle = sTitle;
+		this.sPlace = sPlace;
+		this.sSdateStr = sSdateStr;
+		this.sEdateStr = sEdateStr;
+		this.sDescription = sDescription;
+		this.rangeNo = rangeNo;
+		this.bgiNo = bgiNo;
+		this.sCdate = sCdate;
+		this.sStatus = sStatus;
+		this.mno = mno;
+		this.howlong = howlong;
+		this.mId = mId;
+	}
+
 	public Schedule(String sTitle, String sPlace, Date sSdate, Date sEdate, String sDescription, int rangeNo, int bgiNo,
 			String sStatus, int mno, int howlong) {
 		super();
@@ -235,8 +272,12 @@ public class Schedule {
 		builder.append(sPlace);
 		builder.append(", sSdate=");
 		builder.append(sSdate);
+		builder.append(", sSdateStr=");
+		builder.append(sSdateStr);
 		builder.append(", sEdate=");
 		builder.append(sEdate);
+		builder.append(", sEdateStr=");
+		builder.append(sEdateStr);
 		builder.append(", sDescription=");
 		builder.append(sDescription);
 		builder.append(", rangeNo=");

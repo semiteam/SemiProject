@@ -111,4 +111,24 @@
 		  FROM SCHEDULE
 		  JOIN MEMBER USING (M_NO)
 	</entry>
+	
+	<entry key="selectMemberPlan">
+		SELECT SD_NO
+		     , SD_TITLE
+		     , SD_PLACE
+		     , SD_SDATE
+		     , SD_EDATE
+		     , SD_DESCRIPTION
+		     , RANGE_NO
+		     , BGI_NO
+		     , SD_CDATE
+		     , SD_STATUS
+		     , SD_HOWLONG
+		     , M_NO
+		     , M_ID
+		  FROM SCHEDULE
+		  JOIN MEMBER USING (M_NO)
+		 WHERE M_NO LIKE ?
+		    OR M_ID LIKE ?
+	</entry>
 </properties>

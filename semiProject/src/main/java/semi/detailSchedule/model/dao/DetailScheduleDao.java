@@ -67,7 +67,7 @@ public class DetailScheduleDao {
 		} finally {
 			close(rset);
 			close(pstmt);
-		}
+		}		
 		
 		return list;
 	}

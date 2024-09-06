@@ -243,4 +243,47 @@ public class ScheduleDao {
 		
 		return list;
 	}
+
+	public ArrayList<Schedule> selectMemberPlan(Connection conn, String search) {
+		ArrayList<Schedule> list = new ArrayList<Schedule>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectMemberPlan");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, search);
+			pstmt.setString(2, search);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Schedule(rset.getInt("SD_NO"),
+									  rset.getString("SD_TITLE"),
+									  rset.getString("SD_PLACE"),
+									  rset.getString("SD_SDATE"),
+									  rset.getString("SD_EDATE"),
+									  rset.getString("SD_DESCRIPTION"),
+									  rset.getInt("RANGE_NO"),
+									  rset.getInt("BGI_NO"),
+									  rset.getDate("SD_CDATE"),
+									  rset.getString("SD_STATUS"),
+									  rset.getInt("M_NO"),
+									  rset.getInt("SD_HOWLONG"),
+									  rset.getString("M_ID")
+									 )
+						);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
 }

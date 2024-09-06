@@ -105,4 +105,14 @@ public class ScheduleService {
 		
 		return list;
 	}
+
+	public ArrayList<Schedule> selectMemberPlan(String search) {
+		Connection conn = getConnection();
+		
+		ArrayList<Schedule> list = new ScheduleDao().selectMemberPlan(conn, search);
+		
+		close(conn);
+		
+		return list;
+	}
 }
