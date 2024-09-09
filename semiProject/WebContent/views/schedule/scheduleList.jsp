@@ -85,20 +85,36 @@
                                 <div class="swiper-container">
                                     <div class="swiper-wrapper">
                                         <div class="swiper-slide">
-                                            <h4>대한민국</h4>
-                                            <div>동아시아, 한반도 남부에 위치한 국가</div>
+                                            <h1 style="font-size: 30px">대한민국</h1> <br><br>
+                                            <div style="font-size: 20px">1. 동아시아, 한반도 남부에 위치한 국가</div><br>
+                                            <div style="font-size: 20px">2. 약칭으로 한국과 남한으로 칭함</div><br>
+                                            <div style="font-size: 20px">3. 국가는 관습상 애국가, 국화는 관습상 무궁화</div><br>
+                                            <div style="font-size: 20px">4. 공용어는 한국어와 한국 수어</div><br>
+                                            <div style="font-size: 20px">5. 수도는 서울특별시</div><br>
                                         </div>
                                         <div class="swiper-slide">
-                                            1
+                                            <h1 style="font-size: 30px">여행 경비</h1> <br><br>
+                                            <div style="font-size: 20px">1. 숙박 : 1박 평균 4만원 내외</div><br>
+                                            <div style="font-size: 20px">2. 식비 : 1일 평균 8만원</div><br>
+                                            <div style="font-size: 20px">3. 교통비 : 1일 평균 7천원</div><br>
                                         </div>
                                         <div class="swiper-slide">
-                                            2
+                                        	<h1 style="font-size: 30px">추천 여행지 1. 서울특별시</h1> <br><br>
+                                            <div style="font-size: 20px">1. 대한민국의 수도로, 젊은이의 메카</div><br>
+                                            <div style="font-size: 20px">2. 홍대, 연남동, 명동 등 핫함</div><br>
+                                            <div style="font-size: 20px">3. 영어 가능자 다수 포집</div><br>
                                         </div>
                                         <div class="swiper-slide">
-                                            3
+                                            <h1 style="font-size: 30px">추천 여행지 2. 부산광역시</h1> <br><br>
+                                            <div style="font-size: 20px">1. 대한민국의 제 2의 수도로 불리우는 곳</div><br>
+                                            <div style="font-size: 20px">2. 역사적으로 의미가 깊은 곳</div><br>
+                                            <div >3. 부산항에서 배를 타고 일본 방문도 가능</div><br>
                                         </div>
                                         <div class="swiper-slide">
-                                            4
+                                            <h1 style="font-size: 30px">추천 여행지 3. 제주특별자치도</h1> <br><br>
+                                            <div style="font-size: 20px">1. 대한민국의 제 2언어, 제주어 보유</div><br>
+                                            <div style="font-size: 20px">2. 관광지가 많고, 연예인이 하는 카페도 다수 보유</div><br>
+                                            <div style="font-size: 20px">3. 제주도 오른쪽 끝부터 왼쪽 끝까지 1시간 조금 넘음</div><br>
                                         </div>
                                     </div>
                                     <div class="swiper-button-next"></div>
@@ -111,7 +127,11 @@
                                 <div class="swiper-container">
                                     <div class="swiper-wrapper">
                                         <div class="swiper-slide">
-                                            1
+                                            <h1 style="font-size: 30px">일본</h1> <br><br>
+                                            <div style="font-size: 20px">1. 동아시아, 섬나라</div><br>
+                                            <div style="font-size: 20px">2. 국가는 기미가요, 국화는 키쿠</div><br>
+                                            <div style="font-size: 20px">3. 공용어는 일본어와 일본 수어</div><br>
+                                            <div style="font-size: 20px">4. 수도는 도쿄</div><br>
                                         </div>
                                         <div class="swiper-slide">
                                             2

@@ -14,9 +14,11 @@
 .content-reply{
     border-radius: 5px;
     width: 1000px;
-    height: 350px;
+    height: auto;
+    min-height: 80px;
     background-color: #e5e5e5;
     margin-top: 40px;
+    padding: 20px;
 }
 .content-back{
     border-radius: 5px;

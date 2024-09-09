@@ -197,7 +197,7 @@
 					for(let i = 0; i<list.length; i++){
 						value += "<tr>"
 								+ "<td>" + list[i].rContent + "</td>"
-								+ "<td>" + list[i].adminId + "</td>" 
+								+ "<td style='width: 30px'>" + list[i].adminId + "</td>" 
 							  +"</tr>";
 					}
 					$("#reply-area tbody").html(value);

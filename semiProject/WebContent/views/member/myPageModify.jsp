@@ -47,6 +47,15 @@
         
         <link rel="stylesheet" href="resouces/css/myPageModify.css">
         <link rel="stylesheet" href="resouces/css/common.css">
+        <style>
+        	.top_menu {
+			    top: 1.75vh;
+			    right: -4vw !important;
+			    width: 18.6vw;
+			    height: 2vh;
+			    font-size: 80%;
+			}
+        </style>
 </head>
 <body>
 
