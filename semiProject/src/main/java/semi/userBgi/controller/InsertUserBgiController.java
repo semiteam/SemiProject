@@ -49,7 +49,7 @@ public class InsertUserBgiController extends HttpServlet {
 			
 			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "utf-8", new MyFileRenamePolicy());
 			
-			UserBgi ub = new UserBgi(multiRequest.getOriginalFileName("userImg"), multiRequest.getFilesystemName("userImg"), "/resouces/scheduleUpfiles/");
+			UserBgi ub = new UserBgi(multiRequest.getOriginalFileName("userImg"), multiRequest.getFilesystemName("userImg"), "resouces/scheduleUpfiles/");
 			
 			int result = new userBgiService().insertUserBgi(ub);
 			

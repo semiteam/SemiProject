@@ -26,6 +26,7 @@ public class userBgiDao {
 	}
 
 	public int insertUserBgi(Connection conn, UserBgi ub) {
+		System.out.println(ub.getuBgiPath());
 		int result = 0;
 		
 		PreparedStatement pstmt = null;
