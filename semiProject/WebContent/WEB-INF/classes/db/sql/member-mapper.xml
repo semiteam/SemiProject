@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="loginMember">
+		SELECT M_NO
+		, M_NAME
+		, M_ID
+		, M_NICKNAME
+		, M_PWD
+		, M_RRN
+		, M_PHONE
+		, M_EMAIL
+		, M_ADDRESS
+		, M_DATE
+		, M_MODIFY
+		, M_STATUS
+		, M_REPORT
+		, M_GRADE
+		, M_PROFILE
+		, POSTAL_CODE
+		, BASIC_ADDRESS
+		, DETAILED_ADDRESS
+
+		FROM MEMBER
+		WHERE M_ID = ?
+		AND M_PWD = ?
+		AND M_STATUS = 'U'
+	</entry>
+
+	<entry key="insertMember">
+		INSERT
+		INTO MEMBER
+		(
+		M_NO
+		, M_NAME
+		, M_ID
+		, M_NICKNAME
+		, M_PWD
+		, M_RRN
+		, M_PHONE
+		, M_EMAIL
+		, M_ADDRESS
+		, M_PROFILE
+		, POSTAL_CODE
+		, BASIC_ADDRESS
+		, DETAILED_ADDRESS
+		)
+		VALUES
+		(
+		SEQ_MEM.NEXTVAL
+		, ?
+		, ?
+		, ?
+		, ?
+		, ?
+		, ?
+		, ?
+		, ?
+		, ?
+		, ?
+		, ?
+		, ?
+		)
+	</entry>
+
+	<entry key="selectMemberCount">
+		SELECT
+		COUNT(*) COUNT
+		FROM MEMBER
+		WHERE M_STATUS != 'N'
+	</entry>
+
+	<entry key="selectList">
+		SELECT *
+		FROM (
+		SELECT ROWNUM RNUM, A.*
+		FROM (
+		SELECT
+		M_NO
+		, M_NAME
+		, M_ID
+		, M_NICKNAME
+		, M_PWD
+		, M_RRN
+		, M_PHONE
+		, M_EMAIL
+		, M_ADDRESS
+		, M_DATE
+		, M_MODIFY
+		, M_STATUS
+		, M_REPORT
+		, M_GRADE
+		, M_PROFILE
+		, POSTAL_CODE
+		, BASIC_ADDRESS
+		, DETAILED_ADDRESS
+		FROM MEMBER
+		WHERE M_STATUS != 'N'
+		ORDER
+		BY M_REPORT DESC
+		) A
+		)
+		WHERE RNUM BETWEEN ? AND ?
+	</entry>
+
+
+	<entry key="blockMember">
+		UPDATE MEMBER
+		SET M_STATUS = 'B'
+		WHERE M_NO = ?
+	</entry>
+
+	<entry key="kakaoLoginMember">
+
+		SELECT M_NO
+		, M_NAME
+		, M_ID
+		, M_NICKNAME
+		, M_PWD
+		, M_RRN
+		, M_PHONE
+		, M_EMAIL
+		, M_ADDRESS
+		, M_DATE
+		, M_MODIFY
+		, M_STATUS
+		, M_REPORT
+		, M_GRADE
+		, M_PROFILE
+		, POSTAL_CODE
+		, BASIC_ADDRESS
+		, DETAILED_ADDRESS
+		FROM MEMBER
+		WHERE M_ID = ?
+		AND M_STATUS = 'U'
+	</entry>
+
+	<entry key="idCheck">
+		SELECT
+		COUNT(*) "COUNT"
+		FROM MEMBER
+		WHERE M_ID = ?
+	</entry>
+
+	<entry key="idFindSearch">
+		SELECT
+		M_NO
+		, M_ID
+
+		FROM MEMBER
+		WHERE M_NAME = ?
+		AND M_EMAIL = ?
+		AND M_STATUS = 'U'
+	</entry>
+
+	<entry key="pwdFindSearch">
+		SELECT
+		M_NO
+		, M_NAME
+		, M_EMAIL
+		FROM MEMBER
+		WHERE
+		M_EMAIL = ?
+		AND M_STATUS = 'U'
+	</entry>
+
+	<entry key="checkId">
+		SELECT
+		COUNT(*) "COUNT"
+		FROM MEMBER
+		WHERE M_ID = ?
+	</entry>
+
+	<entry key="unblockMember">
+		UPDATE MEMBER
+		SET M_STATUS = 'U'
+		WHERE M_STATUS != 'N'
+		AND M_NO = ?
+	</entry>
+
+
+	<entry key="memberStatus">
+		SELECT M_STATUS
+		FROM MEMBER
+		WHERE M_NO = ?
+	</entry>
+
+	<entry key="selectCommnetery">
+		SELECT
+		C_NO
+		, M_NO
+		, C_CONTENT
+		, C_DATE
+		, C_TYPE
+		, C_STATUS
+		FROM COMMENTERY
+		JOIN MEMBER
+		USING (M_NO)
+		WHERE C_STATUS = 'Y'
+	</entry>
+	<entry key="updateMember">
+		UPDATE MEMBER
+		SET M_NICKNAME = ?,
+		M_PHONE = ?,
+		M_EMAIL = ?,
+		M_ADDRESS = ?
+		WHERE M_ID = ?
+	</entry>
+
+	<entry key="updateMemberChangePwd">
+		UPDATE MEMBER
+		SET M_NICKNAME = ?,
+		M_PWD = ?,
+		M_PHONE = ?,
+		M_EMAIL = ?,
+		M_ADDRESS = ?
+		WHERE M_ID = ?
+	</entry>
+
+	<entry key="selectMember">
+		SELECT
+		M_NO
+		, M_NAME
+		, M_ID
+		, M_NICKNAME
+		, M_PWD
+		, M_RRN
+		, M_PHONE
+		, M_EMAIL
+		, M_ADDRESS
+		, M_DATE
+		, M_MODIFY
+		, M_STATUS
+		, M_REPORT
+		, M_GRADE
+		, M_PROFILE
+		, POSTAL_CODE
+		, BASIC_ADDRESS
+		, DETAILED_ADDRESS
+		FROM MEMBER
+		WHERE M_ID = ?
+	</entry>
+
+	<entry key="checkNickname">
+		SELECT COUNT(*)
+		FROM MEMBER
+		WHERE M_NICKNAME = ?
+		AND M_STATUS = 'U'
+	</entry>
+
+	<entry key="updateAddress">
+		UPDATE
+		MEMBER
+		SET POSTAL_CODE = ?
+		, BASIC_ADDRESS = ?
+		, DETAILED_ADDRESS = ?
+		WHERE M_ID = ?
+	</entry>
+
+	<entry key="deleteMember">
+		UPDATE MEMBER SET M_STATUS = 'N' WHERE M_ID = ?
+	</entry>
+
+	<entry key="findMemberByDetails">
+		SELECT *
+		FROM MEMBER
+		WHERE M_ID = ?
+		AND M_NAME = ?
+		AND SUBSTR(M_RRN, 1, 6) = ?
+	</entry>
+
+	<entry key="checkUserId">
+		SELECT COUNT(*) FROM MEMBER WHERE M_ID = ?
+	</entry>
+
+	<entry key="checkName">
+		SELECT COUNT(*) FROM MEMBER WHERE M_ID = ? AND M_NAME = ?
+	</entry>
+
+	<entry key="checkBirth">
+		SELECT COUNT(*) FROM MEMBER WHERE M_ID = ? AND SUBSTR(M_RRN, 1, 6) = ?
+	</entry>
+</properties>
