@@ -141,6 +141,14 @@ public class LoginController extends HttpServlet {
 	         
 	          request.getRequestDispatcher("views/admin/admin1.jsp").forward(request, response);
 			}
+		} else if (loginUser.getmStatus().equals("B")) {
+			session.setAttribute("alertMsg", "차단된 회원입니다.");
+			
+			response.sendRedirect(request.getContextPath() + "/GoLogin.me");
+		} else if (loginUser.getmStatus().equals("N")) {
+			session.setAttribute("alertMsg", "탈퇴한 회원입니다.");
+			
+			response.sendRedirect(request.getContextPath() + "/GoLogin.me");
 		} else {
 			session.setAttribute("loginUser", loginUser);
             session.setAttribute("alertMsg", loginUser.getmNickname() + "님의 방문을 환영합니다");

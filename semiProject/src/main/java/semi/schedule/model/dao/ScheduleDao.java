@@ -73,7 +73,7 @@ public class ScheduleDao {
 			pstmt.setInt(1, mno);
 			
 			rset = pstmt.executeQuery();
-			
+
 			while (rset.next()) {
 				list.add(new Schedule(
 									  rset.getInt("SD_NO"),

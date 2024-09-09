@@ -346,7 +346,7 @@
 	                                var ubgiPath = '<%= sd.getUbgiPath() %>';
 	                                var sNo = '<%= sd.getsNo() %>';
 	                                
-	                                if (bbgiPath == null) {
+	                                if (bbgiPath === 'null') {
 	                                    $('#cover' + sNo).css('background-image', "url('" + ubgiPath + "')");
 	                                } else {
 	                                    $('#cover' + sNo).css('background-image', "url('" + bbgiPath + "')");
