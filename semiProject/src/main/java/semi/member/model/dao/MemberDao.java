@@ -508,14 +508,26 @@ public class MemberDao {
 
 	    try {
 	        // 기존의 업데이트 SQL 쿼리
-	        String sql = prop.getProperty("updateMember");
-	        pstmt = conn.prepareStatement(sql);
-	        pstmt.setString(1, member.getmNickname());
-	        pstmt.setString(2, member.getmPwd());
-	        pstmt.setString(3, member.getmPhone());
-	        pstmt.setString(4, member.getmEmail());
-	        pstmt.setString(5, member.getmAddress());
-	        pstmt.setString(6, member.getmId());
+	    	if (member.getmPwd() == "") {
+	    		String sql = prop.getProperty("updateMember");
+		        pstmt = conn.prepareStatement(sql);
+		        pstmt.setString(1, member.getmNickname());
+		        pstmt.setString(2, member.getmPhone());
+		        pstmt.setString(3, member.getmEmail());
+		        pstmt.setString(4, member.getmAddress());
+		        pstmt.setString(5, member.getmId());
+	    	} else {
+	    		String sql = prop.getProperty("updateMemberChangePwd");
+		        pstmt = conn.prepareStatement(sql);
+		        pstmt.setString(1, member.getmNickname());
+		        pstmt.setString(2, member.getmPwd());
+		        pstmt.setString(3, member.getmPhone());
+		        pstmt.setString(4, member.getmEmail());
+		        pstmt.setString(5, member.getmAddress());
+		        pstmt.setString(6, member.getmId());
+	    	}
+	    	
+	        
 
 	        result = pstmt.executeUpdate();  // 업데이트 수행
 

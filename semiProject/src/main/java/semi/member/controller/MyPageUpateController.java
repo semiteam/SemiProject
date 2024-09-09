@@ -63,6 +63,7 @@ public class MyPageUpateController extends HttpServlet {
         String fullAddress = (postcode != null ? postcode + " " : "") + 
                              (basicAddress != null ? basicAddress + " " : "") + 
                              (detailAddress != null ? detailAddress : "");
+        System.out.println(fullAddress);
 
         // 세션에서 현재 로그인한 사용자 정보를 가져오기
         HttpSession session = request.getSession();
