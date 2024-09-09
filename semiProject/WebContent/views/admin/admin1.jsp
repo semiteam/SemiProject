@@ -241,9 +241,11 @@ PageInfo postPi = (PageInfo)request.getAttribute("postPi"); ArrayList<Member>
                                     if ($(this).val() === "") {
                                       $("#find_result").html("");
                                       $(".user-info").show()
+                                      $('.paging-area').show();
                                     } else {
                                       findMember($(this).val());
                                       $(".user-info").hide()
+                                      $('.paging-area').hide();
                                     }
                                   });
                                 });
@@ -394,9 +396,11 @@ PageInfo postPi = (PageInfo)request.getAttribute("postPi"); ArrayList<Member>
                                   if ($(this).val() === "") {
                                     $("#result-post").html("");
                                     $('.post-info').show()
+                                    $('.paging-area').show();
                                   } else {
                                     findWirte($(this).val());
                                     $('.post-info').hide()
+                                    $('.paging-area').hide();
                                   }
                                 });
                               });
