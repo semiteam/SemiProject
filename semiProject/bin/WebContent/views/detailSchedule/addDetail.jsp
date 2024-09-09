@@ -66,7 +66,7 @@
     <body>
         <%@ include file="../common/basic.jsp" %>
 		<div class="wrap">
-			<div class="top">
+			<div class="top"> 
 				<div class="logo" onclick="location.href='<%= contextPath %>'">우리 여행가조</div>
 				<div class="top_menu">
 					<ul>
