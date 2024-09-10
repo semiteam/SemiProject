@@ -61,6 +61,9 @@ ERD-CLOUR :  <br><br>
 ![Honeycam 2024-09-10 12-31-38](https://github.com/user-attachments/assets/ca1feabc-48a7-49cc-a354-3b37c782d4fc)<br>
 <고객센터 문의 작성 / 회원시점><br>
 
+
+이은지 <br>
+김 민<br><br>
 ![Honeycam 2024-09-10 12-33-50](https://github.com/user-attachments/assets/b3d422d9-288d-4f6e-98e7-dce024d58d90)<br>
 <고객센터 문의 답변 / 관리자시점><br>
 
