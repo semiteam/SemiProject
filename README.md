@@ -23,3 +23,14 @@
 이은지 <br>
 김 민<br>
 
+# :computer: 사용 기술 <br>
+- OS : window10 <br>
+- language : JAVA11 , JavaScript <br>
+- Back-End : JSP & Servlet <br>
+- Front-End : JavaScript / jQuery / AJAX / JSON <br>
+- Developer Tools : Eclipse / VS Code / SqlDeveloper <br>
+- Server : Apach Tomcat 9.0 <br>
+- DBMS : Oracle <br>
+- Management : Git, GitHub, Sourcetree <br>
+  
+
