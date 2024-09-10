@@ -40,7 +40,7 @@
 
 # 🧾 설계 내역 <br>
 UseCase Diagram :  <br>
-ERD-CLOUR :  <br><br>
+ERDCLoud : https://www.erdcloud.com/d/9N8iAFP7SwKb74GfZ <br><br>
 
 
 
