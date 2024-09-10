@@ -46,7 +46,23 @@ ERD-CLOUR :  <br><br>
 
 # 🎨 프로젝트 구현 <br>
   최승균 <br>
-  이은지 <br>
-  김 민<br>
+![Honeycam 2024-09-10 12-15-28](https://github.com/user-attachments/assets/99712b6b-72fb-4b56-982a-e072bcab6aea)<br>
+<관리자 로그인시 보이는 관리자 페이지 디자인> <br>
+
+![Honeycam 2024-09-10 12-23-56](https://github.com/user-attachments/assets/d604c68c-c2e7-4690-a7be-8161ae5f5cd8)<br>
+<실시간 검색 기능 및 회원상세보기 기능 부적절한 회원 블랙리스트 등록과 해제 기능><br>
+
+![Honeycam 2024-09-10 12-27-49](https://github.com/user-attachments/assets/41c8cbae-6a77-4a11-b0b8-e2f4894dbf4c)<br>
+<멀티 페이징 및 부적절한 글 삭제 및 문의답변 이동><br>
+
+![Honeycam 2024-09-10 12-30-11](https://github.com/user-attachments/assets/54b283b7-a386-41c9-9d7b-3041a91a761c)<br>
+<고객센터 페이지 디자인 및 실시간 검색기능 문의글 조회시 비밀번호 기능(자유선택가능) / 회원시점><br>
+
+![Honeycam 2024-09-10 12-31-38](https://github.com/user-attachments/assets/ca1feabc-48a7-49cc-a354-3b37c782d4fc)<br>
+<고객센터 문의 작성 / 회원시점><br>
+
+![Honeycam 2024-09-10 12-33-50](https://github.com/user-attachments/assets/b3d422d9-288d-4f6e-98e7-dce024d58d90)<br>
+<고객센터 문의 답변 / 관리자시점><br>
+
   
 
