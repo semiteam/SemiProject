@@ -37,8 +37,8 @@
 
 
 # 🧾 설계 내역 <br>
-UseCase Diagram : 
-ERD-CLOUR : 
+UseCase Diagram :  <br>
+ERD-CLOUR :  <br><br>
 
 
 # 📜 프로젝트 소개 <br>
