@@ -25,14 +25,14 @@
 김 민<br><br>
 
 # 🖥️ 사용 기술 <br>
-- OS : window10 <br>
+- OS : Windows11 <br>
 - language : JAVA11 , JavaScript <br>
 - Back-End : JSP & Servlet <br>
 - Front-End : JavaScript / jQuery / AJAX / JSON <br>
 - Developer Tools : Eclipse / VS Code / SqlDeveloper <br>
 - Server : Apach Tomcat 9.0 <br>
 - DBMS : Oracle <br>
-- Management : Git, GitHub, Sourcetree <br>
+- SCM : Git, GitHub, Sourcetree <br>
 - API : Kakao Map, KaKao Login<br><br>
 
 
