@@ -39,7 +39,7 @@
 
 
 # 🧾 설계 내역 <br>
-UseCase Diagram :  <br>
+UseCase Diagram : https://drive.google.com/file/d/1BtgpKr39XvDb_TKiAJo_5XLHZ6-2tAvE/view?usp=drive_link <br>
 ERDCLoud : https://www.erdcloud.com/d/9N8iAFP7SwKb74GfZ <br><br>
 
 
