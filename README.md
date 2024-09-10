@@ -21,9 +21,8 @@
 - 고객센터 페이지 전체 구현 및 기능 담당 <br>br>
 
 이은지 <br>
-김 민<br>
+김 민<br><br>
 
-<br>
 # :computer: 사용 기술 <br>
 - OS : window10 <br>
 - language : JAVA11 , JavaScript <br>
