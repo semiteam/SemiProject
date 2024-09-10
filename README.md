@@ -16,15 +16,15 @@
 24.09.01 ~ 09.09 : 베타 테스트 및 에러 수정과 최종 발표 자료 준비 <br><br>
 
 # 😎 팀원 및 역할 <br>
-## 최승균 (https://github.com/0724choi) <br>
+### 최승균 (https://github.com/0724choi) <br>
 - 관리자 페이지 전체 구현 및 기능 담당 <br>
 - 관리자 페이지의 회원관리페이지를 통해 전체 회원의 상세정보 및 모든 내역 조회 및 제재(블랙리스트 등록 및 해제) 가능 <br>
 - 관리자 페이지 통계 페이지 구현 및 기능 담당
 - aJax를 활용한 실시간 검색기능 구현 <br>
 - 고객센터 페이지 전체 구현 및 기능 담당 <br>
 
-## 이은지 <br>
-## 김 민<br><br>
+### 이은지 <br>
+### 김 민<br><br>
 
 # 🖥️ 사용 기술 <br>
 - OS : Windows11 <br>
@@ -47,7 +47,7 @@ ERDCLoud : https://www.erdcloud.com/d/9N8iAFP7SwKb74GfZ <br><br>
 
 
 # 🎨 프로젝트 구현 <br>
-  ## 최승균 <br>
+  ### 최승균 <br>
 ![Honeycam 2024-09-10 12-15-28](https://github.com/user-attachments/assets/99712b6b-72fb-4b56-982a-e072bcab6aea)<br>
 <관리자로 로그인시 보이는 페이지> <br>
 
@@ -66,8 +66,8 @@ ERDCLoud : https://www.erdcloud.com/d/9N8iAFP7SwKb74GfZ <br><br>
 ![Honeycam 2024-09-10 12-33-50](https://github.com/user-attachments/assets/b3d422d9-288d-4f6e-98e7-dce024d58d90)<br>
 <고객센터 문의 답변 / 관리자시점><br>
 
-## 이은지 <br>
-## 김 민<br><br>
+### 이은지 <br>
+### 김 민<br><br>
 
   
 
