@@ -47,7 +47,7 @@ ERDCLoud : https://www.erdcloud.com/d/9N8iAFP7SwKb74GfZ <br><br>
 
 
 # 🎨 프로젝트 구현 <br>
-  최승균 <br>
+  최승균 (https://github.com/0724choi) <br>
 ![Honeycam 2024-09-10 12-15-28](https://github.com/user-attachments/assets/99712b6b-72fb-4b56-982a-e072bcab6aea)<br>
 <관리자로 로그인시 보이는 페이지> <br>
 
