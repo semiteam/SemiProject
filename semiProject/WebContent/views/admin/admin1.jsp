@@ -721,7 +721,8 @@ PageInfo postPi = (PageInfo)request.getAttribute("postPi"); ArrayList<Member>
                                });
 
 
-                               $(document).on('click', '.block-btn', function() {
+                               $(document).on('click', '.block-btn', function(event) {
+                            	   event.stopPropagation(); //  이벤트 전파를 멈추게 해주는 메소드
                             	    const mNo = $(this).data('mno'); // Get data attribute
 
                             	    if (confirm('정말로 차단하시겠습니까?')) {
@@ -730,7 +731,7 @@ PageInfo postPi = (PageInfo)request.getAttribute("postPi"); ArrayList<Member>
                             	});
 
 
-                               $(document).on('click','.unblock-btn', function() {
+                               $(document).on('click','.unblock-btn', function(event) {
                                    event.stopPropagation(); //  이벤트 전파를 멈추게 해주는 메소드
                                    const mNo = $(this).data("mno");
 
