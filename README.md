@@ -26,6 +26,7 @@
 ### 이은지 <br>
 ### 김 민<br>
 - 로그인,회원가입/탈퇴 및 비밀번호/아이디 찾기 기능 담당 <br>
+- 마이페이지 구현 및 우편 API 기능 구현 <br>
 - 카카오 회원가입 및 카카오 로그인 기능 담당 (API) <br>
 - 리뷰 볼래? 페이지 전체 구현 및 CRUD 담당 <br>
 
@@ -71,7 +72,18 @@ ERDCLoud : https://www.erdcloud.com/d/9N8iAFP7SwKb74GfZ <br><br>
 <고객센터 문의 답변 / 관리자시점><br>
 
 ### 이은지 <br>
-### 김 민<br><br>
+### 김 민<br>
+![Honeycam 2024-09-19 15-49-36](https://github.com/user-attachments/assets/efa59a26-f1c4-4074-91a8-b77764e59835)
+<카카오 API 로그인 구현> <br>
+
+![Honeycam 2024-09-19 15-52-00](https://github.com/user-attachments/assets/262752eb-ace9-464a-876d-01955633f917)
+<개인정보 변경 페이지 우편번호/주소 API 구현 <br>
+
+![Honeycam 2024-09-19 15-54-17](https://github.com/user-attachments/assets/faf19b37-6f9b-41c6-ad7a-49004bee921b)
+<리뷰 볼래? 페이지 구현> <br>
+
+
+
 
   
 
